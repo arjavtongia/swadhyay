@@ -1,0 +1,44 @@
+# कालचक्र — समय का पहिया
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, तत्त्वार्थसूत्र (अध्याय 3), तिलोयपण्णत्ति और आदिपुराण में बताए काल-वर्णन के आधार पर।
+
+@ | संक्षेप में | In brief
+गद्य: जैन आगम के अनुसार समय का न आदि है, न अन्त। वह एक पहिये की तरह घूमता रहता है, इसलिए इसे कालचक्र कहते हैं। इस पहिये के दो आधे भाग हैं। अवसर्पिणी में सुख, आयु और शरीर की ऊँचाई धीरे-धीरे घटते जाते हैं, और उत्सर्पिणी में ये फिर बढ़ते जाते हैं। हर आधे भाग में छह आरे, यानी छह काल, होते हैं।
+गद्य: हमारे भरत क्षेत्र में आज अवसर्पिणी का पाँचवाँ आरा चल रहा है, जिसे दुःषमा काल या 'पंचम काल' कहते हैं।
+Prose: In Jain teaching, time has no beginning and no end. It turns like a wheel, and so it is called the kalchakra, the wheel of time. The wheel has two halves. In the avasarpini, the descending half, happiness, lifespan and the height of the body slowly decrease; in the utsarpini, the ascending half, they grow again. Each half has six aras, or ages.
+Prose: In our land, Bharat kshetra, the fifth ara of the avasarpini is now running. It is called the dukhama age, or the pancham kaal, the fifth age.
+
+@ | छह आरे | The six aras
+गद्य: अवसर्पिणी के छह आरे इस क्रम से आते हैं: सुषमा-सुषमा (बहुत सुख), सुषमा (सुख), सुषमा-दुःषमा (सुख अधिक, दुःख थोड़ा), दुःषमा-सुषमा (दुःख अधिक, सुख थोड़ा), दुःषमा (दुःख) और दुःषमा-दुःषमा (बहुत दुःख)। उत्सर्पिणी में यही छह आरे उलटे क्रम से आते हैं, दुःषमा-दुःषमा से सुषमा-सुषमा तक।
+गद्य: पहले तीन आरे बहुत लम्बे होते हैं: चार, तीन और दो कोड़ाकोड़ी सागर। सागर समय की इतनी बड़ी इकाई है कि उसे वर्षों में गिना नहीं जा सकता, और एक कोड़ाकोड़ी का अर्थ है एक करोड़ गुणा एक करोड़। चौथा आरा बयालीस हज़ार वर्ष कम एक कोड़ाकोड़ी सागर का होता है, और पाँचवाँ और छठा इक्कीस-इक्कीस हज़ार वर्ष के।
+गद्य: इस तरह एक अवसर्पिणी दस कोड़ाकोड़ी सागर की होती है, उत्सर्पिणी भी उतनी ही, और दोनों मिलाकर बीस कोड़ाकोड़ी सागर का एक कल्पकाल बनता है।
+Prose: The six aras of the avasarpini come in this order: sushama-sushama (great happiness), sushama (happiness), sushama-dukhama (more happiness than sorrow), dukhama-sushama (more sorrow than happiness), dukhama (sorrow) and dukhama-dukhama (great sorrow). In the utsarpini the same six come in reverse, from dukhama-dukhama up to sushama-sushama.
+Prose: The first three aras are immensely long: four, three and two kodakodi sagar. A sagar is a unit of time so vast that it cannot be counted in years, and a kodakodi is a crore times a crore. The fourth ara lasts one kodakodi sagar less forty-two thousand years, and the fifth and sixth twenty-one thousand years each.
+Prose: So one avasarpini lasts ten kodakodi sagar, an utsarpini the same, and together they make one kalpa of twenty kodakodi sagar.
+
+@ | भोगभूमि: जब कल्पवृक्ष सब देते थे | The land of plenty, when wish-trees gave everything
+गद्य: पहले तीन आरों में भरत क्षेत्र भोगभूमि था। मनुष्य जोड़े (युगल) के रूप में जन्म लेते थे, उनकी आयु बहुत लम्बी और शरीर बहुत ऊँचे होते थे, और उन्हें खेती, व्यापार या कोई काम नहीं करना पड़ता था। दस प्रकार के कल्पवृक्ष भोजन, वस्त्र, आभूषण, बर्तन, माला, घर, दीपक, प्रकाश और संगीत, सब कुछ दे देते थे।
+गद्य: वहाँ न राजा थे, न युद्ध, न चोरी। जीवन शान्त था, पर धर्म का उपदेश और मोक्ष का मार्ग भी नहीं था।
+गद्य: तीसरे आरे के अन्त में कल्पवृक्ष घटने लगे। तब एक-एक करके चौदह कुलकर हुए, जिन्होंने लोगों को बदलते समय में जीना सिखाया। अन्तिम कुलकर नाभिराय के पुत्र ऋषभदेव ने कर्मभूमि की शुरुआत की और वे इस युग के पहले तीर्थंकर बने।
+Prose: In the first three aras, Bharat kshetra was a bhogbhumi, a land of plenty. People were born as twins, a boy and a girl together; they lived very long lives, were very tall, and never had to farm, trade or work. Ten kinds of kalpavriksha, wish-fulfilling trees, gave them everything: food, clothes, ornaments, vessels, garlands, homes, lamps, light and music.
+Prose: There were no kings, no wars and no theft. Life was peaceful, but there was also no teaching of dharma and no path to liberation.
+Prose: Towards the end of the third ara the wish-trees began to fail. Then, one after another, fourteen Kulkars appeared and taught people how to live in the changing times. Rishabhdev, the son of Nabhiraya, the last Kulkar, began the age of work and became the first Tirthankar of our age.
+लिंक: kulkar | चौदह कुलकर के बारे में पढ़ें | Read about the fourteen Kulkars
+
+@ | चौथा आरा: तीर्थंकरों का काल | The fourth ara: the age of the Tirthankars
+गद्य: चौथा आरा, दुःषमा-सुषमा, धर्म का सबसे उज्ज्वल समय है। इसी में दूसरे तीर्थंकर अजितनाथ से चौबीसवें तीर्थंकर महावीर तक तेईस तीर्थंकर हुए, और चक्रवर्ती, बलभद्र, नारायण जैसे अधिकतर शलाका पुरुष भी। इस आरे में जन्मे जीव तप करके इसी भव से मोक्ष पा सकते थे।
+गद्य: आचार्य बताते हैं कि बहुत सी अवसर्पिणियाँ बीतने पर एक 'हुण्डावसर्पिणी' आती है, जिसमें कुछ असाधारण बातें होती हैं। हमारी अवसर्पिणी ऐसी ही है। इसमें पहले तीर्थंकर ऋषभदेव का जन्म और मोक्ष तीसरे आरे में ही हो गया, चक्रवर्ती भरत अपने ही भाई बाहुबली से हार गए, और भगवान पार्श्वनाथ जैसे तीर्थंकरों पर उपसर्ग हुए।
+गद्य: चौथे आरे के तीन वर्ष साढ़े आठ महीने शेष रहते पावापुर में भगवान महावीर का निर्वाण हुआ।
+Prose: The fourth ara, dukhama-sushama, is the brightest time for dharma. In it came twenty-three Tirthankars, from Ajitnath, the second, to Mahavir, the twenty-fourth, along with most of the other great souls: the chakravartis, balbhadras and narayans. Those born in this ara could attain liberation in that very life through tapas.
+Prose: The acharyas explain that after many avasarpinis have passed comes a hundavasarpini, in which some unusual things happen. Ours is one. In it the first Tirthankar, Rishabhdev, was born and attained liberation within the third ara; the chakravarti Bharat lost to his own brother Bahubali; and Tirthankars such as Parshvanath faced attacks while meditating.
+Prose: Bhagwan Mahavir attained nirvana at Pawapuri when three years and eight and a half months of the fourth ara remained.
+लिंक: bahubali | भरत और बाहुबली | Bharat and Bahubali
+
+@ | पंचम काल, और आगे क्या है | The pancham kaal, and what lies ahead
+गद्य: महावीर के निर्वाण के थोड़े समय बाद पाँचवाँ आरा, दुःषमा काल, शुरू हुआ। यह इक्कीस हज़ार वर्ष का है और हम इसी में जी रहे हैं। इस काल में भरत क्षेत्र से कोई जीव सीधे मोक्ष नहीं जाता, फिर भी धर्म का मार्ग खुला है। सच्ची श्रद्धा, ज्ञान और संयम से जीव अपनी आत्मा को निर्मल करता है और मोक्ष की ओर बढ़ता है। शास्त्र बताते हैं कि पंचम काल के अन्त तक मुनि, आर्यिका, श्रावक और श्राविका का चतुर्विध संघ बना रहेगा।
+गद्य: छठे आरे में धर्म लुप्त हो जाएगा और जीवन बहुत कठिन होगा। फिर उत्सर्पिणी शुरू होगी और समय सुधरने लगेगा। उसके तीसरे आरे में फिर चौबीस तीर्थंकर होंगे। परम्परा कहती है कि भगवान महावीर के भक्त, मगध के राजा श्रेणिक, आने वाली उत्सर्पिणी के पहले तीर्थंकर बनेंगे।
+गद्य: यह पहिया केवल भरत और ऐरावत क्षेत्रों में घूमता है। विदेह क्षेत्र में सदा चौथे आरे जैसा समय रहता है, इसलिए वहाँ आज भी तीर्थंकर विराजमान हैं, जैसे सीमन्धर स्वामी। भूत, वर्तमान और भविष्य, तीनों कालों के चौबीस-चौबीस तीर्थंकरों की पूजा 'त्रिकाल चौबीसी' में की जाती है।
+Prose: Soon after Mahavir's nirvana the fifth ara, the dukhama age, began. It lasts twenty-one thousand years, and we live in it. In this age no one goes straight to liberation from Bharat kshetra, yet the path of dharma is still open. Through right faith, knowledge and self-restraint the soul grows purer and moves towards liberation. The scriptures say the fourfold sangh of munis, aryikas, shravaks and shravikas will remain until the end of this age.
+Prose: In the sixth ara dharma will disappear and life will be very hard. Then the utsarpini will begin and times will slowly improve. In its third ara twenty-four Tirthankars will come again. Tradition says that King Shrenik of Magadha, Bhagwan Mahavir's devoted follower, will be the first Tirthankar of the coming utsarpini.
+Prose: This wheel turns only in Bharat and Airavat kshetras. In Videha kshetra it is always like the fourth ara, so Tirthankars are present there even now, such as Simandhar Swami. The twenty-four Tirthankars of all three times, past, present and future, are worshipped together in the Trikal Chaubisi pooja.
+लिंक: trikal-chaubisi-pooja | त्रिकाल चौबीसी पूजा | Trikal Chaubisi Pooja
+लिंक: jambudweep | विदेह क्षेत्र और सीमन्धर स्वामी | Videha and Simandhar Swami

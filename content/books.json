@@ -4841,5 +4841,25 @@
       "hi": "परम्परागत कथा, बच्चों के लिए आसान हिंदी और अंग्रेज़ी में; पूरी कथा \"जैन कथाएँ\" में है। चित्र इसी ऐप में बने हैं।",
       "en": "A traditional story, retold in easy Hindi and English for children; the full story is in Jain stories. Pictures drawn for this app."
     }
+  },
+  {
+    "id": "kalchakra",
+    "file": "content/itihas/kalchakra.txt",
+    "scroll": true,
+    "category": "katha",
+    "title": { "hi": "कालचक्र — समय का पहिया", "en": "Kalchakra: the wheel of time" },
+    "author": { "hi": "शास्त्रों के आधार पर", "en": "From the scriptures" },
+    "unit": { "hi": "अंश", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "coverIcon": "dharmachakra",
+    "blurb": { "hi": "अवसर्पिणी और उत्सर्पिणी के छह-छह आरे, तीर्थंकरों का काल, और हम आज कहाँ हैं", "en": "The six ages of time going down and coming up, the age of the Tirthankars, and where we are today" },
+    "aliases": ["kalchakra", "kaalchakra", "kal chakra", "kalchakr", "wheel of time", "avasarpini", "utsarpini", "ara", "aara", "pancham kaal", "pancham kal", "hundavasarpini", "bhogbhumi", "कालचक्र", "काल चक्र", "अवसर्पिणी", "उत्सर्पिणी", "आरा", "आरे", "पंचम काल", "हुण्डावसर्पिणी", "भोगभूमि"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, तत्त्वार्थसूत्र (अध्याय 3), तिलोयपण्णत्ति और आदिपुराण में बताए काल-वर्णन के आधार पर।",
+      "en": "Written for this app in simple Hindi and English, from the account of time in the Tattvartha Sutra (chapter 3), the Tiloyapannatti and the Adipuran."
+    },
+    "group": { "hi": "तीर्थंकर और महापुरुष", "en": "Tirthankars and great souls" }
   }
 ]

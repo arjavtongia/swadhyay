@@ -46,7 +46,7 @@
 | **पूजा और आरती** · Poojas | 111 poojas, arghya, visarjan and aartis, including a pooja for each of the 24 Tirthankars and the Diwali pooja |
 | **पाठ और स्तोत्र** · Paath and stotras | 59 texts: Meri Bhavana, Chhahdhala, Samayik Path, Kalyan Mandir, Ekibhav and more |
 | **ग्रंथ** · Granths | 54 scriptures of the four anuyogs: Samaysar, Pravachansar, Ratnakarand Shravakachar, Gommatsar, the puranas and more |
-| **जैन कथाएँ** · Stories | 33 traditional stories with photos of the places they happened, and 8 picture stories for young children |
+| **जैन कथाएँ** · Stories | 33 traditional stories with photos of the places they happened, Kalchakra (the wheel of time), and 8 picture stories for young children |
 | **मंदिर और पूजा विधि** · Temple guides | Step-by-step darshan and ashta-dravya pooja guides with every mantra and a drawing for each step |
 | **तिथि** · Tithi calendar | Today's tithi and the next 7 days, with ashtami, chaturdashi and festivals marked, worked out on the phone |
 | **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 56 common questions work offline |
@@ -93,13 +93,13 @@ The texts are plain files that anyone can correct.
 | पूजा विधि | Ashta-dravya pooja guide, 15 steps (Hindi and English) |
 | दीपावली पूजन विधि | Diwali pooja at home and on the new bahi: setup steps (Hindi and English), arghyavali, Shri Mahavir Jin Pooja (Vrindavan), Saraswati Pooja (Dyanatray), Nirvan Kand (Bhagwatidas), 64 riddhi arghyas, visarjan and aarti |
 
-#### Jain stories (`content/katha/`, 33 stories)
+#### Jain stories (`content/katha/`, 33 stories, and Kalchakra in `content/itihas/`)
 
 The stories are listed in five groups:
 
 | Group | Stories |
 | --- | --- |
-| तीर्थंकर और महापुरुष | Mahavir's childhood (his five names), Bharat and Bahubali, Akshay Tritiya, Neminath and Rajul, Parshvanath and Kamath, Sati Chandana: retold for this app in simple Hindi and English, with photos of Kundalpur, Shravanabelagola, Hastinapur, Girnar, Kashi, Shikharji and Pawapuri |
+| तीर्थंकर और महापुरुष | Mahavir's childhood (his five names), Bharat and Bahubali, Akshay Tritiya, Neminath and Rajul, Parshvanath and Kamath, Sati Chandana: retold for this app in simple Hindi and English, with photos of Kundalpur, Shravanabelagola, Hastinapur, Girnar, Kashi, Shikharji and Pawapuri; and Kalchakra, the wheel of time: the six aras, the age of the Tirthankars and where we are today |
 | आचार्यों की कथाएँ | Acharya Mantunga and the Bhaktamar, Shrutkevali Bhadrabahu, Samantabhadra, Akalank, Patrakesari |
 | सम्यग्दर्शन के आठ अंग | Anjan Chor, Anantmati, Raja Uddayan, Revati Rani, Jinendrabhakt Seth, Varishen Muni, Vishnukumar Muni (Rakshabandhan), Vajrakumar Muni, with a diagram of all eight angas |
 | व्रत, सत्य और अहिंसा | Yampal Chandal, Mrigsen the fisherman, the little fish Shalisikth, giving up food at night, Raja Vasu, Shribhuti, Neeli |

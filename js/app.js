@@ -806,11 +806,14 @@
 
   /* All stories, under a heading for each group (तीर्थंकर, आचार्य, ...). */
   function storyListHtml() {
+    /* A story joins its group wherever it stands in books.json, so a new one can be added at the end of the list
+       (which keeps the Ask index's numbering of every other text unchanged). */
     const groups = [];
     catalog.filter(b => b.category === 'katha').forEach(b => {
       const name = b.group ? L(b.group) : '';
-      if (!groups.length || groups[groups.length - 1].name !== name) groups.push({ name: name, books: [] });
-      groups[groups.length - 1].books.push(b);
+      let g = groups.find(x => x.name === name);
+      if (!g) groups.push(g = { name: name, books: [] });
+      g.books.push(b);
     });
     return groups.map(g => (g.name ? '<h2 class="shelf-head story-group" translate="no">' + esc(g.name) + '</h2>' : '') +
       '<ul class="rows">' + g.books.map(storyRow).join('') + '</ul>').join('');
@@ -1370,8 +1373,10 @@
     if (moral.length) {
       html += '<aside class="moral"><h2>' + esc(t('moral')) + '</h2>' + moral.map(p => '<p translate="no">' + esc(p) + '</p>').join('') + '</aside>';
     }
-    if (v.links.length) {
-      html += '<div class="guide-links">' + v.links.map(l =>
+    /* A link to a text not yet in the app is left out until that text is added. */
+    const links = v.links.filter(l => bookMeta(l.book));
+    if (links.length) {
+      html += '<div class="guide-links">' + links.map(l =>
         '<a class="btn btn-wide" href="#/read/' + encodeURIComponent(l.book) + '/1">' + icon('book') + '<span>' + esc(L(l)) + '</span></a>').join('') + '</div>';
     }
     (v.chitra || []).filter(c => !c.top).forEach(c => { html += chitraHtml(c); });
