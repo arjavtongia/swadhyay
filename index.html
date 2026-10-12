@@ -70,9 +70,10 @@
   </div>
   <script>
     /* A soft temple bell as the darshan opens, made in code so it needs no file and works offline.
-       Phones and browsers only allow sound before a tap where the app is installed or often used;
-       anywhere else the context starts paused and the opening stays silent. Settings can turn it
-       off (saved as "bell" with the other settings), and turning it on there rings it once. */
+       Browsers only allow sound before a tap where the app is installed or often used. Anywhere
+       else (a browser tab, an iPhone) the bell waits for the first touch instead, as one rings the
+       ghanta on entering. Settings can turn it off (saved as "bell" with the other settings), and
+       turning it on there rings it once. */
     var BELL = (function () {
       var AC = window.AudioContext || window.webkitAudioContext;
       /* Partials of a small brass ghanta: [ratio to the note, level, seconds to fade]. */
@@ -100,14 +101,38 @@
         setTimeout(function () { ctx.close(); }, (delay + 3.5) * 1000);
       }
 
-      /* allowedOnly: ring only if the browser already allows sound (the opening, before any tap). */
-      function ring(delay, allowedOnly) {
-        if (!AC) return;
+      /* Rings if the browser allows sound now, and says whether it did. Inside a tap, resume()
+         is allowed; anywhere else it never settles, so it is given up after a moment. */
+      function play(delay, done) {
         var ctx;
-        try { ctx = new AC(); } catch (e) { return; }
-        if (ctx.state === 'running') { strike(ctx, delay); return; }
-        if (allowedOnly) { ctx.close(); return; }
-        ctx.resume().then(function () { strike(ctx, delay); }, function () { ctx.close(); });
+        try { ctx = new AC(); } catch (e) { done(false); return; }
+        if (ctx.state === 'running') { strike(ctx, delay); done(true); return; }
+        var settled = false;
+        function settle(ok) {
+          if (settled) return;
+          settled = true;
+          if (ok && ctx.state === 'running') strike(ctx, delay); else ctx.close();
+          done(ok && ctx.state === 'running');
+        }
+        ctx.resume().then(function () { settle(true); }, function () { settle(false); });
+        setTimeout(function () { settle(false); }, 400);
+      }
+
+      /* Held back at the opening: ring at the first touch or key within 20 seconds, once. A touch
+         that only scrolls does not count as a tap for the browser, so the bell waits for the next. */
+      var EVENTS = ['touchend', 'click', 'keydown'], until = 0, trying = false;
+      function onFirstTouch() {
+        if (trying) return;
+        if (Date.now() > until || !wanted()) { disarm(); return; }
+        trying = true;
+        play(0, function (rang) { trying = false; if (rang) disarm(); });
+      }
+      function arm() {
+        until = Date.now() + 20000;
+        EVENTS.forEach(function (e) { window.addEventListener(e, onFirstTouch, true); });
+      }
+      function disarm() {
+        EVENTS.forEach(function (e) { window.removeEventListener(e, onFirstTouch, true); });
       }
 
       function wanted() {
@@ -117,8 +142,13 @@
         } catch (e) { return true; }
       }
 
-      if (wanted() && document.visibilityState !== 'hidden') ring(0.25, true);
-      return { ring: ring };
+      /* Opened out of sight (a background tab), it waits for the first touch rather than ringing unseen. */
+      if (AC && wanted()) {
+        if (document.visibilityState === 'hidden') arm();
+        else play(0.25, function (rang) { if (!rang) arm(); });
+      }
+      /* For Settings: rings now (it is called from a tap) and drops any wait for a first touch. */
+      return { ring: function (delay) { if (!AC) return; disarm(); play(delay || 0, function () {}); } };
     })();
   </script>
 
