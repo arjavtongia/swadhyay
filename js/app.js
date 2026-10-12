@@ -1867,12 +1867,14 @@
       '<a class="btn btn-small" href="mailto:' + MAIL + '">' + icon('mail') + '<span translate="no">' + MAIL + '</span></a></section>';
   }
 
-  /* Ways to help: give a text as gyan daan (written for by mail, since each is arranged by hand), and any amount by card once SPONSORS_URL is set. */
+  /* Ways to help: give a text as gyan daan (written for by mail, since each is arranged by hand), and any amount by card once SPONSORS_URL is set.
+     The mail opens with a short form to fill in; mail apps want CRLF line breaks in a mailto body. */
   function supportHtml() {
     return '<section class="set support"><h2>' + icon('heart') + ' ' + esc(t('support')) + '</h2>' +
       '<p>' + esc(t('supportDesc')) + '</p>' +
       '<h3>' + esc(t('sponsorHeading')) + '</h3><p>' + esc(t('sponsorDesc')) + '</p>' +
-      '<a class="btn btn-wide" href="mailto:' + MAIL + '?subject=' + encodeURIComponent(t('sponsorMailSubject')) + '">' + icon('mail') +
+      '<a class="btn btn-wide" href="mailto:' + MAIL + '?subject=' + encodeURIComponent(t('sponsorMailSubject')) +
+      '&amp;body=' + encodeURIComponent(t('sponsorMailBody').replace(/\n/g, '\r\n')) + '">' + icon('mail') +
       '<span>' + esc(t('sponsorWrite')) + '</span></a>' +
       (SPONSORS_URL ? '<h3>' + esc(t('giveHeading')) + '</h3><p>' + esc(t('giveDesc')) + '</p>' +
         '<a class="btn btn-wide" href="' + SPONSORS_URL + '" target="_blank" rel="noopener">' + icon('heart') +
