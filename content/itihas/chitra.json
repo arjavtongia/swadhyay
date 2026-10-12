@@ -1,0 +1,181 @@
+{
+  "kalchakra": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "kalchakra",
+      "top": true,
+      "title": { "hi": "कालचक्र — छह आरे नीचे जाते हुए, छह ऊपर आते हुए", "en": "The wheel of time: six aras going down, six coming back up" },
+      "items": [
+        { "hi": "सुषमा-सुषमा", "en": "Sushama-sushama", "sub": { "hi": "बहुत सुख · 4 कोड़ाकोड़ी सागर", "en": "great happiness · 4 kodakodi sagar" } },
+        { "hi": "सुषमा", "en": "Sushama", "sub": { "hi": "सुख · 3 कोड़ाकोड़ी सागर", "en": "happiness · 3 kodakodi sagar" } },
+        { "hi": "सुषमा-दुःषमा", "en": "Sushama-dukhama", "sub": { "hi": "सुख अधिक, दुःख थोड़ा · 2 कोड़ाकोड़ी सागर", "en": "more happiness than sorrow · 2 kodakodi sagar" } },
+        { "hi": "दुःषमा-सुषमा", "en": "Dukhama-sushama", "sub": { "hi": "दुःख अधिक, सुख थोड़ा · 42,000 वर्ष कम 1 कोड़ाकोड़ी सागर · तीर्थंकरों का काल", "en": "more sorrow than happiness · 1 kodakodi sagar less 42,000 years · the age of the Tirthankars" } },
+        { "hi": "दुःषमा", "en": "Dukhama", "sub": { "hi": "दुःख · 21,000 वर्ष", "en": "sorrow · 21,000 years" } },
+        { "hi": "दुःषमा-दुःषमा", "en": "Dukhama-dukhama", "sub": { "hi": "बहुत दुःख · 21,000 वर्ष", "en": "great sorrow · 21,000 years" } },
+        { "hi": "अवसर्पिणी", "en": "Avasarpini", "tag": "↓", "sub": { "hi": "दायाँ आधा: सुख, आयु और ऊँचाई घटती जाती है", "en": "the right half: happiness, lifespan and height decrease" } },
+        { "hi": "उत्सर्पिणी", "en": "Utsarpini", "tag": "↑", "sub": { "hi": "बायाँ आधा: सब फिर बढ़ता जाता है", "en": "the left half: everything grows again" } },
+        { "hi": "हम यहाँ हैं", "en": "We are here", "tag": "★", "sub": { "hi": "अवसर्पिणी का पाँचवाँ आरा, पंचम काल", "en": "the fifth ara of the avasarpini, the pancham kaal" } }
+      ],
+      "gist": { "hi": "एक अवसर्पिणी और एक उत्सर्पिणी मिलकर एक कल्पकाल बनाती हैं: बीस कोड़ाकोड़ी सागर।", "en": "One avasarpini and one utsarpini together make one kalpa: twenty kodakodi sagar." }
+    }
+  ],
+  "teen-lok": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "lokPurush",
+      "top": true,
+      "title": { "hi": "लोक का आकार — चौदह राजू ऊँचा लोक-पुरुष", "en": "The shape of the universe: the lok purush, fourteen rajju tall" },
+      "items": [
+        { "hi": "सिद्धशिला", "en": "Siddhashila", "sub": { "hi": "लोक के शिखर पर, जहाँ सिद्ध भगवान विराजते हैं", "en": "at the summit of the universe, where the Siddhas dwell" } },
+        { "hi": "ऊर्ध्व लोक", "en": "Upper world (urdhva lok)", "sub": { "hi": "स्वर्ग और उनके ऊपर के विमान · 7 राजू", "en": "the heavens and the realms above them · 7 rajju" } },
+        { "hi": "मध्य लोक", "en": "Middle world (madhya lok)", "sub": { "hi": "द्वीप और समुद्र; मनुष्य और तिर्यंच — हमारी दुनिया", "en": "islands and oceans; humans and animals: our world" } },
+        { "hi": "अधो लोक", "en": "Lower world (adho lok)", "sub": { "hi": "सात पृथ्वियाँ, जिनमें नरक हैं · 7 राजू", "en": "seven earths, which hold the hells · 7 rajju" } }
+      ],
+      "gist": { "hi": "नीचे 7 राजू चौड़ा, कमर पर 1, कोहनियों पर 5 और सबसे ऊपर फिर 1 राजू।", "en": "Seven rajju wide at the bottom, one at the waist, five at the elbows and one again at the top." }
+    },
+    {
+      "at": [3],
+      "type": "stack",
+      "title": { "hi": "सात पृथ्वियाँ — एक के नीचे एक", "en": "The seven earths, one below another" },
+      "items": [
+        { "hi": "रत्नप्रभा", "en": "Ratnaprabha", "sub": { "hi": "30 लाख नरक-बिल", "en": "3 million hell-abodes" } },
+        { "hi": "शर्कराप्रभा", "en": "Sharkaraprabha", "sub": { "hi": "25 लाख नरक-बिल", "en": "2.5 million hell-abodes" } },
+        { "hi": "बालुकाप्रभा", "en": "Balukaprabha", "sub": { "hi": "15 लाख नरक-बिल", "en": "1.5 million hell-abodes" } },
+        { "hi": "पंकप्रभा", "en": "Pankaprabha", "sub": { "hi": "10 लाख नरक-बिल", "en": "1 million hell-abodes" } },
+        { "hi": "धूमप्रभा", "en": "Dhumaprabha", "sub": { "hi": "3 लाख नरक-बिल", "en": "300,000 hell-abodes" } },
+        { "hi": "तमःप्रभा", "en": "Tamahprabha", "sub": { "hi": "पाँच कम एक लाख नरक-बिल", "en": "99,995 hell-abodes" } },
+        { "hi": "महातमःप्रभा", "en": "Mahatamahprabha", "sub": { "hi": "केवल 5 नरक-बिल, सबसे अधिक दुःख", "en": "only 5 hell-abodes, the greatest suffering" } }
+      ]
+    },
+    {
+      "at": [5],
+      "type": "list",
+      "title": { "hi": "ऊर्ध्वलोक — नीचे से ऊपर", "en": "The upper world, from bottom to top" },
+      "items": [
+        { "hi": "सोलह स्वर्ग (कल्प)", "en": "Sixteen heavens (kalpas)", "sub": { "hi": "सौधर्म, ईशान से आरण, अच्युत तक; यहाँ इन्द्र होते हैं", "en": "from Saudharma and Ishan to Aran and Achyut; here there are Indras" } },
+        { "hi": "नौ ग्रैवेयक", "en": "Nine graiveyak", "sub": { "hi": "लोक-पुरुष की ग्रीवा (गर्दन) के स्थान पर", "en": "at the neck (griva) of the lok purush" } },
+        { "hi": "नौ अनुदिश", "en": "Nine anudish" },
+        { "hi": "पाँच अनुत्तर", "en": "Five anuttar", "sub": { "hi": "विजय, वैजयन्त, जयन्त, अपराजित और सबसे ऊपर सर्वार्थसिद्धि", "en": "Vijay, Vaijayant, Jayant, Aparajit and, highest, Sarvarthasiddhi" } },
+        { "hi": "सिद्धशिला", "en": "Siddhashila", "sub": { "hi": "उसके ऊपर लोक के अन्त में अनन्त सिद्ध", "en": "above it, at the edge of the universe, the countless Siddhas" } }
+      ]
+    }
+  ],
+  "jambudweep": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "jambudweep",
+      "top": true,
+      "title": { "hi": "जम्बूद्वीप — ऊपर से देखने पर, उत्तर ऊपर", "en": "Jambudvip seen from above, north at the top" },
+      "items": [
+        { "hi": "सुमेरु पर्वत", "en": "Mount Sumeru", "sub": { "hi": "द्वीप के ठीक बीच में", "en": "at the very centre of the island" } },
+        { "hi": "भरत क्षेत्र", "en": "Bharat kshetra", "sub": { "hi": "सबसे दक्षिण में — हमारा क्षेत्र", "en": "the far south: our own land" } },
+        { "hi": "विदेह क्षेत्र", "en": "Videha kshetra", "sub": { "hi": "सबसे बड़ा; यहाँ सदा तीर्थंकर विराजते हैं", "en": "the largest; Tirthankars are always present here" } },
+        { "hi": "ऐरावत क्षेत्र", "en": "Airavat kshetra", "sub": { "hi": "सबसे उत्तर में, भरत जैसा", "en": "the far north, like Bharat" } },
+        { "hi": "कुलाचल पर्वत", "en": "Kulachal ranges", "sub": { "hi": "छह पर्वत, जो सात क्षेत्रों को अलग करते हैं (चित्र में निषध)", "en": "six ranges dividing the seven regions (Nishadh is marked)" } },
+        { "hi": "लवण समुद्र", "en": "Lavan ocean", "sub": { "hi": "जम्बूद्वीप को चारों ओर से घेरे हुए", "en": "ringing Jambudvip on every side" } }
+      ],
+      "gist": { "hi": "चित्र में पट्टियाँ दिखाने के लिए बड़ी बनाई गई हैं; सच में भरत क्षेत्र बहुत पतला है और विदेह सबसे चौड़ा।", "en": "The bands are drawn wider so they can be seen; in truth Bharat is a very thin strip and Videha by far the widest." }
+    }
+  ],
+  "kulkar": [
+    {
+      "at": [3],
+      "type": "list",
+      "title": { "hi": "चौदह कुलकर, क्रम से", "en": "The fourteen Kulkars, in order" },
+      "items": [
+        { "hi": "प्रतिश्रुति", "en": "Pratishruti", "sub": { "hi": "सूरज और चाँद का भय दूर किया", "en": "calmed the fear of the sun and moon" } },
+        { "hi": "सन्मति", "en": "Sanmati", "sub": { "hi": "अँधेरे और तारों का भय दूर किया", "en": "calmed the fear of darkness and stars" } },
+        { "hi": "क्षेमंकर", "en": "Kshemankar" },
+        { "hi": "क्षेमन्धर", "en": "Kshemandhar" },
+        { "hi": "सीमंकर", "en": "Simankar" },
+        { "hi": "सीमन्धर", "en": "Simandhar" },
+        { "hi": "विमलवाहन", "en": "Vimalvahan" },
+        { "hi": "चक्षुष्मान", "en": "Chakshushman" },
+        { "hi": "यशस्वी", "en": "Yashasvi" },
+        { "hi": "अभिचन्द्र", "en": "Abhichandra" },
+        { "hi": "चन्द्राभ", "en": "Chandrabh" },
+        { "hi": "मरुदेव", "en": "Marudev" },
+        { "hi": "प्रसेनजित", "en": "Prasenajit" },
+        { "hi": "नाभिराय", "en": "Nabhiraya", "sub": { "hi": "भगवान ऋषभदेव के पिता", "en": "father of Bhagwan Rishabhdev" } }
+      ]
+    }
+  ],
+  "shalaka-purush": [
+    {
+      "at": [1],
+      "type": "sum",
+      "title": { "hi": "त्रेसठ शलाका पुरुष", "en": "The sixty-three great souls" },
+      "items": [
+        { "hi": "24 तीर्थंकर", "en": "24 Tirthankars" },
+        { "hi": "12 चक्रवर्ती", "en": "12 chakravartis" },
+        { "hi": "9 बलभद्र", "en": "9 balbhadras" },
+        { "hi": "9 नारायण", "en": "9 narayans" },
+        { "hi": "9 प्रतिनारायण", "en": "9 pratinarayans" }
+      ],
+      "result": { "hi": "63 शलाका पुरुष", "en": "63 shalaka purush" }
+    }
+  ],
+  "chaubis-tirthankar": [
+    {
+      "at": [3],
+      "type": "drawing",
+      "drawing": "lanchhan24",
+      "top": true,
+      "title": { "hi": "चौबीस तीर्थंकरों के चिह्न (लांछन)", "en": "The emblems (lanchhans) of the twenty-four Tirthankars" },
+      "items": [
+        { "hi": "ऋषभदेव (आदिनाथ)", "en": "Rishabhdev (Adinath)", "sub": { "hi": "बैल · अयोध्या", "en": "bull · Ayodhya" } },
+        { "hi": "अजितनाथ", "en": "Ajitnath", "sub": { "hi": "हाथी · अयोध्या", "en": "elephant · Ayodhya" } },
+        { "hi": "सम्भवनाथ", "en": "Sambhavnath", "sub": { "hi": "घोड़ा · श्रावस्ती", "en": "horse · Shravasti" } },
+        { "hi": "अभिनन्दननाथ", "en": "Abhinandannath", "sub": { "hi": "बन्दर · अयोध्या", "en": "monkey · Ayodhya" } },
+        { "hi": "सुमतिनाथ", "en": "Sumatinath", "sub": { "hi": "चकवा · अयोध्या", "en": "chakva bird · Ayodhya" } },
+        { "hi": "पद्मप्रभ", "en": "Padmaprabh", "sub": { "hi": "लाल कमल · कौशाम्बी", "en": "red lotus · Kaushambi" } },
+        { "hi": "सुपार्श्वनाथ", "en": "Suparshvanath", "sub": { "hi": "स्वस्तिक · काशी", "en": "swastik · Kashi" } },
+        { "hi": "चन्द्रप्रभ", "en": "Chandraprabh", "sub": { "hi": "अर्धचन्द्र · चन्द्रपुरी", "en": "crescent moon · Chandrapuri" } },
+        { "hi": "पुष्पदन्त (सुविधिनाथ)", "en": "Pushpadant (Suvidhinath)", "sub": { "hi": "मगर · काकन्दी", "en": "crocodile · Kakandi" } },
+        { "hi": "शीतलनाथ", "en": "Shitalnath", "sub": { "hi": "कल्पवृक्ष · भद्दिलपुर", "en": "wish-tree · Bhaddilpur" } },
+        { "hi": "श्रेयांसनाथ", "en": "Shreyansnath", "sub": { "hi": "गैंडा · सिंहपुरी", "en": "rhinoceros · Simhapuri" } },
+        { "hi": "वासुपूज्य", "en": "Vasupujya", "sub": { "hi": "भैंसा · चम्पापुरी", "en": "buffalo · Champapuri" } },
+        { "hi": "विमलनाथ", "en": "Vimalnath", "sub": { "hi": "सूअर · कम्पिला", "en": "boar · Kampila" } },
+        { "hi": "अनन्तनाथ", "en": "Anantnath", "sub": { "hi": "सेही · अयोध्या", "en": "porcupine · Ayodhya" } },
+        { "hi": "धर्मनाथ", "en": "Dharmanath", "sub": { "hi": "वज्रदण्ड · रत्नपुरी", "en": "vajra · Ratnapuri" } },
+        { "hi": "शान्तिनाथ", "en": "Shantinath", "sub": { "hi": "हिरण · हस्तिनापुर", "en": "deer · Hastinapur" } },
+        { "hi": "कुन्थुनाथ", "en": "Kunthunath", "sub": { "hi": "बकरा · हस्तिनापुर", "en": "goat · Hastinapur" } },
+        { "hi": "अरनाथ", "en": "Arahnath", "sub": { "hi": "मछली · हस्तिनापुर", "en": "fish · Hastinapur" } },
+        { "hi": "मल्लिनाथ", "en": "Mallinath", "sub": { "hi": "कलश · मिथिला", "en": "kalash · Mithila" } },
+        { "hi": "मुनिसुव्रतनाथ", "en": "Munisuvratnath", "sub": { "hi": "कछुआ · राजगृह", "en": "tortoise · Rajgriha" } },
+        { "hi": "नमिनाथ", "en": "Naminath", "sub": { "hi": "नीलकमल · मिथिला", "en": "blue lotus · Mithila" } },
+        { "hi": "नेमिनाथ", "en": "Neminath", "sub": { "hi": "शंख · शौरीपुर", "en": "conch · Shauripur" } },
+        { "hi": "पार्श्वनाथ", "en": "Parshvanath", "sub": { "hi": "सर्प · वाराणसी", "en": "serpent · Varanasi" } },
+        { "hi": "महावीर", "en": "Mahavir", "sub": { "hi": "सिंह · कुण्डलपुर", "en": "lion · Kundalpur" } }
+      ],
+      "gist": { "hi": "हर नाम के नीचे पहले चिह्न है, फिर जन्म-नगरी।", "en": "Under each name: first the emblem, then the city of birth." }
+    }
+  ],
+  "shrut-parampara": [
+    {
+      "at": [2],
+      "type": "flow",
+      "title": { "hi": "महावीर के निर्वाण के बाद 683 वर्ष", "en": "The 683 years after Mahavir's nirvana" },
+      "items": [
+        { "hi": "3 केवली · 62 वर्ष", "en": "3 kevalis · 62 years", "sub": { "hi": "गौतम, सुधर्मा, जम्बू स्वामी", "en": "Gautam, Sudharma, Jambu Swami" } },
+        { "hi": "5 श्रुतकेवली · 100 वर्ष", "en": "5 shrutakevalis · 100 years", "sub": { "hi": "विष्णु, नन्दिमित्र, अपराजित, गोवर्धन, भद्रबाहु", "en": "Vishnu, Nandimitra, Aparajit, Govardhan, Bhadrabahu" } },
+        { "hi": "11 आचार्य · 183 वर्ष", "en": "11 acharyas · 183 years", "sub": { "hi": "ग्यारह अंग और दस पूर्व के ज्ञाता", "en": "knew eleven angas and ten purvas" } },
+        { "hi": "5 आचार्य · 220 वर्ष", "en": "5 acharyas · 220 years", "sub": { "hi": "ग्यारह अंगों के ज्ञाता", "en": "knew the eleven angas" } },
+        { "hi": "4 आचार्य · 118 वर्ष", "en": "4 acharyas · 118 years", "sub": { "hi": "केवल आचारांग के ज्ञाता", "en": "knew only the Acharang" } }
+      ],
+      "gist": { "hi": "62 + 100 + 183 + 220 + 118 = 683 वर्ष। इसके बाद अंगों का पूरा ज्ञान किसी को नहीं रहा।", "en": "62 + 100 + 183 + 220 + 118 = 683 years. After that no one knew the angas in full." }
+    }
+  ],
+  "acharya-parampara": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "kundkund",
+      "top": true,
+      "title": { "hi": "आचार्य कुन्दकुन्द, शास्त्र लिखते हुए", "en": "Acharya Kundkund, writing the scriptures" }
+    }
+  ]
+}

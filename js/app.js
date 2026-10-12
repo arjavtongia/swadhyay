@@ -220,6 +220,8 @@
         if (rk && rk.ok) Object.assign(chitra, await rk.json());
         const rb = await fetch('content/bal-katha/chitra.json').catch(() => null);
         if (rb && rb.ok) Object.assign(chitra, await rb.json());
+        const ri = await fetch('content/itihas/chitra.json').catch(() => null);
+        if (ri && ri.ok) Object.assign(chitra, await ri.json());
       } catch (e) {
         chitra = {};
       }
@@ -257,7 +259,7 @@
    *   verse lines
    *   पद्य: ...                   (Hindi verse translation, one line each)
    *   गद्य: ... / Prose: ...      (prose paragraph, Hindi / English)
-   *   लिंक: book-id | हिंदी | English   (a button that opens another book)
+   *   लिंक: book-id | हिंदी | English   (a button that opens another book; book-id/12 opens it at its 12th part)
    *   चित्र: img/x.jpg | हिंदी | English | credit   (a picture with its caption)
    *   सीख: ... / Moral: ...       (the lesson of a story, Hindi / English)
    *   अन्वयार्थ: / अर्थ: / भावार्थ: / Meaning: ...
@@ -292,7 +294,9 @@
           v.proseEn.push(m[1]);
         } else if ((m = line.match(/^लिंक\s*:\s*(.*)$/))) {
           const link = m[1].split('|').map(s => s.trim());
-          v.links.push({ book: link[0], hi: link[1] || link[0], en: link[2] || link[1] || link[0] });
+          /* "book-id/position" opens the book at that place; a bare id opens it at the start. */
+          const target = link[0].split('/');
+          v.links.push({ book: target[0], pos: parseInt(target[1], 10) || 1, hi: link[1] || target[0], en: link[2] || link[1] || target[0] });
         } else if ((m = line.match(/^चित्र\s*:\s*(.*)$/))) {
           /* चित्र: picture | Hindi caption | English caption | credit */
           const pic = m[1].split('|').map(s => s.trim());
@@ -776,13 +780,19 @@
 
   /* Stories are listed by title alone so the list is quick to look through; each story opens with its pictures and summary. */
   function storyRow(meta) {
-    return chevronRow('#/book/' + meta.id, titleHtml(meta));
+    /* An article's title alone doesn't say what it covers, so its row adds the one-line summary. */
+    const about = meta.category === 'puran-itihas' && meta.blurb ? '<span class="row-sub">' + esc(L(meta.blurb)) + '</span>' : '';
+    return chevronRow('#/book/' + meta.id, titleHtml(meta) + about);
   }
+
+  /* Read as one page under a picture, with contents naming only their titled parts: stories and the
+     Purana and history articles. */
+  const STORY_LIKE = ['katha', 'bal-katha', 'puran-itihas'];
 
   /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart.
      Where the Pooja guide opens one of several versions, that version says so. */
   function bookRow(meta, inGuide) {
-    if (meta.category === 'katha' || meta.category === 'bal-katha') return storyRow(meta);
+    if (STORY_LIKE.indexOf(meta.category) >= 0) return storyRow(meta);
     return chevronRow('#/book/' + meta.id, titleHtml(meta) +
       '<span class="row-sub">' + (meta.author && L(meta.author) ? esc(L(meta.author)) + ' · ' : '') + esc(countLabel(meta)) + '</span>' +
       (inGuide ? '<span class="row-tag">' + icon('check') + esc(t('inPoojaGuide')) + '</span>' : '') +
@@ -805,11 +815,11 @@
   }
 
   /* All stories, under a heading for each group (तीर्थंकर, आचार्य, ...). */
-  function storyListHtml() {
+  function storyListHtml(catId) {
     /* A story joins its group wherever it stands in books.json, so a new one can be added at the end of the list
        (which keeps the Ask index's numbering of every other text unchanged). */
     const groups = [];
-    catalog.filter(b => b.category === 'katha').forEach(b => {
+    catalog.filter(b => b.category === catId).forEach(b => {
       const name = b.group ? L(b.group) : '';
       let g = groups.find(x => x.name === name);
       if (!g) groups.push(g = { name: name, books: [] });
@@ -838,7 +848,8 @@
     { id: 'pooja', title: 'shelfPooja', cats: ['pooja-prarambh', 'nitya-pooja', 'tirthankar-pooja', 'parv-pooja', 'visarjan', 'aarti'] },
     { id: 'path', title: 'shelfPath', cats: ['path', 'stotra'] },
     { id: 'granth', title: 'shelfGranth', cats: ['prathamanuyog', 'karananuyog', 'charananuyog', 'dravyanuyog', 'nyay', 'itihas', 'anya'] },
-    { id: 'katha', title: 'shelfKatha', cats: ['bal-katha', 'katha'] }
+    { id: 'katha', title: 'shelfKatha', cats: ['bal-katha', 'katha'] },
+    { id: 'puran-itihas', title: 'shelfItihas', cats: ['puran-itihas'] }
   ];
 
   function shelfCats(g) {
@@ -1058,6 +1069,7 @@
       count('path') && { href: '#/books/group/path', emblem: { category: 'stotra' }, title: t('pathPath'), sub: t('pathPathSub', { n: count('path') }) },
       count('granth') && { href: '#/books/group/granth', emblem: { id: 'tattvarth-sutra' }, title: t('pathGranth'), sub: t('pathGranthSub', { n: count('granth') }) },
       has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: kathaSub() },
+      has('puran-itihas') && { href: '#/books/puran-itihas', emblem: { category: 'puran-itihas' }, title: t('pathItihas'), sub: t('pathItihasSub', { n: count('puran-itihas') }) },
       has('vidhi') && { href: '#/books/vidhi', icon: 'temple', title: t('pathVidhi'), sub: t('pathVidhiSub') },
       /* Saved appears once something has been saved; until then it would only be an empty line. */
       state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: savedSub() }
@@ -1107,7 +1119,7 @@
 
   /* Each shelf counts in its own words (poojas, stotras, stories, scriptures); a mixed shelf counts texts. */
   const CATEGORY_COUNT = { 'nitya-pooja': 'countPoojas', 'tirthankar-pooja': 'countPoojas', 'parv-pooja': 'countPoojas',
-    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides' };
+    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides', 'puran-itihas': 'countArticles' };
   function categoryCount(catId, n) {
     const granth = GROUPS.find(g => g.id === 'granth').cats.indexOf(catId) >= 0;
     return t(CATEGORY_COUNT[catId] || (granth ? 'countScriptures' : 'countTexts'), { n: n });
@@ -1168,7 +1180,8 @@
       const pooja = GROUPS.find(g => g.id === 'pooja').cats.indexOf(cat.id) >= 0;
       const guided = pooja ? await poojaGuideBooks() : new Set();
       return backBar(up.href, up.label) +
-        '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' + (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml() :
+        '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' +
+        (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml('katha') : cat.id === 'puran-itihas' ? storyListHtml('puran-itihas') :
         (pooja ? poojaHelpHtml() : '') +
         '<ul class="rows">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
     }
@@ -1220,7 +1233,7 @@
     document.title = book.title.hi + ' · ' + t('appName');
     const parent = bookParent(book);
     const kids = book.category === 'bal-katha';
-    const story = book.category === 'katha' || kids;
+    const story = STORY_LIKE.indexOf(book.category) >= 0;
     let html = backBar(parent.href, parent.label) + '<main' + (kids ? ' class="kids"' : '') + '>' +
       (story ? '<div class="book-cover">' + archPicHtml(book) + '</div>' : '') +
       '<div class="book-top">' + (story ? '' : coverEmblem(book)) + '<h1>' + titleHtml(book) + '</h1></div>' +
@@ -1379,7 +1392,7 @@
     const links = v.links.filter(l => bookMeta(l.book));
     if (links.length) {
       html += '<div class="guide-links">' + links.map(l =>
-        '<a class="btn btn-wide" href="#/read/' + encodeURIComponent(l.book) + '/1">' + icon('book') + '<span>' + esc(L(l)) + '</span></a>').join('') + '</div>';
+        '<a class="btn btn-wide" href="#/read/' + encodeURIComponent(l.book) + '/' + l.pos + '">' + icon('book') + '<span>' + esc(L(l)) + '</span></a>').join('') + '</div>';
     }
     (v.chitra || []).filter(c => !c.top).forEach(c => { html += chitraHtml(c); });
     if (v.padya.length) {

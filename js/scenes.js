@@ -716,15 +716,37 @@ const SCENES = (function () {
     pot(60, 110, 0.6, { spout: true, rot: 40 }) + '<path d="M80 92 Q100 100 112 118" fill="none" stroke="' + FLAME + '" stroke-width="3" stroke-linecap="round"/>' + badge(46, 60, 2) +
     thief(258, 186, 1) + arrow(230, 100, 300, 100) + badge(264, 68, 3));
 
+  /* The universe in the shape of a man standing with feet apart and hands on the hips, base at (cx, by), u pixels to
+     a rajju: 14 rajju tall, 7 wide at the feet, 1 at the waist, 5 at the elbows and 1 at the top. The lower world is
+     shaded and split into its seven earths; the Siddhashila sits above the top. */
+  function lokShape(cx, by, u, o) {
+    o = o || {};
+    const top = by - 14 * u;
+    const waist = by - 7 * u;
+    const elbow = by - 10.5 * u;
+    const p = (dx, y) => (cx + dx * u).toFixed(1) + ' ' + y.toFixed(1);
+    let g = '<path d="M' + p(-0.5, waist) + ' L' + p(0.5, waist) + ' L' + p(3.5, by) + ' L' + p(-3.5, by) + ' Z" fill="#e3cfa9"/>' +
+      '<path d="M' + p(-0.5, top) + ' L' + p(0.5, top) + ' L' + p(2.5, elbow) + ' L' + p(0.5, waist) + ' L' + p(-0.5, waist) + ' L' + p(-2.5, elbow) + ' Z" fill="#fbf3e2"/>';
+    for (let k = 1; k < 7; k++) {
+      const hw = 0.5 + 3 * k / 7;
+      g += '<path d="M' + p(-hw, waist + k * u) + ' H' + (cx + hw * u).toFixed(1) + '" stroke="' + MARBLE_EDGE + '" stroke-width="1" opacity="0.6"/>';
+    }
+    if (o.nadi) g += '<rect x="' + (cx - 0.5 * u).toFixed(1) + '" y="' + top.toFixed(1) + '" width="' + u.toFixed(1) + '" height="' + (14 * u).toFixed(1) + '" fill="' + SAFFRON + '" opacity="0.35"/>';
+    g += '<path d="M' + p(-0.5, top) + ' L' + p(0.5, top) + ' L' + p(2.5, elbow) + ' L' + p(0.5, waist) + ' L' + p(3.5, by) + ' L' + p(-3.5, by) + ' L' + p(-0.5, waist) + ' L' + p(-2.5, elbow) + ' Z" fill="none" stroke="' + (o.edge || INK) + '" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<path d="M' + p(-2.5, elbow) + ' H' + (cx + 2.5 * u).toFixed(1) + '" stroke="' + (o.edge || INK) + '" stroke-width="1.2" stroke-dasharray="4 4"/>';
+    const w = Math.max(1.2 * u, 22);
+    return g + '<path d="M' + (cx - w).toFixed(1) + ' ' + (top - 4).toFixed(1) + ' Q' + cx + ' ' + (top - 4 - w * 0.55).toFixed(1) + ' ' + (cx + w).toFixed(1) + ' ' + (top - 4).toFixed(1) +
+      ' Q' + cx + ' ' + (top - 4 - w * 0.2).toFixed(1) + ' ' + (cx - w).toFixed(1) + ' ' + (top - 4).toFixed(1) + ' Z" fill="' + GLOW + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5"/>';
+  }
+
   /* 11 Lok: the universe, fourteen rajju tall, in the shape of a standing man, with the Siddhashila at the top. */
   scenes.lokPurush = svg(280, 320,
-    '<path d="M110 54 L170 54 L212 150 L162 180 L212 300 L68 300 L118 180 L68 150 Z" fill="#fbf3e2" stroke="' + INK + '" stroke-width="2.5" stroke-linejoin="round"/>' +
-    '<path d="M68 150 L212 150 M118 180 L162 180" stroke="' + INK + '" stroke-width="1.5" stroke-dasharray="4 4"/>' +
-    '<path d="M98 42 Q140 18 182 42 Q140 34 98 42 Z" fill="' + GLOW + '" stroke="' + BRASS_EDGE + '" stroke-width="2"/>' +
+    lokShape(140, 300, 246 / 14) +
     '<path d="M244 54 V300" stroke="' + PAPER_EDGE + '" stroke-width="2"/><path d="M238 54 h12 M238 300 h12" stroke="' + PAPER_EDGE + '" stroke-width="2"/>' +
-    label(258, 182, '14', 15) +
-    '<g transform="translate(140 174) scale(0.28)">' + stand(0, 0, { hands: 'none' }) + '</g>' +
-    badge(140, 30, 1) + badge(140, 104, 2) + badge(140, 166, 3) + badge(140, 246, 4));
+    pillLabel(244, 182, '14') +
+    '<g transform="translate(140 177) scale(0.28)">' + stand(0, 0, { hands: 'none' }) + '</g>' +
+    '<path d="M152 177 H182" stroke="' + INK + '" stroke-width="1.5"/>' +
+    badge(140, 26, 1) + badge(140, 122, 2) + badge(196, 177, 3) + badge(140, 250, 4));
 
   /* 12 Bodhidurlabh: wealth, grain, gold and kingdoms come easily; true knowledge is rare. */
   scenes.bhBodhi = svg(340, 200,
@@ -1435,6 +1457,224 @@ const SCENES = (function () {
   /* The Vitarag Lord, beyond attachment and aversion. */
   scenes.jinaGlow = svg(320, 200,
     floor(20, 300, 176) + '<circle cx="160" cy="100" r="64" fill="' + GLOW + '"/>' + shrine(160, 176, 1.05));
+
+  /* ---------- Purana and history: the wheel of time, Jambudvip, the lanchhans, and the articles' covers ---------- */
+
+  /* A label on a light pill, so it reads on the night paper too. Its width is guessed from the length of the text. */
+  function pillLabel(x, y, s) {
+    const w = Math.max(30, String(s).length * 8.8) + 16;
+    return '<rect x="' + (x - w / 2).toFixed(1) + '" y="' + (y - 17) + '" width="' + w.toFixed(1) + '" height="24" rx="12" fill="#fbf3e2" stroke="' + BRASS_EDGE + '" stroke-width="1.2"/>' +
+      label(x, y, s, 15);
+  }
+
+  /* The six aras, from great happiness (1) to great sorrow (6): bright gold down to dark earth. */
+  const ARA_COLORS = ['#f6d77a', '#eec060', '#dfa64c', '#c48540', '#99683a', '#6b4a2b'];
+
+  /* The wheel of time. The avasarpini runs down the right half from the top (aras 1 to 6) and the utsarpini climbs back
+     up the left half (6 to 1), so the happiest aras meet at the top and the hardest at the bottom. */
+  function kaalWheel(cx, cy, r, o) {
+    o = o || {};
+    const hub = r * 0.26;
+    const pt = (deg, rr) => (cx + rr * Math.cos(deg * Math.PI / 180)).toFixed(1) + ' ' + (cy + rr * Math.sin(deg * Math.PI / 180)).toFixed(1);
+    let g = '';
+    for (let i = 0; i < 12; i++) {
+      const a1 = -90 + i * 30;
+      const a2 = a1 + 30;
+      const ara = i < 6 ? i + 1 : 12 - i;
+      g += '<path d="M' + pt(a1, hub) + ' L' + pt(a1, r) + ' A' + r + ' ' + r + ' 0 0 1 ' + pt(a2, r) + ' L' + pt(a2, hub) +
+        ' A' + hub.toFixed(1) + ' ' + hub.toFixed(1) + ' 0 0 0 ' + pt(a1, hub) + ' Z" fill="' + ARA_COLORS[ara - 1] + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5" stroke-linejoin="round"/>';
+    }
+    g += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + WOOD_EDGE + '" stroke-width="3"/>' +
+      '<path d="M' + pt(-90, r + 6) + ' L' + pt(-90, hub) + ' M' + pt(90, hub) + ' L' + pt(90, r + 6) + '" stroke="' + WOOD_EDGE + '" stroke-width="3" stroke-linecap="round"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + hub.toFixed(1) + '" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="2"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + (hub * 0.4).toFixed(1) + '" fill="' + BRASS_LIGHT + '" stroke="' + BRASS_EDGE + '" stroke-width="1"/>';
+    if (o.badges) {
+      const rr = (r + hub) / 2 + 4;
+      for (let i = 0; i < 12; i++) {
+        const m = (-75 + i * 30) * Math.PI / 180;
+        g += badge(Math.round(cx + rr * Math.cos(m)), Math.round(cy + rr * Math.sin(m)), i < 6 ? i + 1 : 12 - i);
+      }
+    }
+    return g;
+  }
+
+  /* The wheel of time numbered by ara, with arrows and the names of the two halves in the reader's language
+     (names 7 and 8 of the list under it), and a star where we are now: the fifth ara of the avasarpini (name 9). */
+  scenes.kalchakra = function (names) {
+    const cx = 180;
+    const cy = 182;
+    const r = 108;
+    const R = r + 13;
+    const at = (deg, rr) => [cx + rr * Math.cos(deg * Math.PI / 180), cy + rr * Math.sin(deg * Math.PI / 180)];
+    const f = n => n.toFixed(1);
+    /* An arc just outside the rim, turning clockwise, with its arrowhead along the turn. */
+    const arc = (from, to) => {
+      const a = at(from, R);
+      const b = at(to, R);
+      const t = to * Math.PI / 180;
+      const d = [-Math.sin(t), Math.cos(t)];
+      const n = [Math.cos(t), Math.sin(t)];
+      return '<path d="M' + f(a[0]) + ' ' + f(a[1]) + ' A' + R + ' ' + R + ' 0 0 1 ' + f(b[0]) + ' ' + f(b[1]) + '" fill="none" stroke="#a3301a" stroke-width="2.5" stroke-linecap="round"/>' +
+        '<path d="M' + f(b[0] + 8 * d[0]) + ' ' + f(b[1] + 8 * d[1]) + ' L' + f(b[0] - 3 * d[0] + 6 * n[0]) + ' ' + f(b[1] - 3 * d[1] + 6 * n[1]) +
+        ' L' + f(b[0] - 3 * d[0] - 6 * n[0]) + ' ' + f(b[1] - 3 * d[1] - 6 * n[1]) + ' Z" fill="#a3301a"/>';
+    };
+    const star = at(50, r + 36);
+    const rim = at(48, r + 3);
+    const near = at(49, r + 23);
+    names = names || [];
+    return svg(360, 320, kaalWheel(cx, cy, r, { badges: true }) +
+      arc(-78, 32) + arc(102, 258) +
+      (names[6] ? pillLabel(292, 36, names[6]) : '') + (names[7] ? pillLabel(68, 36, names[7]) : '') +
+      '<path d="M' + f(rim[0]) + ' ' + f(rim[1]) + ' L' + f(near[0]) + ' ' + f(near[1]) + '" stroke="#a3301a" stroke-width="2"/>' +
+      badge(Math.round(star[0]), Math.round(star[1]), '★'));
+  };
+
+  /* Jambudvip from above, north at the top: seven regions parted by six mountain ranges, the wide Videha in the middle
+     with Sumeru at the centre, our Bharat at the southern edge, all ringed by the Lavan ocean. The bands are drawn to be
+     seen, not to scale: Bharat is really a very thin sliver. */
+  let jambuClip = 0;
+  function jambuMap(cx, cy, r) {
+    const id = 'jambu-clip-' + (++jambuClip);
+    const MTN = '#b98f5c';
+    const bands = [[11, '#efe4c8'], [8, MTN], [15, '#e7d8b4'], [10, MTN], [22, '#e3d2a8'], [12, MTN], [60, '#d6e5bd'],
+      [12, MTN], [22, '#e3d2a8'], [10, MTN], [15, '#e7d8b4'], [8, MTN], [11, '#f2c48a']];
+    const s = 2 * r / 216;
+    let y = cy - r;
+    let g = '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 1.28).toFixed(1) + '" fill="#cfe7f8" stroke="#7ab3d8" stroke-width="2"/>' +
+      '<clipPath id="' + id + '"><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '"/></clipPath><g clip-path="url(#' + id + ')">';
+    bands.forEach(b => {
+      const h = b[0] * s;
+      g += '<rect x="' + (cx - r) + '" y="' + y.toFixed(1) + '" width="' + 2 * r + '" height="' + (h + 0.5).toFixed(1) + '" fill="' + b[1] + '"/>';
+      y += h;
+    });
+    return g + '</g><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="' + WOOD_EDGE + '" stroke-width="2"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.1).toFixed(1) + '" fill="#d6bd92" stroke="' + WOOD_EDGE + '" stroke-width="1.5"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r * 0.045).toFixed(1) + '" fill="' + GLOW + '" stroke="' + BRASS_EDGE + '" stroke-width="1"/>';
+  }
+
+  scenes.jambudweep = svg(340, 330,
+    jambuMap(170, 165, 112) +
+    '<path d="M170 47 V57 M170 273 V283 M182 165 H191" stroke="' + INK + '" stroke-width="1.5"/>' +
+    badge(204, 165, 1) + badge(170, 296, 2) + badge(112, 165, 3) + badge(170, 34, 4) + badge(238, 202, 5) + badge(296, 165, 6));
+
+  /* The emblems of the twenty-four Tirthankars, in order. */
+  scenes.lanchhan24 = svg(360, 340, cells(360, 340, 6,
+    ['bull', 'elephant', 'horse', 'monkey', 'bird', 'lotus', 'swastik', 'moon', 'crocodile', 'tree', 'rhino', 'buffalo',
+      'boar', 'porcupine', 'vajra', 'deer', 'goat', 'fish', 'kalash', 'tortoise', 'bluelotus', 'conch', 'serpent', 'lion']
+      .map(k => '<g transform="scale(0.78)">' + LANCHHAN[k] + '</g>')));
+
+  /* A chakravarti's divine wheel, the chakraratna: a brass ring with spokes and flame points. */
+  function itChakra(x, y, r) {
+    let g = '';
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4;
+      const p = (rr, da) => (x + rr * Math.cos(a + da)).toFixed(1) + ' ' + (y + rr * Math.sin(a + da)).toFixed(1);
+      g += '<path d="M' + x + ' ' + y + ' L' + p(r, 0) + '" stroke="' + BRASS_EDGE + '" stroke-width="2"/>' +
+        '<path d="M' + p(r, -0.14) + ' L' + p(r + 7, 0) + ' L' + p(r, 0.14) + ' Z" fill="' + FLAME + '" stroke="' + BRASS_EDGE + '" stroke-width="1"/>';
+    }
+    return '<circle cx="' + x + '" cy="' + y + '" r="' + (r + 10) + '" fill="' + GLOW + '" opacity="0.8"/>' + g +
+      '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="none" stroke="' + BRASS_EDGE + '" stroke-width="3"/>' +
+      '<circle cx="' + x + '" cy="' + y + '" r="' + (r * 0.28).toFixed(1) + '" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5"/>';
+  }
+
+  /* A palm-leaf manuscript between its wooden boards, tied with a red cord, centred at (x, y). */
+  function itPothi(x, y) {
+    let lines = '';
+    for (let i = 0; i < 3; i++) lines += '<path d="M' + (x - 44) + ' ' + (y - 4 + i * 4) + ' H' + (x + 44) + '" stroke="#c9a868" stroke-width="1"/>';
+    return '<rect x="' + (x - 54) + '" y="' + (y + 8) + '" width="108" height="7" rx="2" fill="' + WOOD + '" stroke="' + WOOD_EDGE + '" stroke-width="1.5"/>' +
+      '<rect x="' + (x - 50) + '" y="' + (y - 9) + '" width="100" height="17" rx="2" fill="#efd9a4" stroke="#b9925a" stroke-width="1.5"/>' + lines +
+      '<rect x="' + (x - 54) + '" y="' + (y - 16) + '" width="108" height="7" rx="2" fill="' + WOOD + '" stroke="' + WOOD_EDGE + '" stroke-width="1.5"/>' +
+      '<path d="M' + (x - 24) + ' ' + (y - 16) + ' V' + (y + 15) + ' M' + (x + 24) + ' ' + (y - 16) + ' V' + (y + 15) + '" stroke="' + RED + '" stroke-width="2"/>' +
+      '<path d="M' + (x + 24) + ' ' + (y + 15) + ' q10 8 4 18" fill="none" stroke="' + RED + '" stroke-width="2" stroke-linecap="round"/>';
+  }
+
+  /* A temple with its shikhar, kalash and flag, floor at (x, y). */
+  function itTemple(x, y, s) {
+    return '<g transform="translate(' + x + ' ' + y + ') scale(' + (s || 1) + ')">' +
+      '<rect x="-62" y="-12" width="124" height="12" rx="2" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+      '<rect x="-46" y="-60" width="92" height="48" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+      '<path d="M-13 -12 V-36 Q0 -50 13 -36 V-12 Z" fill="' + WOOD_EDGE + '"/>' +
+      '<path d="M-38 -60 Q-34 -110 0 -128 Q34 -110 38 -60 Z" fill="#f1e4cc" stroke="' + MARBLE_EDGE + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+      '<path d="M-36 -78 Q0 -84 36 -78 M-31 -96 Q0 -102 31 -96 M-20 -113 Q0 -118 20 -113" fill="none" stroke="' + MARBLE_EDGE + '" stroke-width="1.2"/>' +
+      '<ellipse cx="0" cy="-129" rx="10" ry="4" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1.2"/>' +
+      '<path d="M-4 -133 Q0 -143 4 -133 Z" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1"/>' +
+      '<path d="M0 -140 V-160" stroke="' + WOOD_EDGE + '" stroke-width="2"/><path d="M0 -160 L22 -154 L0 -148 Z" fill="' + SAFFRON + '"/></g>';
+  }
+
+  /* A manastambha, the tall pillar before a temple, with its canopy. */
+  function itPillar(x, y) {
+    return '<rect x="' + (x - 18) + '" y="' + (y - 10) + '" width="36" height="10" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+      '<rect x="' + (x - 12) + '" y="' + (y - 18) + '" width="24" height="8" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+      '<rect x="' + (x - 6) + '" y="' + (y - 104) + '" width="12" height="86" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+      '<rect x="' + (x - 11) + '" y="' + (y - 114) + '" width="22" height="10" rx="2" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1.2"/>' +
+      '<path d="M' + (x - 13) + ' ' + (y - 114) + ' Q' + x + ' ' + (y - 128) + ' ' + (x + 13) + ' ' + (y - 114) + ' Z" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1.2"/>';
+  }
+
+  /* A small temple on a hill top, with its flag. */
+  function peakTemple(x, y) {
+    return '<path d="M' + (x - 8) + ' ' + (y + 2) + ' h16 v-10 l-8 -10 l-8 10 z" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1"/>' +
+      '<path d="M' + x + ' ' + (y - 18) + ' V' + (y - 30) + '" stroke="' + WOOD_EDGE + '" stroke-width="1.5"/><path d="M' + x + ' ' + (y - 30) + ' l12 3 l-12 3 z" fill="' + SAFFRON + '"/>';
+  }
+
+  const fullMoon = (x, y, r) => '<circle cx="' + x + '" cy="' + y + '" r="' + r + '" fill="#f3e2b4" stroke="#d8c48e" stroke-width="1.5"/>';
+
+  /* The wheel of time between the sun and the moon. */
+  story.kalchakra = cover(
+    '<circle cx="160" cy="80" r="70" fill="' + GLOW + '" opacity="0.6"/>' + kaalWheel(160, 80, 62) +
+    sun(40, 36, 9) + fullMoon(282, 36, 10));
+
+  /* The universe as a standing figure against the night sky, the Siddhashila glowing at its top. */
+  story['teen-lok'] = cover(
+    stars([[30, 30], [62, 64], [96, 22], [228, 30], [262, 70], [292, 26], [50, 112], [276, 116], [116, 96], [208, 100]]) +
+    '<circle cx="160" cy="12" r="20" fill="' + GLOW + '" opacity="0.5"/>' +
+    lokShape(160, 148, 9.3, { nadi: true, edge: BRASS_LIGHT }),
+    { night: true });
+
+  /* Jambudvip from above, ringed by its ocean. */
+  story.jambudweep = cover(jambuMap(160, 82, 58) + sun(292, 30, 8));
+
+  /* A Kulkar shows a frightened couple the sun and moon, beside a wish-tree. */
+  story.kulkar = cover(
+    sun(192, 30, 10) + fullMoon(292, 40, 10) +
+    tree(52, 150, 1.05) + '<circle cx="36" cy="92" r="4.5" fill="' + RED + '"/><circle cx="66" cy="84" r="4.5" fill="' + FLAME + '"/><circle cx="52" cy="104" r="4.5" fill="' + RED + '"/>' +
+    stand(120, 150, { hands: 'folded', cloth: SAFFRON }) + stand(152, 150, { hands: 'folded', dupatta: true }) +
+    stand(240, 150, { hands: 'hold', dir: -1 }) + crown(240, 54, 0.7));
+
+  /* The great souls: a Tirthankar at the centre, a chakravarti with his wheel, and the two brothers. */
+  story['shalaka-purush'] = cover(
+    '<circle cx="160" cy="76" r="48" fill="' + GLOW + '"/>' + shrine(160, 150, 0.72) +
+    stand(62, 150, { hands: 'none', cloth: SAFFRON }) + crown(62, 54, 0.7) + itChakra(100, 44, 13) +
+    stand(250, 150, { hands: 'none', dir: -1 }) + crown(250, 54, 0.7) +
+    stand(286, 150, { hands: 'none', dir: -1, cloth: '#cfe3f5' }));
+
+  /* The twin peaks of Mangi-Tungi, from where Ram attained liberation. */
+  story['jain-ramayan'] = cover(
+    sun(52, 36, 10) +
+    '<path d="M150 150 Q176 138 186 106 Q192 70 208 54 Q224 70 230 106 Q240 138 290 150 Z" fill="#d6bd92" stroke="' + WOOD_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M30 150 Q74 140 88 104 Q96 60 114 42 Q132 60 140 104 Q152 140 196 150 Z" fill="#e3cfa9" stroke="' + WOOD_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    peakTemple(114, 44) + peakTemple(208, 56));
+
+  /* The scripture honoured: a palm-leaf manuscript on its stand, with lamps and flowers. */
+  story['shrut-parampara'] = cover(
+    '<circle cx="160" cy="92" r="52" fill="' + GLOW + '"/>' +
+    chowki(160, 122, 128) + itPothi(160, 106) +
+    diya(64, 146, 0.9) + diya(256, 146, 0.9) + flower5(104, 140, 0.8) + flower5(216, 140, 0.8));
+
+  /* An acharya writing the scriptures. */
+  story['acharya-parampara'] = cover(
+    tree(286, 150, 0.95) +
+    '<circle cx="204" cy="86" r="26" fill="' + GLOW + '" opacity="0.8"/>' +
+    sit(110, 150, { plain: true, hands: 'lap' }) +
+    chowki(204, 122, 76) + book(204, 104, 30, { h: 16 }) +
+    '<path d="M148 116 l22 -20" stroke="' + WOOD_EDGE + '" stroke-width="3.5" stroke-linecap="round"/>');
+
+  /* A temple and its manastambha, with a devotee at the door. */
+  story['madhyakal-adhunik'] = cover(
+    sun(284, 32, 10) +
+    itPillar(64, 150) + itTemple(176, 150, 0.82) +
+    '<g transform="translate(264 150) scale(0.8)">' + stand(0, 0, { hands: 'folded', dir: -1 }) + '</g>');
+
+  Object.keys(story).forEach(k => { scenes['story.' + k] = story[k]; });
 
   return scenes;
 })();

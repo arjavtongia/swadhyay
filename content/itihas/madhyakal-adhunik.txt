@@ -1,0 +1,40 @@
+# मध्यकाल से आज तक
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, इतिहास की प्रकाशित जानकारी और कवियों की अपनी रचनाओं के आधार पर।
+
+@ | संक्षेप में | In brief
+गद्य: पिछले पाँच सौ वर्षों में उत्तर भारत में जैन परम्परा ने नया रूप लिया। आगरा, जयपुर और दिल्ली जैसे नगरों में गृहस्थ विद्वानों और कवियों ने शास्त्रों का अर्थ सरल हिंदी में किया, और वे पूजाएँ, भजन और पाठ लिखे जिन्हें हम आज मंदिरों और घरों में पढ़ते हैं।
+गद्य: बीसवीं सदी में दिगम्बर मुनि परम्परा फिर से फली-फूली, प्राचीन ग्रंथ छपकर सबके हाथ में आए, और बड़े तीर्थों पर नई रचनाएँ बनीं।
+Prose: Over the last five hundred years the Jain tradition in north India took on a new form. In cities such as Agra, Jaipur and Delhi, householder scholars and poets explained the scriptures in simple Hindi and wrote the poojas, bhajans and paths that we read in our temples and homes today.
+Prose: In the twentieth century the Digambar muni tradition flourished again, the ancient scriptures were printed and reached everyone, and new monuments rose at the great tirthas.
+
+@ | भट्टारक और शास्त्र-भण्डार | The bhattarakas and the manuscript libraries
+गद्य: मध्यकाल में, जब दिगम्बर मुनियों का विहार बहुत कठिन हो गया था, तब भट्टारकों ने मंदिरों, तीर्थों और शास्त्र-भण्डारों की देखभाल की। जयपुर (आमेर), नागौर, ईडर, कारंजा और मूडबिद्री जैसे स्थानों के शास्त्र-भण्डारों में हज़ारों हस्तलिखित ग्रंथ सदियों तक सुरक्षित रहे, और इन्हीं प्रतियों से आगे चलकर शास्त्र छपे।
+गद्य: आज भी श्रवणबेलगोला, मूडबिद्री और कुछ दूसरे स्थानों पर भट्टारक पीठ हैं, जो तीर्थों और परम्परा की सँभाल करते हैं।
+Prose: In the medieval period, when it had become very hard for Digambar munis to travel, the bhattarakas looked after the temples, tirthas and manuscript libraries. In the shastra bhandars of places such as Jaipur (Amer), Nagaur, Idar, Karanja and Moodbidri, thousands of handwritten texts were kept safe for centuries, and the printed scriptures later came from these copies.
+Prose: There are still bhattaraka seats at Shravanabelagola, Moodbidri and a few other places, caring for the tirthas and the tradition.
+
+@ | हिंदी के जैन कवि और विद्वान | Jain poets and scholars of Hindi
+गद्य: आगरा के कवि बनारसीदास (1586–1643) ने 'समयसार नाटक' में समयसार का भाव ब्रज भाषा की कविता में लिखा, और 'अर्धकथानक' में अपने जीवन की कथा। अर्धकथानक हिंदी की पहली आत्मकथा मानी जाती है।
+गद्य: अठारहवीं सदी में आगरा के भूधरदास और द्यानतराय ने बारह भावना, पार्श्वपुराण और अनेक पूजाएँ और पद लिखे। जयपुर के पंडित टोडरमल ने 'मोक्षमार्ग प्रकाशक' लिखा और गोम्मटसार जैसे कठिन ग्रंथों की हिंदी टीका की।
+गद्य: उन्नीसवीं सदी में पंडित दौलतराम ने 'छहढाला' लिखा, और बुधजन, वृन्दावनदास और दूसरे कवियों ने पूजाएँ और स्तुतियाँ लिखीं। इस ऐप की बहुत सी पूजाएँ और पाठ इन्हीं कवियों के हैं।
+Prose: The Agra poet Banarasidas (1586–1643) put the essence of the Samaysar into Braj verse in his Samaysar Natak, and told his own life story in the Ardhakathanak, regarded as the first autobiography in Hindi.
+Prose: In the eighteenth century Bhudhardas and Dyanatray of Agra wrote the Barah Bhavana, the Parshvapuran and many poojas and songs. Pandit Todarmal of Jaipur wrote the Mokshamarg Prakashak and Hindi commentaries on difficult works such as the Gommatsar.
+Prose: In the nineteenth century Pandit Daulatram wrote the Chhahdhala, and Budhjan, Vrindavandas and other poets wrote poojas and hymns of praise. Many of the poojas and paths in this app are by these poets.
+लिंक: ardhakathanak | अर्धकथानक | Ardhakathanak
+लिंक: samaysar-natak | समयसार नाटक | Samaysar Natak
+लिंक: chhahdhala | छहढाला | Chhahdhala
+
+@ | बीसवीं सदी: मुनि परम्परा का पुनर्जागरण | The twentieth century: the munis return
+गद्य: उन्नीसवीं सदी तक उत्तर भारत में दिगम्बर मुनि बहुत कम दिखते थे। बीसवीं सदी में आचार्य शान्तिसागर (1872–1955) ने कठोर मुनि-चर्या के साथ देश भर में विहार करके यह परम्परा फिर से जीवित की; उन्हें 'चारित्र चक्रवर्ती' कहा जाता है। उनकी प्रेरणा से धवला जैसे आगम ग्रंथ ताम्रपत्रों पर उत्कीर्ण किए गए, ताकि वे सदा सुरक्षित रहें। 1955 में उन्होंने कुन्थलगिरि में सल्लेखना-पूर्वक समाधिमरण किया।
+गद्य: उनके बाद अनेक आचार्यों के संघ बने। आचार्य विद्यासागर (1946–2024) ने सैकड़ों युवाओं को मुनि और आर्यिका दीक्षा दी और 'मूकमाटी' जैसा हिंदी महाकाव्य लिखा; फ़रवरी 2024 में डोंगरगढ़ (छत्तीसगढ़) के चन्द्रगिरि तीर्थ पर उन्होंने समाधिमरण किया। गणिनी आर्यिका ज्ञानमती माताजी की प्रेरणा से हस्तिनापुर में जम्बूद्वीप की रचना बनी, और मांगीतुंगी में पहाड़ की चट्टान में ही भगवान ऋषभदेव की 108 फ़ुट ऊँची प्रतिमा उकेरी गई।
+गद्य: इसी सदी में सोनगढ़ के कानजी स्वामी के समयसार पर प्रवचनों से, और अनेक विद्वानों और प्रकाशकों के काम से, शास्त्रों का स्वाध्याय घर-घर तक पहुँचा।
+Prose: Until the nineteenth century Digambar munis were rarely seen in north India. In the twentieth century Acharya Shantisagar (1872–1955) revived the tradition, travelling across the country while keeping the strict conduct of a muni; he is called Charitra Chakravarti, the emperor of conduct. At his urging, scriptures such as the Dhavala were engraved on copper plates so they would last. In 1955, at Kunthalgiri, he ended his life in samadhi through sallekhana.
+Prose: After him many acharyas led sanghs of their own. Acharya Vidyasagar (1946–2024) gave diksha to hundreds of young munis and aryikas and wrote the Hindi epic Mookmati; in February 2024 he ended his life in samadhi at the Chandragiri tirtha in Dongargarh, Chhattisgarh. Inspired by Ganini Aryika Gyanmati Mataji, the Jambudvip model was built at Hastinapur, and at Mangi-Tungi a 108-foot image of Bhagwan Rishabhdev was carved into the rock of the mountain itself.
+Prose: In the same century the talks of Kanji Swami of Songadh on the Samaysar, along with the work of many scholars and publishers, carried the study of scripture into homes everywhere.
+लिंक: jambudweep | जम्बूद्वीप | Jambudvip
+
+@ | आज का जैन समाज | The Jain community today
+गद्य: 2011 की जनगणना में भारत में लगभग 45 लाख जैन थे, और 2014 में भारत सरकार ने जैन समाज को राष्ट्रीय अल्पसंख्यक का दर्जा दिया। संख्या में छोटा होते हुए भी जैन समाज शिक्षा, दान, जीव-दया और व्यापार के लिए जाना जाता है। आज जैन परिवार दुनिया के अनेक देशों में बसे हैं, और वहाँ भी मंदिर, पाठशालाएँ और स्वाध्याय चलते हैं।
+गद्य: इस इतिहास की असली विरासत केवल मंदिर और ग्रंथ नहीं, वह जीवन भी है जो ढाई हज़ार वर्ष से चला आ रहा है: छना हुआ पानी, सूर्यास्त से पहले भोजन, क्षमा का पर्व, और हर दिन थोड़ा स्वाध्याय।
+Prose: The 2011 census counted about 45 lakh (4.5 million) Jains in India, and in 2014 the Government of India recognised Jains as a national minority. Small in number, the Jain community is known for learning, giving, care for all living beings and trade. Today Jain families live in many countries of the world, and there too they keep temples, pathshalas and swadhyay going.
+Prose: The true heritage of this history is not only temples and scriptures but a way of life kept for two and a half thousand years: filtered water, eating before sunset, a festival of forgiveness, and a little swadhyay every day.

@@ -1,0 +1,50 @@
+# महान आचार्य और उनके ग्रंथ
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, दिगम्बर आचार्य परम्परा और विद्वानों के मत के आधार पर। बहुत प्राचीन आचार्यों के समय पर विद्वानों में मतभेद है, इसलिए समय लगभग बताया गया है।
+
+@ | संक्षेप में | In brief
+गद्य: अंग-ज्ञान लुप्त होने के बाद दिगम्बर आचार्यों ने जो बचा था उसे ग्रंथों में लिखा और नए ग्रंथ रचे। इस ऐप के ग्रंथ विभाग के अधिकतर शास्त्र इन्हीं आचार्यों के हैं। यहाँ कुछ प्रमुख आचार्यों का परिचय उनके समय के क्रम से है।
+गद्य: बहुत प्राचीन आचार्यों के ठीक समय पर विद्वानों में मतभेद है, इसलिए यहाँ समय लगभग बताया गया है।
+Prose: After the knowledge of the angas was lost, the Digambar acharyas wrote down what remained and composed new works. Most of the scriptures in this app's library are by these acharyas. Here are some of the foremost, in the order of their times.
+Prose: Scholars differ on the exact dates of the most ancient acharyas, so the dates here are approximate.
+
+@ | आचार्य कुन्दकुन्द | Acharya Kundkund
+गद्य: दिगम्बर परम्परा में आचार्य कुन्दकुन्द का स्थान इतना ऊँचा है कि मंगल पाठ में भगवान महावीर और गौतम गणधर के बाद उन्हीं का नाम आता है: 'मंगलं भगवान वीरो, मंगलं गौतमो गणी। मंगलं कुन्दकुन्दार्यो, जैनधर्मोऽस्तु मंगलम्॥' दिगम्बर मुनि आज भी अपने को कुन्दकुन्द की परम्परा (कुन्दकुन्दान्वय) का कहते हैं।
+गद्य: परम्परा उन्हें ईसा की पहली सदी के आसपास का मानती है, और उनका नाम दक्षिण भारत के कोण्डकुन्दपुर गाँव से जुड़ा है। उन्होंने प्राकृत में समयसार, प्रवचनसार, नियमसार, पंचास्तिकाय और अष्टपाहुड जैसे ग्रंथ लिखे, जो आत्मा के स्वरूप और अध्यात्म के मूल ग्रंथ हैं।
+Prose: In the Digambar tradition Acharya Kundkund is held so high that the mangal path names him right after Bhagwan Mahavir and Gautam Ganadhar: 'Auspicious is Bhagwan Veer, auspicious is Gautam the ganadhar, auspicious is Kundkund, and may Jain dharma be auspicious.' Digambar munis still describe themselves as belonging to Kundkund's line, the Kundkundanvay.
+Prose: Tradition places him around the first century CE, and his name is linked with the village of Kondakundapur in South India. He wrote, in Prakrit, works such as the Samaysar, Pravachansar, Niyamsar, Panchastikay and Ashtapahud: the foundational texts on the nature of the soul and spiritual life.
+लिंक: samaysar | समयसार | Samaysar
+लिंक: kundkund-pooja | आचार्य कुंदकुंद पूजा | Acharya Kundkund Pooja
+
+@ | आचार्य उमास्वामी | Acharya Umaswami
+गद्य: आचार्य उमास्वामी, जिन्हें गृद्धपिच्छ भी कहते हैं, ने 'तत्त्वार्थसूत्र' लिखा, जो संस्कृत में लिखा गया पहला जैन ग्रंथ माना जाता है। इसके दस अध्यायों के 357 सूत्रों में पूरे जैन दर्शन का सार है, और यह दिगम्बर और श्वेताम्बर दोनों परम्पराओं में मान्य है। दिगम्बर परम्परा उन्हें कुन्दकुन्द का शिष्य मानती है।
+गद्य: इसका पहला सूत्र पूरे मोक्षमार्ग को एक वाक्य में कह देता है: 'सम्यग्दर्शनज्ञानचारित्राणि मोक्षमार्गः', यानी सम्यग्दर्शन, सम्यग्ज्ञान और सम्यक्चारित्र, तीनों मिलकर मोक्ष का मार्ग हैं।
+Prose: Acharya Umaswami, also called Gridhrapichchha, wrote the Tattvartha Sutra, held to be the first Jain work written in Sanskrit. Its 357 sutras in ten chapters hold the essence of all Jain philosophy, and it is accepted by both the Digambar and Shvetambar traditions. The Digambar tradition regards him as a disciple of Kundkund.
+Prose: Its first sutra states the whole path to liberation in one line: right faith, right knowledge and right conduct together are the path to liberation.
+लिंक: tattvarth-sutra-anvayarth | तत्त्वार्थसूत्र (अर्थ सहित) | Tattvartha Sutra (with meaning)
+
+@ | समन्तभद्र, पूज्यपाद और अकलंक | Samantabhadra, Pujyapad and Akalank
+गद्य: आचार्य समन्तभद्र (लगभग दूसरी सदी) बड़े तार्किक और स्तुतिकार थे। उनके 'रत्नकरण्ड श्रावकाचार' में गृहस्थ के धर्म का सबसे प्रसिद्ध वर्णन है, और 'आप्तमीमांसा' में सच्चे देव की परीक्षा। उनकी भक्ति की कथा इस ऐप की कथाओं में है।
+गद्य: आचार्य पूज्यपाद, जिनका दूसरा नाम देवनन्दी है (लगभग पाँचवीं-छठी सदी), ने तत्त्वार्थसूत्र की पहली प्रसिद्ध टीका 'सर्वार्थसिद्धि' लिखी, और 'समाधितन्त्र', 'इष्टोपदेश' और संस्कृत व्याकरण 'जैनेन्द्र व्याकरण' भी।
+गद्य: आचार्य अकलंक (आठवीं सदी) ने न्याय-शास्त्र में जैन दर्शन की रक्षा की। तत्त्वार्थसूत्र पर उनकी टीका 'तत्त्वार्थराजवार्तिक' और न्याय ग्रंथ 'लघीयस्त्रय' प्रसिद्ध हैं। उनके त्याग की कथा भी इस ऐप में है।
+Prose: Acharya Samantabhadra (around the second century) was a great logician and poet of praise. His Ratnakarand Shravakachar is the best-known account of a householder's dharma, and his Aptamimansa examines who is truly worthy of worship. The story of his devotion is among this app's stories.
+Prose: Acharya Pujyapad, also called Devanandi (around the fifth or sixth century), wrote the Sarvarthasiddhi, the first famous commentary on the Tattvartha Sutra, as well as the Samadhitantra, the Ishtopadesh and a Sanskrit grammar, the Jainendra Vyakaran.
+Prose: Acharya Akalank (eighth century) defended Jain thought in the field of logic. His commentary on the Tattvartha Sutra, the Tattvartha Rajavartik, and his work on logic, the Laghiyastraya, are well known. The story of his sacrifice is in this app too.
+लिंक: ratnakarand-shravakachar | रत्नकरण्ड श्रावकाचार | Ratnakarand Shravakachar
+लिंक: samantabhadra | आचार्य समन्तभद्र की कथा | The story of Acharya Samantabhadra
+लिंक: akalank | आचार्य अकलंक की कथा | The story of Acharya Akalank
+
+@ | जिनसेन, गुणभद्र और नेमिचन्द्र | Jinasena, Gunabhadra and Nemichandra
+गद्य: नौवीं सदी में, राष्ट्रकूट राजाओं के समय, आचार्य जिनसेन ने 'आदिपुराण' लिखा, जिसमें भगवान ऋषभदेव और भरत चक्रवर्ती की कथा है। राष्ट्रकूट सम्राट अमोघवर्ष उनका बहुत आदर करते थे। जिनसेन के शिष्य गुणभद्र ने बाकी तेईस तीर्थंकरों और दूसरे शलाका पुरुषों की कथा 'उत्तरपुराण' में पूरी की; दोनों मिलकर 'महापुराण' कहलाते हैं। गुणभद्र का 'आत्मानुशासन' भी इस ऐप में है।
+गद्य: दसवीं सदी में आचार्य नेमिचन्द्र सिद्धान्तचक्रवर्ती ने गंग राज्य के मंत्री चामुण्डराय के लिए 'गोम्मटसार' लिखा, जिसमें जीव और कर्म का सूक्ष्म वर्णन है। चामुण्डराय का घरेलू नाम गोम्मट था। उन्होंने ही श्रवणबेलगोला में बाहुबली की विशाल प्रतिमा बनवाई, जो इसीलिए गोम्मटेश्वर कहलाती है। 'द्रव्यसंग्रह' भी आचार्य नेमिचन्द्र का माना जाता है।
+Prose: In the ninth century, in the time of the Rashtrakuta kings, Acharya Jinasena wrote the Adipuran, the story of Bhagwan Rishabhdev and the chakravarti Bharat. The Rashtrakuta emperor Amoghavarsha held him in great honour. Jinasena's disciple Gunabhadra completed the story of the other twenty-three Tirthankars and the other great souls in the Uttarpuran; together the two are called the Mahapuran. Gunabhadra's Atmanushasan is also in this app.
+Prose: In the tenth century Acharya Nemichandra Siddhantachakravarti wrote the Gommatsar, a detailed account of souls and karma, for Chamundaraya, minister of the Ganga kingdom. Chamundaraya's pet name was Gommata. It was he who had the giant statue of Bahubali made at Shravanabelagola, which is why it is called Gommateshwara. The Dravyasangrah is also attributed to Acharya Nemichandra.
+लिंक: adipuran | आदिपुराण | Adipuran
+लिंक: gommatsar-jeevkand | गोम्मटसार जीवकांड | Gommatsar Jeevkand
+लिंक: dravyasangrah | द्रव्यसंग्रह | Dravyasangrah
+
+@ | परम्परा आज भी चल रही है | The line continues
+गद्य: इन आचार्यों के बाद भी यह परम्परा चलती रही: 'ज्ञानार्णव' के आचार्य शुभचन्द्र, 'पद्मनन्दी पंचविंशतिका' के आचार्य पद्मनन्दी, 'पुरुषार्थसिद्ध्युपाय' और समयसार की 'आत्मख्याति' टीका के आचार्य अमृतचन्द्र, और अनेक दूसरे।
+गद्य: आज के दिगम्बर मुनि भी इन्हीं के ग्रंथों का स्वाध्याय करते हैं और इन्हीं की परम्परा में दीक्षा देते हैं। गृहस्थों के लिए भी इन ग्रंथों को अर्थ सहित धीरे-धीरे पढ़ना, यानी स्वाध्याय, सबसे बड़ा तप माना गया है।
+Prose: The line went on after these acharyas: Acharya Shubhachandra of the Gyanarnav, Acharya Padmanandi of the Padmanandi Panchvinshatika, Acharya Amritchandra of the Purusharthasiddhyupay and the Atmakhyati commentary on the Samaysar, and many more.
+Prose: Digambar munis today still study these works and give diksha in this same line. For householders too, reading these works slowly with their meaning, swadhyay, is counted among the highest forms of tapas.
+लिंक: purusharthasiddhyupay | पुरुषार्थसिद्ध्युपाय | Purusharthasiddhyupay

@@ -759,6 +759,11 @@
       {
         "book": "chaubis-tirthankar-stavan",
         "pos": 1
+      },
+      {
+        "book": "chaubis-tirthankar",
+        "find": "तीर्थंकर वे हैं जो संसार-सागर",
+        "pos": 1
       }
     ]
   },
@@ -871,6 +876,11 @@
       {
         "book": "mahavir-bachpan",
         "pos": 1
+      },
+      {
+        "book": "mahavir-itihas",
+        "find": "बहत्तर वर्ष की आयु में",
+        "pos": 5
       }
     ]
   },
@@ -1029,6 +1039,11 @@
         "book": "shrut-panchami-pooja",
         "find": "षट्खण्डागम रचा",
         "pos": 1
+      },
+      {
+        "book": "shrut-parampara",
+        "find": "ज्येष्ठ शुक्ल पंचमी को चतुर्विध संघ",
+        "pos": 5
       }
     ]
   },
@@ -1363,7 +1378,13 @@
       "hi": "दोनों भगवान महावीर के अनुयायी हैं और मूल सिद्धांत, जैसे अहिंसा, रत्नत्रय, कर्म और मोक्ष, एक ही हैं। मुख्य अन्तर आचरण और कुछ मान्यताओं में है: दिगम्बर मुनि वस्त्र नहीं रखते और मानते हैं कि पूर्ण अपरिग्रह के बिना मोक्ष नहीं, जबकि श्वेताम्बर साधु श्वेत वस्त्र पहनते हैं; मान्य आगम ग्रंथ और प्रतिमाओं का स्वरूप भी अलग है। यह ऐप दिगम्बर परम्परा के पाठों पर आधारित है।",
       "en": "Both follow Bhagwan Mahavir and share the core teachings: ahimsa, the three jewels, karma and moksha. They differ in practice and some beliefs: Digambar munis keep no clothing and hold that liberation needs complete non-possession, while Shvetambar monks wear white; their accepted scriptures and the form of their idols also differ. This app follows the texts of the Digambar tradition."
     },
-    "sources": []
+    "sources": [
+      {
+        "book": "shrut-parampara",
+        "find": "दोनों परम्पराएँ चौबीस तीर्थंकरों",
+        "pos": 4
+      }
+    ]
   },
   {
     "id": "god",
@@ -1470,6 +1491,260 @@
         "book": "tattvarth-sutra",
         "find": "प्रायश्चित्तविनय",
         "pos": 321
+      }
+    ]
+  },
+  {
+    "id": "kalchakra",
+    "q": {
+      "hi": "कालचक्र क्या है, और अभी कौन-सा काल चल रहा है?",
+      "en": "What is the kalchakra, and which age are we in now?"
+    },
+    "also": [
+      "kalchakra",
+      "kaal chakra",
+      "wheel of time",
+      "avasarpini utsarpini",
+      "pancham kaal kya hai",
+      "abhi kaun sa kaal hai",
+      "six aras",
+      "कालचक्र",
+      "पंचम काल"
+    ],
+    "a": {
+      "hi": "जैन आगम के अनुसार समय पहिये की तरह घूमता है। उसके दो आधे भाग हैं: अवसर्पिणी, जिसमें सुख, आयु और शरीर की ऊँचाई घटते जाते हैं, और उत्सर्पिणी, जिसमें ये फिर बढ़ते हैं। हर भाग में छह आरे होते हैं, सुषमा-सुषमा से दुःषमा-दुःषमा तक। चौथे आरे में तीर्थंकर होते हैं। भगवान महावीर के निर्वाण के थोड़े बाद अवसर्पिणी का पाँचवाँ आरा, पंचम काल, शुरू हुआ, जो इक्कीस हज़ार वर्ष का है; हम आज इसी में हैं।",
+      "en": "In Jain teaching time turns like a wheel. It has two halves: the avasarpini, in which happiness, lifespan and height decrease, and the utsarpini, in which they grow again. Each half has six aras, from sushama-sushama to dukhama-dukhama. The Tirthankars come in the fourth ara. Soon after Bhagwan Mahavir's nirvana the fifth ara of the avasarpini, the pancham kaal, began; it lasts twenty-one thousand years, and we live in it today."
+    },
+    "sources": [
+      {
+        "book": "kalchakra",
+        "find": "अवसर्पिणी के छह आरे इस क्रम से",
+        "pos": 2
+      },
+      {
+        "book": "kalchakra",
+        "find": "महावीर के निर्वाण के थोड़े समय बाद",
+        "pos": 5
+      }
+    ]
+  },
+  {
+    "id": "teen-lok",
+    "q": {
+      "hi": "जैन धर्म में तीन लोक क्या हैं?",
+      "en": "What are the three worlds (teen lok) in Jainism?"
+    },
+    "also": [
+      "teen lok",
+      "tin lok",
+      "jain cosmology",
+      "jain universe",
+      "lok ka aakar",
+      "siddhshila kahan hai",
+      "brahmand",
+      "तीन लोक",
+      "सिद्धशिला"
+    ],
+    "a": {
+      "hi": "जैन आगम के अनुसार लोक किसी का बनाया नहीं, अनादि-अनन्त है। उसका आकार कमर पर हाथ रखकर खड़े पुरुष जैसा है, चौदह राजू ऊँचा। नीचे अधोलोक में सात पृथ्वियाँ हैं जिनमें नरक हैं; बीच में मध्यलोक है, जिसके केन्द्र में जम्बूद्वीप है और जहाँ हम रहते हैं; ऊपर ऊर्ध्वलोक में स्वर्ग हैं। सबसे ऊपर सिद्धशिला है, और उसके ऊपर लोक के अन्त में सिद्ध भगवान विराजते हैं।",
+      "en": "In Jain teaching the universe was made by no one; it has no beginning and no end. It is shaped like a man standing with his hands on his hips, fourteen rajju tall. Below, in the lower world, are seven earths that hold the hells; in the middle is the middle world, with Jambudvip at its centre, where we live; above, in the upper world, are the heavens. At the top is Siddhashila, and above it, at the edge of the universe, dwell the Siddhas."
+    },
+    "sources": [
+      {
+        "book": "teen-lok",
+        "find": "पुरुष जैसा बताया गया है",
+        "pos": 2
+      },
+      {
+        "book": "teen-lok",
+        "find": "अर्धचन्द्र के आकार की सिद्धशिला",
+        "pos": 5
+      }
+    ]
+  },
+  {
+    "id": "shalaka-purush",
+    "q": {
+      "hi": "त्रेसठ शलाका पुरुष कौन हैं?",
+      "en": "Who are the sixty-three shalaka purush?"
+    },
+    "also": [
+      "63 shalaka purush",
+      "tresath shalaka purush",
+      "shalaka purush",
+      "chakravarti kaun hai",
+      "narayan pratinarayan",
+      "baldev narayan",
+      "शलाका पुरुष"
+    ],
+    "a": {
+      "hi": "हर युग में तिरेसठ महापुरुष होते हैं, जिन्हें शलाका पुरुष कहते हैं: चौबीस तीर्थंकर, बारह चक्रवर्ती, नौ बलभद्र, नौ नारायण और नौ प्रतिनारायण। चक्रवर्ती भरत क्षेत्र के छहों खण्ड जीतते हैं। हर नारायण अपने प्रतिनारायण को उसी के चक्र से मारता है; इस युग में राम, लक्ष्मण और रावण आठवें, और बलराम, श्रीकृष्ण और जरासन्ध नौवें बलभद्र, नारायण और प्रतिनारायण हैं। इनकी कथाएँ महापुराण जैसे पुराणों में हैं।",
+      "en": "Every age has sixty-three great souls, called shalaka purush: twenty-four Tirthankars, twelve chakravartis, nine balbhadras, nine narayans and nine pratinarayans. A chakravarti conquers all six regions of Bharat kshetra. Each narayan kills his pratinarayan with the pratinarayan's own discus; in our age Ram, Lakshman and Ravan are the eighth balbhadra, narayan and pratinarayan, and Balram, Krishna and Jarasandh the ninth. Their stories are in puranas such as the Mahapuran."
+    },
+    "sources": [
+      {
+        "book": "shalaka-purush",
+        "find": "तिरेसठ महापुरुष होते हैं",
+        "pos": 1
+      },
+      {
+        "book": "shalaka-purush",
+        "find": "इस युग की नौ जोड़ियों",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "jain-ramayan",
+    "q": {
+      "hi": "जैन धर्म में राम और रावण की कथा क्या है?",
+      "en": "What is the story of Ram and Ravan in Jainism?"
+    },
+    "also": [
+      "jain ramayan",
+      "jain ramayana",
+      "ram in jainism",
+      "ravan jain",
+      "padmapuran ram",
+      "who killed ravan in jainism",
+      "ram ka moksha",
+      "जैन रामायण",
+      "राम रावण"
+    ],
+    "a": {
+      "hi": "आचार्य रविषेण के पद्मपुराण (लगभग 677 ईस्वी) में राम की कथा है। उसमें राम आठवें बलभद्र, लक्ष्मण आठवें नारायण और रावण आठवें प्रतिनारायण हैं; रावण, सुग्रीव और हनुमान विद्याधर मनुष्य हैं। रावण विद्वान और जिनभक्त था, पर सीता की चाह ने उसका नाश किया, और उसे लक्ष्मण ने उसी के चक्र से मारा। सीता ने आर्यिका दीक्षा ली, और राम ने मुनि बनकर मांगीतुंगी (तुंगीगिरि) से मोक्ष पाया।",
+      "en": "Acharya Ravishen's Padmapuran (around 677 CE) tells the story of Ram. In it Ram is the eighth balbhadra, Lakshman the eighth narayan and Ravan the eighth pratinarayan; Ravan, Sugriv and Hanuman are vidyadhars, human beings with special powers. Ravan was learned and devoted to the Jina, but his desire for Sita ruined him, and Lakshman killed him with his own discus. Sita became an aryika, and Ram became a muni and attained liberation from Mangi-Tungi (Tungigiri)."
+    },
+    "sources": [
+      {
+        "book": "jain-ramayan",
+        "find": "आचार्य रविषेण ने लगभग 677 ईस्वी",
+        "pos": 1
+      },
+      {
+        "book": "jain-ramayan",
+        "find": "तुंगीगिरि (मांगीतुंगी, महाराष्ट्र) से उन्होंने मोक्ष पाया",
+        "pos": 5
+      }
+    ]
+  },
+  {
+    "id": "krishna-jain",
+    "q": {
+      "hi": "जैन धर्म में श्रीकृष्ण और पाण्डव कौन हैं?",
+      "en": "Who are Krishna and the Pandavs in Jainism?"
+    },
+    "also": [
+      "krishna jain",
+      "krishna in jainism",
+      "harivansh puran",
+      "pandav moksha",
+      "neminath krishna",
+      "jain mahabharat",
+      "श्रीकृष्ण",
+      "हरिवंश पुराण",
+      "पाण्डव"
+    ],
+    "a": {
+      "hi": "आचार्य जिनसेन के हरिवंश पुराण (783 ईस्वी) के अनुसार श्रीकृष्ण नौवें नारायण हैं, बलराम नौवें बलभद्र और जरासन्ध नौवाँ प्रतिनारायण। बाईसवें तीर्थंकर नेमिनाथ श्रीकृष्ण के चचेरे भाई थे। जैन परम्परा मानती है कि श्रीकृष्ण आने वाली उत्सर्पिणी में तीर्थंकर बनेंगे। पाण्डवों ने दीक्षा ली; युधिष्ठिर, भीम और अर्जुन ने शत्रुंजय पर्वत से मोक्ष पाया।",
+      "en": "In Acharya Jinasena's Harivansh Puran (783 CE), Krishna is the ninth narayan, Balram the ninth balbhadra and Jarasandh the ninth pratinarayan. Neminath, the twenty-second Tirthankar, was Krishna's cousin. The Jain tradition holds that Krishna will become a Tirthankar in the coming utsarpini. The Pandavs took diksha; Yudhishthir, Bhim and Arjun attained liberation from Mount Shatrunjay."
+    },
+    "sources": [
+      {
+        "book": "harivansh",
+        "find": "इस कथा के केन्द्र में बाईसवें तीर्थंकर नेमिनाथ",
+        "pos": 1
+      },
+      {
+        "book": "harivansh",
+        "find": "पाण्डवों ने भी संसार छोड़कर दीक्षा ली",
+        "pos": 5
+      }
+    ]
+  },
+  {
+    "id": "veer-nirvan-samvat",
+    "q": {
+      "hi": "वीर निर्वाण संवत् क्या है?",
+      "en": "What is the Veer Nirvan Samvat?"
+    },
+    "also": [
+      "veer nirvan samvat",
+      "vir nirvan samvat",
+      "vir samvat",
+      "jain year",
+      "jain calendar year",
+      "jain samvat",
+      "वीर संवत"
+    ],
+    "a": {
+      "hi": "वीर निर्वाण संवत् भगवान महावीर के निर्वाण से गिना जाता है, और भारत में आज भी चलने वाले सबसे पुराने संवतों में से एक है। परम्परा के अनुसार महावीर का निर्वाण ईसा से 527 वर्ष पहले कार्तिक कृष्ण अमावस्या (दीपावली) को पावापुर में हुआ। नया संवत् दीपावली के अगले दिन, कार्तिक शुक्ल प्रतिपदा, से शुरू होता है, और उस दिन से वह ईस्वी सन् से 527 आगे होता है; जैसे, 2026 की दीपावली के बाद संवत् 2553 चलता है।",
+      "en": "The Veer Nirvan Samvat is counted from Bhagwan Mahavir's nirvana, and is one of the oldest eras still in use in India. By tradition Mahavir attained nirvana at Pawapuri on Kartik Krishna Amavasya (Diwali), 527 years before the Common Era. Each new year begins the day after Diwali, on Kartik Shukla Pratipada, and from that day it runs 527 years ahead of the Common Era; after Diwali 2026, for example, the year is 2553."
+    },
+    "sources": [
+      {
+        "book": "mahavir-itihas",
+        "find": "वीर निर्वाण संवत्",
+        "pos": 5
+      }
+    ]
+  },
+  {
+    "id": "chandragupta-jain",
+    "q": {
+      "hi": "क्या चन्द्रगुप्त मौर्य जैन मुनि बने थे?",
+      "en": "Did Chandragupta Maurya become a Jain muni?"
+    },
+    "also": [
+      "chandragupta maurya jain",
+      "chandragupta jain muni",
+      "chandragiri",
+      "bhadrabahu chandragupta",
+      "shravanabelagola chandragupta",
+      "चन्द्रगुप्त"
+    ],
+    "a": {
+      "hi": "जैन परम्परा और श्रवणबेलगोला के शिलालेखों के अनुसार, अन्तिम श्रुतकेवली भद्रबाहु जब बारह वर्ष के अकाल से पहले मुनि-संघ के साथ दक्षिण गए, तब मौर्य सम्राट चन्द्रगुप्त राज्य छोड़कर उनके साथ मुनि बने। उन्होंने श्रवणबेलगोला के चन्द्रगिरि पर्वत पर गुरु की सेवा की और वहीं समाधिमरण किया। कुछ कथाएँ भद्रबाहु की समाधि उज्जयिनी में बताती हैं, और इतिहासकार इस पर एकमत नहीं हैं।",
+      "en": "According to the Jain tradition and the inscriptions at Shravanabelagola, when Bhadrabahu, the last shrutakevali, led a sangh of munis south ahead of a twelve-year famine, the Maurya emperor Chandragupta gave up his throne and went with him as a muni. He served his guru on Chandragiri hill at Shravanabelagola and ended his life there in samadhi. Some stories place Bhadrabahu's samadhi at Ujjayini instead, and historians do not agree on it."
+    },
+    "sources": [
+      {
+        "book": "shrut-parampara",
+        "find": "मौर्य सम्राट चन्द्रगुप्त ने राज्य छोड़कर",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "jain-dharma-age",
+    "q": {
+      "hi": "जैन धर्म कितना पुराना है?",
+      "en": "How old is Jain dharma?"
+    },
+    "also": [
+      "how old is jainism",
+      "jain dharm kitna purana hai",
+      "jain itihas",
+      "jain history",
+      "history of jainism",
+      "oldest jain inscription",
+      "kharavela",
+      "जैन इतिहास"
+    ],
+    "a": {
+      "hi": "जैन आगम के अनुसार जैन धर्म अनादि है: हर युग में तीर्थंकर इसे फिर प्रकाशित करते हैं, और इस युग में पहले तीर्थंकर ऋषभदेव थे। इतिहासकार तेईसवें तीर्थंकर पार्श्वनाथ और चौबीसवें तीर्थंकर महावीर (परम्परा के अनुसार निर्वाण 527 ईसा पूर्व) को ऐतिहासिक महापुरुष मानते हैं। कलिंग के राजा खारवेल का दो हज़ार वर्ष से भी पुराना शिलालेख णमोकार मंत्र से शुरू होता है, और मथुरा में लगभग उतनी ही पुरानी तीर्थंकर प्रतिमाएँ मिली हैं।",
+      "en": "In Jain teaching, Jain dharma has no beginning: in every age the Tirthankars make it shine again, and in ours the first was Rishabhdev. Historians accept Parshvanath, the twenty-third Tirthankar, and Mahavir, the twenty-fourth (nirvana 527 BCE by tradition), as historical figures. King Kharavela of Kalinga's inscription, over two thousand years old, opens with the Namokar mantra, and images of Tirthankars just as old have been found at Mathura."
+    },
+    "sources": [
+      {
+        "book": "chaubis-tirthankar",
+        "find": "आज के इतिहासकार भी तेईसवें",
+        "pos": 5
+      },
+      {
+        "book": "shilalekh",
+        "find": "हाथीगुम्फा गुफा",
+        "pos": 2
       }
     ]
   }

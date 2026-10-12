@@ -46,10 +46,11 @@
 | **पूजा और आरती** · Poojas | 111 poojas, arghya, visarjan and aartis, including a pooja for each of the 24 Tirthankars and the Diwali pooja |
 | **पाठ और स्तोत्र** · Paath and stotras | 59 texts: Meri Bhavana, Chhahdhala, Samayik Path, Kalyan Mandir, Ekibhav and more |
 | **ग्रंथ** · Granths | 54 scriptures of the four anuyogs: Samaysar, Pravachansar, Ratnakarand Shravakachar, Gommatsar, the puranas and more |
-| **जैन कथाएँ** · Stories | 33 traditional stories with photos of the places they happened, Kalchakra (the wheel of time), and 8 picture stories for young children |
+| **जैन कथाएँ** · Stories | 33 traditional stories with photos of the places they happened, and 8 picture stories for young children |
+| **पुराण और इतिहास** · Purana and history | 13 articles in simple Hindi and English: the wheel of time, the three worlds and Jambudvip, the Kulkars, the 63 great souls, the 24 Tirthankars, the Jain Ramayana and Harivansh, and history from Mahavir to today, with drawings and photos |
 | **मंदिर और पूजा विधि** · Temple guides | Step-by-step darshan and ashta-dravya pooja guides with every mantra and a drawing for each step |
 | **तिथि** · Tithi calendar | Today's tithi and the next 7 days, with ashtami, chaturdashi and festivals marked, worked out on the phone |
-| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 56 common questions work offline |
+| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 64 common questions work offline |
 
 ## बनाया गया सबके लिए · Made for everyone
 
@@ -93,19 +94,31 @@ The texts are plain files that anyone can correct.
 | पूजा विधि | Ashta-dravya pooja guide, 15 steps (Hindi and English) |
 | दीपावली पूजन विधि | Diwali pooja at home and on the new bahi: setup steps (Hindi and English), arghyavali, Shri Mahavir Jin Pooja (Vrindavan), Saraswati Pooja (Dyanatray), Nirvan Kand (Bhagwatidas), 64 riddhi arghyas, visarjan and aarti |
 
-#### Jain stories (`content/katha/`, 33 stories, and Kalchakra in `content/itihas/`)
+#### Jain stories (`content/katha/`, 33 stories)
 
 The stories are listed in five groups:
 
 | Group | Stories |
 | --- | --- |
-| तीर्थंकर और महापुरुष | Mahavir's childhood (his five names), Bharat and Bahubali, Akshay Tritiya, Neminath and Rajul, Parshvanath and Kamath, Sati Chandana: retold for this app in simple Hindi and English, with photos of Kundalpur, Shravanabelagola, Hastinapur, Girnar, Kashi, Shikharji and Pawapuri; and Kalchakra, the wheel of time: the six aras, the age of the Tirthankars and where we are today |
+| तीर्थंकर और महापुरुष | Mahavir's childhood (his five names), Bharat and Bahubali, Akshay Tritiya, Neminath and Rajul, Parshvanath and Kamath, Sati Chandana: retold for this app in simple Hindi and English, with photos of Kundalpur, Shravanabelagola, Hastinapur, Girnar, Kashi, Shikharji and Pawapuri |
 | आचार्यों की कथाएँ | Acharya Mantunga and the Bhaktamar, Shrutkevali Bhadrabahu, Samantabhadra, Akalank, Patrakesari |
 | सम्यग्दर्शन के आठ अंग | Anjan Chor, Anantmati, Raja Uddayan, Revati Rani, Jinendrabhakt Seth, Varishen Muni, Vishnukumar Muni (Rakshabandhan), Vajrakumar Muni, with a diagram of all eight angas |
 | व्रत, सत्य और अहिंसा | Yampal Chandal, Mrigsen the fisherman, the little fish Shalisikth, giving up food at night, Raja Vasu, Shribhuti, Neeli |
 | मुनि, राजा और श्रेष्ठी | Mahamuni Sukumal and Seth Sudarshan (in chapters), Sukaushal Muni, Gajkumar Muni, Raja Shrenik, Charudatt, Raja Karkandu |
 
 The stories that are not retold come from the Jain Database and the Aradhana Katha Kosh (Br. Nemidatta), in Hindi; each has a short version in Hindi and English and its lesson, written for this app. Photos are from Wikimedia Commons and are credited under each picture; stories without a photo have a drawn picture on their card.
+
+#### Purana and history (`content/itihas/`, 13 articles)
+
+Articles written for this app in simple Hindi and English, from the scriptures (Tattvartha Sutra, Tiloyapannatti, Adipuran, Uttarpuran, Padmapuran, Harivansh Puran, Shrutavatar, Darshansar) and published history, in three groups:
+
+| Group | Articles |
+| --- | --- |
+| लोक और काल | Kalchakra (the wheel of time), the three worlds, Jambudvip, Bharat and Videha, the fourteen Kulkars |
+| पुराणों से | The sixty-three great souls, the twenty-four Tirthankars (with every emblem and birthplace), the Jain Ramayana, the Harivansh Puran |
+| इतिहास | Bhagwan Mahavir in the light of history, after Mahavir (the kevalis, shrutakevalis and Shrut Panchami), the great acharyas and their books, history written in stone, from the medieval age to today |
+
+Each article links to the verses it draws on, opening the Tattvartha Sutra, Shrutavatar or Darshansar at that place.
 
 #### Poojas, paath and stotras (`content/pooja/`, 170 texts)
 

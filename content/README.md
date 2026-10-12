@@ -21,6 +21,7 @@ Meaning: English meaning
 गद्य: हिंदी गद्य का एक अनुच्छेद
 Prose: English paragraph
 लिंक: darshan-path | बटन का हिंदी नाम | Button label in English   ← दूसरा ग्रंथ खोलने का बटन
+लिंक: tattvarth-sutra-anvayarth/87 | हिंदी | English   ← ग्रंथ को उसके 87वें भाग पर खोलने का बटन
 चित्र: img/katha/pawapuri.jpg | हिंदी कैप्शन | English caption | फ़ोटो का श्रेय   ← चित्र
 सीख: कथा की सीख             ← कथा की सीख, एक रंगीन डिब्बे में
 Moral: the lesson of the story, in English
@@ -52,6 +53,10 @@ Only add texts that are free to share, or that you have permission to use.
 ## कथाएँ · Stories (`katha/`)
 
 Stories are books in the `katha` category. Besides the usual fields, their entry in `books.json` can have `cover` (a photo shown on the story's card), `coverPos` (which part of the photo to show, for example `"center 10%"`), and `blurb` (one line about the story, in Hindi and English). A story without `cover` gets a coloured tile with the first letter of its name. Pictures go in `img/katha/`; use only photos that are free to share and write the photographer and license in the caption's last field.
+
+## पुराण और इतिहास · Purana and history (`itihas/`)
+
+Articles in the `puran-itihas` category, written for this app in simple Hindi and English. They read like stories: one page, a picture on the card (a drawn scene, or `cover`), and contents that list only their titled parts. Their entry in `books.json` has a `blurb`, shown under the title in the list, and a `group` (लोक और काल, पुराणों से or इतिहास). Their explanatory pictures are in `itihas/chitra.json`. A link can open a text at a given place: `लिंक: shrutavatar/34 | ...` opens its 34th part, counting the parts the way the reader does. New articles go at the end of `books.json`, so the Ask index keeps every other text's number.
 
 ## `pooja/` और `granth/` · Imported texts
 

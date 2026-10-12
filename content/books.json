@@ -4846,20 +4846,251 @@
     "id": "kalchakra",
     "file": "content/itihas/kalchakra.txt",
     "scroll": true,
-    "category": "katha",
+    "category": "puran-itihas",
     "title": { "hi": "कालचक्र — समय का पहिया", "en": "Kalchakra: the wheel of time" },
-    "author": { "hi": "शास्त्रों के आधार पर", "en": "From the scriptures" },
-    "unit": { "hi": "अंश", "en": "Part" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
     "count": 5,
     "textLang": "hi",
     "numberMark": false,
-    "coverIcon": "dharmachakra",
-    "blurb": { "hi": "अवसर्पिणी और उत्सर्पिणी के छह-छह आरे, तीर्थंकरों का काल, और हम आज कहाँ हैं", "en": "The six ages of time going down and coming up, the age of the Tirthankars, and where we are today" },
-    "aliases": ["kalchakra", "kaalchakra", "kal chakra", "kalchakr", "wheel of time", "avasarpini", "utsarpini", "ara", "aara", "pancham kaal", "pancham kal", "hundavasarpini", "bhogbhumi", "कालचक्र", "काल चक्र", "अवसर्पिणी", "उत्सर्पिणी", "आरा", "आरे", "पंचम काल", "हुण्डावसर्पिणी", "भोगभूमि"],
+    "blurb": { "hi": "अवसर्पिणी, उत्सर्पिणी और छह आरे: जैन दृष्टि में समय", "en": "Avasarpini, utsarpini and the six aras: time in Jain teaching" },
+    "aliases": ["aara", "aare", "avasarpini", "bhogbhumi", "hundavasarpini", "jain time", "kaal chakra", "kalchakr", "kalchakra", "kalpavriksha", "mythology", "pancham kaal", "pancham kal", "six aras", "utsarpini", "wheel of time", "अवसर्पिणी", "आरा", "आरे", "उत्सर्पिणी", "कल्पवृक्ष", "काल चक्र", "कालचक्र", "पंचम काल", "भोगभूमि"],
     "source": {
-      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, तत्त्वार्थसूत्र (अध्याय 3), तिलोयपण्णत्ति और आदिपुराण में बताए काल-वर्णन के आधार पर।",
-      "en": "Written for this app in simple Hindi and English, from the account of time in the Tattvartha Sutra (chapter 3), the Tiloyapannatti and the Adipuran."
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 3), तिलोयपण्णत्ति और आदिपुराण के काल-वर्णन के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the account of time in the Tattvartha Sutra (chapter 3), the Tiloyapannatti and the Adipuran. Pictures drawn for this app."
     },
-    "group": { "hi": "तीर्थंकर और महापुरुष", "en": "Tirthankars and great souls" }
+    "group": { "hi": "लोक और काल", "en": "The universe and time" }
+  },
+  {
+    "id": "teen-lok",
+    "file": "content/itihas/teen-lok.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "तीन लोक — जैन दृष्टि में ब्रह्माण्ड", "en": "The three worlds: the universe in Jain teaching" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 6,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "पुरुष के आकार का लोक, सात पृथ्वियाँ, मध्यलोक, स्वर्ग और सिद्धशिला", "en": "A universe shaped like a person: the seven earths, the middle world, the heavens and Siddhashila" },
+    "aliases": ["adholok", "brahmand", "cosmology", "heaven", "hell", "jain cosmology", "jain universe", "lok purush", "madhyalok", "mythology", "narak", "rajju", "siddhashila", "siddhshila", "svarg", "swarg", "teen lok", "three lokas", "three worlds", "tin lok", "universe", "urdhvalok", "अधोलोक", "ऊर्ध्वलोक", "तीन लोक", "नरक", "ब्रह्माण्ड", "मध्यलोक", "राजू", "लोक", "सिद्धशिला", "स्वर्ग"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 3, 4 और 10), तिलोयपण्णत्ति और त्रिलोकसार के लोक-वर्णन के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the account of the universe in the Tattvartha Sutra (chapters 3, 4 and 10), the Tiloyapannatti and the Trilokasar. Pictures drawn for this app."
+    },
+    "group": { "hi": "लोक और काल", "en": "The universe and time" }
+  },
+  {
+    "id": "jambudweep",
+    "file": "content/itihas/jambudweep.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "जम्बूद्वीप, भरत क्षेत्र और विदेह", "en": "Jambudvip, Bharat kshetra and Videha" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 6,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "सुमेरु, भरत क्षेत्र के छह खण्ड, विदेह, पंचमेरु और नन्दीश्वर द्वीप", "en": "Sumeru, the six regions of Bharat, Videha, the five Merus and Nandishwar Dweep" },
+    "aliases": ["airavat", "ashtahnika", "bharat kshetra", "jain geography", "jambu dweep", "jambudvip", "jambudweep", "meru", "mythology", "nandishwar", "nandishwar dweep", "panchmeru", "pandukshila", "simandhar", "sumeru", "videh", "videha", "vidyadhar", "अष्टाह्निका", "जम्बूद्वीप", "नंदीश्वर", "नन्दीश्वर", "पंचमेरु", "पाण्डुक शिला", "भरत क्षेत्र", "मेरु", "विदेह", "सीमन्धर", "सुमेरु"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 3), तिलोयपण्णत्ति, आदिपुराण और दर्शनसार के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Tattvartha Sutra (chapter 3), the Tiloyapannatti, the Adipuran and the Darshansar. Pictures drawn for this app."
+    },
+    "group": { "hi": "लोक और काल", "en": "The universe and time" }
+  },
+  {
+    "id": "kulkar",
+    "file": "content/itihas/kulkar.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "चौदह कुलकर — भोगभूमि से कर्मभूमि तक", "en": "The fourteen Kulkars: from the age of plenty to the age of work" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "जब कल्पवृक्ष घटे, और ऋषभदेव ने खेती, लिखना और जीविका सिखाई", "en": "When the wish-trees failed, and Rishabhdev taught farming, writing and work" },
+    "aliases": ["adinath", "asi masi krishi", "brahmi", "brahmi lipi", "fourteen kulkars", "karmabhumi", "kulkar", "kulkara", "manu", "marudevi", "mythology", "nabhiraj", "nabhiraya", "rishabhdev", "sundari", "असि मसि कृषि", "आदिनाथ", "ऋषभदेव", "कर्मभूमि", "कुलकर", "नाभिराय", "ब्राह्मी", "मनु", "मरुदेवी", "सुन्दरी"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य जिनसेन के आदिपुराण और तिलोयपण्णत्ति के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Jinasena's Adipuran and the Tiloyapannatti. Pictures drawn for this app."
+    },
+    "group": { "hi": "लोक और काल", "en": "The universe and time" }
+  },
+  {
+    "id": "shalaka-purush",
+    "file": "content/itihas/shalaka-purush.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "त्रेसठ शलाका पुरुष", "en": "The sixty-three great souls (shalaka purush)" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "चौबीस तीर्थंकर, बारह चक्रवर्ती, और बलभद्र, नारायण, प्रतिनारायण", "en": "Twenty-four Tirthankars, twelve chakravartis, and the balbhadras, narayans and pratinarayans" },
+    "aliases": ["169 punya purush", "63 shalaka purush", "balbhadra", "baldev", "chakravarti", "chakravarty", "kamdev", "mahapuran", "mythology", "narayan", "pratinarayan", "prativasudev", "shalaka purush", "tresath shalaka purush", "trishashti", "vasudev", "कामदेव", "चक्रवर्ती", "तिरेसठ", "त्रेसठ", "नारायण", "प्रतिनारायण", "बलदेव", "बलभद्र", "शलाका पुरुष"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य जिनसेन और गुणभद्र के महापुराण (आदिपुराण, उत्तरपुराण) और तिलोयपण्णत्ति के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Mahapuran of Acharya Jinasena and Gunabhadra (Adipuran, Uttarpuran) and the Tiloyapannatti. Pictures drawn for this app."
+    },
+    "group": { "hi": "पुराणों से", "en": "From the puranas" }
+  },
+  {
+    "id": "chaubis-tirthankar",
+    "file": "content/itihas/chaubis-tirthankar.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "चौबीस तीर्थंकर", "en": "The twenty-four Tirthankars" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/shikharji.jpg",
+    "blurb": { "hi": "पंच कल्याणक, हर तीर्थंकर का चिह्न और जन्म-नगरी, और निर्वाण भूमियाँ", "en": "The five kalyanaks, each Tirthankar's emblem and birthplace, and where they attained nirvana" },
+    "aliases": ["24 tirthankar", "birthplace", "chaubis tirthankar", "janm nagari", "kalyanak", "lanchan", "lanchhan", "nirvan bhumi", "panch kalyanak", "sammed shikhar", "shikharji", "tirthankar emblem", "tirthankar names", "tirthankar symbol", "twenty four tirthankars", "कल्याणक", "चिह्न", "चौबीस तीर्थंकर", "जन्म नगरी", "तीर्थंकर", "निर्वाण भूमि", "पंच कल्याणक", "लांछन", "सम्मेद शिखर"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर परम्परा के अनुसार (उत्तरपुराण, तिलोयपण्णत्ति, निर्वाण कांड)। चित्र इसी ऐप में बने हैं, और फ़ोटो विकिमीडिया कॉमन्स से, हर फ़ोटो के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, following the Digambar tradition (Uttarpuran, Tiloyapannatti, Nirvan Kand). Pictures drawn for this app; photographs from Wikimedia Commons, credited under each photo."
+    },
+    "group": { "hi": "पुराणों से", "en": "From the puranas" }
+  },
+  {
+    "id": "jain-ramayan",
+    "file": "content/itihas/jain-ramayan.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "जैन रामायण — पद्मपुराण की राम-कथा", "en": "The Jain Ramayana: the story of Ram in the Padmapuran" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "पद्मपुराण की राम-कथा, जिसमें रावण को लक्ष्मण मारते हैं और राम मोक्ष पाते हैं", "en": "The Ram story of the Padmapuran, in which Lakshman slays Ravan and Ram attains liberation" },
+    "aliases": ["hanuman", "jain ramayan", "jain ramayana", "lakshman", "mangi tungi", "mangitungi", "mythology", "padma", "padmacharit", "padmapuran", "paumachariyam", "ram", "rama", "ramayan", "ramayana", "ravan", "ravana", "sita", "tungigiri", "vidyadhar", "जैन रामायण", "तुंगीगिरि", "पद्मपुराण", "मांगीतुंगी", "राम", "रामायण", "रावण", "लक्ष्मण", "सीता", "हनुमान"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य रविषेण के पद्मपुराण (पद्मचरित) और भैया भगवतीदास के निर्वाण कांड के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Ravishen's Padmapuran (Padmacharit) and Bhaiya Bhagwatidas's Nirvan Kand. Pictures drawn for this app."
+    },
+    "group": { "hi": "पुराणों से", "en": "From the puranas" }
+  },
+  {
+    "id": "harivansh",
+    "file": "content/itihas/harivansh.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "हरिवंश पुराण — नेमिनाथ, श्रीकृष्ण और पाण्डव", "en": "The Harivansh Puran: Neminath, Krishna and the Pandavs" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/girnar.jpg",
+    "blurb": { "hi": "नेमिनाथ का वैराग्य, श्रीकृष्ण और जरासन्ध, द्वारिका का अन्त और पाण्डवों का मोक्ष", "en": "Neminath's renunciation, Krishna and Jarasandh, the end of Dwarka and the Pandavs' liberation" },
+    "aliases": ["arishtanemi", "balaram", "balram", "dwarika", "dwarka", "harivamsha", "harivansh", "harivansh puran", "jain mahabharat", "jarasandh", "kaurav", "krishn", "krishna", "mahabharat", "mahabharata", "mythology", "neminath", "pandav", "pandava", "shatrunjay", "कृष्ण", "जरासन्ध", "द्वारिका", "नेमिनाथ", "पाण्डव", "बलराम", "महाभारत", "शत्रुंजय", "श्रीकृष्ण", "हरिवंश", "हरिवंश पुराण"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य जिनसेन (पुन्नाट संघ) के हरिवंश पुराण, आचार्य गुणभद्र के उत्तरपुराण और निर्वाण कांड के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Harivansh Puran of Acharya Jinasena (Punnat sangh), Acharya Gunabhadra's Uttarpuran and the Nirvan Kand. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "पुराणों से", "en": "From the puranas" }
+  },
+  {
+    "id": "mahavir-itihas",
+    "file": "content/itihas/mahavir-itihas.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "भगवान महावीर — इतिहास के प्रकाश में", "en": "Bhagwan Mahavir in the light of history" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 6,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/pawapuri.jpg",
+    "blurb": { "hi": "जन्म, केवलज्ञान, उपदेश और निर्वाण, परम्परा और इतिहासकारों की दृष्टि से", "en": "Birth, omniscience, teaching and nirvana, as tradition and historians tell it" },
+    "aliases": ["gautam ganadhar", "history", "itihas", "jain history", "kundalpur", "mahaveer", "mahavir", "mahavir history", "nigantha nataputta", "pavapuri", "pawapuri", "vaishali", "vardhaman", "veer nirvan samvat", "veer shasan jayanti", "vir nirvan samvat", "vir samvat", "इतिहास", "कुण्डलपुर", "गौतम गणधर", "पावापुर", "महावीर", "वर्धमान", "वीर निर्वाण संवत", "वीर निर्वाण संवत्", "वीर शासन जयन्ती", "वैशाली"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर परम्परा (उत्तरपुराण, तिलोयपण्णत्ति) और इतिहासकारों के मत के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Digambar tradition (Uttarpuran, Tiloyapannatti) and the views of historians. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "इतिहास", "en": "History" }
+  },
+  {
+    "id": "shrut-parampara",
+    "file": "content/itihas/shrut-parampara.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "महावीर के बाद — केवली, श्रुतकेवली और श्रुत पंचमी", "en": "After Mahavir: the kevalis, the shrutakevalis and Shrut Panchami" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "683 वर्षों की श्रुत परम्परा, भद्रबाहु और चन्द्रगुप्त, और श्रुत पंचमी की शुरुआत", "en": "683 years of the oral tradition, Bhadrabahu and Chandragupta, and how Shrut Panchami began" },
+    "aliases": ["bhadrabahu", "bhutbali", "chandragupta", "chandragupta maurya", "dharasena", "dharsen", "dhavala", "digambar shvetambar", "gautam", "history", "jain history", "jambu swami", "kashaypahud", "kevali", "pushpadant", "shatkhandagam", "shravanabelagola", "shrut panchami", "shrut parampara", "shrutakevali", "shrutkevali", "shwetambar", "sudharma", "केवली", "चन्द्रगुप्त", "दिगम्बर", "धरसेन", "धवला", "पुष्पदन्त", "भद्रबाहु", "भूतबलि", "श्रुत पंचमी", "श्रुत परम्परा", "श्रुतकेवली", "श्वेताम्बर", "षट्खण्डागम"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य इन्द्रनन्दी के श्रुतावतार, तिलोयपण्णत्ति, आचार्य देवसेन के दर्शनसार और श्रवणबेलगोला के शिलालेखों के आधार पर। चित्र इसी ऐप में बने हैं, और फ़ोटो विकिमीडिया कॉमन्स से, हर फ़ोटो के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Indranandi's Shrutavatar, the Tiloyapannatti, Acharya Devsen's Darshansar and the inscriptions of Shravanabelagola. Pictures drawn for this app; photographs from Wikimedia Commons, credited under each photo."
+    },
+    "group": { "hi": "इतिहास", "en": "History" }
+  },
+  {
+    "id": "acharya-parampara",
+    "file": "content/itihas/acharya-parampara.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "महान आचार्य और उनके ग्रंथ", "en": "Great acharyas and their books" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 6,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "कुन्दकुन्द, उमास्वामी, समन्तभद्र, अकलंक, जिनसेन और नेमिचन्द्र", "en": "Kundkund, Umaswami, Samantabhadra, Akalank, Jinasena and Nemichandra" },
+    "aliases": ["acharya", "acharya parampara", "akalank", "amritchandra", "chamundaraya", "gunabhadra", "history", "jain history", "jinasena", "jinsen", "kundakunda", "kundkund", "nemichandra", "pujyapad", "samantabhadra", "shubhachandra", "umasvati", "umaswami", "अकलंक", "आचार्य", "आचार्य परम्परा", "उमास्वामी", "कुंदकुंद", "कुन्दकुन्द", "गुणभद्र", "चामुण्डराय", "जिनसेन", "नेमिचन्द्र", "पूज्यपाद", "समन्तभद्र"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर आचार्य परम्परा और विद्वानों के मत के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Digambar line of acharyas and the views of scholars. Pictures drawn for this app."
+    },
+    "group": { "hi": "इतिहास", "en": "History" }
+  },
+  {
+    "id": "shilalekh",
+    "file": "content/itihas/shilalekh.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "पत्थरों में लिखा इतिहास", "en": "History written in stone" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/mathura-ayagapata.jpg",
+    "blurb": { "hi": "खारवेल का शिलालेख, मथुरा, श्रवणबेलगोला, एलोरा, खजुराहो और ग्वालियर", "en": "Kharavela's inscription, Mathura, Shravanabelagola, Ellora, Khajuraho and Gwalior" },
+    "aliases": ["aihole", "archaeology", "ayagapata", "chandragiri", "deogarh", "ellora", "gommateshwar", "gwalior", "hathigumpha", "history", "inscription", "inscriptions", "jain caves", "jain history", "jain temples", "kankali tila", "khajuraho", "khandagiri", "kharavela", "kharvel", "mathura", "shilalekh", "shravanabelagola", "udayagiri", "इतिहास", "एलोरा", "कंकाली टीला", "खजुराहो", "खारवेल", "ग्वालियर", "देवगढ़", "मथुरा", "शिलालेख", "श्रवणबेलगोला", "हाथीगुम्फा"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, पुरातत्त्व और इतिहास की प्रकाशित जानकारी के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on published archaeology and history. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "इतिहास", "en": "History" }
+  },
+  {
+    "id": "madhyakal-adhunik",
+    "file": "content/itihas/madhyakal-adhunik.txt",
+    "scroll": true,
+    "category": "puran-itihas",
+    "title": { "hi": "मध्यकाल से आज तक", "en": "From the medieval age to today" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "बनारसीदास और टोडरमल से आचार्य शान्तिसागर और विद्यासागर तक", "en": "From Banarasidas and Todarmal to Acharya Shantisagar and Vidyasagar" },
+    "aliases": ["ardhakathanak", "banarasi das", "banarasidas", "bhattarak", "bhattaraka", "bhudhardas", "budhjan", "daulatram", "dyanatray", "gyanmati", "history", "jain census", "jain history", "jain minority", "kanji swami", "medieval", "modern jain history", "moksh marg prakashak", "shanti sagar", "shantisagar", "shastra bhandar", "todarmal", "vidya sagar", "vidyasagar", "इतिहास", "ज्ञानमती", "टोडरमल", "दौलतराम", "द्यानतराय", "बनारसीदास", "भट्टारक", "भूधरदास", "मोक्षमार्ग प्रकाशक", "विद्यासागर", "शांतिसागर", "शान्तिसागर", "शास्त्र भण्डार"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, इतिहास की प्रकाशित जानकारी और कवियों की अपनी रचनाओं के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on published history and the poets' own works. Pictures drawn for this app."
+    },
+    "group": { "hi": "इतिहास", "en": "History" }
   }
 ]
