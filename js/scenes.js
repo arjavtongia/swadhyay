@@ -1782,5 +1782,51 @@ const SCENES = (function () {
   ['pehle-padhein', 'padhai', 'naukri-vyapar', 'vivah-parivar', 'swasthya', 'bhay-chinta', 'sankat', 'bhaktamar-upay', 'ghar-chaityalaya', 'vastu']
     .forEach(k => { scenes['story.' + k] = story[k]; });
 
+  /* ---------- Jain festivals: covers for the articles without a photograph ---------- */
+
+  /* A festival flag between rows of lamps. */
+  story['parv-parichay'] = cover(
+    '<circle cx="160" cy="80" r="52" fill="' + GLOW + '" opacity="0.7"/>' +
+    '<path d="M150 150 V30" stroke="' + WOOD_EDGE + '" stroke-width="4" stroke-linecap="round"/>' +
+    '<path d="M152 32 Q184 24 214 36 Q196 48 214 62 Q184 70 152 60 Z" fill="' + SAFFRON + '" stroke="#b46a1c" stroke-width="1.5" stroke-linejoin="round"/>' +
+    '<path d="M138 150 h24" stroke="' + WOOD_EDGE + '" stroke-width="4" stroke-linecap="round"/>' +
+    [40, 76, 112, 208, 244, 280].map(x => diya(x, 146, 0.8)).join(''));
+
+  /* Kailash, with the glow of the Lord's liberation above its peak. */
+  story['adinath-parv'] = cover(
+    '<path d="M50 150 L160 34 L270 150 Z" fill="#e3cfa9" stroke="' + WOOD_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M126 70 L160 34 L194 70 Z" fill="#fffaf0"/>' +
+    '<circle cx="160" cy="26" r="18" fill="' + GLOW + '" opacity="0.9"/>' +
+    '<path d="M118 20 Q160 4 202 20 Q160 14 118 20 Z" fill="' + GLOW + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5"/>' +
+    sun(286, 34, 9));
+
+  /* Nandishwar Dweep: the ring of the island with a temple in each direction, under the night sky. */
+  story.ashtahnika = cover(
+    stars([[30, 30], [70, 60], [250, 26], [292, 70], [40, 110], [280, 120]]) +
+    '<ellipse cx="160" cy="98" rx="104" ry="52" fill="#bfe0f7"/><ellipse cx="160" cy="98" rx="84" ry="40" fill="#e3cfa9" stroke="' + WOOD_EDGE + '" stroke-width="2"/>' +
+    [[160, 66], [228, 98], [160, 132], [92, 98]].map(p =>
+      '<path d="M' + (p[0] - 11) + ' ' + (p[1] + 8) + ' h22 v-12 l-11 -12 l-11 12 z" fill="' + BRASS + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5" stroke-linejoin="round"/>').join('') +
+    '<circle cx="160" cy="98" r="10" fill="' + GLOW + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5"/>',
+    { night: true });
+
+  /* The ten dharmas as a flower of ten petals. */
+  story['dashlakshan-parv'] = cover((function () {
+    let p = '';
+    for (let i = 0; i < 10; i++) p += '<ellipse cx="0" cy="-40" rx="12" ry="22" fill="' + (i % 2 ? '#f2b56a' : SAFFRON) + '" stroke="#b46a1c" stroke-width="1" transform="rotate(' + (i * 36) + ')"/>';
+    return '<g transform="translate(160 84)">' + p + '<circle r="19" fill="' + FLAME + '" stroke="#b46a1c" stroke-width="1.5"/>' +
+      '<text y="6" text-anchor="middle" font-size="18" font-weight="700" fill="' + INK + '" font-family="' + FONT + '">10</text></g>' +
+      diya(52, 146, 0.8) + diya(268, 146, 0.8);
+  })());
+
+  /* Two people, hands folded, asking each other's forgiveness. */
+  story['kshamavani-parv'] = cover(
+    '<circle cx="160" cy="76" r="50" fill="' + GLOW + '" opacity="0.8"/>' +
+    stand(118, 150, { hands: 'folded', bow: true, cloth: SAFFRON }) +
+    stand(202, 150, { hands: 'folded', bow: true, dir: -1 }) +
+    flower5(160, 138, 1));
+
+  ['parv-parichay', 'adinath-parv', 'ashtahnika', 'dashlakshan-parv', 'kshamavani-parv']
+    .forEach(k => { scenes['story.' + k] = story[k]; });
+
   return scenes;
 })();

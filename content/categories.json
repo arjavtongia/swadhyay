@@ -5,6 +5,7 @@
   { "id": "katha", "title": { "hi": "जैन कथाएँ", "en": "Jain stories" } },
   { "id": "puran-itihas", "title": { "hi": "पुराण और इतिहास", "en": "Purana and history" } },
   { "id": "samadhan", "title": { "hi": "जीवन के समाधान", "en": "Help for life's troubles" } },
+  { "id": "parv", "title": { "hi": "जैन पर्व और उनकी कथाएँ", "en": "Jain festivals and their stories" } },
   { "id": "pooja-prarambh", "title": { "hi": "पूजा से पहले — अभिषेक, विनय, स्वस्ति", "en": "Before the pooja — abhishek, vinay, swasti" } },
   { "id": "nitya-pooja", "title": { "hi": "नित्य पूजाएँ", "en": "Daily poojas" } },
   { "id": "tirthankar-pooja", "title": { "hi": "तीर्थंकर पूजाएँ", "en": "Tirthankar poojas" } },

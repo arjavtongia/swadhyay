@@ -233,6 +233,8 @@
         if (ri && ri.ok) Object.assign(chitra, await ri.json());
         const rs = await fetch('content/samadhan/chitra.json').catch(() => null);
         if (rs && rs.ok) Object.assign(chitra, await rs.json());
+        const rp = await fetch('content/parv/chitra.json').catch(() => null);
+        if (rp && rp.ok) Object.assign(chitra, await rp.json());
       } catch (e) {
         chitra = {};
       }
@@ -809,9 +811,9 @@
 
   /* Read as one page under a picture, with contents naming only their titled parts: stories and the
      Purana and history articles. */
-  const STORY_LIKE = ['katha', 'bal-katha', 'puran-itihas', 'samadhan'];
+  const STORY_LIKE = ['katha', 'bal-katha', 'puran-itihas', 'samadhan', 'parv'];
   /* The shelves of articles written for this app, listed by group with each one's summary. */
-  const ARTICLE_CATS = ['puran-itihas', 'samadhan'];
+  const ARTICLE_CATS = ['puran-itihas', 'samadhan', 'parv'];
 
   /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart.
      Where the Pooja guide opens one of several versions, that version says so. */
@@ -874,7 +876,8 @@
     { id: 'granth', title: 'shelfGranth', cats: ['prathamanuyog', 'karananuyog', 'charananuyog', 'dravyanuyog', 'nyay', 'itihas', 'anya'] },
     { id: 'katha', title: 'shelfKatha', cats: ['bal-katha', 'katha'] },
     { id: 'puran-itihas', title: 'shelfItihas', cats: ['puran-itihas'] },
-    { id: 'samadhan', title: 'shelfSamadhan', cats: ['samadhan'] }
+    { id: 'samadhan', title: 'shelfSamadhan', cats: ['samadhan'] },
+    { id: 'parv', title: 'shelfParv', cats: ['parv'] }
   ];
 
   function shelfCats(g) {
@@ -898,19 +901,21 @@
 
   /* Festivals by purnimanta month (0 = Chaitra), paksha and day of the paksha. */
   const FESTIVALS = [
-    { m: 0, p: 'shukla', d: [13], key: 'mahavirJayanti' },
-    { m: 1, p: 'shukla', d: [3], key: 'akshayaTritiya' },
-    { m: 2, p: 'shukla', d: [5], key: 'shrutPanchami' },
-    { m: 3, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika' },
-    { m: 4, p: 'krishna', d: [1], key: 'veerShasan' },
-    { m: 4, p: 'shukla', d: [7], key: 'mokshSaptami' },
-    { m: 4, p: 'shukla', d: [15], key: 'rakshaBandhan' },
-    { m: 5, p: 'shukla', d: [14], key: 'anantChaturdashi' },
-    { m: 5, p: 'shukla', d: [5, 6, 7, 8, 9, 10, 11, 12, 13], key: 'dasLakshan' },
-    { m: 6, p: 'krishna', d: [1], key: 'kshamavani' },
+    { m: 0, p: 'krishna', d: [9], key: 'adinathJayanti', book: 'adinath-parv' },
+    { m: 0, p: 'shukla', d: [13], key: 'mahavirJayanti', book: 'mahavir-jayanti' },
+    { m: 1, p: 'shukla', d: [3], key: 'akshayaTritiya', book: 'akshay-tritiya-parv' },
+    { m: 2, p: 'shukla', d: [5], key: 'shrutPanchami', book: 'shrut-panchami-parv' },
+    { m: 3, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika', book: 'ashtahnika' },
+    { m: 4, p: 'krishna', d: [1], key: 'veerShasan', book: 'veer-shasan-jayanti' },
+    { m: 4, p: 'shukla', d: [7], key: 'mokshSaptami', book: 'moksh-saptami' },
+    { m: 4, p: 'shukla', d: [15], key: 'rakshaBandhan', book: 'rakshabandhan-parv' },
+    { m: 5, p: 'shukla', d: [14], key: 'anantChaturdashi', book: 'anant-chaturdashi' },
+    { m: 5, p: 'shukla', d: [5, 6, 7, 8, 9, 10, 11, 12, 13], key: 'dasLakshan', book: 'dashlakshan-parv' },
+    { m: 6, p: 'krishna', d: [1], key: 'kshamavani', book: 'kshamavani-parv' },
     { m: 7, p: 'krishna', d: [15], key: 'diwali', book: 'deepawali-poojan' },
-    { m: 7, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika' },
-    { m: 11, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika' }
+    { m: 7, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika', book: 'ashtahnika' },
+    { m: 10, p: 'krishna', d: [14], key: 'adinathNirvan', book: 'adinath-parv' },
+    { m: 11, p: 'shukla', d: [8, 9, 10, 11, 12, 13, 14, 15], key: 'ashtahnika', book: 'ashtahnika' }
   ];
 
   function dayInfo(date) {
@@ -993,7 +998,7 @@
       '</section>';
   }
 
-  /* In the week before a festival that has its own pooja (Diwali), a notice on the home screen opens it. */
+  /* In the week before a festival, a notice on the home screen opens its page: its story, or for Diwali the pooja guide. */
   async function festivalCardHtml() {
     const now = new Date();
     for (let i = 0; i < 7; i++) {
@@ -1096,6 +1101,7 @@
       has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: kathaSub() },
       has('puran-itihas') && { href: '#/books/puran-itihas', emblem: { category: 'puran-itihas' }, title: t('pathItihas'), sub: t('pathItihasSub', { n: count('puran-itihas') }) },
       has('samadhan') && { href: '#/books/samadhan', emblem: { category: 'samadhan' }, title: t('pathSamadhan'), sub: t('pathSamadhanSub', { n: count('samadhan') }) },
+      has('parv') && { href: '#/books/parv', emblem: { category: 'parv' }, title: t('pathParv'), sub: t('pathParvSub') },
       has('vidhi') && { href: '#/books/vidhi', icon: 'temple', title: t('pathVidhi'), sub: t('pathVidhiSub') },
       /* Saved appears once something has been saved; until then it would only be an empty line. */
       state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: savedSub() }

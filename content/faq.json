@@ -493,6 +493,11 @@
         "book": "dashlakshan-pooja",
         "find": "उत्तम क्षमा मारदव आरजव",
         "pos": 1
+      },
+      {
+        "book": "dashlakshan-parv",
+        "find": "तत्त्वार्थसूत्र में धर्म के दस लक्षण",
+        "pos": 2
       }
     ]
   },
@@ -516,6 +521,11 @@
       {
         "book": "kshamavani-pooja",
         "pos": 1
+      },
+      {
+        "book": "kshamavani-parv",
+        "find": "जाने-अनजाने में, मन, वचन",
+        "pos": 2
       }
     ]
   },
@@ -955,6 +965,11 @@
       {
         "book": "akshay-tritiya",
         "pos": 1
+      },
+      {
+        "book": "akshay-tritiya-parv",
+        "find": "गन्ने के रस से उनका पहला आहार",
+        "pos": 2
       }
     ]
   },
@@ -979,6 +994,11 @@
       {
         "book": "deepawali-poojan",
         "pos": 1
+      },
+      {
+        "book": "deepawali-parv",
+        "find": "हरिवंश पुराण में वर्णन है",
+        "pos": 2
       }
     ]
   },
@@ -1011,6 +1031,11 @@
         "book": "rakshabandhan-pooja",
         "find": "श्रावण शुक्ल पूर्णिमा",
         "pos": 1
+      },
+      {
+        "book": "rakshabandhan-parv",
+        "find": "तीन पग धरती माँगी",
+        "pos": 2
       }
     ]
   },
@@ -1044,6 +1069,11 @@
         "book": "shrut-parampara",
         "find": "ज्येष्ठ शुक्ल पंचमी को चतुर्विध संघ",
         "pos": 5
+      },
+      {
+        "book": "shrut-panchami-parv",
+        "find": "जिनवाणी पहली बार लिखी हुई",
+        "pos": 2
       }
     ]
   },
@@ -1933,6 +1963,207 @@
       {
         "book": "vastu",
         "find": "अधिकतर लोक-मान्यताएँ हैं",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "jain-festivals",
+    "q": {
+      "hi": "जैन धर्म के मुख्य पर्व कौन-से हैं?",
+      "en": "What are the main Jain festivals?"
+    },
+    "also": [
+      "jain festivals",
+      "jain festival list",
+      "jain tyohar",
+      "jain parv list",
+      "जैन पर्व",
+      "जैन त्योहार"
+    ],
+    "a": {
+      "hi": "वर्ष भर के मुख्य जैन पर्व हैं: चैत्र में आदिनाथ जयंती और महावीर जयंती, वैशाख में अक्षय तृतीया, ज्येष्ठ में श्रुत पंचमी, श्रावण में वीर शासन जयंती, मोक्ष सप्तमी और रक्षाबंधन, भाद्रपद में दशलक्षण पर्व और अनन्त चतुर्दशी, आश्विन में क्षमावणी, कार्तिक में दीपावली, और माघ में आदिनाथ निर्वाण। आषाढ़, कार्तिक और फाल्गुन के अन्तिम आठ दिन अष्टाह्निका पर्व होता है, और हर पक्ष की अष्टमी और चतुर्दशी पर्व-दिन हैं। जैन पर्व त्याग, संयम, पूजा और क्षमा के दिन हैं।",
+      "en": "The main Jain festivals of the year are Adinath Jayanti and Mahavir Jayanti in Chaitra, Akshay Tritiya in Vaishakh, Shrut Panchami in Jyeshtha, Veer Shasan Jayanti, Moksh Saptami and Rakshabandhan in Shravan, the Daslakshan festival and Anant Chaturdashi in Bhadrapad, Kshamavani in Ashwin, Diwali in Kartik, and Adinath Nirvan in Magh. The last eight days of Ashadh, Kartik and Phalgun are the Ashtahnika festival, and the ashtami and chaturdashi of every fortnight are festival days. Jain festivals are days of renunciation, self-restraint, worship and forgiveness."
+    },
+    "sources": [
+      {
+        "book": "parv-parichay",
+        "find": "वर्ष चैत्र से शुरू होता है",
+        "pos": 4
+      }
+    ]
+  },
+  {
+    "id": "mahavir-jayanti",
+    "q": {
+      "hi": "महावीर जयंती कब और कैसे मनाई जाती है?",
+      "en": "When and how is Mahavir Jayanti celebrated?"
+    },
+    "also": [
+      "mahavir jayanti",
+      "mahaveer jayanti",
+      "mahavir janm kalyanak",
+      "महावीर जयंती"
+    ],
+    "a": {
+      "hi": "महावीर जयंती चैत्र शुक्ल त्रयोदशी को, प्रायः मार्च या अप्रैल में, भगवान महावीर के जन्म कल्याणक के रूप में मनाई जाती है। माता त्रिशला ने सोलह शुभ स्वप्न देखे थे, और जन्म के बाद इन्द्र ने सुमेरु पर्वत पर बालक का जन्माभिषेक किया। इस दिन प्रभात फेरी, मंदिरों में अभिषेक और पूजा, भगवान की शोभायात्रा, पालना और दान होता है।",
+      "en": "Mahavir Jayanti is celebrated on Chaitra Shukla Trayodashi, usually in March or April, as the birth kalyanak of Bhagwan Mahavir. Mother Trishala saw sixteen auspicious dreams, and after his birth Indra bathed the child on Mount Sumeru. The day brings a dawn procession, abhishek and pooja in the temples, a procession of the Lord, the rocking of his cradle, and giving."
+    },
+    "sources": [
+      {
+        "book": "mahavir-jayanti",
+        "find": "चैत्र शुक्ल त्रयोदशी, जो प्रायः मार्च",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "adinath-jayanti",
+    "q": {
+      "hi": "आदिनाथ जयंती और आदिनाथ निर्वाण कब होते हैं?",
+      "en": "When are Adinath Jayanti and Adinath Nirvan?"
+    },
+    "also": [
+      "adinath jayanti",
+      "rishabhdev jayanti",
+      "adinath nirvan",
+      "rishabh nirvan",
+      "आदिनाथ जयंती",
+      "आदिनाथ निर्वाण"
+    ],
+    "a": {
+      "hi": "चैत्र कृष्ण नवमी को भगवान ऋषभदेव (आदिनाथ) के जन्म और दीक्षा, दोनों कल्याणक होते हैं, इसलिए उस दिन आदिनाथ जयंती मनाई जाती है। माघ कृष्ण चतुर्दशी को उन्होंने कैलाश (अष्टापद) से मोक्ष पाया; उस दिन निर्वाण कांड पढ़ा जाता है और निर्वाण लाडू चढ़ाया जाता है।",
+      "en": "On Chaitra Krishna Navami fall both the birth and the diksha of Bhagwan Rishabhdev (Adinath), so Adinath Jayanti is kept that day. On Magh Krishna Chaturdashi he attained liberation from Kailash (Ashtapad); on that day the Nirvan Kand is recited and a nirvan laddu is offered."
+    },
+    "sources": [
+      {
+        "book": "adinath-parv",
+        "find": "चैत्र कृष्ण नवमी को भगवान ऋषभदेव",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "ashtahnika",
+    "q": {
+      "hi": "अष्टाह्निका पर्व क्या है?",
+      "en": "What is the Ashtahnika festival?"
+    },
+    "also": [
+      "ashtahnika",
+      "ashtanhika",
+      "athai",
+      "siddhachakra vidhan",
+      "mainasundari shripal",
+      "अष्टाह्निका",
+      "सिद्धचक्र"
+    ],
+    "a": {
+      "hi": "अष्टाह्निका आठ दिन का पर्व है, जो वर्ष में तीन बार, आषाढ़, कार्तिक और फाल्गुन के शुक्ल पक्ष की अष्टमी से पूर्णिमा तक आता है। इन दिनों देव आठवें द्वीप, नन्दीश्वर द्वीप, के बावन जिनालयों में पूजा करते हैं, और हम अपने मंदिरों में नन्दीश्वर द्वीप की पूजा करते हैं। इसी पर्व में सिद्धचक्र विधान होता है, जिसकी कथा मैनासुन्दरी और श्रीपाल की है।",
+      "en": "Ashtahnika is an eight-day festival that comes three times a year, from the shukla ashtami to the full moon of Ashadh, Kartik and Phalgun. During these days the devas worship at the fifty-two Jina temples of Nandishwar Dweep, the eighth island, and we perform the Nandishwar Dweep pooja in our temples. The Siddhachakra vidhan is held in this festival; its story is that of Mainasundari and Shripal."
+    },
+    "sources": [
+      {
+        "book": "ashtahnika",
+        "find": "नन्दीश्वर द्वीप है, जहाँ बावन",
+        "pos": 2
+      }
+    ]
+  },
+  {
+    "id": "veer-shasan-jayanti",
+    "q": {
+      "hi": "वीर शासन जयंती क्या है?",
+      "en": "What is Veer Shasan Jayanti?"
+    },
+    "also": [
+      "veer shasan jayanti",
+      "vir shasan jayanti",
+      "mahavir first sermon",
+      "वीर शासन जयंती"
+    ],
+    "a": {
+      "hi": "श्रावण कृष्ण प्रतिपदा को राजगृह के विपुलाचल पर्वत पर भगवान महावीर की पहली देशना हुई, यानी उनका धर्म-शासन शुरू हुआ। केवलज्ञान के बाद छियासठ दिन तक उनकी दिव्यध्वनि नहीं खिरी थी, क्योंकि कोई गणधर नहीं था; इन्द्रभूति गौतम के आकर दीक्षा लेने पर वाणी खिरी। यह दिन वीर शासन जयंती के रूप में मनाया जाता है।",
+      "en": "On Shravan Krishna Pratipada, on Vipulachal hill at Rajgriha, Bhagwan Mahavir gave his first sermon: the rule of his dharma began. After his omniscience his divine sound did not flow for sixty-six days, because there was no ganadhar; it flowed when Indrabhuti Gautam came and took diksha. The day is celebrated as Veer Shasan Jayanti."
+    },
+    "sources": [
+      {
+        "book": "veer-shasan-jayanti",
+        "find": "छियासठ दिन तक उनकी दिव्यध्वनि",
+        "pos": 2
+      }
+    ]
+  },
+  {
+    "id": "moksh-saptami",
+    "q": {
+      "hi": "मोक्ष सप्तमी क्या है?",
+      "en": "What is Moksh Saptami?"
+    },
+    "also": [
+      "moksh saptami",
+      "moksha saptami",
+      "parshvanath nirvan",
+      "मोक्ष सप्तमी"
+    ],
+    "a": {
+      "hi": "श्रावण शुक्ल सप्तमी को तेईसवें तीर्थंकर भगवान पार्श्वनाथ ने सम्मेद शिखर के स्वर्णभद्र कूट से मोक्ष पाया। इस दिन मंदिरों में पार्श्वनाथ भगवान की पूजा और अभिषेक होता है, निर्वाण लाडू चढ़ाया जाता है, और बहुत से यात्री सम्मेद शिखर की वन्दना करते हैं।",
+      "en": "On Shravan Shukla Saptami Bhagwan Parshvanath, the twenty-third Tirthankar, attained liberation from the Swarnabhadra peak of Sammed Shikhar. On this day the temples hold the pooja and abhishek of Bhagwan Parshvanath, a nirvan laddu is offered, and many pilgrims climb Sammed Shikhar."
+    },
+    "sources": [
+      {
+        "book": "moksh-saptami",
+        "find": "स्वर्णभद्र कूट से मोक्ष पाया",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "anant-chaturdashi",
+    "q": {
+      "hi": "अनन्त चतुर्दशी क्यों मनाई जाती है?",
+      "en": "Why is Anant Chaturdashi celebrated?"
+    },
+    "also": [
+      "anant chaturdashi",
+      "anant chaudas",
+      "vasupujya nirvan",
+      "अनन्त चतुर्दशी",
+      "अनंत चतुर्दशी"
+    ],
+    "a": {
+      "hi": "भाद्रपद शुक्ल चतुर्दशी दशलक्षण पर्व का अन्तिम दिन है, और इसी दिन बारहवें तीर्थंकर भगवान वासुपूज्य ने चम्पापुर से मोक्ष पाया। वासुपूज्य अकेले तीर्थंकर हैं जिनके पाँचों कल्याणक एक ही नगर, चम्पापुर, में हुए। इस दिन सबसे अधिक लोग उपवास करते हैं, निर्वाण लाडू चढ़ाया जाता है और शोभायात्रा निकलती है।",
+      "en": "Bhadrapad Shukla Chaturdashi is the last day of the Daslakshan festival, and on this day Bhagwan Vasupujya, the twelfth Tirthankar, attained liberation from Champapur. Vasupujya is the only Tirthankar whose five kalyanaks all took place in one city, Champapur. On this day the most people fast, a nirvan laddu is offered and a procession is taken out."
+    },
+    "sources": [
+      {
+        "book": "anant-chaturdashi",
+        "find": "चम्पापुर से मोक्ष पाया",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "mahamastakabhishek",
+    "q": {
+      "hi": "महामस्तकाभिषेक क्या है?",
+      "en": "What is the Mahamastakabhisheka?"
+    },
+    "also": [
+      "mahamastakabhishek",
+      "mahamastakabhisheka",
+      "shravanabelagola abhishek",
+      "gommateshwar abhishek",
+      "महामस्तकाभिषेक"
+    ],
+    "a": {
+      "hi": "हर बारह वर्ष में एक बार कर्नाटक के श्रवणबेलगोला में भगवान बाहुबली (गोम्मटेश्वर) की 57 फ़ुट ऊँची प्रतिमा का सिर से अभिषेक होता है, जिसे महामस्तकाभिषेक कहते हैं। प्रतिमा के पीछे मचान बनाकर जल, दूध, गन्ने का रस, चन्दन, हल्दी, केसर और फूलों से अभिषेक किया जाता है। पिछला महामस्तकाभिषेक फ़रवरी 2018 में हुआ था।",
+      "en": "Once every twelve years, at Shravanabelagola in Karnataka, the 57-foot statue of Bhagwan Bahubali (Gommateshwara) is anointed from the head down; this is the Mahamastakabhisheka. A scaffold is built behind the statue and it is anointed with water, milk, sugarcane juice, sandalwood, turmeric, saffron and flowers. The last Mahamastakabhisheka was held in February 2018."
+    },
+    "sources": [
+      {
+        "book": "mahamastakabhishek",
+        "find": "हर बारह वर्ष में एक बार",
         "pos": 1
       }
     ]

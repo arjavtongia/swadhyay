@@ -62,6 +62,10 @@ Articles in the `puran-itihas` category, written for this app in simple Hindi an
 
 Articles in the `samadhan` category, laid out the same way as the Purana and history articles, with their pictures in `samadhan/chitra.json`. Each trouble has three parts: what Jain teaching says, what to do, and which paath tradition recommends, linked with `लिंक:` (for example `bhaktamar/45` for one Bhaktamar verse). Write "परम्परा में" for anything that comes from custom rather than the text itself, never promise a result, and add a mantra only from a printed source that can be credited.
 
+## जैन पर्व · Jain festivals (`parv/`)
+
+Articles in the `parv` category, laid out the same way, with their pictures in `parv/chitra.json`. Each has four parts: कब (when), कथा (the story), कैसे मनाते हैं (how it is kept) and पूजा और पाठ (the poojas, linked with `लिंक:`). A festival in the `FESTIVALS` list in `js/app.js` names its article in `book`, so the home screen's festival notice opens it in the week before.
+
 ## `pooja/` और `granth/` · Imported texts
 
 The files in `pooja/` (poojas, paath, stotras, aartis) and `granth/` (scriptures) were converted from the Jain Database, nikkyjain.github.io, by scripts kept outside this repo (`import/fetch_pooja.py`, `import/import_pooja.py`, `import/import_gatha.py`, then `import/merge_catalog.py` to rebuild their entries in `books.json` and `categories.json`, and `import/fix_spelling.py` to correct spelling slips in the meanings, such as रुप for रूप). Re-running those scripts overwrites these files, so if you fix a typo here, also tell whoever runs the import, so it can be added to `fix_spelling.py`. These files are not in the `FILES` list of `sw.js`: each one is saved for offline use the first time it is opened.

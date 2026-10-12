@@ -1,0 +1,82 @@
+{
+  "parv-parichay": [
+    {
+      "at": [4],
+      "type": "list",
+      "title": { "hi": "वर्ष भर के मुख्य जैन पर्व", "en": "The main Jain festivals of the year" },
+      "items": [
+        { "hi": "आदिनाथ जयंती", "en": "Adinath Jayanti", "tag": "चैत्र", "sub": { "hi": "चैत्र कृष्ण 9 · जन्म और तप कल्याणक", "en": "Chaitra Krishna 9 · birth and renunciation" } },
+        { "hi": "महावीर जयंती", "en": "Mahavir Jayanti", "tag": "चैत्र", "sub": { "hi": "चैत्र शुक्ल 13 · जन्म कल्याणक", "en": "Chaitra Shukla 13 · birth kalyanak" } },
+        { "hi": "अक्षय तृतीया", "en": "Akshay Tritiya", "tag": "वैशाख", "sub": { "hi": "वैशाख शुक्ल 3 · ऋषभदेव का पहला आहार", "en": "Vaishakh Shukla 3 · Rishabhdev's first aahar" } },
+        { "hi": "श्रुत पंचमी", "en": "Shrut Panchami", "tag": "ज्येष्ठ", "sub": { "hi": "ज्येष्ठ शुक्ल 5 · जिनवाणी का पर्व", "en": "Jyeshtha Shukla 5 · festival of the scriptures" } },
+        { "hi": "अष्टाह्निका", "en": "Ashtahnika", "tag": "आषाढ़", "sub": { "hi": "आषाढ़, कार्तिक, फाल्गुन शुक्ल 8 से 15", "en": "Shukla 8 to 15 of Ashadh, Kartik and Phalgun" } },
+        { "hi": "वीर शासन जयंती", "en": "Veer Shasan Jayanti", "tag": "श्रावण", "sub": { "hi": "श्रावण कृष्ण 1 · महावीर की पहली देशना", "en": "Shravan Krishna 1 · Mahavir's first sermon" } },
+        { "hi": "मोक्ष सप्तमी", "en": "Moksh Saptami", "tag": "श्रावण", "sub": { "hi": "श्रावण शुक्ल 7 · पार्श्वनाथ का निर्वाण", "en": "Shravan Shukla 7 · Parshvanath's nirvana" } },
+        { "hi": "रक्षाबंधन", "en": "Rakshabandhan", "tag": "श्रावण", "sub": { "hi": "श्रावण शुक्ल 15 · सात सौ मुनियों की रक्षा", "en": "Shravan Shukla 15 · seven hundred munis saved" } },
+        { "hi": "दशलक्षण पर्व", "en": "Daslakshan", "tag": "भाद्रपद", "sub": { "hi": "भाद्रपद शुक्ल 5 से 14 · दस धर्म", "en": "Bhadrapad Shukla 5 to 14 · the ten dharmas" } },
+        { "hi": "अनन्त चतुर्दशी", "en": "Anant Chaturdashi", "tag": "भाद्रपद", "sub": { "hi": "भाद्रपद शुक्ल 14 · वासुपूज्य का निर्वाण", "en": "Bhadrapad Shukla 14 · Vasupujya's nirvana" } },
+        { "hi": "क्षमावणी", "en": "Kshamavani", "tag": "आश्विन", "sub": { "hi": "आश्विन कृष्ण 1 · क्षमा का पर्व", "en": "Ashwin Krishna 1 · festival of forgiveness" } },
+        { "hi": "दीपावली", "en": "Diwali", "tag": "कार्तिक", "sub": { "hi": "कार्तिक कृष्ण 15 · महावीर का निर्वाण", "en": "Kartik Krishna 15 · Mahavir's nirvana" } },
+        { "hi": "आदिनाथ निर्वाण", "en": "Adinath Nirvan", "tag": "माघ", "sub": { "hi": "माघ कृष्ण 14 · कैलाश से मोक्ष", "en": "Magh Krishna 14 · liberation from Kailash" } }
+      ],
+      "tagNote": { "hi": "तिथियाँ पूर्णिमान्त महीनों के अनुसार; अपने मंदिर का पंचांग भी देखें।", "en": "Dates follow purnimanta months; also check your temple's panchang." }
+    }
+  ],
+  "adinath-parv": [
+    {
+      "at": [3],
+      "type": "drawing",
+      "drawing": "kailash",
+      "top": true,
+      "title": { "hi": "कैलाश (अष्टापद) — भगवान ऋषभदेव की निर्वाण भूमि", "en": "Kailash (Ashtapad), where Bhagwan Rishabhdev attained nirvana" }
+    }
+  ],
+  "ashtahnika": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "nandishwar",
+      "top": true,
+      "title": { "hi": "नंदीश्वर द्वीप — चारों दिशाओं में जिनमंदिर", "en": "Nandishwar Dweep: temples in the four directions" }
+    }
+  ],
+  "dashlakshan-parv": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "dashlakshan",
+      "top": true,
+      "title": { "hi": "दशलक्षण धर्म — दस दिन, दस धर्म", "en": "The ten dharmas: ten days, ten virtues" },
+      "items": [
+        { "hi": "उत्तम क्षमा", "en": "Supreme forgiveness" },
+        { "hi": "उत्तम मार्दव", "en": "Supreme humility" },
+        { "hi": "उत्तम आर्जव", "en": "Supreme straightforwardness" },
+        { "hi": "उत्तम शौच", "en": "Supreme purity" },
+        { "hi": "उत्तम सत्य", "en": "Supreme truth" },
+        { "hi": "उत्तम संयम", "en": "Supreme self-restraint" },
+        { "hi": "उत्तम तप", "en": "Supreme austerity" },
+        { "hi": "उत्तम त्याग", "en": "Supreme renunciation" },
+        { "hi": "उत्तम आकिंचन्य", "en": "Supreme non-possession" },
+        { "hi": "उत्तम ब्रह्मचर्य", "en": "Supreme celibacy" }
+      ]
+    }
+  ],
+  "kshamavani-parv": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "kshama",
+      "top": true,
+      "title": { "hi": "क्षमावणी — क्षमा माँगना और देना", "en": "Kshamavani: asking and giving forgiveness" }
+    }
+  ],
+  "deepawali-parv": [
+    {
+      "at": [3],
+      "type": "drawing",
+      "drawing": "diwali",
+      "top": true,
+      "title": { "hi": "दीपावली की शाम — दीपक जलाएँ, पटाखे नहीं", "en": "Diwali evening: light lamps, not crackers" }
+    }
+  ]
+}

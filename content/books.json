@@ -5282,5 +5282,280 @@
       "en": "An article written for this app in simple Hindi and English, based on popular vastu custom, which is not Jain scripture. Pictures drawn for this app."
     },
     "group": { "hi": "घर और वास्तु", "en": "Home and vastu" }
+  },
+  {
+    "id": "parv-parichay",
+    "file": "content/parv/parv-parichay.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "जैन पर्व — त्याग और आराधना के दिन", "en": "Jain festivals: days of renunciation and worship" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "तिथि से पर्व, हर महीने के पर्व-दिन, और वर्ष भर के मुख्य पर्वों की सूची", "en": "Festivals by the tithi, the festival days of every month, and the main festivals of the year" },
+    "aliases": ["ashtami chaturdashi", "festival", "jain festival list", "jain festivals", "jain parv", "kalyanak", "parv", "parva", "tyohar", "अष्टमी", "चतुर्दशी", "जैन पर्व", "त्योहार", "पर्व"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर जैन परम्परा और जैन घरों के रीति-रिवाज के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Digambar Jain tradition and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "पर्वों का परिचय", "en": "About Jain festivals" }
+  },
+  {
+    "id": "adinath-parv",
+    "file": "content/parv/adinath-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "आदिनाथ जयंती और निर्वाण", "en": "Adinath Jayanti and Nirvan" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "चैत्र कृष्ण नवमी को जन्म और दीक्षा, माघ कृष्ण चतुर्दशी को कैलाश से मोक्ष", "en": "Birth and diksha on Chaitra Krishna Navami, liberation from Kailash on Magh Krishna Chaturdashi" },
+    "aliases": ["adinath jayanti", "adinath nirvan", "ashtapad", "kailash", "nilanjana", "rishabh nirvan", "rishabhdev jayanti", "अष्टापद", "आदिनाथ जयंती", "आदिनाथ निर्वाण", "ऋषभदेव जयंती", "कैलाश"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य जिनसेन के आदिपुराण और दिगम्बर जैन परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Jinasena's Adipuran and the Digambar Jain tradition. Pictures drawn for this app."
+    },
+    "group": { "hi": "चैत्र से आषाढ़", "en": "Chaitra to Ashadh" }
+  },
+  {
+    "id": "mahavir-jayanti",
+    "file": "content/parv/mahavir-jayanti.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "महावीर जयंती", "en": "Mahavir Jayanti" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/kundalpur-nalanda.jpg",
+    "blurb": { "hi": "त्रिशला माता के सोलह स्वप्न, सुमेरु पर जन्माभिषेक, और जयंती का उत्सव", "en": "Mother Trishala's sixteen dreams, the birth-bathing on Sumeru, and the Jayanti celebrations" },
+    "aliases": ["16 dreams", "mahaveer jayanti", "mahavir janm kalyanak", "mahavir jayanti", "shobha yatra", "solah sapne", "trishala", "जन्म कल्याणक", "त्रिशला", "महावीर जयंती", "सोलह स्वप्न"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, उत्तरपुराण और दिगम्बर जैन परम्परा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Uttarpuran and the Digambar Jain tradition. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "चैत्र से आषाढ़", "en": "Chaitra to Ashadh" }
+  },
+  {
+    "id": "akshay-tritiya-parv",
+    "file": "content/parv/akshay-tritiya-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "अक्षय तृतीया", "en": "Akshay Tritiya" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/hastinapur.jpg",
+    "blurb": { "hi": "राजकुमार श्रेयांस ने गन्ने के रस से भगवान ऋषभदेव का पहला आहार कराया", "en": "Prince Shreyans offers Bhagwan Rishabhdev his first aahar of sugarcane juice" },
+    "aliases": ["aahar daan", "akha teej", "akshay tritiya", "akshaya tritiya", "ikshu ras", "shreyans", "sugarcane", "अक्षय तृतीया", "आखा तीज", "आहार दान", "इक्षु रस", "श्रेयांस"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य जिनसेन के आदिपुराण और जैन परम्परा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Jinasena's Adipuran and the Jain tradition. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "चैत्र से आषाढ़", "en": "Chaitra to Ashadh" }
+  },
+  {
+    "id": "shrut-panchami-parv",
+    "file": "content/parv/shrut-panchami-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "श्रुत पंचमी", "en": "Shrut Panchami" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/girnar.jpg",
+    "blurb": { "hi": "जिस दिन जिनवाणी पहली बार लिखी गई: धरसेन, पुष्पदन्त, भूतबलि और षट्खण्डागम", "en": "The day the Jinvani was first written down: Dharasena, Pushpadant, Bhutbali and the Shatkhandagam" },
+    "aliases": ["dharasena", "jinvani", "shastra puja", "shatkhandagam", "shrut panchami", "shrutpanchami", "जिनवाणी", "शास्त्र पूजा", "श्रुत पंचमी", "षट्खण्डागम"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आचार्य इन्द्रनन्दी के श्रुतावतार के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on Acharya Indranandi's Shrutavatar. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "चैत्र से आषाढ़", "en": "Chaitra to Ashadh" }
+  },
+  {
+    "id": "ashtahnika",
+    "file": "content/parv/ashtahnika.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "अष्टाह्निका पर्व", "en": "The Ashtahnika festival" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "नन्दीश्वर द्वीप की पूजा, और मैनासुन्दरी और श्रीपाल की सिद्धचक्र कथा", "en": "The worship of Nandishwar Dweep, and the Siddhachakra story of Mainasundari and Shripal" },
+    "aliases": ["ashtahnika", "ashtanhika", "athai", "maina sundari", "mainasundari", "nandishwar", "shripal", "siddhachakra", "siddhchakra vidhan", "अठाई", "अष्टाह्निका", "नन्दीश्वर", "मैना सुंदरी", "मैनासुन्दरी", "श्रीपाल", "सिद्धचक्र"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तिलोयपण्णत्ति के लोक-वर्णन और सिद्धचक्र विधान की परम्परागत कथा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Tiloyapannatti's account of the universe and the traditional story of the Siddhachakra vidhan. Pictures drawn for this app."
+    },
+    "group": { "hi": "चैत्र से आषाढ़", "en": "Chaitra to Ashadh" }
+  },
+  {
+    "id": "veer-shasan-jayanti",
+    "file": "content/parv/veer-shasan-jayanti.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "वीर शासन जयंती", "en": "Veer Shasan Jayanti" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 3,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/rajgir-vaibhar.jpg",
+    "blurb": { "hi": "छियासठ दिन के मौन के बाद विपुलाचल पर भगवान महावीर की पहली देशना", "en": "Bhagwan Mahavir's first sermon on Vipulachal, after sixty-six days of silence" },
+    "aliases": ["divyadhvani", "first sermon", "gautam ganadhar", "veer shasan jayanti", "vipulachal", "vir shasan jayanti", "गौतम गणधर", "दिव्यध्वनि", "विपुलाचल", "वीर शासन जयंती"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर जैन परम्परा (तिलोयपण्णत्ति, धवला) के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Digambar Jain tradition (Tiloyapannatti, Dhavala). Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "moksh-saptami",
+    "file": "content/parv/moksh-saptami.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "मोक्ष सप्तमी — भगवान पार्श्वनाथ का निर्वाण", "en": "Moksh Saptami: Bhagwan Parshvanath's nirvana" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/shikharji.jpg",
+    "blurb": { "hi": "धरणेन्द्र-पद्मावती, कमठ का उपसर्ग, और सम्मेद शिखर से पार्श्वनाथ का मोक्ष", "en": "Dharanendra and Padmavati, Kamath's attack, and Parshvanath's liberation from Sammed Shikhar" },
+    "aliases": ["dharanendra", "moksh saptami", "moksha saptami", "nirvan laddu", "padmavati", "parasnath", "parshvanath nirvan", "sammed shikhar", "धरणेन्द्र", "निर्वाण लाडू", "पद्मावती", "पार्श्वनाथ निर्वाण", "मोक्ष सप्तमी", "सम्मेद शिखर"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, उत्तरपुराण और दिगम्बर जैन परम्परा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Uttarpuran and the Digambar Jain tradition. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "rakshabandhan-parv",
+    "file": "content/parv/rakshabandhan-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "रक्षाबंधन — मुनियों की रक्षा का पर्व", "en": "Rakshabandhan: the festival of protecting the munis" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 3,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/hastinapur-shantinath.jpg",
+    "blurb": { "hi": "मुनि विष्णुकुमार ने हस्तिनापुर में सात सौ मुनियों की रक्षा कैसे की", "en": "How Muni Vishnukumar saved seven hundred munis at Hastinapur" },
+    "aliases": ["700 muni", "akampanacharya", "bali", "rakhi", "raksha bandhan", "rakshabandhan", "vishnukumar", "अकम्पनाचार्य", "रक्षाबंधन", "राखी", "विष्णुकुमार"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आराधना कथा कोश और हरिवंश पुराण में वर्णित विष्णुकुमार मुनि की कथा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the story of Vishnukumar Muni in the Aradhana Katha Kosh and the Harivansh Puran. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "dashlakshan-parv",
+    "file": "content/parv/dashlakshan-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "दशलक्षण पर्व — धर्म के दस लक्षण", "en": "Daslakshan: the ten marks of dharma" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "दस दिन, दस धर्म, उत्तम क्षमा की कथा, सुगन्ध दशमी और रत्नत्रय व्रत", "en": "Ten days, ten dharmas, a story of supreme forgiveness, Sugandh Dashami and the Ratnatray vrat" },
+    "aliases": ["das lakshan", "dash dharma", "dashlakshan", "daslakshan", "dhoop dashami", "parvraj", "paryushan", "paryushana", "ratnatray vrat", "sugandh dashami", "uttam kshama", "उत्तम क्षमा", "दशलक्षण", "दसलक्षण", "धूप दशमी", "पर्युषण", "पर्वराज", "रत्नत्रय व्रत", "सुगन्ध दशमी"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 9) और दिगम्बर जैन परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Tattvartha Sutra (chapter 9) and the Digambar Jain tradition. Pictures drawn for this app."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "anant-chaturdashi",
+    "file": "content/parv/anant-chaturdashi.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "अनन्त चतुर्दशी", "en": "Anant Chaturdashi" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/champapur.jpg",
+    "blurb": { "hi": "दशलक्षण का अन्तिम दिन, और चम्पापुर से भगवान वासुपूज्य का मोक्ष", "en": "The last day of Daslakshan, and Bhagwan Vasupujya's liberation from Champapur" },
+    "aliases": ["anant chaturdashi", "anant chaturdashi jain", "anant chaudas", "champapur", "vasupujya", "अनंत चतुर्दशी", "अनंत चौदस", "अनन्त चतुर्दशी", "चम्पापुर", "वासुपूज्य"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, उत्तरपुराण और दिगम्बर जैन परम्परा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Uttarpuran and the Digambar Jain tradition. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "kshamavani-parv",
+    "file": "content/parv/kshamavani-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "क्षमावणी पर्व", "en": "Kshamavani, the festival of forgiveness" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "दस धर्मों के बाद क्षमा का दिन, और कमठ और मरुभूति की दस जन्मों के बैर की कथा", "en": "The day of forgiveness after the ten dharmas, and the story of Kamath and Marubhuti's enmity across ten lives" },
+    "aliases": ["forgiveness", "kshama", "kshamapana", "kshamavaani", "kshamavani", "micchami dukkadam", "michhami dukkadam", "क्षमा", "क्षमावणी", "क्षमावाणी", "मिच्छामि दुक्कडम्"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, दिगम्बर जैन परम्परा और जैन कथाओं के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Digambar Jain tradition and Jain stories. Pictures drawn for this app."
+    },
+    "group": { "hi": "श्रावण से आश्विन", "en": "Shravan to Ashwin" }
+  },
+  {
+    "id": "deepawali-parv",
+    "file": "content/parv/deepawali-parv.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "दीपावली — भगवान महावीर का निर्वाण", "en": "Diwali: Bhagwan Mahavir's nirvana" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 3,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/pawapuri.jpg",
+    "blurb": { "hi": "निर्वाण और गौतम स्वामी का केवलज्ञान: जैन दीपावली की दो ज्योतियाँ", "en": "Nirvana, and Gautam Swami's omniscience: the two lights of the Jain Diwali" },
+    "aliases": ["deepawali", "dipawali", "diwali", "gautam swami", "mahavir nirvan", "nirvan laddu", "pawapuri", "veer nirvan samvat", "गौतम स्वामी", "दिवाली", "दीपावली", "निर्वाण लाडू", "पावापुर", "महावीर निर्वाण"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, उत्तरपुराण, आचार्य जिनसेन के हरिवंश पुराण और दिगम्बर जैन परम्परा के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Uttarpuran, Acharya Jinasena's Harivansh Puran and the Digambar Jain tradition. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "कार्तिक, और विशेष उत्सव", "en": "Kartik, and special festivals" }
+  },
+  {
+    "id": "mahamastakabhishek",
+    "file": "content/parv/mahamastakabhishek.txt",
+    "scroll": true,
+    "category": "parv",
+    "title": { "hi": "महामस्तकाभिषेक — श्रवणबेलगोला", "en": "The Mahamastakabhisheka at Shravanabelagola" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 3,
+    "textLang": "hi",
+    "numberMark": false,
+    "cover": "img/katha/shravanabelagola.jpg",
+    "blurb": { "hi": "हर बारह वर्ष में गोम्मटेश्वर बाहुबली का अभिषेक, और गुल्लिकायज्जी की कथा", "en": "The anointing of Gommateshwara Bahubali every twelve years, and the story of Gullikayajji" },
+    "aliases": ["bahubali", "gommateshwar", "gullikayajji", "mahamastak abhishek", "mahamastakabhishek", "mahamastakabhisheka", "shravanabelagola", "गोम्मटेश्वर", "बाहुबली", "महामस्तकाभिषेक", "श्रवणबेलगोला"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आदिपुराण की कथा और श्रवणबेलगोला की प्रकाशित जानकारी के आधार पर। चित्र: विकिमीडिया कॉमन्स, हर चित्र के नीचे फ़ोटोग्राफ़र और लाइसेंस के साथ।",
+      "en": "An article written for this app in simple Hindi and English, based on the Adipuran's story and published information about Shravanabelagola. Photographs from Wikimedia Commons, credited under each picture."
+    },
+    "group": { "hi": "कार्तिक, और विशेष उत्सव", "en": "Kartik, and special festivals" }
   }
 ]

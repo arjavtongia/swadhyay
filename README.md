@@ -51,7 +51,8 @@
 | **मंदिर और पूजा विधि** · Temple guides | Step-by-step darshan and ashta-dravya pooja guides with every mantra and a drawing for each step |
 | **तिथि** · Tithi calendar | Today's tithi and the next 7 days, with ashtami, chaturdashi and festivals marked, worked out on the phone |
 | **जीवन के समाधान** · Help for life's troubles | 10 articles in simple Hindi and English on studies, work and money, marriage and family, health, fear and hard times: what Jain teaching says, what to do, and which paath tradition recommends (each Bhaktamar verse one tap away), plus the home shrine and popular vastu, marked as custom |
-| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 71 common questions work offline |
+| **जैन पर्व और उनकी कथाएँ** · Jain festivals | 14 articles on the festivals of the year, from Adinath Jayanti and Mahavir Jayanti to Daslakshan, Kshamavani and Diwali: when each falls, its story, how it is kept and which pooja to recite; the tithi calendar's festival notice opens each one's story |
+| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 79 common questions work offline |
 
 ## बनाया गया सबके लिए · Made for everyone
 
@@ -132,6 +133,19 @@ Articles written for this app in simple Hindi and English. Each trouble gets wha
 | घर और वास्तु | The home shrine in Jain practice; common vastu tips, marked as popular custom rather than Jain scripture |
 
 The Bhaktamar riddhi mantras and yantras are not included, since they differ from one printed edition to another.
+
+#### Jain festivals and their stories (`content/parv/`, 14 articles)
+
+Articles written for this app in simple Hindi and English, following the Digambar tradition. Each festival gets when it falls, its story, how it is kept, and the poojas to recite, linked in the app.
+
+| Group | Articles |
+| --- | --- |
+| पर्वों का परिचय | Jain festivals: the tithi, the monthly festival days, and the year at a glance |
+| चैत्र से आषाढ़ | Adinath Jayanti and Nirvan, Mahavir Jayanti, Akshay Tritiya, Shrut Panchami, Ashtahnika (with the story of Mainasundari and Shripal) |
+| श्रावण से आश्विन | Veer Shasan Jayanti, Moksh Saptami, Rakshabandhan, Daslakshan, Anant Chaturdashi, Kshamavani |
+| कार्तिक, और विशेष उत्सव | Diwali, the Mahamastakabhisheka at Shravanabelagola |
+
+In the week before a festival, the notice under the tithi calendar on the home screen opens that festival's article (for Diwali, the Diwali Pooja guide).
 
 #### Poojas, paath and stotras (`content/pooja/`, 170 texts)
 

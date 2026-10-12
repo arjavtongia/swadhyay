@@ -1,0 +1,23 @@
+# जैन पर्व — त्याग और आराधना के दिन
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, दिगम्बर जैन परम्परा और जैन घरों के रीति-रिवाज के आधार पर।
+
+@ | संक्षेप में | In brief
+गद्य: जैन पर्व खाने-पीने और मौज के नहीं, आत्मा को निर्मल करने के दिन हैं। इनमें उपवास, संयम, पूजा, स्वाध्याय, दान और क्षमा पर ज़ोर रहता है। हर पर्व के पीछे किसी तीर्थंकर के जीवन की, या धर्म की रक्षा की कोई कथा है।
+गद्य: इस भाग में वर्ष भर के मुख्य जैन पर्व हैं: हर पर्व कब आता है, उसकी कथा, उसे कैसे मनाते हैं, और उस दिन कौन-सी पूजा पढ़ी जाती है।
+Prose: Jain festivals are not days of feasting and pleasure but days for purifying the soul. They stress fasting, self-restraint, pooja, study of scripture, giving and forgiveness. Behind each festival is a story from the life of a Tirthankar, or of the protection of dharma.
+Prose: This section covers the main Jain festivals of the year: when each falls, its story, how it is kept, and which pooja is recited that day.
+
+@ | तिथि से पर्व | Festivals follow the tithi
+गद्य: जैन पर्व चन्द्र-तिथि से मनाए जाते हैं, इसलिए अंग्रेज़ी कैलेंडर में इनकी तारीख हर वर्ष बदलती है। इस ऐप के मुख्य पन्ने पर आज की तिथि और अगले सात दिन दिखते हैं, और कोई पर्व पास हो तो उसकी सूचना भी। व्रत और पर्व की ठीक तिथि के लिए अपने मंदिर का पंचांग ज़रूर देखें, क्योंकि स्थान और परम्परा के अनुसार एक दिन का अन्तर हो सकता है।
+Prose: Jain festivals follow the lunar tithi, so their dates in the English calendar change every year. The home screen of this app shows today's tithi and the next seven days, with a notice when a festival is near. For the exact day of a fast or festival, check your temple's panchang, since place and custom can shift it by a day.
+
+@ | हर महीने के पर्व-दिन | The festival days of every month
+गद्य: हर पक्ष की अष्टमी और चतुर्दशी, यानी महीने में चार दिन, पर्व के दिन माने जाते हैं। इन दिनों बहुत से श्रावक उपवास या एकासन करते हैं, हरी सब्ज़ियाँ नहीं खाते, और मंदिर में विशेष पूजा और स्वाध्याय करते हैं।
+गद्य: इसके अलावा चौबीस तीर्थंकरों के पाँच-पाँच कल्याणक, यानी वर्ष में एक सौ बीस कल्याणक-दिन, अपने-अपने तीर्थंकर की पूजा के साथ मनाए जाते हैं।
+Prose: The ashtami and chaturdashi of each fortnight, four days a month, are festival days. On them many shravaks fast or eat only once, avoid green vegetables, and offer special pooja and study in the temple.
+Prose: Besides these, the five kalyanaks of each of the twenty-four Tirthankars, a hundred and twenty days in the year, are kept with the pooja of that Tirthankar.
+लिंक: chaubis-tirthankar | चौबीस तीर्थंकर और पाँच कल्याणक | The twenty-four Tirthankars and the five kalyanaks
+
+@ | वर्ष भर के पर्व | Festivals through the year
+गद्य: वर्ष चैत्र से शुरू होता है: चैत्र में आदिनाथ जयंती और महावीर जयंती, वैशाख में अक्षय तृतीया, ज्येष्ठ में श्रुत पंचमी, श्रावण में वीर शासन जयंती, मोक्ष सप्तमी और रक्षाबंधन, भाद्रपद में दशलक्षण पर्व और अनन्त चतुर्दशी, आश्विन में क्षमावणी, कार्तिक में दीपावली, और माघ में आदिनाथ निर्वाण। आषाढ़, कार्तिक और फाल्गुन के अन्तिम आठ दिन अष्टाह्निका पर्व होता है। श्रवणबेलगोला का महामस्तकाभिषेक हर बारह वर्ष में आता है।
+Prose: The year begins with Chaitra: Adinath Jayanti and Mahavir Jayanti in Chaitra, Akshay Tritiya in Vaishakh, Shrut Panchami in Jyeshtha, Veer Shasan Jayanti, Moksh Saptami and Rakshabandhan in Shravan, the Daslakshan festival and Anant Chaturdashi in Bhadrapad, Kshamavani in Ashwin, Diwali in Kartik, and Adinath Nirvan in Magh. The last eight days of Ashadh, Kartik and Phalgun are the Ashtahnika festival. The Mahamastakabhisheka at Shravanabelagola comes once every twelve years.

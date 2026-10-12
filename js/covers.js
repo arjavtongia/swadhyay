@@ -132,6 +132,7 @@ const COVERS = (function () {
     '<path d="M29 22 h6 M29 28 h6 M29 34 h6 M29 40 h6" stroke="' + BRASS_EDGE + '" stroke-width="1.5" stroke-linecap="round"/>');
   E['puran-itihas'] = E.itihas;   /* the Purana and history articles share the pillar of the itihas granths */
   E.samadhan = box(diya);         /* Help for life's troubles: a lamp in the dark */
+  E.parv = E['parv-pooja'];       /* Jain festivals share the festival flag of the festival poojas */
   E.anya = box(book);
   E.katha = box('<circle cx="44" cy="16" r="5" fill="' + FLAME + '"/>' + book);
 

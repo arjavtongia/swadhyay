@@ -182,7 +182,9 @@ const STRINGS = {
       dasLakshan: 'दशलक्षण पर्व',
       anantChaturdashi: 'अनन्त चतुर्दशी',
       kshamavani: 'क्षमावाणी',
-      diwali: 'दीपावली · वीर निर्वाण'
+      diwali: 'दीपावली · वीर निर्वाण',
+      adinathJayanti: 'आदिनाथ जयंती',
+      adinathNirvan: 'आदिनाथ निर्वाण'
     },
     countTexts: '{n} पाठ',
     countPoojas: '{n} पूजाएँ',
@@ -232,6 +234,8 @@ const STRINGS = {
     pathItihasSub: '{n} लेख: कालचक्र, तीन लोक, तीर्थंकर, आचार्य और शिलालेख',
     pathSamadhan: 'जीवन के समाधान',
     pathSamadhanSub: '{n} लेख: पढ़ाई, नौकरी, विवाह, स्वास्थ्य, डर, संकट और वास्तु',
+    pathParv: 'जैन पर्व और उनकी कथाएँ',
+    pathParvSub: 'महावीर जयंती से दीपावली तक, हर पर्व की कथा और पूजा',
     pathVidhi: 'मंदिर दर्शन और पूजा विधि',
     pathVidhiSub: 'हर चरण चित्र के साथ',
     shelfNitya: 'नित्य पाठ और विधि',
@@ -241,6 +245,7 @@ const STRINGS = {
     shelfKatha: 'कथाएँ',
     shelfItihas: 'पुराण और इतिहास',
     shelfSamadhan: 'जीवन के समाधान',
+    shelfParv: 'जैन पर्व',
     shelfOther: 'अन्य',
     help: 'कैसे चलाएँ',
     helpTips: [
@@ -425,7 +430,9 @@ const STRINGS = {
       dasLakshan: 'Dashlakshan Parva',
       anantChaturdashi: 'Anant Chaturdashi',
       kshamavani: 'Kshamavani',
-      diwali: 'Diwali · Veer Nirvan'
+      diwali: 'Diwali · Veer Nirvan',
+      adinathJayanti: 'Adinath Jayanti',
+      adinathNirvan: 'Adinath Nirvan'
     },
     countTexts: '{n} texts',
     countPoojas: '{n} poojas',
@@ -475,6 +482,8 @@ const STRINGS = {
     pathItihasSub: '{n} articles: the wheel of time, the three worlds, the Tirthankars, the acharyas and the inscriptions',
     pathSamadhan: "Help for life's troubles",
     pathSamadhanSub: '{n} articles: studies, work, marriage, health, fear, hard times and vastu',
+    pathParv: 'Jain festivals and their stories',
+    pathParvSub: 'From Mahavir Jayanti to Diwali, the story and pooja of every festival',
     pathVidhi: 'Temple visit and pooja guides',
     pathVidhiSub: 'Every step with a picture',
     shelfNitya: 'Daily prayers and guides',
@@ -484,6 +493,7 @@ const STRINGS = {
     shelfKatha: 'Stories',
     shelfItihas: 'Purana and history',
     shelfSamadhan: "Help for life's troubles",
+    shelfParv: 'Jain festivals',
     shelfOther: 'Other',
     help: 'How to use',
     helpTips: [
