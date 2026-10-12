@@ -81,7 +81,7 @@
       function strike(ctx, delay) {
         var F = 587.33, at = ctx.currentTime + delay;
         var level = ctx.createGain(), soft = ctx.createBiquadFilter();
-        level.gain.value = 0.07;
+        level.gain.value = 0.2;
         soft.type = 'lowpass';
         soft.frequency.value = 4200;
         level.connect(soft);
