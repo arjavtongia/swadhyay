@@ -974,15 +974,17 @@
     return '';
   }
 
-  /* Continue reading under the toran: the book, where you stopped, a brass trail and one clear button. */
+  /* Continue reading as one bar: the book's emblem, where you stopped with a brass trail, and a round button. */
   function continueHtml(href, book, meta, pct, action) {
-    return '<a class="arch continue" href="' + href + '">' + ORN.crown(10) +
-      '<span class="arch-body">' + ORN.sides() +
+    return '<a class="continue" href="' + href + '">' + coverEmblem(book) +
+      '<span class="continue-main">' +
+      '<span class="continue-kicker">' + esc(action) + '</span>' +
       '<span class="continue-title">' + titleHtml(book) + '</span>' +
-      (meta ? '<span class="continue-meta">' + esc(meta) + '</span>' : '') +
-      (pct != null ? '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' : '') +
-      '<span class="btn btn-primary continue-go">' + esc(action) + icon('arrow-right') + '</span>' +
-      '</span></a><div class="plinth full" aria-hidden="true"><i></i></div>';
+      (meta || pct != null ? '<span class="continue-where">' +
+        (meta ? '<span class="continue-meta">' + esc(meta) + '</span>' : '') +
+        (pct != null ? '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' : '') +
+        '</span>' : '') +
+      '</span><span class="continue-go" aria-hidden="true">' + icon('arrow-right') + '</span></a>';
   }
 
   /* The Saved line names what is saved, newest first, rather than repeating its own title. */
