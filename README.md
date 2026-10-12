@@ -50,7 +50,8 @@
 | **पुराण और इतिहास** · Purana and history | 13 articles in simple Hindi and English: the wheel of time, the three worlds and Jambudvip, the Kulkars, the 63 great souls, the 24 Tirthankars, the Jain Ramayana and Harivansh, and history from Mahavir to today, with drawings and photos |
 | **मंदिर और पूजा विधि** · Temple guides | Step-by-step darshan and ashta-dravya pooja guides with every mantra and a drawing for each step |
 | **तिथि** · Tithi calendar | Today's tithi and the next 7 days, with ashtami, chaturdashi and festivals marked, worked out on the phone |
-| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 64 common questions work offline |
+| **जीवन के समाधान** · Help for life's troubles | 10 articles in simple Hindi and English on studies, work and money, marriage and family, health, fear and hard times: what Jain teaching says, what to do, and which paath tradition recommends (each Bhaktamar verse one tap away), plus the home shrine and popular vastu, marked as custom |
+| **प्रश्न पूछें** · Ask | Questions about Jain dharma answered from the app's own texts, with links to the verses; 71 common questions work offline |
 
 ## बनाया गया सबके लिए · Made for everyone
 
@@ -119,6 +120,18 @@ Articles written for this app in simple Hindi and English, from the scriptures (
 | इतिहास | Bhagwan Mahavir in the light of history, after Mahavir (the kevalis, shrutakevalis and Shrut Panchami), the great acharyas and their books, history written in stone, from the medieval age to today |
 
 Each article links to the verses it draws on, opening the Tattvartha Sutra, Shrutavatar or Darshansar at that place.
+
+#### Help for life's troubles (`content/samadhan/`, 10 articles)
+
+Articles written for this app in simple Hindi and English. Each trouble gets what Jain teaching says about it, practical steps, and the paath tradition recommends, linked to the text in the app; nothing is promised, and the opening article warns against paid "sure remedies".
+
+| Group | Articles |
+| --- | --- |
+| शुरुआत | Paath, mantra and karma (how to do jaap, and what to beware of); Bhaktamar: which verse for which trouble |
+| जीवन की उलझनें | Studies and exams, work and money, marriage and family, illness and health, fear and worry, hard times and disputes |
+| घर और वास्तु | The home shrine in Jain practice; common vastu tips, marked as popular custom rather than Jain scripture |
+
+The Bhaktamar riddhi mantras and yantras are not included, since they differ from one printed edition to another.
 
 #### Poojas, paath and stotras (`content/pooja/`, 170 texts)
 

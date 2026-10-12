@@ -1,0 +1,35 @@
+# पढ़ाई, परीक्षा और याददाश्त
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, तत्त्वार्थसूत्र (अध्याय 6), भक्तामर स्तोत्र और जैन घरों की परम्परा के आधार पर।
+
+@ | जैन दृष्टि: ज्ञान आत्मा का स्वभाव है | The Jain view: knowledge is the soul's nature
+गद्य: जैन धर्म कहता है कि जानना आत्मा का स्वभाव है। जो चीज़ हमारे ज्ञान को ढक देती है, वह ज्ञानावरण कर्म है, जैसे बादल सूरज को ढक लेते हैं।
+गद्य: तत्त्वार्थसूत्र बताता है कि यह कर्म कैसे बँधता है: ज्ञान और ज्ञानी से जलना, जानते हुए भी ज्ञान छिपाना, किसी की पढ़ाई में बाधा डालना, और गुरु या शास्त्र का अनादर करना। इसका उलटा करने से ज्ञान खिलता है: गुरु और पुस्तक का विनय, सीखी हुई बात दूसरों को बताना, और रोज़ थोड़ा स्वाध्याय।
+Prose: Jain dharma teaches that knowing is the very nature of the soul. What covers our knowledge is gyanavaran karma, as clouds cover the sun.
+Prose: The Tattvartha Sutra explains how this karma is bound: by jealousy of knowledge and the learned, by hiding what one knows, by getting in the way of someone's studies, and by disrespecting teachers or scripture. Doing the opposite lets knowledge bloom: respect for teachers and books, sharing what you have learned, and a little study of scripture every day.
+लिंक: tattvarth-sutra-anvayarth/219 | तत्त्वार्थसूत्र: ज्ञानावरण कर्म कैसे बँधता है | Tattvartha Sutra: how gyanavaran karma is bound
+
+@ | क्या करें | What to do
+गद्य: रोज़ एक तय समय पर पढ़ें; सुबह का समय याद करने के लिए सबसे अच्छा माना जाता है। जो आज पढ़ा, उसे रात को सोने से पहले एक बार दोहराएँ और हफ़्ते में एक बार फिर।
+गद्य: पढ़ते समय फ़ोन दूर रखें। पूरी नींद लें, सादा भोजन करें, और सूर्यास्त से पहले खाना खा लें तो रात को मन हल्का रहता है। जो समझ न आए, शिक्षक से बिना संकोच पूछें, और कमज़ोर साथी की मदद करें: दूसरों को सिखाना भी ज्ञान बढ़ाता है।
+गद्य: पुस्तक का आदर करें: उसे ज़मीन पर न रखें, उस पर पैर न लगने दें, और उसे फाड़ें या फेंकें नहीं।
+Prose: Study at a fixed time every day; the early morning is held to be the best time for remembering. Revise what you learned today once before sleeping, and once more at the end of the week.
+Prose: Keep the phone away while studying. Sleep enough, eat simply, and if you finish dinner before sunset the mind stays light at night. Ask your teacher about anything you don't understand, without hesitation, and help a classmate who is struggling: teaching others also increases your own knowledge.
+Prose: Respect books: don't put them on the floor, don't let your feet touch them, and don't tear or throw them.
+
+@ | क्या पढ़ें | What to recite
+गद्य: पढ़ाई शुरू करने से पहले तीन बार णमोकार मंत्र और सरस्वती वंदना।
+गद्य: परम्परा में भक्तामर का छठा काव्य, 'अल्पश्रुतं श्रुतवतां परिहासधाम', पढ़ाई और स्मरण-शक्ति के लिए पढ़ा जाता है। इसमें आचार्य मानतुंग कहते हैं: 'मैं अल्पज्ञानी हूँ, फिर भी आपकी भक्ति मुझे बोलने को विवश करती है, जैसे बसन्त में आम की मंजरी कोयल को गाने पर विवश करती है।' इसे रोज़ अर्थ सहित पढ़ें, और 'ॐ ह्रीं अर्हं नमः' की एक माला करें।
+गद्य: परीक्षा से पहले और श्रुत पंचमी पर सरस्वती पूजा (जिनवाणी पूजा) करें।
+Prose: Before you begin studying: the Namokar mantra three times and the Saraswati Vandana.
+Prose: By tradition the sixth verse of the Bhaktamar, 'alpashrutam shrutavatam parihasadhama', is recited for study and memory. In it Acharya Mantunga says: 'I know little, yet devotion to you makes me speak, as the mango blossom in spring makes the cuckoo sing.' Recite it every day with its meaning, and do one mala of 'om hrim arham namah'.
+Prose: Before exams, and on Shrut Panchami, perform the Saraswati (Jinvani) pooja.
+लिंक: bhaktamar/6 | भक्तामर का छठा काव्य | The sixth verse of the Bhaktamar
+लिंक: saraswati-vandana | सरस्वती वंदना | Saraswati Vandana
+लिंक: saraswati-pooja | सरस्वती पूजा | Saraswati Pooja
+
+@ | परीक्षा के दिन | On exam day
+गद्य: रात को देर तक न जागें। सुबह घर से निकलने से पहले नौ बार णमोकार मंत्र पढ़ें और माता-पिता को प्रणाम करें। समय से पहले पहुँचें, पेपर पहले पूरा पढ़ें, और जो आता है वह पहले लिखें।
+गद्य: परीक्षा के बाद उसके बारे में बार-बार न सोचें। परिणाम जैसा भी हो, वह आपकी मेहनत और कर्मों का फल है; उससे सीखें और अगली बार और अच्छी तैयारी करें। अंक जीवन का एक भाग हैं, पूरा जीवन नहीं।
+Prose: Don't stay up late the night before. In the morning, before leaving home, recite the Namokar mantra nine times and bow to your parents. Arrive early, read the whole paper first, and write what you know first.
+Prose: After the exam, don't keep going over it. Whatever the result, it is the fruit of your effort and your karma; learn from it and prepare better next time. Marks are one part of life, not the whole of it.
+लिंक: bhadrabahu | श्रुतकेवली भद्रबाहु की कथा | The story of Shrutakevali Bhadrabahu

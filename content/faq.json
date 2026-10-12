@@ -1747,5 +1747,194 @@
         "pos": 2
       }
     ]
+  },
+  {
+    "id": "mantra-padhai",
+    "q": {
+      "hi": "पढ़ाई और परीक्षा के लिए कौन-सा पाठ या मंत्र है?",
+      "en": "Which paath or mantra is there for studies and exams?"
+    },
+    "also": [
+      "mantra for study",
+      "exam mantra",
+      "padhai ke liye mantra",
+      "pariksha ke liye mantra",
+      "vidya mantra",
+      "memory mantra",
+      "पढ़ाई का मंत्र"
+    ],
+    "a": {
+      "hi": "परम्परा में भक्तामर का छठा काव्य, 'अल्पश्रुतं श्रुतवतां परिहासधाम', पढ़ाई और स्मरण-शक्ति के लिए अर्थ सहित रोज़ पढ़ा जाता है, साथ में 'ॐ ह्रीं अर्हं नमः' की एक माला। पढ़ने से पहले तीन बार णमोकार और सरस्वती वंदना करें, और परीक्षा से पहले सरस्वती पूजा। जैन धर्म कहता है कि ज्ञान गुरु और पुस्तक के विनय, दूसरों को सिखाने और रोज़ की मेहनत से खिलता है; पाठ मेहनत के साथ है, उसके बदले नहीं।",
+      "en": "By tradition the sixth verse of the Bhaktamar, 'alpashrutam shrutavatam parihasadhama', is recited daily with its meaning for study and memory, with one mala of 'om hrim arham namah'. Before studying, recite the Namokar three times and the Saraswati Vandana, and perform the Saraswati pooja before exams. Jain dharma teaches that knowledge blooms through respect for teachers and books, teaching others and daily effort; paath goes with hard work, never instead of it."
+    },
+    "sources": [
+      {
+        "book": "padhai",
+        "find": "अल्पश्रुतं श्रुतवतां परिहासधाम",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "mantra-naukri",
+    "q": {
+      "hi": "नौकरी या व्यापार में सफलता के लिए कौन-सा पाठ है?",
+      "en": "Which paath is there for success in a job or business?"
+    },
+    "also": [
+      "mantra for job",
+      "mantra for success",
+      "mantra for business",
+      "naukri ke liye mantra",
+      "vyapar mantra",
+      "lakshmi mantra",
+      "नौकरी का मंत्र"
+    ],
+    "a": {
+      "hi": "भक्तामर का अड़तालीसवाँ, अन्तिम काव्य स्वयं कहता है कि जो भक्ति से इस स्तुति को कंठ में धारण करता है, उसे सम्मान और लक्ष्मी प्राप्त होती है; परम्परा में काम और व्यापार की उन्नति के लिए इसे रोज़ पढ़ा जाता है। हर नए काम की शुरुआत णमोकार और मंगल पाठ से करें। जैन दृष्टि से धन पुण्य से मिलता है और दूसरों के काम में बाधा डालने से अन्तराय कर्म बँधता है, इसलिए ईमानदारी, सही तौल-माप और नियम से दान भी उतने ही ज़रूरी हैं।",
+      "en": "The forty-eighth and last verse of the Bhaktamar itself says that whoever holds this praise in devotion gains honour and prosperity; by tradition it is recited daily for progress in work and business. Begin every new task with the Namokar and the mangal path. In the Jain view wealth comes from merit, and blocking others' work binds antaray karma, so honesty, fair weights and regular giving matter just as much."
+    },
+    "sources": [
+      {
+        "book": "naukri-vyapar",
+        "find": "अड़तालीसवाँ, अन्तिम काव्य स्वयं कहता है",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "mantra-vivah",
+    "q": {
+      "hi": "विवाह और घर की शान्ति के लिए कौन-सा पाठ है?",
+      "en": "Which paath is there for marriage and peace at home?"
+    },
+    "also": [
+      "mantra for marriage",
+      "shaadi ke liye mantra",
+      "vivah mantra",
+      "ghar ki shanti",
+      "family problems",
+      "vashikaran",
+      "विवाह का मंत्र"
+    ],
+    "a": {
+      "hi": "जैन विवाह और हर शुभ अवसर पर मंगलाष्टक पढ़ा जाता है; रिश्ते की बात शुरू होने पर घर में मंगलाष्टक और णमोकार से शुरुआत करें। परिवार में मनमुटाव हो तो सब मिलकर मेरी भावना पढ़ें, क्षमावणी पर एक-दूसरे से क्षमा माँगें और शान्ति पाठ करें। किसी को वश में करने वाले मंत्र जैन धर्म में नहीं हैं; किसी के मन को बाँधना हिंसा है।",
+      "en": "The Mangalashtak is recited at Jain weddings and on every auspicious occasion; when talk of a match begins, start at home with the Mangalashtak and the Namokar. If there is ill feeling in the family, read Meri Bhavana together, ask one another's forgiveness on Kshamavani, and recite the Shanti Path. Jain dharma has no mantras for bringing someone under your control; binding another's mind is violence."
+    },
+    "sources": [
+      {
+        "book": "vivah-parivar",
+        "find": "जैन विवाह और हर शुभ अवसर पर मंगलाष्टक",
+        "pos": 4
+      }
+    ]
+  },
+  {
+    "id": "mantra-rog",
+    "q": {
+      "hi": "बीमारी में कौन-सा स्तोत्र पढ़ा जाता है?",
+      "en": "Which stotra is recited in illness?"
+    },
+    "also": [
+      "mantra for health",
+      "bimari ka mantra",
+      "rog nashak",
+      "ekibhav stotra",
+      "vishapahar stotra",
+      "shantidhara",
+      "बीमारी का मंत्र"
+    ],
+    "a": {
+      "hi": "भक्तामर का पैंतालीसवाँ काव्य स्वयं कहता है कि भयंकर रोग से निराश लोग भी भगवान के चरणों की धूल से स्वस्थ हो जाते हैं; परम्परा में रोग में इसका पाठ होता है। परम्परा के अनुसार एकीभाव स्तोत्र आचार्य वादिराज ने रोग के समय रचा और विषापहार स्तोत्र कवि धनंजय ने पुत्र को साँप के डसने पर, इसलिए ये भी पढ़े जाते हैं, साथ में शान्तिनाथ पूजा और शान्ति पाठ। पर सबसे पहले समय पर डॉक्टर को दिखाएँ और दवा पूरी लें; पाठ इलाज के साथ है, उसकी जगह नहीं।",
+      "en": "The forty-fifth verse of the Bhaktamar itself says that even people who have lost hope through a terrible disease are made well by the dust of the Lord's feet; by tradition it is recited in illness. Tradition holds that Acharya Vadiraj composed the Ekibhav Stotra during an illness and the poet Dhananjay the Vishapahar Stotra when his son was bitten by a snake, so these are recited too, along with the Shantinath pooja and the Shanti Path. But first of all see a doctor in time and take the full course of medicine; paath goes with treatment, never in place of it."
+    },
+    "sources": [
+      {
+        "book": "swasthya",
+        "find": "पैंतालीसवाँ काव्य स्वयं कहता है",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "mantra-bhay",
+    "q": {
+      "hi": "डर लगे या बुरे सपने आएँ तो क्या पढ़ें?",
+      "en": "What should I recite when I am afraid or have bad dreams?"
+    },
+    "also": [
+      "dar lagta hai",
+      "fear mantra",
+      "bad dreams",
+      "bure sapne",
+      "anxiety",
+      "chinta",
+      "bhay nashak",
+      "डर का मंत्र"
+    ],
+    "a": {
+      "hi": "डर लगे तो णमोकार मंत्र पढ़ें और मंगल पाठ में अरिहंत, सिद्ध, साधु और धर्म की शरण लें; बुरा सपना देखकर जागें तो नौ बार णमोकार पढ़कर फिर सोएँ। भक्तामर का सैंतालीसवाँ काव्य स्वयं कहता है कि इस स्तोत्र को पढ़ने वाले का हर भय भाग जाता है। रोज़ थोड़ी सामायिक मन को शान्त रखती है; डर या उदासी बहुत दिनों तक रहे तो डॉक्टर या परामर्शदाता से भी मिलें।",
+      "en": "When afraid, recite the Namokar mantra and take refuge, as the mangal path does, in the Arihant, the Siddha, the Sadhu and the dharma; if you wake from a bad dream, recite the Namokar nine times and go back to sleep. The forty-seventh verse of the Bhaktamar itself says that every fear flees from one who reads this stotra. A little samayik every day keeps the mind calm; if fear or sadness lasts many days, see a doctor or counsellor as well."
+    },
+    "sources": [
+      {
+        "book": "bhay-chinta",
+        "find": "सैंतालीसवाँ काव्य स्वयं कहता है",
+        "pos": 3
+      }
+    ]
+  },
+  {
+    "id": "bhaktamar-kavya",
+    "q": {
+      "hi": "भक्तामर का कौन-सा काव्य किस कठिनाई में पढ़ा जाता है?",
+      "en": "Which Bhaktamar verse is recited for which trouble?"
+    },
+    "also": [
+      "bhaktamar kavya benefits",
+      "bhaktamar for problems",
+      "bhaktamar riddhi mantra",
+      "which bhaktamar verse",
+      "bhaktamar upay",
+      "भक्तामर उपाय"
+    ],
+    "a": {
+      "hi": "भक्तामर के 38 से 47 तक के काव्य स्वयं आठ भयों से मुक्ति की बात करते हैं: 38 हाथी, 39 सिंह, 40 आग, 41 साँप, 42 और 43 युद्ध और शत्रु, 44 समुद्र, 45 रोग, 46 बन्धन, और 47 सब भय एक साथ। 48वाँ काव्य सम्मान और लक्ष्मी की बात करता है। परम्परा में पहला काव्य हर शुभ शुरुआत के लिए और छठा पढ़ाई के लिए पढ़ा जाता है। हर काव्य की ऋद्धि और मंत्र अलग-अलग पुस्तकों में अलग मिलते हैं; उन्हें अपने मंदिर की मान्य पुस्तक से लें।",
+      "en": "Verses 38 to 47 of the Bhaktamar themselves speak of freedom from eight fears: 38 the elephant, 39 the lion, 40 fire, 41 the snake, 42 and 43 war and enemies, 44 the sea, 45 disease, 46 bondage, and 47 every fear together. Verse 48 speaks of honour and prosperity. By tradition verse 1 is recited at every good beginning and verse 6 for studies. Each verse's riddhi and mantra differ from book to book; take them from the book your temple follows."
+    },
+    "sources": [
+      {
+        "book": "bhaktamar-upay",
+        "find": "आठ बड़े भयों से छूट जाते हैं",
+        "pos": 1
+      }
+    ]
+  },
+  {
+    "id": "vastu-jain",
+    "q": {
+      "hi": "क्या जैन धर्म में वास्तु माना जाता है?",
+      "en": "Does Jain dharma follow vastu?"
+    },
+    "also": [
+      "vastu",
+      "vaastu",
+      "jain vastu",
+      "vastu shastra jain",
+      "ghar ka vastu",
+      "vastu dosh",
+      "वास्तु"
+    ],
+    "a": {
+      "hi": "जैन विद्वानों ने भी मंदिर और घर बनाने पर लिखा है, जैसे ठक्कुर फेरू का वत्थुसार (चौदहवीं सदी)। पर आज सुनाई देने वाले अधिकतर वास्तु सुझाव लोक-मान्यताएँ हैं, जैन आगम के वचन नहीं। जैन धर्म कहता है कि सुख-दुःख अपने कर्मों और आचरण से आते हैं, दीवारों और दिशाओं से नहीं; इसलिए वास्तु को सुविधा की समझ के रूप में लें, डर के रूप में नहीं, और पैसे लेकर 'दोष' दूर करने वालों से सावधान रहें।",
+      "en": "Jain scholars also wrote on building temples and homes, such as Thakkura Pheru's Vatthusar (fourteenth century). But most of the vastu advice heard today is popular custom, not Jain scripture. Jain dharma teaches that happiness and sorrow come from our own karma and conduct, not from walls and directions; so take vastu as practical good sense, not as something to fear, and be wary of anyone who charges money to remove a 'dosh'."
+    },
+    "sources": [
+      {
+        "book": "vastu",
+        "find": "अधिकतर लोक-मान्यताएँ हैं",
+        "pos": 1
+      }
+    ]
   }
 ]

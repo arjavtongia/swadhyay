@@ -1,0 +1,37 @@
+# पहले यह पढ़ें — पाठ, मंत्र और कर्म
+# इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया, जैन आगम (तत्त्वार्थसूत्र, रत्नकरण्ड श्रावकाचार) और जैन घरों की परम्परा के आधार पर।
+
+@ | संक्षेप में | In brief
+गद्य: जीवन में उलझनें आती रहती हैं: पढ़ाई की चिन्ता, नौकरी या व्यापार की परेशानी, विवाह और परिवार की बातें, बीमारी, डर और झगड़े। इस भाग में हर उलझन के लिए तीन बातें हैं: जैन धर्म उसके बारे में क्या कहता है, व्यवहार में क्या करें, और परम्परा में कौन-सा पाठ या मंत्र बताया जाता है।
+गद्य: हर पाठ इसी ऐप में है, अर्थ सहित। उसका बटन दबाते ही वह पाठ खुल जाता है।
+Prose: Life keeps bringing troubles: worry over studies, problems at work or in business, questions of marriage and family, illness, fear and quarrels. For each trouble this section gives three things: what Jain dharma says about it, what to do in practice, and which paath or mantra tradition recommends.
+Prose: Every paath named here is in this app, with its meaning. Tap its button and it opens.
+
+@ | कर्म और पुरुषार्थ | Karma and effort
+गद्य: जैन धर्म के अनुसार सुख और दुःख किसी देवता के दिए हुए नहीं, अपने ही किए कर्मों के फल हैं। पर कर्म अटल भाग्य नहीं है। अच्छे भाव और सही पुरुषार्थ से नए कर्म बदलते हैं, और पुराने कर्मों का फल भी हल्का हो सकता है।
+गद्य: इसलिए हर उलझन में दो काम साथ-साथ करने हैं: पूरी मेहनत, और शुद्ध भाव। पाठ और मंत्र मन को शान्त करते हैं और उसे भगवान के गुणों से भर देते हैं। यही शुभ भाव पुण्य है, और शान्त मन को रास्ता भी साफ़ दिखता है। भक्तामर के पहले ही काव्य में भगवान के चरणों को 'पाप रूपी अँधेरे को नष्ट करने वाला' कहा गया है।
+Prose: In Jain teaching, happiness and sorrow are not given by any god; they are the fruit of our own karma. But karma is not fixed fate. Good feelings and right effort change the karma we bind now, and can soften the fruit of old karma too.
+Prose: So in every trouble two things go together: full effort, and a pure mind. Paath and mantra calm the mind and fill it with the Lord's virtues. That good feeling is itself merit, and a calm mind sees the way more clearly. The very first verse of the Bhaktamar calls the Lord's feet the destroyer of the darkness of sin.
+लिंक: bhaktamar/1 | भक्तामर का पहला काव्य | The first verse of the Bhaktamar
+
+@ | पाठ और जाप कैसे करें | How to recite and do jaap
+गद्य: नहा-धोकर, साफ़ कपड़ों में, शान्त जगह पर बैठें, अच्छा हो कि मुख पूर्व या उत्तर की ओर हो। सामने भगवान की प्रतिमा या चित्र हो, या बस आँखें बन्द कर लें। शुरुआत और अन्त में तीन बार णमोकार मंत्र पढ़ें।
+गद्य: जाप के लिए 108 मनकों की माला लें। हर मनके पर एक बार मंत्र बोलें या मन में दोहराएँ। सबसे बड़ा मंत्र णमोकार महामंत्र है; छोटे जाप के लिए 'ॐ ह्रीं अर्हं नमः' भी बहुत बोला जाता है।
+गद्य: पाठ अर्थ समझकर करें, रोज़ एक ही समय पर, और कुछ दिनों या हफ़्तों का नियम लेकर। जल्दी-जल्दी गिनती पूरी करने से अच्छा है धीरे, मन लगाकर थोड़ा पढ़ना।
+Prose: After bathing, in clean clothes, sit in a quiet place, ideally facing east or north. Have an image or picture of the Lord in front of you, or simply close your eyes. Recite the Namokar mantra three times at the start and at the end.
+Prose: For jaap, take a mala of 108 beads and say the mantra once on each bead, aloud or in the mind. The greatest mantra is the Namokar Mahamantra; for a short jaap, 'om hrim arham namah' is also widely recited.
+Prose: Recite with understanding, at the same time every day, and keep it as a rule for some days or weeks. A little, said slowly and with the mind on it, is better than rushing to finish a count.
+लिंक: namokar | णमोकार मंत्र | Namokar Mantra
+
+@ | सावधान रहें | Be careful
+गद्य: रत्नकरण्ड श्रावकाचार में आचार्य समन्तभद्र कहते हैं कि वरदान की आशा में राग-द्वेष से भरे देवी-देवताओं को पूजना 'देव मूढ़ता' है। जिनेन्द्र भगवान वीतराग हैं; वे न खुश होकर कुछ देते हैं, न नाराज़ होकर कुछ छीनते हैं। उनकी भक्ति से हमारे अपने भाव और कर्म सुधरते हैं।
+गद्य: ऐसे किसी व्यक्ति पर भरोसा न करें जो पैसे लेकर 'पक्का उपाय' बताए, डराए कि आप पर कोई दोष या बाधा है, या किसी को वश में करने का मंत्र दे। किसी के मन को बाँधना हिंसा है। बीमारी में डॉक्टर, पढ़ाई में मेहनत और काम में ईमानदारी की जगह कोई पाठ नहीं ले सकता; पाठ इनके साथ है, इनके बदले नहीं।
+Prose: In the Ratnakarand Shravakachar, Acharya Samantabhadra says that worshipping gods and goddesses full of attachment and aversion in the hope of boons is 'dev mudhata', a delusion about the divine. The Jina is free of attachment; he neither gives when pleased nor takes away when displeased. Devotion to him improves our own feelings and karma.
+Prose: Do not trust anyone who charges money for a 'sure remedy', frightens you that you are under some curse or obstacle, or offers a mantra to bring another person under your control. Binding another person's mind is violence. No paath can take the place of a doctor in illness, of hard work in studies or of honesty in work; paath goes with these, never instead of them.
+लिंक: ratnakarand-shravakachar/22 | रत्नकरण्ड श्रावकाचार: देव मूढ़ता | Ratnakarand Shravakachar: dev mudhata
+लिंक: revati | रेवती रानी की कथा | The story of Queen Revati
+
+@ | इस भाग में | In this section
+गद्य: आगे के लेखों में पढ़ाई, नौकरी और व्यापार, विवाह और परिवार, स्वास्थ्य, डर और चिन्ता, और संकट और झगड़ों के लिए अलग-अलग बातें हैं। भक्तामर के किस काव्य को किस कठिनाई में पढ़ा जाता है, इसकी एक सूची है, और घर के चैत्यालय और वास्तु पर दो लेख हैं।
+Prose: The articles that follow cover studies, work and business, marriage and family, health, fear and worry, and hard times and quarrels. There is a list of which Bhaktamar verse is recited in which difficulty, and two articles on the home shrine and on vastu.
+लिंक: bhaktamar-upay | भक्तामर — किस कठिनाई में कौन-सा काव्य | Bhaktamar: which verse for which trouble

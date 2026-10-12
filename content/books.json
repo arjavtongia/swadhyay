@@ -5092,5 +5092,195 @@
       "en": "An article written for this app in simple Hindi and English, based on published history and the poets' own works. Pictures drawn for this app."
     },
     "group": { "hi": "इतिहास", "en": "History" }
+  },
+  {
+    "id": "pehle-padhein",
+    "file": "content/samadhan/pehle-padhein.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "पहले यह पढ़ें — पाठ, मंत्र और कर्म", "en": "Read this first: paath, mantra and karma" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "जैन दृष्टि से उपाय क्या है, जाप कैसे करें, और किन बातों से सावधान रहें", "en": "What a remedy means in Jain teaching, how to do jaap, and what to beware of" },
+    "aliases": ["108", "dev mudhata", "jaap", "jap", "karma", "mala", "mantra", "om hrim arham namah", "purusharth", "remedies", "remedy", "samadhan", "solution", "tantrik", "upaay", "upay", "उपाय", "कर्म", "जाप", "देव मूढ़ता", "पुरुषार्थ", "मंत्र", "माला", "समाधान"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, जैन आगम (तत्त्वार्थसूत्र, रत्नकरण्ड श्रावकाचार) और जैन घरों की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on Jain scripture (Tattvartha Sutra, Ratnakarand Shravakachar) and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "शुरुआत", "en": "Start here" }
+  },
+  {
+    "id": "bhaktamar-upay",
+    "file": "content/samadhan/bhaktamar-upay.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "भक्तामर — किस कठिनाई में कौन-सा काव्य", "en": "Bhaktamar: which verse for which trouble" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 6,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "हाथी, सिंह, आग, साँप, युद्ध, समुद्र, रोग और बन्धन: भक्तामर के काव्य, बटन दबाते ही अर्थ सहित", "en": "Elephant, lion, fire, snake, war, sea, disease and bondage: the Bhaktamar verses, one tap away with their meaning" },
+    "aliases": ["bhaktamar benefits", "bhaktamar for problems", "bhaktamar kavya", "bhaktamar mantra", "bhaktamar riddhi", "bhaktamar upay", "kavya 48", "kavya 6", "which bhaktamar verse", "आठ भय", "ऋद्धि", "भक्तामर उपाय", "भक्तामर काव्य", "भक्तामर मंत्र"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, इसी ऐप के भक्तामर स्तोत्र के अर्थ और जैन घरों की प्रचलित परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the meanings in this app's Bhaktamar Stotra and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "शुरुआत", "en": "Start here" }
+  },
+  {
+    "id": "padhai",
+    "file": "content/samadhan/padhai.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "पढ़ाई, परीक्षा और याददाश्त", "en": "Studies, exams and memory" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "ज्ञानावरण कर्म, पढ़ने का सही ढंग, भक्तामर का छठा काव्य और सरस्वती वंदना", "en": "Gyanavaran karma, good study habits, the sixth Bhaktamar verse and the Saraswati Vandana" },
+    "aliases": ["education", "exam", "exam mantra", "exams", "mantra for study", "memory", "padhai", "pariksha", "saraswati", "studies", "study", "vidya", "yaaddasht", "पढ़ाई", "परीक्षा", "याददाश्त", "विद्या", "शिक्षा", "सरस्वती"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 6), भक्तामर स्तोत्र और जैन घरों की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Tattvartha Sutra (chapter 6), the Bhaktamar Stotra and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "naukri-vyapar",
+    "file": "content/samadhan/naukri-vyapar.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "नौकरी, व्यापार और धन", "en": "Work, business and money" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "अन्तराय कर्म, ईमानदार कमाई, दान, और भक्तामर का अड़तालीसवाँ काव्य", "en": "Antaray karma, honest earning, giving, and the forty-eighth Bhaktamar verse" },
+    "aliases": ["business", "career", "dhan", "dhandha", "interview", "job", "jobs", "lakshmi", "mantra for business", "mantra for job", "mantra for success", "money", "naukri", "success", "vyapar", "wealth", "work", "धंधा", "धन", "नौकरी", "लक्ष्मी", "व्यापार", "सफलता"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, तत्त्वार्थसूत्र (अध्याय 6 और 7), भक्तामर स्तोत्र और जैन घरों की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Tattvartha Sutra (chapters 6 and 7), the Bhaktamar Stotra and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "vivah-parivar",
+    "file": "content/samadhan/vivah-parivar.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "विवाह और परिवार में प्रेम", "en": "Marriage and love at home" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "रिश्ता ढूँढना, घर में प्रेम, मंगलाष्टक, मेरी भावना और क्षमावणी", "en": "Finding a match, love at home, the Mangalashtak, Meri Bhavana and Kshamavani" },
+    "aliases": ["dahej", "dowry", "family", "ghar ki shanti", "husband", "mantra for marriage", "marriage", "match", "parivar", "rishta", "shaadi", "shadi", "vashikaran", "vivah", "wife", "दहेज", "पति", "पत्नी", "परिवार", "रिश्ता", "विवाह", "शादी"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, आदिपुराण, श्रावकाचार ग्रंथों और जैन घरों की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Adipuran, the shravakachar texts and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "swasthya",
+    "file": "content/samadhan/swasthya.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "बीमारी और स्वास्थ्य", "en": "Illness and health" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "डॉक्टर और दवा, सेवा, भक्तामर का पैंतालीसवाँ काव्य, एकीभाव और विषापहार स्तोत्र", "en": "Doctors and medicine, caring for the sick, the forty-fifth Bhaktamar verse, the Ekibhav and Vishapahar stotras" },
+    "aliases": ["bimari", "dawai", "disease", "ekibhav", "health", "illness", "mantra for health", "medicine", "rog", "shantidhara", "sick", "swasthya", "vishapahar", "आरोग्य", "दवा", "बीमारी", "रोग", "शान्तिधारा", "स्वास्थ्य"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, जैन आचार, भक्तामर स्तोत्र, एकीभाव और विषापहार स्तोत्र की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on Jain conduct and the tradition of the Bhaktamar, Ekibhav and Vishapahar stotras. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "bhay-chinta",
+    "file": "content/samadhan/bhay-chinta.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "डर, चिन्ता और बुरे सपने", "en": "Fear, worry and bad dreams" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "सात भय, सामायिक, णमोकार और मंगल पाठ, और भक्तामर का सैंतालीसवाँ काव्य", "en": "The seven fears, samayik, the Namokar and mangal path, and the forty-seventh Bhaktamar verse" },
+    "aliases": ["anxiety", "bad dreams", "bhay", "chinta", "dar", "fear", "nightmare", "sapne", "stress", "tension", "travel", "worry", "yatra", "चिंता", "चिन्ता", "डर", "तनाव", "बुरे सपने", "भय", "यात्रा"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, समयसार, भक्तामर स्तोत्र, मंगल पाठ और जैन घरों की परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Samaysar, the Bhaktamar Stotra, the mangal path and the customs of Jain homes. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "sankat",
+    "file": "content/samadhan/sankat.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "संकट, झगड़े और रुकावटें", "en": "Hard times, disputes and obstacles" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "मुकदमे, कर्ज़ और नुकसान में क्या करें, भक्तामर के 42, 43 और 46वें काव्य, कल्याणमंदिर और दुखहरण विनती", "en": "What to do in lawsuits, debt and loss, Bhaktamar verses 42, 43 and 46, the Kalyan Mandir and the Dukhharan Vinati" },
+    "aliases": ["badha", "court case", "debt", "dispute", "jhagda", "karz", "lawsuit", "loss", "mukadma", "nuksan", "obstacle", "problem", "problems", "rukavat", "sankat", "trouble", "कर्ज़", "झगड़ा", "नुकसान", "बाधा", "मुकदमा", "रुकावट", "संकट"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, भक्तामर स्तोत्र, कल्याणमंदिर स्तोत्र, दुखहरण विनती और जैन कथाओं के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the Bhaktamar Stotra, the Kalyan Mandir Stotra, the Dukhharan Vinati and Jain stories. Pictures drawn for this app."
+    },
+    "group": { "hi": "जीवन की उलझनें", "en": "Life's troubles" }
+  },
+  {
+    "id": "ghar-chaityalaya",
+    "file": "content/samadhan/ghar-chaityalaya.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "घर का चैत्यालय — जैन परम्परा में घर की पूजा", "en": "The home shrine: worship at home in the Jain tradition" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 5,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "प्रतिमा या चित्र, स्थान और दिशा, शास्त्र का आदर और रोज़ का क्रम", "en": "An image or a picture, place and direction, respect for scripture and the daily routine" },
+    "aliases": ["chaityalaya", "ghar ka mandir", "ghar mein pratima", "home shrine", "home temple", "jain vastu", "jinvani", "pooja room", "puja ghar", "shastra", "घर का मंदिर", "चैत्यालय", "जिनवाणी", "पूजा घर", "प्रतिमा"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, जैन घरों और मंदिरों की प्रचलित परम्परा के आधार पर। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on the customs of Jain homes and temples. Pictures drawn for this app."
+    },
+    "group": { "hi": "घर और वास्तु", "en": "Home and vastu" }
+  },
+  {
+    "id": "vastu",
+    "file": "content/samadhan/vastu.txt",
+    "scroll": true,
+    "category": "samadhan",
+    "title": { "hi": "वास्तु — घर के लिए आम सुझाव", "en": "Vastu: common tips for the home" },
+    "author": { "hi": "इसी ऐप के लिए लिखा गया लेख", "en": "An article written for this app" },
+    "unit": { "hi": "भाग", "en": "Part" },
+    "count": 4,
+    "textLang": "hi",
+    "numberMark": false,
+    "blurb": { "hi": "दिशाओं के प्रचलित सुझाव, उनके पीछे की समझ, और जैन दृष्टि", "en": "Popular advice on directions, the sense behind it, and the Jain view" },
+    "aliases": ["direction", "disha", "ishan", "kitchen", "main door", "north east", "vaastu", "vastu", "vastu shastra", "vastu tips", "ईशान", "दिशा", "मुख्य द्वार", "रसोई", "वास्तु", "वास्तु शास्त्र"],
+    "source": {
+      "hi": "इसी ऐप के लिए सरल हिंदी और अंग्रेज़ी में लिखा गया लेख, प्रचलित वास्तु मान्यताओं के आधार पर, जो जैन आगम के वचन नहीं हैं। चित्र इसी ऐप में बने हैं।",
+      "en": "An article written for this app in simple Hindi and English, based on popular vastu custom, which is not Jain scripture. Pictures drawn for this app."
+    },
+    "group": { "hi": "घर और वास्तु", "en": "Home and vastu" }
   }
 ]

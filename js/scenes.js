@@ -1676,5 +1676,111 @@ const SCENES = (function () {
 
   Object.keys(story).forEach(k => { scenes['story.' + k] = story[k]; });
 
+  /* ---------- Help for life's troubles: the vastu plan, and the articles' covers ---------- */
+
+  /* A house plan, north at the top, with the places popular vastu suggests: 1 worship in the north-east · 2 kitchen in
+     the south-east · 3 the main bedroom in the south-west · 4 an open centre · 5 the main door on the east · 6 water in
+     the north · ↑ north. The north and east are kept light and open, the south and west heavier. */
+  scenes.vastuGrid = (function () {
+    const x0 = 40;
+    const y0 = 40;
+    const c = 72;
+    const fills = [['#efe4c8', '#fbf3e2', '#fbf3e2'], ['#efe4c8', '#f4ead3', '#fbf3e2'], ['#e3d2a8', '#efe4c8', '#efe4c8']];
+    let g = '';
+    for (let r = 0; r < 3; r++) {
+      for (let k = 0; k < 3; k++) {
+        g += '<rect x="' + (x0 + k * c) + '" y="' + (y0 + r * c) + '" width="' + c + '" height="' + c + '" fill="' + fills[r][k] + '" stroke="' + PAPER_EDGE + '" stroke-width="1.5"/>';
+      }
+    }
+    const right = x0 + 3 * c;
+    const bottom = y0 + 3 * c;
+    g += '<path d="M' + x0 + ' ' + y0 + ' H' + right + ' V' + (y0 + c + 22) + ' M' + right + ' ' + (y0 + 2 * c - 22) + ' V' + bottom + ' H' + x0 + ' V' + y0 + '" fill="none" stroke="' + WOOD_EDGE + '" stroke-width="5" stroke-linejoin="round" stroke-linecap="square"/>' +
+      '<rect x="' + (right - 4) + '" y="' + (y0 + c + 22) + '" width="8" height="' + (c - 44) + '" fill="' + WOOD + '"/>';
+    const mid = n => x0 + n * c + c / 2;
+    const midY = n => y0 + n * c + c / 2;
+    g += diya(mid(2), midY(0) + 14, 0.9) +
+      flames(mid(2), midY(2) + 18, 0.6) +
+      '<rect x="' + (mid(0) - 24) + '" y="' + (midY(2) - 6) + '" width="48" height="26" rx="4" fill="#fff6e6" stroke="' + CLOTH_EDGE + '" stroke-width="2"/><rect x="' + (mid(0) - 20) + '" y="' + (midY(2) - 2) + '" width="14" height="10" rx="3" fill="' + CLOTH_EDGE + '"/>' +
+      '<circle cx="' + mid(1) + '" cy="' + midY(1) + '" r="22" fill="none" stroke="' + PAPER_EDGE + '" stroke-width="2" stroke-dasharray="4 4"/>' +
+      drop(mid(1), midY(0) + 16, 1.8);
+    g += badge(mid(2), midY(0) - 18, 1) + badge(mid(2), midY(2) - 16, 2) + badge(mid(0), midY(2) - 24, 3) + badge(mid(1), midY(1), 4) +
+      badge(right + 22, midY(1), 5) + badge(mid(1), midY(0) - 18, 6);
+    g += arrow(300, 84, 300, 44) + badge(300, 100, '↑');
+    return svg(330, 300, g);
+  })();
+
+  /* Paath, mantra and karma: a devotee at jaap with a mala, a lamp beside. */
+  story['pehle-padhein'] = cover(
+    '<circle cx="150" cy="86" r="54" fill="' + GLOW + '"/>' +
+    sit(150, 150, { hands: 'mala' }) + diya(250, 146, 1.1) + flower5(80, 140, 0.9) + flower5(60, 146, 0.7));
+
+  /* Studies: a child at the book stand in the morning sun. */
+  story.padhai = cover(
+    sun(272, 36, 11) +
+    sit(110, 150, { hands: 'lap' }) +
+    chowki(196, 122, 80) + book(196, 104, 32, { h: 18 }) +
+    '<circle cx="196" cy="90" r="24" fill="' + GLOW + '" opacity="0.6"/>');
+
+  /* Work and money: an honest balance, coins, and the lamp of the new account book. */
+  story['naukri-vyapar'] = cover(
+    '<path d="M160 44 V136 M128 136 H192" stroke="' + BRASS_EDGE + '" stroke-width="3.5" stroke-linecap="round"/>' +
+    '<path d="M104 60 H216" stroke="' + BRASS_EDGE + '" stroke-width="3" stroke-linecap="round"/>' +
+    '<path d="M104 60 L92 94 H116 Z M216 60 L204 94 H228 Z" fill="' + BRASS_LIGHT + '" stroke="' + BRASS_EDGE + '" stroke-width="1.5" stroke-linejoin="round"/>' +
+    coins(56, 146) + diya(268, 146, 1));
+
+  /* Marriage and family: two people with a garland between them, and a kalash. */
+  story['vivah-parivar'] = cover(
+    '<circle cx="160" cy="70" r="40" fill="' + GLOW + '" opacity="0.7"/>' +
+    stand(126, 150, { hands: 'folded', cloth: SAFFRON }) + stand(194, 150, { hands: 'folded', dupatta: true, dir: -1, cloth: '#e7b3c2' }) +
+    garland(160, 40) + pot(268, 150, 0.7) + '<path d="M258 108 Q268 92 278 108" fill="' + GREEN + '"/>');
+
+  /* Health: someone resting calmly beside a lamp and a pot of water, under a tree. */
+  story.swasthya = cover(
+    tree(270, 150, 1) +
+    '<circle cx="140" cy="88" r="46" fill="' + GLOW + '" opacity="0.7"/>' +
+    sit(140, 150, { hands: 'folded' }) + pot(62, 150, 0.6) + diya(212, 146, 0.9));
+
+  /* Fear and worry: a calm figure with folded hands under the night sky. */
+  story['bhay-chinta'] = cover(
+    moon(250, 40, 16) + stars([[40, 30], [90, 52], [140, 24], [200, 60], [290, 90], [60, 100]]) +
+    '<circle cx="150" cy="96" r="44" fill="' + GLOW + '" opacity="0.35"/>' +
+    sit(150, 150, { hands: 'folded' }) + diya(230, 146, 0.9),
+    { night: true });
+
+  /* Hard times: a small boat riding a stormy sea towards the sun breaking through. */
+  story.sankat = cover(
+    sun(262, 40, 12) +
+    '<path d="M20 64 q20 -14 40 -2 q18 -16 40 -2 q16 -12 34 0" fill="none" stroke="#8d8d94" stroke-width="10" stroke-linecap="round"/>' +
+    '<path d="M110 108 H210 L194 128 H126 Z" fill="' + WOOD + '" stroke="' + WOOD_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M160 108 V54 L196 100 Z" fill="#fff6e6" stroke="' + CLOTH_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M0 130 q20 -12 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#bfe0f7" stroke-width="4"/>',
+    { water: true });
+
+  /* Bhaktamar for troubles: chains falling open in the light of the Lord. */
+  story['bhaktamar-upay'] = cover(
+    '<circle cx="160" cy="80" r="56" fill="' + GLOW + '"/>' + flower5(160, 80, 3.4) +
+    chainLinks(40, 120, 110, 140, 6) + chainLinks(210, 140, 280, 120, 6) +
+    '<path d="M116 142 l-6 10 M204 142 l6 10" stroke="#6b6b73" stroke-width="3" stroke-linecap="round"/>');
+
+  /* The home shrine: the Lord on a raised shelf, the scripture beside, a covered lamp. */
+  story['ghar-chaityalaya'] = cover(
+    '<rect x="96" y="96" width="128" height="10" rx="3" fill="' + WOOD + '" stroke="' + WOOD_EDGE + '" stroke-width="2"/>' +
+    '<path d="M104 106 V150 M216 106 V150" stroke="' + WOOD_EDGE + '" stroke-width="4"/>' +
+    '<g transform="translate(140 96) scale(0.55)">' + jina(0, 0, 1, { noChhatra: true }) + '</g>' +
+    book(192, 80, 18, { h: 14 }) + diya(270, 146, 0.9) + diya(50, 146, 0.9));
+
+  /* Vastu: a house with its door to the east and a compass pointing north. */
+  story.vastu = cover(
+    sun(56, 36, 10) +
+    '<path d="M110 150 V92 L160 56 L210 92 V150 Z" fill="' + MARBLE + '" stroke="' + MARBLE_EDGE + '" stroke-width="2" stroke-linejoin="round"/>' +
+    '<path d="M100 98 L160 50 L220 98" fill="none" stroke="' + WOOD_EDGE + '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<rect x="148" y="112" width="24" height="38" rx="3" fill="' + WOOD + '" stroke="' + WOOD_EDGE + '" stroke-width="2"/>' +
+    '<rect x="122" y="104" width="16" height="16" fill="#cfe7f8" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/><rect x="182" y="104" width="16" height="16" fill="#cfe7f8" stroke="' + MARBLE_EDGE + '" stroke-width="1.5"/>' +
+    '<circle cx="268" cy="72" r="26" fill="#fff6e6" stroke="' + BRASS_EDGE + '" stroke-width="2"/>' +
+    '<path d="M268 52 L276 74 H260 Z" fill="#a3301a"/><path d="M268 92 L276 74 H260 Z" fill="' + MARBLE_EDGE + '"/>');
+
+  ['pehle-padhein', 'padhai', 'naukri-vyapar', 'vivah-parivar', 'swasthya', 'bhay-chinta', 'sankat', 'bhaktamar-upay', 'ghar-chaityalaya', 'vastu']
+    .forEach(k => { scenes['story.' + k] = story[k]; });
+
   return scenes;
 })();

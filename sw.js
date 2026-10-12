@@ -4,7 +4,7 @@
  * and saved, so updates and text corrections show the next time the app opens.
  * Change VERSION when adding or removing files in the list below.
  */
-const VERSION = 'swadhyay-v19';
+const VERSION = 'swadhyay-v22';
 /* On a slow line, the saved copy is shown after this wait while the new one keeps downloading for next time. */
 const WAIT_MS = 3000;
 /* Fonts and icons never change, so they come straight from the saved copy. */
@@ -31,6 +31,7 @@ const FILES = [
   'content/faq.json',
   'content/bal-katha/chitra.json',
   'content/itihas/chitra.json',
+  'content/samadhan/chitra.json',
   'content/categories.json',
   'content/chitra.json',
   'content/namokar.txt',

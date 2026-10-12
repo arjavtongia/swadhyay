@@ -1,0 +1,84 @@
+{
+  "pehle-padhein": [
+    {
+      "at": [3],
+      "type": "drawing",
+      "drawing": "jaap",
+      "top": true,
+      "title": { "hi": "जाप, सामायिक और स्वाध्याय", "en": "Jaap, samayik and study" },
+      "items": [
+        { "hi": "माला से णमोकार मंत्र — 9 या 108 बार", "en": "Namokar Mantra on a mala, 9 or 108 times" },
+        { "hi": "सामायिक — शान्त बैठकर आत्मा का चिन्तन", "en": "Samayik: sit quietly and reflect on the soul" },
+        { "hi": "स्वाध्याय — कोई शास्त्र या स्तोत्र पढ़ें", "en": "Study: read a scripture or stotra" }
+      ]
+    }
+  ],
+  "bhaktamar-upay": [
+    {
+      "at": [1],
+      "type": "list",
+      "title": { "hi": "किस कठिनाई में कौन-सा काव्य", "en": "Which verse for which trouble" },
+      "items": [
+        { "hi": "हर शुभ शुरुआत, विघ्न दूर करने के लिए", "en": "Every good beginning, to remove obstacles", "tag": "1" },
+        { "hi": "पढ़ाई और स्मरण-शक्ति", "en": "Studies and memory", "tag": "6" },
+        { "hi": "बड़े और अचानक आए संकट", "en": "Great and sudden dangers", "tag": "38" },
+        { "hi": "हिंसक पशु का भय", "en": "Fear of wild animals", "tag": "39" },
+        { "hi": "आग का भय", "en": "Fear of fire", "tag": "40" },
+        { "hi": "साँप और विष का भय", "en": "Fear of snakes and poison", "tag": "41" },
+        { "hi": "विरोध, झगड़े और मुकदमे", "en": "Opposition, quarrels and lawsuits", "tag": "42–43" },
+        { "hi": "यात्रा और जल का भय", "en": "Journeys, and fear of water", "tag": "44" },
+        { "hi": "रोग", "en": "Illness", "tag": "45" },
+        { "hi": "बन्धन, कैद, फँसी हुई स्थिति", "en": "Bondage, imprisonment, being trapped", "tag": "46" },
+        { "hi": "हर प्रकार का भय", "en": "Every kind of fear", "tag": "47" },
+        { "hi": "सम्मान, सफलता और लक्ष्मी", "en": "Honour, success and prosperity", "tag": "48" }
+      ],
+      "tagNote": { "hi": "अंक = भक्तामर का काव्य", "en": "Number = verse of the Bhaktamar" },
+      "gist": { "hi": "38 से 47 तक के काव्य स्वयं इन भयों से मुक्ति की बात करते हैं; 1 और 6 को किस काम में पढ़ें, यह परम्परा बताती है।", "en": "Verses 38 to 47 themselves speak of freedom from these fears; tradition tells when to recite verses 1 and 6." }
+    },
+    {
+      "at": [3],
+      "type": "drawing",
+      "drawing": "bhaya",
+      "title": { "hi": "आठ भय, जो भगवान के स्मरण से दूर होते हैं", "en": "Eight fears removed by remembering the Lord" },
+      "items": [
+        { "hi": "मतवाला हाथी", "en": "Wild elephant", "tag": "38" },
+        { "hi": "सिंह", "en": "Lion", "tag": "39" },
+        { "hi": "जंगल की आग", "en": "Forest fire", "tag": "40" },
+        { "hi": "सर्प", "en": "Snake", "tag": "41" },
+        { "hi": "युद्ध", "en": "War", "tag": "42–43" },
+        { "hi": "समुद्र का तूफ़ान", "en": "Storm at sea", "tag": "44" },
+        { "hi": "जलोदर रोग", "en": "Dropsy (disease)", "tag": "45" },
+        { "hi": "बन्धन, ज़ंजीरें", "en": "Chains and imprisonment", "tag": "46" }
+      ],
+      "tagNote": { "hi": "अंक = श्लोक", "en": "Number = verse" }
+    }
+  ],
+  "ghar-chaityalaya": [
+    {
+      "at": [4],
+      "type": "drawing",
+      "drawing": "shastra",
+      "top": true,
+      "title": { "hi": "जिनवाणी, ऊँचे स्थान पर, दीपक और फूलों के साथ", "en": "The Jinvani, set up high, with lamps and flowers" }
+    }
+  ],
+  "vastu": [
+    {
+      "at": [2],
+      "type": "drawing",
+      "drawing": "vastuGrid",
+      "top": true,
+      "title": { "hi": "घर का नक्शा — प्रचलित वास्तु के अनुसार, उत्तर ऊपर", "en": "A house plan by popular vastu, north at the top" },
+      "items": [
+        { "hi": "पूजा का स्थान", "en": "Place of worship", "sub": { "hi": "उत्तर-पूर्व (ईशान)", "en": "north-east (ishan)" } },
+        { "hi": "रसोई", "en": "Kitchen", "sub": { "hi": "दक्षिण-पूर्व (आग्नेय)", "en": "south-east (agneya)" } },
+        { "hi": "मुखिया का शयन-कक्ष", "en": "Main bedroom", "sub": { "hi": "दक्षिण-पश्चिम (नैऋत्य)", "en": "south-west (nairitya)" } },
+        { "hi": "घर का बीच", "en": "Centre of the house", "sub": { "hi": "खुला और खाली", "en": "open and uncluttered" } },
+        { "hi": "मुख्य द्वार", "en": "Main door", "sub": { "hi": "पूर्व या उत्तर की ओर", "en": "facing east or north" } },
+        { "hi": "पानी", "en": "Water", "sub": { "hi": "उत्तर या उत्तर-पूर्व में", "en": "in the north or north-east" } },
+        { "hi": "उत्तर दिशा", "en": "North", "tag": "↑", "sub": { "hi": "चित्र में ऊपर", "en": "up in the picture" } }
+      ],
+      "gist": { "hi": "हल्के रंग वाला उत्तर और पूर्व का हिस्सा खुला और हल्का रखें, गहरे रंग वाले दक्षिण और पश्चिम में भारी सामान। ये लोक-मान्यताएँ हैं, जैन आगम के वचन नहीं।", "en": "Keep the lighter north and east side open and light, and heavy things in the darker south and west. These are popular customs, not Jain scripture." }
+    }
+  ]
+}

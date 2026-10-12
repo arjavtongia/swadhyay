@@ -215,6 +215,8 @@ const STRINGS = {
     pathKathaSub: '{n} कथाएँ, और बच्चों के लिए {k} चित्र-कथाएँ',
     pathItihas: 'पुराण और इतिहास',
     pathItihasSub: '{n} लेख: कालचक्र, तीन लोक, तीर्थंकर, आचार्य और शिलालेख',
+    pathSamadhan: 'जीवन के समाधान',
+    pathSamadhanSub: '{n} लेख: पढ़ाई, नौकरी, विवाह, स्वास्थ्य, डर, संकट और वास्तु',
     pathVidhi: 'मंदिर दर्शन और पूजा विधि',
     pathVidhiSub: 'हर चरण चित्र के साथ',
     shelfNitya: 'नित्य पाठ और विधि',
@@ -223,6 +225,7 @@ const STRINGS = {
     shelfGranth: 'ग्रंथ — चार अनुयोग',
     shelfKatha: 'कथाएँ',
     shelfItihas: 'पुराण और इतिहास',
+    shelfSamadhan: 'जीवन के समाधान',
     shelfOther: 'अन्य',
     help: 'कैसे चलाएँ',
     helpTips: [
@@ -440,6 +443,8 @@ const STRINGS = {
     pathKathaSub: '{n} stories, and {k} picture stories for children',
     pathItihas: 'Purana and history',
     pathItihasSub: '{n} articles: the wheel of time, the three worlds, the Tirthankars, the acharyas and the inscriptions',
+    pathSamadhan: "Help for life's troubles",
+    pathSamadhanSub: '{n} articles: studies, work, marriage, health, fear, hard times and vastu',
     pathVidhi: 'Temple visit and pooja guides',
     pathVidhiSub: 'Every step with a picture',
     shelfNitya: 'Daily prayers and guides',
@@ -448,6 +453,7 @@ const STRINGS = {
     shelfGranth: 'Scriptures — the four anuyogs',
     shelfKatha: 'Stories',
     shelfItihas: 'Purana and history',
+    shelfSamadhan: "Help for life's troubles",
     shelfOther: 'Other',
     help: 'How to use',
     helpTips: [

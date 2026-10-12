@@ -222,6 +222,8 @@
         if (rb && rb.ok) Object.assign(chitra, await rb.json());
         const ri = await fetch('content/itihas/chitra.json').catch(() => null);
         if (ri && ri.ok) Object.assign(chitra, await ri.json());
+        const rs = await fetch('content/samadhan/chitra.json').catch(() => null);
+        if (rs && rs.ok) Object.assign(chitra, await rs.json());
       } catch (e) {
         chitra = {};
       }
@@ -781,13 +783,15 @@
   /* Stories are listed by title alone so the list is quick to look through; each story opens with its pictures and summary. */
   function storyRow(meta) {
     /* An article's title alone doesn't say what it covers, so its row adds the one-line summary. */
-    const about = meta.category === 'puran-itihas' && meta.blurb ? '<span class="row-sub">' + esc(L(meta.blurb)) + '</span>' : '';
+    const about = ARTICLE_CATS.indexOf(meta.category) >= 0 && meta.blurb ? '<span class="row-sub">' + esc(L(meta.blurb)) + '</span>' : '';
     return chevronRow('#/book/' + meta.id, titleHtml(meta) + about);
   }
 
   /* Read as one page under a picture, with contents naming only their titled parts: stories and the
      Purana and history articles. */
-  const STORY_LIKE = ['katha', 'bal-katha', 'puran-itihas'];
+  const STORY_LIKE = ['katha', 'bal-katha', 'puran-itihas', 'samadhan'];
+  /* The shelves of articles written for this app, listed by group with each one's summary. */
+  const ARTICLE_CATS = ['puran-itihas', 'samadhan'];
 
   /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart.
      Where the Pooja guide opens one of several versions, that version says so. */
@@ -849,7 +853,8 @@
     { id: 'path', title: 'shelfPath', cats: ['path', 'stotra'] },
     { id: 'granth', title: 'shelfGranth', cats: ['prathamanuyog', 'karananuyog', 'charananuyog', 'dravyanuyog', 'nyay', 'itihas', 'anya'] },
     { id: 'katha', title: 'shelfKatha', cats: ['bal-katha', 'katha'] },
-    { id: 'puran-itihas', title: 'shelfItihas', cats: ['puran-itihas'] }
+    { id: 'puran-itihas', title: 'shelfItihas', cats: ['puran-itihas'] },
+    { id: 'samadhan', title: 'shelfSamadhan', cats: ['samadhan'] }
   ];
 
   function shelfCats(g) {
@@ -1070,6 +1075,7 @@
       count('granth') && { href: '#/books/group/granth', emblem: { id: 'tattvarth-sutra' }, title: t('pathGranth'), sub: t('pathGranthSub', { n: count('granth') }) },
       has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: kathaSub() },
       has('puran-itihas') && { href: '#/books/puran-itihas', emblem: { category: 'puran-itihas' }, title: t('pathItihas'), sub: t('pathItihasSub', { n: count('puran-itihas') }) },
+      has('samadhan') && { href: '#/books/samadhan', emblem: { category: 'samadhan' }, title: t('pathSamadhan'), sub: t('pathSamadhanSub', { n: count('samadhan') }) },
       has('vidhi') && { href: '#/books/vidhi', icon: 'temple', title: t('pathVidhi'), sub: t('pathVidhiSub') },
       /* Saved appears once something has been saved; until then it would only be an empty line. */
       state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: savedSub() }
@@ -1119,7 +1125,7 @@
 
   /* Each shelf counts in its own words (poojas, stotras, stories, scriptures); a mixed shelf counts texts. */
   const CATEGORY_COUNT = { 'nitya-pooja': 'countPoojas', 'tirthankar-pooja': 'countPoojas', 'parv-pooja': 'countPoojas',
-    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides', 'puran-itihas': 'countArticles' };
+    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides', 'puran-itihas': 'countArticles', samadhan: 'countArticles' };
   function categoryCount(catId, n) {
     const granth = GROUPS.find(g => g.id === 'granth').cats.indexOf(catId) >= 0;
     return t(CATEGORY_COUNT[catId] || (granth ? 'countScriptures' : 'countTexts'), { n: n });
@@ -1181,7 +1187,7 @@
       const guided = pooja ? await poojaGuideBooks() : new Set();
       return backBar(up.href, up.label) +
         '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' +
-        (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml('katha') : cat.id === 'puran-itihas' ? storyListHtml('puran-itihas') :
+        (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml('katha') : ARTICLE_CATS.indexOf(cat.id) >= 0 ? storyListHtml(cat.id) :
         (pooja ? poojaHelpHtml() : '') +
         '<ul class="rows">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
     }

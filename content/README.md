@@ -58,6 +58,10 @@ Stories are books in the `katha` category. Besides the usual fields, their entry
 
 Articles in the `puran-itihas` category, written for this app in simple Hindi and English. They read like stories: one page, a picture on the card (a drawn scene, or `cover`), and contents that list only their titled parts. Their entry in `books.json` has a `blurb`, shown under the title in the list, and a `group` (लोक और काल, पुराणों से or इतिहास). Their explanatory pictures are in `itihas/chitra.json`. A link can open a text at a given place: `लिंक: shrutavatar/34 | ...` opens its 34th part, counting the parts the way the reader does. New articles go at the end of `books.json`, so the Ask index keeps every other text's number.
 
+## जीवन के समाधान · Help for life's troubles (`samadhan/`)
+
+Articles in the `samadhan` category, laid out the same way as the Purana and history articles, with their pictures in `samadhan/chitra.json`. Each trouble has three parts: what Jain teaching says, what to do, and which paath tradition recommends, linked with `लिंक:` (for example `bhaktamar/45` for one Bhaktamar verse). Write "परम्परा में" for anything that comes from custom rather than the text itself, never promise a result, and add a mantra only from a printed source that can be credited.
+
 ## `pooja/` और `granth/` · Imported texts
 
 The files in `pooja/` (poojas, paath, stotras, aartis) and `granth/` (scriptures) were converted from the Jain Database, nikkyjain.github.io, by scripts kept outside this repo (`import/fetch_pooja.py`, `import/import_pooja.py`, `import/import_gatha.py`, then `import/merge_catalog.py` to rebuild their entries in `books.json` and `categories.json`, and `import/fix_spelling.py` to correct spelling slips in the meanings, such as रुप for रूप). Re-running those scripts overwrites these files, so if you fix a typo here, also tell whoever runs the import, so it can be added to `fix_spelling.py`. These files are not in the `FILES` list of `sw.js`: each one is saved for offline use the first time it is opened.
