@@ -1258,6 +1258,21 @@
       (sponsorText(s.note) ? '<span class="sponsor-note" translate="no">' + esc(sponsorText(s.note)) + '</span>' : '') + '</span></p>';
   }
 
+  /* The mail to write for gyan daan: a short form to fill in, with the text already named and linked when sent from its page.
+     Mail apps want CRLF line breaks in a mailto body. */
+  function sponsorMailHref(book) {
+    const subject = t('sponsorMailSubject') + (book ? ': ' + book.title.hi : '');
+    const body = t('sponsorMailBody', { book: book ? book.title.hi + ' — ' + APP_URL + '#/book/' + book.id : '' });
+    return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&amp;body=' + encodeURIComponent(body.replace(/\n/g, '\r\n'));
+  }
+
+  /* At the end of a text's page, a quiet invitation to give it as gyan daan, until someone has. */
+  function bookGiveHtml(book) {
+    if (sponsors[book.id] && sponsorText(sponsors[book.id].name)) return '';
+    return '<aside class="book-give"><p>' + esc(t('sponsorBookDesc')) + '</p>' +
+      '<a class="btn btn-wide" href="' + sponsorMailHref(book) + '">' + icon('flower') + '<span>' + esc(t('sponsorBook')) + '</span></a></aside>';
+  }
+
   async function viewBook(id, secStr) {
     const book = await getBook(id);
     if (!book) return viewNotFound();
@@ -1324,7 +1339,7 @@
       html += '<h2>' + esc(t('contents')) + '</h2><ol class="rows verse-index">' +
         book.verses.map(v => verseRow(book, v)).join('') + '</ol>';
     }
-    return html + '</main>';
+    return html + bookGiveHtml(book) + '</main>';
   }
 
   let ctx = null;
@@ -1873,14 +1888,12 @@
       '<a class="btn btn-small" href="mailto:' + MAIL + '">' + icon('mail') + '<span translate="no">' + MAIL + '</span></a></section>';
   }
 
-  /* Ways to help: give a text as gyan daan (written for by mail, since each is arranged by hand), and any amount by card once SPONSORS_URL is set.
-     The mail opens with a short form to fill in; mail apps want CRLF line breaks in a mailto body. */
+  /* Ways to help: give a text as gyan daan (written for by mail, since each is arranged by hand), and any amount by card once SPONSORS_URL is set. */
   function supportHtml() {
     return '<section class="set support"><h2>' + icon('heart') + ' ' + esc(t('support')) + '</h2>' +
       '<p>' + esc(t('supportDesc')) + '</p>' +
       '<h3>' + esc(t('sponsorHeading')) + '</h3><p>' + esc(t('sponsorDesc')) + '</p>' +
-      '<a class="btn btn-wide" href="mailto:' + MAIL + '?subject=' + encodeURIComponent(t('sponsorMailSubject')) +
-      '&amp;body=' + encodeURIComponent(t('sponsorMailBody').replace(/\n/g, '\r\n')) + '">' + icon('mail') +
+      '<a class="btn btn-wide" href="' + sponsorMailHref(null) + '">' + icon('mail') +
       '<span>' + esc(t('sponsorWrite')) + '</span></a>' +
       (SPONSORS_URL ? '<h3>' + esc(t('giveHeading')) + '</h3><p>' + esc(t('giveDesc')) + '</p>' +
         '<a class="btn btn-wide" href="' + SPONSORS_URL + '" target="_blank" rel="noopener">' + icon('heart') +
