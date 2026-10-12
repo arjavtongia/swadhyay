@@ -37,9 +37,9 @@ Moral: the lesson of the story, in English
 
 ## चित्र · Pictures
 
-`chitra.json` में हर ग्रंथ के "चित्र से समझें" हैं। `"at"` में श्लोक/सूत्र का क्रमांक (पूरे ग्रंथ में) लिखें। प्रकार: `sum` (जोड़), `list` (सूची), `flow` (क्रम), `tree` (भेद), `stack` (परतें), `drawing` (`js/drawings.js` का पूजा-चित्र या `js/scenes.js` का दृश्य)। `"top": true` लिखने पर चित्र पाठ के ऊपर दिखता है, जैसे विधि के हर चरण में; चित्र के नंबर नीचे की सूची (`items`) से समझाए जाते हैं।
+`chitra.json` में हर ग्रंथ के "चित्र से समझें" हैं। `"at"` में श्लोक/सूत्र का क्रमांक (पूरे ग्रंथ में) लिखें। प्रकार: `sum` (जोड़), `list` (सूची), `flow` (क्रम), `tree` (भेद), `stack` (परतें), `drawing` (`js/drawings.js` का पूजा-चित्र या `js/scenes.js` का दृश्य)। `"top": true` लिखने पर चित्र पाठ के ऊपर दिखता है, जैसे विधि के हर चरण में; चित्र के नंबर नीचे की सूची (`items`) से समझाए जाते हैं। `"link": "bhaktamar"` लिखने पर सूची के अंक उस ग्रंथ के श्लोक माने जाते हैं, और हर पंक्ति दबाने पर अपना श्लोक खुलता है (`42–43` से 42वाँ)। किसी एक पंक्ति (`items` में) पर `"link": "vishnukumar"` या `"link": "shrutavatar/34"` लिखने पर वह पंक्ति वह पाठ खोलती है।
 
-`chitra.json` holds the explanatory pictures for each book. `"at"` is the verse position in the whole book. Types: `sum`, `list`, `flow`, `tree`, `stack`, and `drawing` (a pooja drawing from `js/drawings.js` or a step scene from `js/scenes.js`). With `"top": true` the picture is shown above the text, as in each step of the guides; the numbers in the picture are explained by the list under it (`items`).
+`chitra.json` holds the explanatory pictures for each book. `"at"` is the verse position in the whole book. Types: `sum`, `list`, `flow`, `tree`, `stack`, and `drawing` (a pooja drawing from `js/drawings.js` or a step scene from `js/scenes.js`). With `"top": true` the picture is shown above the text, as in each step of the guides; the numbers in the picture are explained by the list under it (`items`). With `"link": "bhaktamar"` the numbers in the list are places in that book, and each row opens its own (`42–43` opens 42). A `"link"` on one item (`"vishnukumar"`, or `"shrutavatar/34"` for its 34th part) makes that row open that text.
 
 ## नया ग्रंथ जोड़ना · Adding a new book
 

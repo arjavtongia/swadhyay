@@ -769,6 +769,7 @@
       "at": [28],
       "type": "drawing",
       "drawing": "pratiharya",
+      "link": "bhaktamar",
       "title": { "hi": "आठ प्रातिहार्य (श्लोक 28–35)", "en": "The eight pratiharyas (verses 28–35)" },
       "items": [
         { "hi": "अशोक वृक्ष", "en": "Ashoka tree", "tag": "28" },
@@ -790,6 +791,7 @@
       "at": [38],
       "type": "drawing",
       "drawing": "bhaya",
+      "link": "bhaktamar",
       "title": { "hi": "आठ भय, जो भगवान के स्मरण से दूर होते हैं", "en": "Eight fears removed by remembering the Lord" },
       "items": [
         { "hi": "मतवाला हाथी", "en": "Wild elephant", "tag": "38" },

@@ -17,6 +17,7 @@
     {
       "at": [1],
       "type": "list",
+      "link": "bhaktamar",
       "title": { "hi": "किस कठिनाई में कौन-सा काव्य", "en": "Which verse for which trouble" },
       "items": [
         { "hi": "हर शुभ शुरुआत, विघ्न दूर करने के लिए", "en": "Every good beginning, to remove obstacles", "tag": "1" },
@@ -39,6 +40,7 @@
       "at": [3],
       "type": "drawing",
       "drawing": "bhaya",
+      "link": "bhaktamar",
       "title": { "hi": "आठ भय, जो भगवान के स्मरण से दूर होते हैं", "en": "Eight fears removed by remembering the Lord" },
       "items": [
         { "hi": "मतवाला हाथी", "en": "Wild elephant", "tag": "38" },

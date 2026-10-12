@@ -454,6 +454,19 @@
       (it.sub ? '<span class="dg-sub" translate="no">' + esc(L(it.sub)) + '</span>' : '') + '</span>';
   }
 
+  /* A numbered row of a list or a picture's legend. With "link" set on the picture, its numbers are places in
+     that book ("42–43" opens 42), and each row opens its own. A row's own "link" opens that text instead
+     ("vishnukumar", or "shrutavatar/34" at its 34th part). */
+  function dgRow(c, it, i) {
+    const tag = it.tag || String(i + 1);
+    const inner = '<span class="dg-badge">' + esc(tag) + '</span>' + dgItem(it, 'dg-text');
+    const to = it.link ? it.link.split('/') : [c.link, tag];
+    const n = it.link && !to[1] ? 1 : parseInt(to[1], 10);
+    if (!to[0] || !bookMeta(to[0]) || !(n >= 1)) return '<li>' + inner + '</li>';
+    return '<li class="dg-link"><a class="dg-go" href="#/read/' + encodeURIComponent(to[0]) + '/' + n + '">' +
+      inner + icon('chevron-right', 'row-chev') + '</a></li>';
+  }
+
   function chitraHtml(c, heading) {
     let body = '';
     let pic = '';
@@ -464,8 +477,7 @@
         items.map(it => dgItem(it, 'dg-box')).join('<span class="dg-op" aria-hidden="true">+</span>') +
         '<span class="dg-op" aria-hidden="true">=</span>' + dgItem(c.result, 'dg-box dg-result') + '</div>';
     } else if (c.type === 'list') {
-      body = '<ol class="dg-list">' + items.map((it, i) =>
-        '<li><span class="dg-badge">' + esc(it.tag || String(i + 1)) + '</span>' + dgItem(it, 'dg-text') + '</li>').join('') + '</ol>';
+      body = '<ol class="dg-list">' + items.map((it, i) => dgRow(c, it, i)).join('') + '</ol>';
     } else if (c.type === 'flow') {
       body = '<ol class="dg-flow">' + items.map((it, i) =>
         '<li><span class="dg-badge">' + (i + 1) + '</span>' + dgItem(it, 'dg-text') + '</li>').join('') + '</ol>';
@@ -484,8 +496,7 @@
       const drawing = DRAWINGS[c.drawing] || (typeof SCENES !== 'undefined' ? SCENES[c.drawing] : null);
       const svgHtml = typeof drawing === 'function' ? drawing(items.map(it => L(it).split(' (')[0])) : (drawing || '');
       pic = '<div class="dg-drawing" role="img" aria-label="' + esc(L(c.title)) + '">' + svgHtml + '</div>';
-      legend = items.length ? '<ol class="dg-list dg-legend">' + items.map((it, i) =>
-        '<li><span class="dg-badge">' + esc(it.tag || String(i + 1)) + '</span>' + dgItem(it, 'dg-text') + '</li>').join('') + '</ol>' : '';
+      legend = items.length ? '<ol class="dg-list dg-legend">' + items.map((it, i) => dgRow(c, it, i)).join('') + '</ol>' : '';
       body = pic + legend;
     }
     /* A picture placed above a step or a pooja stands in an arched niche; its caption and the numbered list follow. */
