@@ -200,6 +200,8 @@
 
   let catalog = null;
   let categories = [];
+  /* Sung recordings of some poojas: content/audio.json, the files themselves in audio/. */
+  let recordings = {};
   /* Texts given as gyan daan, by book id: content/sponsors.json. */
   let sponsors = {};
   let chitra = null;
@@ -207,14 +209,16 @@
 
   async function getCatalog() {
     if (!catalog) {
-      const [r, rc, rs] = await Promise.all([
+      const [r, rc, ra, rs] = await Promise.all([
         fetch('content/books.json'),
         fetch('content/categories.json').catch(() => null),
+        fetch('content/audio.json').catch(() => null),
         fetch('content/sponsors.json').catch(() => null)
       ]);
       if (!r.ok) throw new Error('books.json ' + r.status);
       catalog = await r.json();
       if (rc && rc.ok) categories = await rc.json();
+      if (ra && ra.ok) recordings = await ra.json().catch(() => ({}));
       if (rs && rs.ok) sponsors = await rs.json().catch(() => ({}));
     }
     return catalog;
@@ -736,14 +740,187 @@
     }
   }
 
+  /* In a pooja recited in one go, the reader bar's Listen plays its sung recording where it has one. A text read
+     verse by verse keeps Listen for reading aloud page by page, and its recording plays from the player alone. */
+  function listenSings() {
+    return !!(ctx && ctx.book.scroll && recordingOf(ctx.book.id));
+  }
+
+  function listening() {
+    return listenSings() ? rec.bookId === ctx.book.id && recPlaying() : speech.playing;
+  }
+
+  function listenInner() {
+    if (!listening()) return icon('volume') + '<span>' + esc(t('listen')) + '</span>';
+    return listenSings() ? icon('player-pause') + '<span>' + esc(t('recPauseShort')) + '</span>'
+      : icon('player-stop') + '<span>' + esc(t('stop')) + '</span>';
+  }
+
   function refreshListenButton() {
     const btn = $app.querySelector('[data-action="listen"]');
     if (!btn) return;
-    btn.innerHTML = speech.playing ? icon('player-stop') + '<span>' + esc(t('stop')) + '</span>'
-      : icon('volume') + '<span>' + esc(t('listen')) + '</span>';
-    btn.setAttribute('aria-pressed', speech.playing ? 'true' : 'false');
+    const on = listening();
+    if (btn.getAttribute('aria-pressed') === String(on)) return;
+    btn.innerHTML = listenInner();
+    btn.setAttribute('aria-pressed', String(on));
     const reader = $app.querySelector('.reader');
-    if (reader) reader.classList.toggle('is-listening', speech.playing);
+    if (reader) reader.classList.toggle('is-listening', on);
+  }
+
+  /* ---------- Recordings (sung poojas) ---------- */
+
+  /* One player outside the screen, so the singing carries on while the page redraws (another section, a text size).
+     Leaving the text pauses it, and coming back finds it where it stopped. */
+  const rec = { el: null, bookId: null, part: 0, seeking: false };
+
+  function recordingOf(id) {
+    const tracks = recordings.books && recordings.books[id];
+    return tracks && tracks.length ? tracks : null;
+  }
+
+  function recPlaying() {
+    return !!(rec.el && rec.bookId && !rec.el.paused);
+  }
+
+  function recAudio() {
+    if (rec.el) return rec.el;
+    const a = rec.el = new Audio();
+    a.preload = 'none';
+    ['play', 'pause', 'timeupdate', 'durationchange'].forEach(ev => a.addEventListener(ev, refreshRecording));
+    a.addEventListener('ended', () => {
+      /* A pooja sung in parts goes on to the next part; after the last it is ready to start again. */
+      const more = rec.part + 1 < recordingOf(rec.bookId).length;
+      recLoad(rec.bookId, more ? rec.part + 1 : 0, more);
+    });
+    a.addEventListener('error', () => {
+      if (!a.getAttribute('src')) return;
+      toast(t('recError'));
+      refreshRecording();
+    });
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.setActionHandler('play', recPlay);
+        navigator.mediaSession.setActionHandler('pause', () => a.pause());
+        navigator.mediaSession.setActionHandler('seekto', d => { if (d.seekTime >= 0) a.currentTime = d.seekTime; });
+      } catch (e) { /* not every phone offers every control */ }
+    }
+    return a;
+  }
+
+  function recLoad(id, part, play) {
+    const tracks = recordingOf(id);
+    if (!tracks || !tracks[part]) return;
+    const a = recAudio();
+    rec.bookId = id;
+    rec.part = part;
+    a.src = tracks[part].file;
+    if (play) recPlay();
+    else refreshRecording();
+  }
+
+  function recPlay() {
+    if (speech.playing) stopSpeech();
+    const p = recAudio().play();
+    if (p && p.catch) p.catch(e => { if (!e || e.name !== 'AbortError') { toast(t('recError')); refreshRecording(); } });
+    recMediaInfo();
+    refreshRecording();
+  }
+
+  function pauseRecording() {
+    if (rec.el && !rec.el.paused) rec.el.pause();
+  }
+
+  function toggleRecording(id) {
+    if (rec.bookId !== id) recLoad(id, 0, true);
+    else if (rec.el.paused) recPlay();
+    else rec.el.pause();
+  }
+
+  /* What the phone shows on its lock screen while a pooja plays. */
+  function recMediaInfo() {
+    const meta = bookMeta(rec.bookId);
+    if (!meta || !('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+    const tracks = recordingOf(rec.bookId);
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: meta.title.hi + (tracks.length > 1 ? ' · ' + partName(tracks, rec.part) : ''),
+        artist: recordings.credit ? L(recordings.credit) : '',
+        album: t('appName'),
+        artwork: [{ src: 'icons/prateek-512.png', sizes: '512x512', type: 'image/png' }]
+      });
+    } catch (e) { /* ignore */ }
+  }
+
+  /* A part is named for what it holds (पूजा, जयमाला) where audio.json says, otherwise numbered. */
+  function partName(tracks, i) {
+    return tracks[i].title ? L(tracks[i].title) : t('recPart', { n: i + 1 });
+  }
+
+  function clock(s) {
+    s = Math.max(0, Math.floor(s || 0));
+    const h = Math.floor(s / 3600);
+    const m = Math.floor(s / 60) % 60;
+    return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(s % 60).padStart(2, '0');
+  }
+
+  /* Where a text's recording stands: its part, the time played and the whole length (known before it loads). */
+  function recState(id) {
+    const tracks = recordingOf(id);
+    const here = rec.bookId === id && rec.el;
+    const part = here ? rec.part : 0;
+    const known = here && isFinite(rec.el.duration) && rec.el.duration > 0;
+    return { tracks: tracks, part: part, now: here ? rec.el.currentTime : 0, dur: known ? rec.el.duration : tracks[part].dur || 0,
+      playing: !!(here && !rec.el.paused) };
+  }
+
+  function recordingHtml(book) {
+    const s = recState(book.id);
+    const pct = s.dur ? Math.min(100, s.now / s.dur * 100) : 0;
+    return '<section class="rec' + (s.playing ? ' is-playing' : '') + '" aria-label="' + esc(t('recTitle')) + '">' +
+      '<div class="rec-row"><button class="rec-play" type="button" data-action="rec-toggle" aria-pressed="' + s.playing + '" aria-label="' +
+      esc(t(s.playing ? 'recPause' : 'recPlay')) + '">' + icon(s.playing ? 'player-pause' : 'player-play') + '</button>' +
+      '<div class="rec-main"><p class="rec-title">' + icon('headphones') + '<span>' + esc(t('recTitle')) + '</span></p>' +
+      '<input class="rec-seek" type="range" min="0" max="' + Math.round(s.dur) + '" step="1" value="' + Math.floor(s.now) +
+      '" style="--p:' + pct.toFixed(1) + '%" aria-label="' + esc(t('recSeek')) + '">' +
+      '<p class="rec-time"><span class="rec-now">' + clock(s.now) + '</span><span class="rec-dur">' + clock(s.dur) + '</span></p></div></div>' +
+      (s.tracks.length > 1 ? '<div class="rec-parts">' + s.tracks.map((x, i) => '<button class="chip" type="button" data-action="rec-part" data-part="' + i +
+        '" aria-pressed="' + (i === s.part) + '">' + esc(partName(s.tracks, i)) + '</button>').join('') + '</div>' : '') +
+      (recordings.credit ? '<p class="rec-credit">' + esc(t('recBy', { who: L(recordings.credit) })) + '</p>' : '') +
+      '</section>';
+  }
+
+  /* Keeps the player on screen in step with the sound, without redrawing the page. */
+  function refreshRecording() {
+    refreshListenButton();
+    const box = $app.querySelector('.rec');
+    if (!box || !ctx || !recordingOf(ctx.book.id)) return;
+    const s = recState(ctx.book.id);
+    if (box.classList.contains('is-playing') !== s.playing) {
+      box.classList.toggle('is-playing', s.playing);
+      const btn = box.querySelector('.rec-play');
+      btn.innerHTML = icon(s.playing ? 'player-pause' : 'player-play');
+      btn.setAttribute('aria-pressed', String(s.playing));
+      btn.setAttribute('aria-label', t(s.playing ? 'recPause' : 'recPlay'));
+    }
+    const seek = box.querySelector('.rec-seek');
+    seek.max = Math.round(s.dur);
+    if (!rec.seeking) seek.value = Math.floor(s.now);
+    seek.style.setProperty('--p', (s.dur ? Math.min(100, seek.value / s.dur * 100) : 0).toFixed(1) + '%');
+    box.querySelector('.rec-now').textContent = clock(seek.value);
+    box.querySelector('.rec-dur').textContent = clock(s.dur);
+    box.querySelectorAll('[data-action="rec-part"]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.part === s.part)));
+  }
+
+  /* Dragging the slider moves the time shown; letting go moves the singing there. */
+  function recSeek(input, done) {
+    if (!ctx) return;
+    const id = ctx.book.id;
+    rec.seeking = !done;
+    if (done) {
+      if (rec.bookId !== id) recLoad(id, 0, true);
+      rec.el.currentTime = +input.value;
+    }
+    refreshRecording();
   }
 
   /* ---------- Screens ---------- */
@@ -822,6 +999,7 @@
     return chevronRow('#/book/' + meta.id, titleHtml(meta) +
       '<span class="row-sub">' + (meta.author && L(meta.author) ? esc(L(meta.author)) + ' · ' : '') + esc(countLabel(meta)) + '</span>' +
       (inGuide ? '<span class="row-tag">' + icon('check') + esc(t('inPoojaGuide')) + '</span>' : '') +
+      (recordingOf(meta.id) ? '<span class="row-tag">' + icon('headphones') + esc(t('recTag')) + '</span>' : '') +
       (meta.opening ? '<span class="row-opening" translate="no" lang="' + (meta.textLang || 'hi') + '">' + esc(meta.opening) + '</span>' : ''),
       coverEmblem(meta));
   }
@@ -1526,7 +1704,10 @@
       '<div class="where"><span class="where-book" translate="no" lang="hi">' + esc(whereBook) + '</span>' +
       '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' +
       (posText ? '<span class="where-pos">' + posText + '</span>' : '') + '</div>' +
-      '<main class="reader' + (book.category === 'bal-katha' ? ' kids' : '') + (speech.playing ? ' is-listening' : '') + '" id="verse-area">';
+      '<main class="reader' + (book.category === 'bal-katha' ? ' kids' : '') + (listening() ? ' is-listening' : '') + '" id="verse-area">';
+    /* The sung recording opens a pooja recited in one go; in a text read verse by verse it follows the verse,
+       so the verse still comes first on every page. */
+    const recHtml = recordingOf(id) ? recordingHtml(book) : '';
 
     if (shrine) {
       html += '<article class="shrine' + (readEntering ? ' is-entering' : '') + '">' + ORN.crown(12) +
@@ -1540,11 +1721,12 @@
         (L(book.author) ? '<p class="shrine-attrib" translate="no">' + esc(L(book.author)) + ' · <span lang="hi">' + esc(book.title.hi) + '</span></p>' : '');
       const notes = verses.map(v => commentaryHtml(book, v)).join('');
       if (notes) html += '<div class="commentary">' + notes + '</div>';
+      html += recHtml;
     } else {
       html += '<div class="page-body' + (page.scroll ? ' scroll-page' : '') + '">';
       if (page.scroll) {
         html += '<header class="page-head">' + ORN.chhatra() + '<h1 translate="no">' + esc(label) + '</h1>' +
-          (secName && secName !== book.title.hi ? '<p class="page-head-sub" translate="no" lang="hi">' + esc(book.title.hi) + '</p>' : '') + '</header>';
+          (secName && secName !== book.title.hi ? '<p class="page-head-sub" translate="no" lang="hi">' + esc(book.title.hi) + '</p>' : '') + '</header>' + recHtml;
       } else {
         html += '<h1 class="step-title" translate="no">' + esc(first.topic ? topicOf(first) : label) + '</h1>';
       }
@@ -1552,7 +1734,7 @@
         (page.scroll && v.topic ? '<h2 class="topic">' + esc(topicOf(v)) + '</h2>' : '') +
         figuresHtml(v, v.topic ? topicOf(v) : label) + (v.lines.length ? '<div class="recite">' + linesHtml(book, v, true) + '</div>' : '') +
         commentaryHtml(book, v) + '</div>').join('');
-      html += '</div>';
+      html += (page.scroll ? '' : recHtml) + '</div>';
     }
 
     /* A text kept short for reciting (the Tattvartha Sutra) opens at the same place in its edition with meaning. */
@@ -1570,8 +1752,7 @@
       '</main>' +
       '<nav class="reader-bar" aria-label="' + esc(book.title.hi) + '">' +
       '<button class="btn" data-action="prev">' + icon(isFirst ? 'list' : 'arrow-left') + '<span>' + esc(isFirst ? t('contents') : t('prev')) + '</span></button>' +
-      '<button class="btn btn-primary" data-action="listen" aria-pressed="' + (speech.playing ? 'true' : 'false') + '">' +
-      (speech.playing ? icon('player-stop') + '<span>' + esc(t('stop')) : icon('volume') + '<span>' + esc(t('listen'))) + '</span></button>' +
+      '<button class="btn btn-primary" data-action="listen" aria-pressed="' + (listening() ? 'true' : 'false') + '">' + listenInner() + '</button>' +
       '<button class="btn" data-action="next"><span>' + esc(isLast ? t('finish') : t('next')) + '</span>' + icon(isLast ? 'check' : 'arrow-right') + '</button>' +
       '</nav>';
     return html;
@@ -1961,6 +2142,8 @@
       catalog.map(b => '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
         (L(b.author) ? '<p class="muted">' + esc(L(b.author)) + '</p>' : '') +
         (b.source ? '<p>' + esc(L(b.source)) + '</p>' : '') + '</section>').join('') +
+      (recordings.source ? '<h2>' + esc(t('recHeading')) + '</h2><p>' + esc(L(recordings.source)) + '</p>' +
+        (recordings.url ? '<p><a href="' + esc(recordings.url) + '" target="_blank" rel="noopener">' + esc(recordings.url.replace('https://', '')) + '</a></p>' : '') : '') +
       '<h2>' + esc(t('toolsHeading')) + '</h2><ul class="plain"><li>' + esc(t('fontCredit')) + '</li><li>' + esc(t('iconCredit')) + '</li><li>' + esc(t('splashPhotoCredit')) + '</li></ul>' +
       '<p>' + esc(t('proofNote')) + '</p><p class="muted">' + esc(t('licenseNote')) + '</p>' +
       '<p><a href="' + REPO_URL + '" target="_blank" rel="noopener">' + REPO_URL.replace('https://', '') + '</a></p></main>';
@@ -1999,6 +2182,7 @@
     const parts = routeParts();
     const view = state.lang ? (parts[0] || 'home') : 'welcome';
     if (view !== 'read') stopSpeech();
+    if (rec.bookId && (view !== 'read' || parts[1] !== rec.bookId)) pauseRecording();
     const token = ++renderToken;
     const focusAction = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.action : null;
     const sameView = view === currentView;
@@ -2264,8 +2448,12 @@
       toast(t('removed'));
       render();
     },
+    'rec-toggle': () => { if (ctx) toggleRecording(ctx.book.id); },
+    'rec-part': el => { if (ctx) recLoad(ctx.book.id, +el.dataset.part, true); },
     'listen': () => {
+      if (listenSings()) { toggleRecording(ctx.book.id); return; }
       if (!hasSpeech()) { toast(t('noSpeech')); return; }
+      pauseRecording();
       if (speech.playing) {
         stopSpeech();
       } else if (ctx) {
@@ -2368,7 +2556,12 @@
     } else if (e.target.id === 'goto-num') {
       const err = document.getElementById('goto-error');
       if (err) err.textContent = '';
+    } else if (e.target.classList.contains('rec-seek')) {
+      recSeek(e.target, false);
     }
+  });
+  $app.addEventListener('change', e => {
+    if (e.target.classList.contains('rec-seek')) recSeek(e.target, true);
   });
 
   /* Press and hold for 3 seconds to unlock settings. */
@@ -2412,7 +2605,8 @@
 
   let touchStart = null;
   $app.addEventListener('touchstart', e => {
-    if (currentView !== 'read' || e.touches.length !== 1) { touchStart = null; return; }
+    /* Dragging the recording's slider is not a page turn. */
+    if (currentView !== 'read' || e.touches.length !== 1 || e.target.closest('.rec')) { touchStart = null; return; }
     touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: true });
   $app.addEventListener('touchend', e => {

@@ -58,7 +58,7 @@
 
 - **Large, clear text** by default, with six sizes to choose from.
 - **Hindi first, with English.** Scripture is never translated away: the original stays, with its meaning below.
-- **सुनें · Listen:** each verse is read aloud in a Hindi voice, and the page turns by itself.
+- **सुनें · Listen:** each verse is read aloud in a Hindi voice, and the page turns by itself. Many poojas, aartis and stotras can also be heard sung, with a player at the top of the page.
 - **Works offline** once opened, at home or in the temple, and can be added to the phone's home screen.
 - **Day and night colours**, or the same as the phone.
 - **Continue where you stopped**, save verses, share a verse on WhatsApp, and search in Hindi or English spellings (भक्तामर or bhaktamar), or by voice.

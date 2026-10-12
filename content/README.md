@@ -84,3 +84,22 @@ A family can sponsor a text as gyan daan. Their name shows on that text's page u
 ```
 
 Keep the file as `{}` when there are none. Sponsors are kept here rather than in `books.json`, which `merge_catalog.py` rewrites.
+
+## गायन · Sung recordings (`audio.json`, `../audio/`)
+
+Some poojas, aartis, stotras and paath have a sung recording, played from a player at the top of the reader page (and, in a text recited in one go, by the reader's "सुनें" button in place of reading aloud). The recordings are in `audio/` at the top of the repo, one AAC `.m4a` file (mono, 64 kbps) per part; `audio.json` lists them by book id:
+
+```json
+"books": {
+  "maha-arghya": [
+    { "file": "audio/maha-arghya.m4a", "dur": 450 }
+  ],
+  "adinath-pooja-jineshwardas": [
+    { "file": "audio/adinath-pooja-jineshwardas-1.m4a", "dur": 709, "title": { "hi": "पूजा", "en": "Pooja" } },
+    { "file": "audio/adinath-pooja-jineshwardas-2.m4a", "dur": 256, "title": { "hi": "पंचकल्याणक अर्घ्य", "en": "Five kalyanaks" } },
+    { "file": "audio/adinath-pooja-jineshwardas-3.m4a", "dur": 638, "title": { "hi": "जयमाला", "en": "Jaimala" } }
+  ]
+}
+```
+
+`dur` is the length in seconds, shown before the file starts to load. A pooja sung in parts plays them one after another, with a button for each part named by its `title` (or "भाग 1", "भाग 2" without one). In a text read verse by verse, such as the Bhaktamar, "सुनें" keeps reading aloud page by page and the recording plays from its own player. `credit`, `source` and `url` at the top name where the recordings come from; they show under the player and on the credits page. Match a recording to the version it actually sings (its opening lines), not just to the name, since several poojas have more than one version. The recordings are never saved for offline use: `sw.js` lets `audio/` go straight to the network.

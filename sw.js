@@ -4,7 +4,7 @@
  * and saved, so updates and text corrections show the next time the app opens.
  * Change VERSION when adding or removing files in the list below.
  */
-const VERSION = 'swadhyay-v24';
+const VERSION = 'swadhyay-v25';
 /* On a slow line, the saved copy is shown after this wait while the new one keeps downloading for next time. */
 const WAIT_MS = 3000;
 /* Fonts and icons never change, so they come straight from the saved copy. */
@@ -35,6 +35,7 @@ const FILES = [
   'content/parv/chitra.json',
   'content/categories.json',
   'content/chitra.json',
+  'content/audio.json',
   'content/sponsors.json',
   'content/namokar.txt',
   'content/darshan-path.txt',
@@ -87,6 +88,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const req = event.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== self.location.origin) return;
+  /* Sung recordings are large and played in pieces as they stream, so they go straight to the network, never saved. */
+  if (/\/audio\//.test(new URL(req.url).pathname)) return;
 
   /* Page loads always get the app shell, so deep links work offline too. */
   const key = req.mode === 'navigate' ? './' : req;

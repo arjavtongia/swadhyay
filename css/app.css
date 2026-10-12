@@ -1284,3 +1284,39 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
   .splash { animation: splash-out 0.4s ease 3s forwards !important; }
   .is-lit > .sp-photo { animation: sp-fade 0.8s ease 0.1s both !important; }
 }
+
+/* ---------- Sung recording, on the reader page of a pooja that has one ---------- */
+
+.rec { max-width: 30rem; margin: 0 auto 1.4rem; padding: 0.6rem 1rem 0.55rem 0.6rem; border: 1px solid var(--brass-line); border-radius: 1.6rem; background: var(--field); }
+.rec-row { display: flex; align-items: center; gap: 0.75rem; }
+.rec-play { display: inline-grid; place-items: center; flex: none; width: max(3rem, 52px); height: max(3rem, 52px); padding: 0; border: 1px solid var(--brass-line); border-radius: 50%; color: var(--brass-text); background: none; cursor: pointer; transition: background-color 0.15s, border-color 0.15s; }
+.rec-play .icon { width: 1.35rem; height: 1.35rem; }
+.rec-play:hover { border-color: var(--brass); background: var(--brass-wash); }
+.rec-play:active { transform: scale(0.97); }
+.rec-play[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); }
+.rec-play:focus-visible { outline: 3px solid var(--text); outline-offset: 3px; }
+.rec-main { flex: 1; min-width: 0; }
+.rec-title { display: flex; align-items: center; gap: 0.35rem; margin: 0; font: 600 var(--fs-sm)/1.4 var(--font-ui); color: var(--brass-text); }
+.rec-title .icon { width: 1.1em; height: 1.1em; }
+/* The slider is the progress trail: a hairline gilded as far as it has played, with the sindoor lozenge at the place. */
+.rec-seek { -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 1.7rem; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; cursor: pointer; touch-action: none; }
+.rec-seek:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+.rec-seek::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, var(--brass) var(--p, 0%), var(--hair) var(--p, 0%)); }
+.rec-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 0.8rem; height: 0.8rem; margin-top: calc(1px - 0.4rem); border: 0; border-radius: 0; background: var(--sindoor); transform: rotate(45deg); }
+.rec-seek::-moz-range-track { height: 1px; background: var(--hair); }
+.rec-seek::-moz-range-progress { height: 2px; background: var(--brass); }
+.rec-seek::-moz-range-thumb { width: 0.7rem; height: 0.7rem; border: 0; border-radius: 0; background: var(--sindoor); transform: rotate(45deg); }
+.rec-time { display: flex; justify-content: space-between; margin: -0.1rem 0 0; font-size: var(--fs-xs); line-height: 1.3; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rec-parts { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.6rem 0 0.1rem 0.4rem; }
+.rec-parts .chip { background: none; cursor: pointer; }
+.rec-parts .chip:hover { background: var(--brass-wash); }
+.rec-parts .chip[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); }
+.rec-credit { margin: 0.35rem 0 0 0.4rem; font-size: var(--fs-xs); line-height: 1.4; color: var(--muted); }
+/* While a text is heard (sung or read aloud) the page keeps its marble, with only the diya glow behind the shrine,
+   and Listen stays the sindoor primary so its "Pause" stays readable. */
+.reader.is-listening { background: none; }
+.reader-bar .btn-primary[aria-pressed="true"] { background: var(--sindoor-fill); border-color: var(--sindoor-fill); box-shadow: var(--lift); }
+/* A row's tags keep their own width where the row is laid out as a grid (wide screens). */
+.row-main > .row-tag { justify-self: start; }
+/* After the verse (texts read verse by verse), the player stands clear of the shrine and its commentary. */
+.reader > .rec, .page-body:not(.scroll-page) > .rec { margin-top: 1.4rem; }

@@ -1,0 +1,83 @@
+{
+  "credit": {
+    "hi": "जैन स्क्वेयर",
+    "en": "Jain Square"
+  },
+  "source": {
+    "hi": "पूजा, आरती, स्तोत्र और पाठ का गायन जैन स्क्वेयर (jainsquare.wordpress.com) के ऑडियो-संग्रह से लिया गया है। ज़्यादातर गायकों का नाम वहाँ नहीं दिया गया है। सबका हृदय से आभार।",
+    "en": "The sung poojas, aartis, stotras and paath come from the audio collection of Jain Square (jainsquare.wordpress.com), which mostly does not name the singers. With gratitude to all of them."
+  },
+  "url": "https://jainsquare.wordpress.com/audio-video/",
+  "books": {
+    "dev-shastra-guru-yugal": [
+      { "file": "audio/dev-shastra-guru-yugal.m4a", "dur": 1789 }
+    ],
+    "chaubis-tirthankar-vrindavan": [
+      { "file": "audio/chaubis-tirthankar-vrindavan.m4a", "dur": 1077 }
+    ],
+    "dashlakshan-pooja": [
+      { "file": "audio/dashlakshan-pooja-1.m4a", "dur": 627, "title": { "hi": "पूजा", "en": "Pooja" } },
+      { "file": "audio/dashlakshan-pooja-2.m4a", "dur": 1346, "title": { "hi": "दस धर्मों के अर्घ्य", "en": "The ten dharmas" } },
+      { "file": "audio/dashlakshan-pooja-3.m4a", "dur": 283, "title": { "hi": "जयमाला", "en": "Jaimala" } }
+    ],
+    "nandishwar-pooja": [
+      { "file": "audio/nandishwar-pooja.m4a", "dur": 1332 }
+    ],
+    "adinath-pooja-jineshwardas": [
+      { "file": "audio/adinath-pooja-jineshwardas-1.m4a", "dur": 709, "title": { "hi": "पूजा", "en": "Pooja" } },
+      { "file": "audio/adinath-pooja-jineshwardas-2.m4a", "dur": 256, "title": { "hi": "पंचकल्याणक अर्घ्य", "en": "Five kalyanaks" } },
+      { "file": "audio/adinath-pooja-jineshwardas-3.m4a", "dur": 638, "title": { "hi": "जयमाला", "en": "Jaimala" } }
+    ],
+    "mahavir-pooja": [
+      { "file": "audio/mahavir-pooja.m4a", "dur": 1609 }
+    ],
+    "maha-arghya": [
+      { "file": "audio/maha-arghya.m4a", "dur": 450 }
+    ],
+    "shanti-path-bhasha": [
+      { "file": "audio/shanti-path-bhasha.m4a", "dur": 502 }
+    ],
+    "namokar": [
+      { "file": "audio/namokar.m4a", "dur": 236 }
+    ],
+    "darshan-path": [
+      { "file": "audio/darshan-path.m4a", "dur": 558 }
+    ],
+    "mangalashtak": [
+      { "file": "audio/mangalashtak.m4a", "dur": 328 }
+    ],
+    "bhaktamar": [
+      { "file": "audio/bhaktamar.m4a", "dur": 1774 }
+    ],
+    "kalyan-mandir": [
+      { "file": "audio/kalyan-mandir.m4a", "dur": 1764 }
+    ],
+    "mahavirashtak": [
+      { "file": "audio/mahavirashtak.m4a", "dur": 269 }
+    ],
+    "chhahdhala": [
+      { "file": "audio/chhahdhala.m4a", "dur": 7047 }
+    ],
+    "barah-bhavana-mangatray": [
+      { "file": "audio/barah-bhavana-mangatray.m4a", "dur": 807 }
+    ],
+    "bhajan-amrit-se-gagri": [
+      { "file": "audio/bhajan-amrit-se-gagri.m4a", "dur": 474 }
+    ],
+    "panch-parmeshthi-aarti": [
+      { "file": "audio/panch-parmeshthi-aarti.m4a", "dur": 386 }
+    ],
+    "mahavir-aarti": [
+      { "file": "audio/mahavir-aarti.m4a", "dur": 367 }
+    ],
+    "chandaprabhu-aarti": [
+      { "file": "audio/chandaprabhu-aarti.m4a", "dur": 270 }
+    ],
+    "parshvanath-aarti": [
+      { "file": "audio/parshvanath-aarti.m4a", "dur": 355 }
+    ],
+    "mahavir-chalisa": [
+      { "file": "audio/mahavir-chalisa.m4a", "dur": 725 }
+    ]
+  }
+}
