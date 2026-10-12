@@ -30,8 +30,8 @@
     "numberMark": true,
     "aliases": ["darshan", "darshan path", "darshanam devdevasya", "दर्शनं देवदेवस्य"],
     "source": {
-      "hi": "संस्कृत पाठ, जैसा परम्परा में पढ़ा जाता है।",
-      "en": "Sanskrit text as traditionally recited."
+      "hi": "संस्कृत पाठ, जैसा परम्परा में पढ़ा जाता है। हिंदी अर्थ: जैन डेटाबेस, nikkyjain.github.io।",
+      "en": "Sanskrit text as traditionally recited. Hindi meaning from the Jain Database, nikkyjain.github.io."
     }
   },
   {
@@ -64,8 +64,8 @@
     "numberMark": true,
     "aliases": ["bhaktamar", "bhaktamara", "bhaktambar", "bhaktamar stotra", "bhaktamar stotram", "adinath stotra", "manatunga", "mantung", "भक्तामर", "भक्तांबर", "मानतुंग"],
     "source": {
-      "hi": "संस्कृत मूल पाठ (दिगम्बर परम्परा, 48 श्लोक)। मिलान: काव्यमाला, सप्तम गुच्छक (निर्णयसागर प्रेस, 1926), संस्कृत विकिस्रोत (sa.wikisource.org) पर उपलब्ध, CC BY-SA 4.0।",
-      "en": "Original Sanskrit text (Digambar tradition, 48 verses). Checked against Kavyamala, part 7 (Nirnaya Sagar Press, 1926), available on Sanskrit Wikisource (sa.wikisource.org), CC BY-SA 4.0."
+      "hi": "संस्कृत मूल पाठ (दिगम्बर परम्परा, 48 श्लोक)। मिलान: काव्यमाला, सप्तम गुच्छक (निर्णयसागर प्रेस, 1926), संस्कृत विकिस्रोत (sa.wikisource.org) पर उपलब्ध, CC BY-SA 4.0। हिंदी अर्थ: जैन डेटाबेस, nikkyjain.github.io।",
+      "en": "Original Sanskrit text (Digambar tradition, 48 verses). Checked against Kavyamala, part 7 (Nirnaya Sagar Press, 1926), available on Sanskrit Wikisource (sa.wikisource.org), CC BY-SA 4.0. Hindi meaning from the Jain Database, nikkyjain.github.io."
     }
   },
   {
@@ -97,6 +97,7 @@
     "sectionUnit": { "hi": "अध्याय", "en": "Chapter" },
     "count": 357,
     "numberMark": true,
+    "meaningBook": "tattvarth-sutra-anvayarth",
     "aliases": ["tattvarth", "tattvartha", "tatvarth", "tatvartha", "tattvarth sutra", "tattvartha sutra", "tatvarth sutra", "moksha shastra", "mokshashastra", "umaswami", "umasvami", "तत्वार्थ", "तत्त्वार्थ", "तत्वार्थसूत्र", "मोक्षशास्त्र", "मोक्ष शास्त्र", "उमास्वामी"],
     "source": {
       "hi": "संस्कृत मूल पाठ, सर्वार्थसिद्धि-सम्मत दिगम्बर पाठ (10 अध्याय, 357 सूत्र)। मिलान: संस्कृत विकिस्रोत (sa.wikisource.org), CC BY-SA 4.0। 'चित्र से समझें' इसी ऐप के लिए बनाए गए हैं।",
@@ -4000,12 +4001,12 @@
     "id": "tattvarth-sutra-anvayarth",
     "file": "content/granth/tattvarth-sutra-anvayarth.txt",
     "category": "dravyanuyog",
-    "title": { "hi": "तत्त्वार्थसूत्र", "en": "Tattvartha Sutra (with meaning)" },
+    "title": { "hi": "तत्त्वार्थसूत्र (अर्थ सहित)", "en": "Tattvartha Sutra (with meaning)" },
     "author": { "hi": "आचार्य उमास्वामी", "en": "Acharya Umaswami" },
-    "unit": { "hi": "गाथा", "en": "Gatha" },
+    "unit": { "hi": "सूत्र", "en": "Sutra" },
     "count": 357,
     "aliases": ["tattvartha sutra (with meaning)"],
-    "sectionUnit": { "hi": "अधिकार", "en": "Section" },
+    "sectionUnit": { "hi": "अध्याय", "en": "Chapter" },
     "source": {
       "hi": "पाठ: जैन डेटाबेस, nikkyjain.github.io। आभार: महेंद्र-कुमार जैन 'न्यायाचार्य', सुपार्श्वमती-माताजी",
       "en": "Text from the Jain Database, nikkyjain.github.io. Translators and editors (as credited there): महेंद्र-कुमार जैन 'न्यायाचार्य', सुपार्श्वमती-माताजी"

@@ -42,7 +42,7 @@
 
 | | |
 | --- | --- |
-| **नित्य पाठ** · Daily paath | Namokar, Bhaktamar, Darshan Path, Darshan Stuti, Barah Bhavana and the Tattvartha Sutra, with meanings and 20 explanatory diagrams |
+| **नित्य पाठ** · Daily paath | Namokar, Bhaktamar, Darshan Path, Darshan Stuti, Barah Bhavana and the Tattvartha Sutra; the Prakrit and Sanskrit texts with their Hindi meaning, and 20 explanatory diagrams |
 | **पूजा और आरती** · Poojas | 111 poojas, arghya, visarjan and aartis, including a pooja for each of the 24 Tirthankars and the Diwali pooja |
 | **पाठ और स्तोत्र** · Paath and stotras | 59 texts: Meri Bhavana, Chhahdhala, Samayik Path, Kalyan Mandir, Ekibhav and more |
 | **ग्रंथ** · Granths | 54 scriptures of the four anuyogs: Samaysar, Pravachansar, Ratnakarand Shravakachar, Gommatsar, the puranas and more |
@@ -84,11 +84,11 @@ The texts are plain files that anyone can correct.
 | Book | Text |
 | --- | --- |
 | णमोकार मंत्र एवं मंगल पाठ | Prakrit original, with Hindi and English meanings |
-| दर्शन पाठ | Sanskrit, 13 verses |
+| दर्शन पाठ | Sanskrit, 13 verses, with Hindi meaning |
 | दर्शन स्तुति — प्रभु पतित पावन | Pt. Budhjan, 8 stanzas (Hindi) |
-| भक्तामर स्तोत्र | Sanskrit original, Digambar tradition, 48 verses |
+| भक्तामर स्तोत्र | Sanskrit original, Digambar tradition, 48 verses, with Hindi meaning |
 | बारह भावना | Pt. Bhudhardas, 13 dohas |
-| तत्त्वार्थसूत्र | Sanskrit original, Digambar recension, 10 chapters, 357 sutras, with 20 explanatory diagrams |
+| तत्त्वार्थसूत्र | Sanskrit original, Digambar recension, 10 chapters, 357 sutras, with 20 explanatory diagrams; every screen opens the same sutras with their Hindi meaning |
 | मंदिर दर्शन विधि | Temple visit guide, 14 steps (Hindi and English) |
 | पूजा विधि | Ashta-dravya pooja guide, 15 steps (Hindi and English) |
 | दीपावली पूजन विधि | Diwali pooja at home and on the new bahi: setup steps (Hindi and English), arghyavali, Shri Mahavir Jin Pooja (Vrindavan), Saraswati Pooja (Dyanatray), Nirvan Kand (Bhagwatidas), 64 riddhi arghyas, visarjan and aarti |
