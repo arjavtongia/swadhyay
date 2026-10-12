@@ -1329,7 +1329,7 @@
 
   /* Each shelf counts in its own words (poojas, stotras, stories, scriptures); a mixed shelf counts texts. */
   const CATEGORY_COUNT = { 'nitya-pooja': 'countPoojas', 'tirthankar-pooja': 'countPoojas', 'parv-pooja': 'countPoojas',
-    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides', 'puran-itihas': 'countArticles', samadhan: 'countArticles' };
+    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides', 'puran-itihas': 'countArticles', samadhan: 'countArticles', parv: 'countArticles' };
   function categoryCount(catId, n) {
     const granth = GROUPS.find(g => g.id === 'granth').cats.indexOf(catId) >= 0;
     return t(CATEGORY_COUNT[catId] || (granth ? 'countScriptures' : 'countTexts'), { n: n });
