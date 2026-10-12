@@ -26,7 +26,7 @@
 
   const DEFAULTS = {
     lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, locked: false,
-    positions: {}, last: null, bookmarks: [], hintShown: false
+    positions: {}, last: null, recent: [], marks: {}, bookmarks: [], hintShown: false
   };
   const state = loadState();
 
@@ -40,6 +40,12 @@
 
   function saveState() {
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+  }
+
+  /* The texts read lately, newest first. Settings saved before this list existed have only the last one. */
+  function recentBooks() {
+    if (state.recent && state.recent.length) return state.recent;
+    return state.last ? [state.last.book] : [];
   }
 
   /* ---------- Small helpers ---------- */
@@ -733,12 +739,9 @@
       { id: 'search', href: '#/search', icon: 'search', label: t('search'), active: view === 'search' },
       { id: 'settings', href: '#/settings', icon: 'settings', label: t('settings'), active: view === 'settings' || view === 'credits' }
     ];
-    /* On home, the Ask button floats just above the bar. */
-    const fab = view !== 'home' ? '' : '<a class="ask-fab" href="#/ask" data-action="open-ask" aria-label="' + esc(t('askFab')) + '">' +
-      icon('ask') + '<span aria-hidden="true">' + esc(t('askTab')) + '</span></a>';
     return '<nav class="tabbar" aria-label="' + esc(t('appName')) + '">' + items.map(it =>
       '<a class="tab' + (it.active ? ' is-active' : '') + '" href="' + it.href + '"' + (it.active ? ' aria-current="page"' : '') + '>' +
-      icon(it.icon) + '<span>' + esc(it.label) + '</span></a>').join('') + fab + '</nav>';
+      icon(it.icon) + '<span>' + esc(it.label) + '</span></a>').join('') + '</nav>';
   }
 
   function chevronRow(href, mainHtml, leadHtml) {
@@ -776,13 +779,29 @@
     return chevronRow('#/book/' + meta.id, titleHtml(meta));
   }
 
-  /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart. */
-  function bookRow(meta) {
+  /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart.
+     Where the Pooja guide opens one of several versions, that version says so. */
+  function bookRow(meta, inGuide) {
     if (meta.category === 'katha' || meta.category === 'bal-katha') return storyRow(meta);
     return chevronRow('#/book/' + meta.id, titleHtml(meta) +
       '<span class="row-sub">' + (meta.author && L(meta.author) ? esc(L(meta.author)) + ' · ' : '') + esc(countLabel(meta)) + '</span>' +
+      (inGuide ? '<span class="row-tag">' + icon('check') + esc(t('inPoojaGuide')) + '</span>' : '') +
       (meta.opening ? '<span class="row-opening" translate="no" lang="' + (meta.textLang || 'hi') + '">' + esc(meta.opening) + '</span>' : ''),
       coverEmblem(meta));
+  }
+
+  /* The texts the Pooja guide opens along the way. */
+  async function poojaGuideBooks() {
+    const guide = await getBook('pooja-vidhi').catch(() => null);
+    return new Set(guide ? [].concat.apply([], guide.verses.map(v => v.links.map(l => l.book))) : []);
+  }
+
+  /* At the top of the pooja shelves, a way in for someone new: the Pooja guide walks through the whole pooja in order. */
+  function poojaHelpHtml() {
+    if (!bookMeta('pooja-vidhi')) return '';
+    return '<a class="notice pooja-help" href="#/book/pooja-vidhi">' + icon('diya') +
+      '<span><span class="notice-title">' + esc(t('poojaHelpTitle')) + '</span><span class="notice-when">' + esc(t('poojaHelpSub')) + '</span></span>' +
+      icon('chevron-right', 'row-chev') + '</a>';
   }
 
   /* All stories, under a heading for each group (तीर्थंकर, आचार्य, ...). */
@@ -887,6 +906,8 @@
     return days;
   }
 
+  const PARVA_AHEAD = 30;
+
   /* The line under the week: the picked day's tithi, or else the next parva or festival.
      Today's tithi is already written above the week, so picking today shows the next parva instead. */
   function dayNoteHtml(days, i) {
@@ -896,10 +917,20 @@
       return (tags.length ? ORN.dhwaja() : '') + '<span>' + esc(dateFmt(d.date, { weekday: 'long', day: 'numeric', month: 'long' })) +
         ' · <b translate="no">' + esc(d.full) + '</b>' + (tags.length ? ' · ' + esc(tags.join(' · ')) : '') + '</span>';
     }
-    const k = days.findIndex(d => d.parva || d.festival);
-    if (k < 0) return '<span>' + esc(t('noParva')) + '</span>';
-    const d = days[k];
-    const when = k === 0 ? t('today') : k === 1 ? t('tomorrow') : dateFmt(d.date, { weekday: 'long' }) + ' ' + d.date.getDate();
+    let k = days.findIndex(x => x.parva || x.festival);
+    let d = days[k];
+    if (!d) {
+      /* None this week: say when the next one is, looking up to a month ahead. */
+      const now = new Date();
+      for (k = days.length; k < PARVA_AHEAD && !d; k++) {
+        const x = dayInfo(new Date(now.getFullYear(), now.getMonth(), now.getDate() + k));
+        if (x.parva || x.festival) d = x;
+      }
+      if (!d) return '<span>' + esc(t('noParva', { n: PARVA_AHEAD })) + '</span>';
+      k--;
+    }
+    const when = k === 0 ? t('today') : k === 1 ? t('tomorrow') : k < days.length ? dateFmt(d.date, { weekday: 'long' }) + ' ' + d.date.getDate() :
+      dateFmt(d.date, { weekday: 'long', day: 'numeric', month: 'long' });
     return ORN.dhwaja() + '<span>' + esc(t('parva')) + ': <b translate="no">' + esc(when + ', ' + (d.festival || d.tithiName)) + '</b></span>';
   }
 
@@ -951,6 +982,53 @@
       '</span></a><div class="plinth full" aria-hidden="true"><i></i></div>';
   }
 
+  /* The stories line names the children's picture stories apart, as the library does. */
+  function kathaSub() {
+    const n = catalog.filter(b => b.category === 'katha').length;
+    const k = catalog.filter(b => b.category === 'bal-katha').length;
+    return k ? t('pathKathaSub', { n: n, k: k }) : t('countStories', { n: n });
+  }
+
+  /* Where a text was left, from what the reader noted, so home need not open the book again. */
+  function readingPlace(meta, mark) {
+    if (meta.scroll) return mark.part ? L(mark.part) : '';
+    return posLabel(meta, mark) + ' · ' + t('ofTotal', { n: mark.of });
+  }
+
+  /* The one next step comes first on home: carry on with the text last read, with any others left open beneath it.
+     On the first visit, and once everything open is finished, begin with the Namokar. */
+  async function readingHtml() {
+    const items = [];
+    for (const id of recentBooks().filter(b => state.positions[b] && bookMeta(b)).slice(0, 3)) {
+      const pos = state.positions[id];
+      let mark = state.marks[id];
+      if (!mark) {
+        /* Saved before places were noted: open the book once to name the place. */
+        const book = await getBook(id).catch(() => null);
+        const v = book && book.verses[pos - 1];
+        if (!v) continue;
+        const s = book.sections[v.section - 1];
+        mark = { num: v.num, label: v.label || '', section: v.section, of: book.verses.length,
+          part: book.scroll && book.sections.length > 1 && s && s.title ? s.title : null };
+      }
+      items.push({ meta: bookMeta(id), pos: pos, mark: mark });
+    }
+    if (!items.length) {
+      const first = bookMeta('namokar');
+      return first ? continueHtml('#/read/namokar/1', first, L(first.author), null, t('startReading')) : '';
+    }
+    const main = items[0];
+    let html = continueHtml('#/read/' + main.meta.id + '/' + main.pos, main.meta, readingPlace(main.meta, main.mark),
+      Math.round(main.pos / main.mark.of * 100), t('continueReading'));
+    if (items.length > 1) {
+      html += '<section class="shelf also-reading"><h2 class="shelf-head">' + esc(t('alsoReading')) + '</h2><ul class="rows">' +
+        items.slice(1).map(x => chevronRow('#/read/' + x.meta.id + '/' + x.pos, titleHtml(x.meta) +
+          '<span class="row-sub">' + esc(readingPlace(x.meta, x.mark) || L(x.meta.author)) + '</span>', coverEmblem(x.meta))).join('') +
+        '</ul></section>';
+    }
+    return html;
+  }
+
   /* The ways into the library, one line each. */
   function pathsHtml() {
     const has = cat => catalog.some(b => b.category === cat);
@@ -963,9 +1041,10 @@
       count('pooja') && { href: '#/books/group/pooja', icon: 'diya', title: t('pathPooja'), sub: t('pathPoojaSub', { n: count('pooja') }) },
       count('path') && { href: '#/books/group/path', emblem: { category: 'stotra' }, title: t('pathPath'), sub: t('pathPathSub', { n: count('path') }) },
       count('granth') && { href: '#/books/group/granth', emblem: { id: 'tattvarth-sutra' }, title: t('pathGranth'), sub: t('pathGranthSub', { n: count('granth') }) },
-      has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: t('pathKathaSub', { n: count('katha') }) },
+      has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: kathaSub() },
       has('vidhi') && { href: '#/books/vidhi', icon: 'temple', title: t('pathVidhi'), sub: t('pathVidhiSub') },
-      { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: state.bookmarks.length ? t('savedCount', { n: state.bookmarks.length }) : t('pathSavedNone') }
+      /* Saved appears once something has been saved; until then it would only be an empty line. */
+      state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: t('savedCount', { n: state.bookmarks.length }) }
     ].filter(Boolean);
     return '<ul class="paths">' + items.map(it =>
       '<li><a class="path" href="' + it.href + '">' + (it.icon ? nicheHtml(icon(it.icon, 'niche-pack')) : coverEmblem(it.emblem)) +
@@ -981,19 +1060,7 @@
       (state.locked ? '' : '<button class="btn btn-small" data-action="switch-lang" data-lang="' + other.code + '" translate="no" lang="' + other.code + '">' +
         icon('language') + '<span>' + esc(other.name) + '</span></button>') +
       '</header><main class="home"><h1 class="greet">' + esc(t('greeting')) + '</h1>' +
-      pathsHtml() + ORN.rule('home-rule') + todayHtml() + await festivalCardHtml();
-
-    /* Continue where you stopped; on the first visit, begin with the Namokar. */
-    const last = state.last && await getBook(state.last.book).catch(() => null);
-    if (last && last.verses[state.last.pos - 1]) {
-      const v = last.verses[state.last.pos - 1];
-      const pct = Math.round(v.pos / last.verses.length * 100);
-      html += continueHtml('#/read/' + last.id + '/' + v.pos, last,
-        placeLabel(last, v) + (last.scroll ? '' : ' · ' + t('ofTotal', { n: last.verses.length })), pct, t('continueReading'));
-    } else {
-      const first = await getBook('namokar').catch(() => null);
-      if (first) html += continueHtml('#/read/namokar/1', first, L(first.author), null, t('startReading'));
-    }
+      await readingHtml() + pathsHtml() + ORN.rule('home-rule') + todayHtml() + await festivalCardHtml();
 
     const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
     const stories = catalog.filter(b => b.category === 'katha');
@@ -1008,19 +1075,35 @@
     const ts = await getBook('tattvarth-sutra').catch(() => null);
     if (ts) {
       const v = ts.verses[day % ts.verses.length];
+      /* The sutra's meaning comes from the edition with meaning, which follows the same order. */
+      const tm = ts.meaningBook && await getBook(ts.meaningBook).catch(() => null);
+      const part = tm && tm.verses[v.pos - 1] && shownParts(tm.verses[v.pos - 1])[0];
+      const meaning = part ? part.text.replace(/\s*॥\s*[0-9०-९]+\s*॥\s*$/, '') : '';
       html += ORN.rule('home-rule') + '<section class="home-sec"><h2 class="sec-head">' + esc(t('todaysSutra')) + '</h2>' +
         '<a class="arch sutra-day" href="#/read/' + ts.id + '/' + v.pos + '">' + ORN.crown(8) + '<span class="arch-body">' + ORN.sides() +
         '<span class="verse" translate="no" lang="sa">' + esc(v.lines.join(' ')) + '</span>' +
+        (meaning ? '<span class="sutra-meaning" translate="no" lang="' + (part.lang || 'hi') + '">' + esc(meaning) + '</span>' : '') +
         '<span class="sutra-meta">' + esc(ts.title.hi) + ' · ' + esc(posLabel(ts, v)) + '</span></span></a>' +
         '<div class="plinth full" aria-hidden="true"><i></i></div></section>';
     }
     return html + '</main>';
   }
 
+  /* Each shelf counts in its own words (poojas, stotras, stories, scriptures); a mixed shelf counts texts. */
+  const CATEGORY_COUNT = { 'nitya-pooja': 'countPoojas', 'tirthankar-pooja': 'countPoojas', 'parv-pooja': 'countPoojas',
+    stotra: 'countStotras', katha: 'countStories', 'bal-katha': 'countStories', vidhi: 'countGuides' };
+  function categoryCount(catId, n) {
+    const granth = GROUPS.find(g => g.id === 'granth').cats.indexOf(catId) >= 0;
+    return t(CATEGORY_COUNT[catId] || (granth ? 'countScriptures' : 'countTexts'), { n: n });
+  }
+
+  /* The four anuyogs are named by tradition; a line under each says what it holds. */
   function categoryRow(c) {
     const n = catalog.filter(b => b.category === c.id).length;
+    const about = t('anuyogAbout')[c.id];
     return chevronRow('#/books/' + c.id, '<span class="title" translate="no">' + esc(L(c.title)) + '</span>' +
-      '<span class="row-sub">' + esc(t('booksCount', { n: n })) + '</span>', coverEmblem({ category: c.id }));
+      (about ? '<span class="row-about">' + esc(about) + '</span>' : '') +
+      '<span class="row-sub">' + esc(categoryCount(c.id, n)) + '</span>', coverEmblem({ category: c.id }));
   }
 
   /* Back from a category goes to its shelf when the shelf holds several categories, otherwise to the library. */
@@ -1057,6 +1140,7 @@
       if (!cats.length) return viewNotFound();
       document.title = t(g.title) + ' · ' + t('appName');
       return backBar('#/books', t('books')) + '<main><h1 class="page-title">' + esc(t(g.title)) + '</h1>' +
+        (g.id === 'pooja' ? poojaHelpHtml() : '') +
         '<ul class="rows">' + cats.map(categoryRow).join('') + '</ul></main>';
     }
     if (catId) {
@@ -1065,9 +1149,12 @@
       document.title = L(cat.title) + ' · ' + t('appName');
       const up = categoryParent(cat.id);
       if (cat.id === 'bal-katha') return backBar(up.href, up.label) + '<main class="kids">' + kidsHomeHtml() + '</main>';
+      const pooja = GROUPS.find(g => g.id === 'pooja').cats.indexOf(cat.id) >= 0;
+      const guided = pooja ? await poojaGuideBooks() : new Set();
       return backBar(up.href, up.label) +
         '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' + (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml() :
-        '<ul class="rows">' + catalog.filter(b => b.category === cat.id).map(bookRow).join('') + '</ul>') + '</main>';
+        (pooja ? poojaHelpHtml() : '') +
+        '<ul class="rows">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
     }
     document.title = t('books') + ' · ' + t('appName');
     let html = backBar('#/', t('home')) + '<main><h1 class="page-title">' + esc(t('books')) + '</h1>';
@@ -1077,7 +1164,7 @@
     html += shelves.filter(s => s.cats.length).map(s => '<section class="shelf"><h2 class="shelf-head" translate="no">' + esc(s.title) + '</h2>' +
       '<ul class="rows">' + s.cats.map(categoryRow).join('') + '</ul></section>').join('');
     const loose = catalog.filter(b => !used.some(c => c.id === b.category));
-    if (loose.length) html += '<ul class="rows">' + loose.map(bookRow).join('') + '</ul>';
+    if (loose.length) html += '<ul class="rows">' + loose.map(b => bookRow(b)).join('') + '</ul>';
     return html + '</main>';
   }
 
@@ -1299,12 +1386,15 @@
     const first = verses[0];
     const last = verses[verses.length - 1];
     ctx = { book: book, page: page, verses: verses };
-    state.positions[id] = page.from;
-    state.last = { book: id, pos: page.from };
-    saveState();
-
     const sec = book.sections[first.section - 1];
     const secName = book.sections.length > 1 && sec && sec.title ? L(sec.title) : '';
+    state.positions[id] = page.from;
+    state.last = { book: id, pos: page.from };
+    state.recent = [id].concat(recentBooks().filter(b => b !== id)).slice(0, 4);
+    /* Enough to name the place on home without opening the book again (some granths are several MB). */
+    state.marks[id] = { num: first.num, label: first.label || '', section: first.section, of: n,
+      part: page.scroll && secName ? sec.title : null };
+    saveState();
     /* A scroll page is a whole pooja or paath: its heading is the pooja's name. */
     const label = page.scroll ? (secName || book.title.hi) : posLabel(book, first, last);
     document.title = book.title.hi + ' · ' + label + ' · ' + t('appName');
@@ -1366,6 +1456,13 @@
         figuresHtml(v, v.topic ? topicOf(v) : label) + (v.lines.length ? '<div class="recite">' + linesHtml(book, v, true) + '</div>' : '') +
         commentaryHtml(book, v) + '</div>').join('');
       html += '</div>';
+    }
+
+    /* A text kept short for reciting (the Tattvartha Sutra) opens at the same place in its edition with meaning. */
+    const withMeaning = book.meaningBook && bookMeta(book.meaningBook);
+    if (withMeaning) {
+      html += '<div class="guide-links"><a class="btn btn-wide" href="#/read/' + withMeaning.id + '/' + page.from + '">' +
+        icon('book') + '<span>' + esc(t('readWithMeaning')) + '</span></a></div>';
     }
 
     html += '<div class="reader-tools">' +
@@ -1640,7 +1737,7 @@
     }
     let html = '';
     if (res.books.length) {
-      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows">' + res.books.map(bookRow).join('') + '</ul>';
+      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows">' + res.books.map(b => bookRow(b)).join('') + '</ul>';
     }
     if (res.verses.length) {
       html += '<h2>' + esc(t('resultsText')) + '</h2><ul class="rows">' +
@@ -1819,7 +1916,6 @@
     const withNav = NAV_VIEWS.indexOf(view) >= 0;
     $app.innerHTML = html + (withNav ? navBar(view) : '');
     $app.classList.toggle('has-nav', withNav);
-    $app.classList.toggle('has-fab', withNav && view === 'home');
     $app.classList.toggle('is-ask', view === 'ask');
     /* A short rise when the screen changes; a page turn slides only the scripture, in the direction of travel. */
     if (!sameRoute) {
@@ -1834,7 +1930,6 @@
   }
 
   let pendingDir = null;
-  let focusAskBox = false;
 
   function afterRender(view, sameView, sameRoute, focusAction) {
     syncChrome();
@@ -1850,12 +1945,7 @@
       }
     }
     if (!(sameRoute && (view === 'settings' || view === 'saved'))) window.scrollTo(0, 0);
-    if (view === 'ask' && askThread.length && !focusAskBox) showLatestQuestion(false);
-    if (view === 'ask' && focusAskBox) {
-      focusAskBox = false;
-      const box = $app.querySelector('#ask-q');
-      if (box) box.focus({ preventScroll: true });
-    }
+    if (view === 'ask' && askThread.length) showLatestQuestion(false);
     /* Opening one part of a long pooja: scroll down to that part, below the sticky top bar. */
     const target = view === 'read' && $app.querySelector('.is-target');
     if (target) window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 90);
@@ -1929,9 +2019,16 @@
       return;
     }
     if (page.to >= book.verses.length) {
+      /* Finished: next time the text opens at its beginning, and home moves on to whatever else was being read. */
       stopSpeech();
+      delete state.positions[book.id];
+      delete state.marks[book.id];
+      state.recent = recentBooks().filter(b => b !== book.id);
+      const next = state.recent.find(b => state.positions[b]);
+      state.last = next ? { book: next, pos: state.positions[next] } : null;
+      saveState();
       toast(t('bookDone'));
-      go('book/' + book.id);
+      go('');
       return;
     }
     pendingDir = 'next';
@@ -2005,8 +2102,6 @@
     'ask-new': () => { askThread = []; refreshAsk(); },
     'ask-share': el => shareAnswer(+el.dataset.i),
     'voice-ask': el => startVoiceAsk(el),
-    /* The floating button opens Ask ready to type; the Ask tab opens it to look through. */
-    'open-ask': () => { focusAskBox = true; location.hash = '#/ask'; },
     'ask-again': el => askQuestion(el.dataset.q),
     'size-panel': el => {
       sizePanelOpen = !sizePanelOpen;

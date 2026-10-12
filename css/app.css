@@ -264,8 +264,6 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 /* ---------- Bottom bar: a marble plinth with a brass edge ---------- */
 
 #app.has-nav { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
-/* Room for the floating Ask button above the bar, so the end of a page is never hidden under it. */
-#app.has-nav.has-fab { padding-bottom: calc(9.6rem + env(safe-area-inset-bottom)); }
 .tabbar, .reader-bar {
   position: fixed;
   left: 0;
@@ -300,32 +298,6 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .tab.is-active .icon { color: var(--brass-text); }
 /* The active tab carries a brass lintel. */
 .tab.is-active::before { content: ''; position: absolute; top: -0.32rem; left: 50%; width: 1.7rem; height: 0.2rem; margin-left: -0.85rem; border-radius: 0 0 3px 3px; background: linear-gradient(var(--brass-hi), var(--brass)); }
-
-/* Ask, floating just above the bar's brass edge at the right. It sits inside the bar, so it rises with the
-   "more below" band. Like the toast, it is one of the few things that
-   stand proud of the marble: a sanctum-white pill drawn in brass, carrying the Lift. */
-.ask-fab {
-  position: absolute;
-  right: 0.9rem;
-  bottom: calc(100% + 0.75rem);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: var(--tap);
-  padding: 0 1.15rem 0 0.85rem;
-  border: 1.5px solid var(--brass);
-  border-radius: 999px;
-  background: var(--shrine);
-  color: var(--text);
-  font: 600 var(--fs-body)/1 var(--font-ui);
-  text-decoration: none;
-  white-space: nowrap;
-  box-shadow: var(--lift);
-  transition: background-color 0.15s, transform 0.15s;
-}
-.ask-fab .icon { width: min(1.5rem, 30px); height: min(1.5rem, 30px); flex: none; color: var(--brass-text); }
-.ask-fab:hover { background: linear-gradient(var(--brass-wash), var(--brass-wash)), var(--shrine); }
-.ask-fab:active { transform: scale(0.97); }
 
 /* ---------- Welcome ---------- */
 
@@ -376,7 +348,8 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .day b { font: 700 0.95rem/1.1 var(--font-head); color: var(--text); font-variant-numeric: tabular-nums; }
 .day.is-today { border-color: var(--brass); background: linear-gradient(var(--brass-wash-strong), transparent 90%); color: var(--brass-text); }
 .day.is-today b { color: var(--brass-text); }
-.day[aria-pressed="true"] { border-color: var(--brass); box-shadow: inset 0 0 0 1px var(--brass); }
+/* A picked day reads as chosen at a glance: filled and ringed, stronger than today's light wash. */
+.day[aria-pressed="true"], :root[data-theme="night"] .day[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1.5px var(--brass); }
 .week .dhwaja { position: absolute; top: -0.72rem; left: 50%; width: 0.75rem; height: 0.9rem; margin-left: -0.19rem; pointer-events: none; }
 .day-note { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.15rem 0.4rem; min-height: 1.6em; margin: 0.45rem 0 0; font-size: var(--fs-sm); line-height: 1.45; color: var(--muted); }
 .day-note b { color: var(--text); font-weight: 600; }
@@ -388,6 +361,9 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .notice .dhwaja { width: 1.2rem; height: 1.45rem; flex: none; }
 .notice-when { display: block; font-size: var(--fs-sm); color: var(--muted); }
 .notice-title { display: block; font: 700 var(--fs-lg)/1.3 var(--font-head); }
+.pooja-help { margin: 0.2rem 0 1.4rem; }
+.pooja-help > span { flex: 1; min-width: 0; }
+.pooja-help > .icon:first-child { width: 1.6rem; height: 1.6rem; flex: none; color: var(--brass-text); }
 
 /* ---------- The cusped arch (continue reading, and the reader's shrine) ---------- */
 
@@ -443,9 +419,14 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .sutra-day:hover .verse { color: var(--sindoor); }
 .sutra-day .verse { display: block; font-size: var(--fs-verse); }
 .sutra-meta { display: block; margin-top: 0.2rem; font-size: var(--fs-sm); color: var(--muted); }
+/* The sutra's meaning, in the plain voice of the interface so it never reads as the sutra itself. */
+.sutra-meaning { display: block; margin: 0.5rem 0 0.4rem; font: 400 var(--fs-md)/1.55 var(--font-ui); color: var(--text); }
 
 .paths, .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
 .paths { margin-top: 1rem; }
+/* Home opens with what you were reading; the library follows after a pause. */
+.home .plinth + .paths, .also-reading + .paths { margin-top: 1.6rem; }
+.also-reading { margin-top: 1.4rem; }
 .paths > li, .rows > li { border-bottom: 1px solid var(--hair); }
 .path, .row {
   display: flex;
@@ -458,9 +439,17 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
   transition: background-color 0.15s;
 }
 .path:hover, .row:hover { background: var(--brass-wash); }
+/* At the largest sizes on a narrow phone the niche and chevron leave little room: the gaps shrink with the screen,
+   and a single long name (Prathamanuyog) may break rather than push the page sideways. */
+.path, .row { gap: min(0.85rem, 4.8vw); }
+.path b, .row .title, .row .title-en { overflow-wrap: anywhere; }
 .path-main, .row-main { display: flex; flex-direction: column; flex: 1; min-width: 0; }
 .path b, .row .title { font: 600 var(--fs-body)/1.35 var(--font-ui); }
 .path small, .row-sub { font-size: var(--fs-sm); line-height: 1.4; color: var(--muted); }
+.row-about { font-size: var(--fs-sm); line-height: 1.4; color: var(--text); }
+/* "Part of the Pooja guide": the version the guide opens, marked among others of the same name. */
+.row-tag { display: inline-flex; align-items: center; gap: 0.25rem; align-self: flex-start; margin-top: 0.25rem; padding: 0.05rem 0.55rem 0.05rem 0.4rem; border: 1px solid var(--brass-line); border-radius: 999px; font-size: var(--fs-xs); line-height: 1.5; color: var(--brass-text); background: var(--brass-wash); }
+.row-tag .icon { width: 0.9em; height: 0.9em; flex: none; }
 .title-en { display: block; font-size: var(--fs-sm); color: var(--muted); }
 /* How a pooja or path begins, in the scripture's carved letters and brass ink, so it reads as a line of the text
    rather than a description. One line on phones; beside the title on wider screens. */

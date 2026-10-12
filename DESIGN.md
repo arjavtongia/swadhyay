@@ -165,13 +165,6 @@ components:
     textColor: "{colors.muted-stone}"
     typography: "{typography.tab-label}"
     height: "52px"
-  ask-fab:
-    backgroundColor: "{colors.shrine-white}"
-    textColor: "{colors.ink}"
-    typography: "{typography.body}"
-    rounded: "{rounded.pill}"
-    padding: "0 1.15rem 0 0.85rem"
-    height: "{spacing.tap}"
   tab-active:
     textColor: "{colors.ink}"
   day-niche:
@@ -272,7 +265,7 @@ A marble-and-brass palette with one devotional red, mirrored as black Kota stone
 All sizes are rem; the root is set by the text-size setting (17, 19, 21, 24, 27 or 31px; 21px default), so every value below grows with it.
 
 ### Hierarchy
-- **Tithi** (Vesper 700, 1.3rem, 1.2): today's tithi in sindoor on home, kept small because it is for reference; the ways into the library come first.
+- **Tithi** (Vesper 700, 1.3rem, 1.2): today's tithi in sindoor on home, kept small because it is for reference; what you are reading and the ways into the library come first.
 - **Greeting** (Vesper 900, 1.25rem, 1.15): जय जिनेन्द्र under the chhatra; 1.6rem on the welcome screen.
 - **Headline** (Vesper 700, 1.42rem, 1.25): page titles, book titles, guide step titles.
 - **Section** (Vesper 700, 1.22rem, 1.3): home section heads; continue-arch title at 1.3rem.
@@ -302,7 +295,7 @@ Responsive changes: at 560px stories become two columns; at 700px the story of t
 Depth is architectural, not floating. Surfaces step: page marble, a lighter sanctum inside arches and niches, and plinth marble for the steps and bars. Brass lines and stacked plinth bars give the sense of carved relief. Shadow is used in three places only.
 
 ### Shadow Vocabulary
-- **Lift** (`box-shadow: 0 3px 8px rgba(0,0,0,0.16)`, night 0.4): the primary sindoor button, the floating Ask button, Ask's question box and the toast, the only things that sit proud of the marble.
+- **Lift** (`box-shadow: 0 3px 8px rgba(0,0,0,0.16)`, night 0.4): the primary sindoor button, Ask's question box and the toast, the only things that sit proud of the marble.
 - **Plinth ledge** (`box-shadow: 0 -3px 0 var(--plinth-edge), 0 -10px 22px rgba(0,0,0,0.07)`): the tab bar and reader bar; the solid 3px is the stone step's edge above the brass line, not a drop shadow.
 - **Diya glow** (`radial-gradient(closest-side, var(--glow), transparent)` behind the shrine): at night always, and by day while listening. Also behind the chhatra of Ask's welcome, day and night.
 - **Brass inset ring** (`box-shadow: inset 0 0 0 1px var(--brass)`): niche outlines and pressed or selected states.
@@ -337,7 +330,7 @@ Quiet brass outlines with one sindoor voice.
 ### Cards / Containers
 There are no cards. Containers are architectural:
 - **Shrine:** the scripture's sanctum; 12-lobe crown, pillars, sanctum-white body, ॥ label ॥ in sindoor, verse below, attribution under the plinth.
-- **Continue arch:** 10-lobe crown over a brass-wash body with title, place, progress trail and the primary button.
+- **Continue arch:** 10-lobe crown over a brass-wash body with title, place, progress trail and the primary button. It opens home, straight under the greeting; up to two other texts left open follow as rows under "ये भी पढ़ रहे थे / Also reading". On the first visit, and once everything open is finished, it offers the Namokar ("यहाँ से शुरू करें / Start here").
 - **Scene niche:** 10-lobe crown and pillars around an authored drawing on scene paper, standing on a plinth, with a brass caption.
 - **Arch picture:** 16:9 picture masked by an 8-lobe arch and framed in brass.
 
@@ -348,9 +341,8 @@ There are no cards. Containers are architectural:
 
 ### Navigation
 - **Top bar:** sticky, page-coloured, hairline below; back link as a pill with a brass arrow.
-- **Tab bar:** five tabs (home, books, ask, search, settings) on plinth marble with a brass top edge and the plinth ledge. Inactive tabs are muted; the active tab is ink with a brass icon and a short brass lintel (1.7rem, gradient highlight to brass) hung from the bar's top edge.
+- **Tab bar:** five tabs (home, library, ask, search, settings: मुख्य, संग्रह, पूछें, खोजें, सेटिंग) on plinth marble with a brass top edge and the plinth ledge. Icon and label always show together; the bar never folds. Inactive tabs are muted; the active tab is ink with a brass icon and a short brass lintel (1.7rem, gradient highlight to brass) hung from the bar's top edge.
 - **Reader bar:** same plinth; Previous, Listen (sindoor primary, wider centre column), Next.
-- **Ask button:** a small pill floating 0.75rem above the tab bar's brass edge at the right: sanctum white, 1.5px brass border, the pack's ask icon (speech bubble with a saffron question mark) in brass script and "पूछें / Ask" in Hind 600, with the Lift. It lives inside the tab bar, so it rises with the more-below band and sinks with the bar as it folds; it opens Ask with the question box focused, ready to type (the Ask tab opens it to look through). Shown on home only. Home reserves 9.6rem under the bar so its last line is never hidden.
 - **More below cue:** a quiet brass-script line in a band at the top of the bar, never over the words.
 
 ### Rows
@@ -363,7 +355,7 @@ Ask is a chat with the app's texts, inside the mandir.
 - **The answer:** on the left under a small chhatra in an arch-topped niche (2.3rem; on phones under 560px it stands above the card so the answer takes the full width). The card is sanctum white with a brass-line border, a 2px brass top edge and corners `bubble-app` (the point at top left, toward the chhatra). Answer text in Hind at reading size; citations are brass pills. "कहाँ पढ़ें" in brass script, then each source as a brass-washed row (`source-row`) with a sindoor numbered badge, the book in Devanagari and "उसी स्थान पर खोलें". AI answers carry the check note. A hairline footer names the kind (common question with a check icon, or answered from the texts with the ask icon) and holds a share button. A common question matched from typed words offers "ग्रंथों से उत्तर लें".
 - **Next:** "मिलते-जुलते प्रश्न" chips under the answer they follow from.
 - **Waiting and errors:** the card shows "ग्रंथों में उत्तर खोजा जा रहा है" with three brass dots; errors read plainly in the card, with starter chips when only common questions can be answered.
-- **Question box:** fixed on the bottom bar, over a fade of the page: a field-white pill (`composer`) with a brass-line border (full brass on focus) and the Lift, holding the voice button (brass script; sindoor on a strong wash while listening), the words (one line, growing to five) and the round sindoor send button, dimmed while empty. While typing on a phone the bottom bar steps aside and the box sits on the keyboard. The bar does not fold and the more-below cue is not shown on Ask.
+- **Question box:** fixed on the bottom bar, over a fade of the page: a field-white pill (`composer`) with a brass-line border (full brass on focus) and the Lift, holding the voice button (brass script; sindoor on a strong wash while listening), the words (one line, growing to five) and the round sindoor send button, dimmed while empty. While typing on a phone the bottom bar steps aside and the box sits on the keyboard. The more-below cue is not shown on Ask.
 - **Motion:** a new message rises 0.6rem in 0.34s (ease-out-expo), the chips after it 0.08s later; sending brings the latest question to the top of the screen so its answer reads from the start.
 - "नई बातचीत" (new chat) in the top bar clears the conversation.
 
