@@ -488,6 +488,10 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .book-cover { margin: 1.2rem 0 0.4rem; }
 .book-blurb { font-size: var(--fs-body); line-height: 1.65; margin: 0.5rem 0 0.4rem; }
 .book-by { margin: 0.2rem 0 0; font-size: var(--fs-sm); color: var(--muted); }
+/* The gyan daan line: who gave the text, in brass script, and the dedication under it. */
+.book-sponsor { display: flex; align-items: flex-start; gap: 0.4rem; margin: 0.5rem 0 0; font-size: var(--fs-sm); line-height: 1.5; color: var(--brass-text); font-weight: 600; }
+.book-sponsor .icon { width: 1.15em; height: 1.15em; margin-top: 0.1em; }
+.sponsor-note { display: block; color: var(--muted); font-weight: 400; }
 .book-actions { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.2rem 0; }
 .book-of { margin: 1rem 0 0; font-size: var(--fs-sm); color: var(--muted); }
 
@@ -717,6 +721,7 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .maker .btn span { overflow-wrap: anywhere; }
 .credit { padding: 0.8rem 0; border-bottom: 1px solid var(--hair); }
 .credit h3 { margin: 0 0 0.15rem; }
+.support h3 { margin: 1.1rem 0 0.25rem; }
 .credit p { margin: 0.15rem 0 0; font-size: var(--fs-sm); }
 
 /* ---------- Empty, loading, toast, "more below" ---------- */

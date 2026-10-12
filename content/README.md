@@ -65,3 +65,18 @@ Articles in the `samadhan` category, laid out the same way as the Purana and his
 ## `pooja/` और `granth/` · Imported texts
 
 The files in `pooja/` (poojas, paath, stotras, aartis) and `granth/` (scriptures) were converted from the Jain Database, nikkyjain.github.io, by scripts kept outside this repo (`import/fetch_pooja.py`, `import/import_pooja.py`, `import/import_gatha.py`, then `import/merge_catalog.py` to rebuild their entries in `books.json` and `categories.json`, and `import/fix_spelling.py` to correct spelling slips in the meanings, such as रुप for रूप). Re-running those scripts overwrites these files, so if you fix a typo here, also tell whoever runs the import, so it can be added to `fix_spelling.py`. These files are not in the `FILES` list of `sw.js`: each one is saved for offline use the first time it is opened.
+
+## ज्ञान दान · Sponsored texts (`sponsors.json`)
+
+A family can sponsor a text as gyan daan. Their name shows on that text's page under its title, and in Credits under "ज्ञान दान". `sponsors.json` lists them by book id; `note` (the dedication) is optional, and each value is either one line for both languages or `{ "hi": …, "en": … }`:
+
+```json
+{
+  "bhaktamar": {
+    "name": { "hi": "श्री … परिवार, इंदौर", "en": "The … family, Indore" },
+    "note": { "hi": "स्व. श्री … की पुण्य स्मृति में", "en": "In loving memory of the late Shri …" }
+  }
+}
+```
+
+Keep the file as `{}` when there are none. Sponsors are kept here rather than in `books.json`, which `merge_catalog.py` rewrites.

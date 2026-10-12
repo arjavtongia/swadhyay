@@ -8,6 +8,10 @@
 
   const REPO_URL = 'https://github.com/arjavtongia/swadhyay';
   const APP_URL = 'https://arjavtongia.github.io/swadhyay/';
+  const MAIL = 'arjav.tongia@gmail.com';
+  /* Card payments for Support in Settings. Left empty until the GitHub Sponsors profile is set up; then
+     'https://github.com/sponsors/arjavtongia' brings back "Give any amount". */
+  const SPONSORS_URL = '';
   const STORE_KEY = 'swadhyay.v1';
   const OLD_STORE_KEY = 'jinvani.v1'; // before the rename; read once so saved data carries over
   const FONT_STEPS = [17, 19, 21, 24, 27, 31];
@@ -196,18 +200,22 @@
 
   let catalog = null;
   let categories = [];
+  /* Texts given as gyan daan, by book id: content/sponsors.json. */
+  let sponsors = {};
   let chitra = null;
   const bookCache = {};
 
   async function getCatalog() {
     if (!catalog) {
-      const [r, rc] = await Promise.all([
+      const [r, rc, rs] = await Promise.all([
         fetch('content/books.json'),
-        fetch('content/categories.json').catch(() => null)
+        fetch('content/categories.json').catch(() => null),
+        fetch('content/sponsors.json').catch(() => null)
       ]);
       if (!r.ok) throw new Error('books.json ' + r.status);
       catalog = await r.json();
       if (rc && rc.ok) categories = await rc.json();
+      if (rs && rs.ok) sponsors = await rs.json().catch(() => ({}));
     }
     return catalog;
   }
@@ -1230,6 +1238,20 @@
       '<p class="field-error" id="goto-error" role="alert"></p></form>';
   }
 
+  /* A sponsor's name and dedication are either one line for both languages or {hi, en}. */
+  function sponsorText(x) {
+    return typeof x === 'string' ? x : L(x);
+  }
+
+  /* On a text's own page, the family who gave it as gyan daan, as a printed book names who had it published. */
+  function sponsorHtml(id) {
+    const s = sponsors[id];
+    if (!s || !sponsorText(s.name)) return '';
+    return '<p class="book-sponsor">' + icon('flower') + '<span><span class="sponsor-by">' + esc(t('sponsoredBy')) + '</span> ' +
+      '<span translate="no">' + esc(sponsorText(s.name)) + '</span>' +
+      (sponsorText(s.note) ? '<span class="sponsor-note" translate="no">' + esc(sponsorText(s.note)) + '</span>' : '') + '</span></p>';
+  }
+
   async function viewBook(id, secStr) {
     const book = await getBook(id);
     if (!book) return viewNotFound();
@@ -1257,6 +1279,7 @@
       '<div class="book-top">' + (story ? '' : coverEmblem(book)) + '<h1>' + titleHtml(book) + '</h1></div>' +
       (book.blurb ? '<p class="book-blurb">' + esc(L(book.blurb)) + '</p>' : '') +
       '<p class="book-by">' + (L(book.author) ? esc(L(book.author)) + ' · ' : '') + esc(countLabel(book)) + '</p>' +
+      sponsorHtml(id) +
       '<div class="book-actions">';
 
     const saved = state.positions[id];
@@ -1835,14 +1858,25 @@
 
   /* The last word in Settings: who made the app, under the same Prateek that crowns home, and how to write. */
   function makerHtml() {
-    const mail = 'arjav.tongia@gmail.com';
     return '<section class="maker">' + ORN.prateek() +
       '<p class="maker-by">' + esc(t('madeBy')) + '</p>' +
       '<h2 class="maker-name" translate="no" lang="' + state.lang + '">' + esc(t('makerName')) + '</h2>' +
       '<p class="maker-place">' + esc(t('makerPlace')) + '</p>' +
       '<p class="maker-about">' + esc(t('makerAbout')) + '</p>' +
       '<p class="maker-write">' + esc(t('makerWrite')) + '</p>' +
-      '<a class="btn btn-small" href="mailto:' + mail + '">' + icon('mail') + '<span translate="no">' + mail + '</span></a></section>';
+      '<a class="btn btn-small" href="mailto:' + MAIL + '">' + icon('mail') + '<span translate="no">' + MAIL + '</span></a></section>';
+  }
+
+  /* Ways to help: give a text as gyan daan (written for by mail, since each is arranged by hand), and any amount by card once SPONSORS_URL is set. */
+  function supportHtml() {
+    return '<section class="set support"><h2>' + icon('heart') + ' ' + esc(t('support')) + '</h2>' +
+      '<p>' + esc(t('supportDesc')) + '</p>' +
+      '<h3>' + esc(t('sponsorHeading')) + '</h3><p>' + esc(t('sponsorDesc')) + '</p>' +
+      '<a class="btn btn-wide" href="mailto:' + MAIL + '?subject=' + encodeURIComponent(t('sponsorMailSubject')) + '">' + icon('mail') +
+      '<span>' + esc(t('sponsorWrite')) + '</span></a>' +
+      (SPONSORS_URL ? '<h3>' + esc(t('giveHeading')) + '</h3><p>' + esc(t('giveDesc')) + '</p>' +
+        '<a class="btn btn-wide" href="' + SPONSORS_URL + '" target="_blank" rel="noopener">' + icon('heart') +
+        '<span>' + esc(t('giveGithub')) + '</span></a>' : '') + '</section>';
   }
 
   function viewSettings() {
@@ -1885,6 +1919,7 @@
       '<button class="btn btn-wide" data-action="lock">' + icon('lock') + '<span>' + esc(t('lockOn')) + '</span></button></section>';
     html += '<section class="set"><h2>' + icon('help-circle') + ' ' + esc(t('help')) + '</h2><ol class="tips">' +
       t('helpTips').map(tip => '<li>' + esc(tip) + '</li>').join('') + '</ol></section>';
+    html += supportHtml();
     html += '<div class="set-link"><a class="row" href="#/credits"><span class="row-main"><span class="title">' + esc(t('credits')) + '</span></span>' + icon('chevron-right', 'row-chev') + '</a></div>';
     return html + makerHtml() + '</main>';
   }
@@ -1892,8 +1927,15 @@
   async function viewCredits() {
     document.title = t('credits') + ' · ' + t('appName');
     await getCatalog();
+    const given = catalog.filter(b => sponsors[b.id] && sponsorText(sponsors[b.id].name));
     return backBar('#/settings', t('settings')) +
       '<main><h1 class="page-title">' + esc(t('credits')) + '</h1><p>' + esc(t('creditsIntro')) + '</p>' +
+      (given.length ? '<h2>' + esc(t('sponsorsHeading')) + '</h2>' + given.map(b => {
+        const s = sponsors[b.id];
+        return '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
+          '<p translate="no">' + esc(sponsorText(s.name)) + '</p>' +
+          (sponsorText(s.note) ? '<p class="muted" translate="no">' + esc(sponsorText(s.note)) + '</p>' : '') + '</section>';
+      }).join('') : '') +
       '<h2>' + esc(t('textsHeading')) + '</h2>' +
       catalog.map(b => '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
         (L(b.author) ? '<p class="muted">' + esc(L(b.author)) + '</p>' : '') +

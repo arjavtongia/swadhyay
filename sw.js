@@ -34,6 +34,7 @@ const FILES = [
   'content/samadhan/chitra.json',
   'content/categories.json',
   'content/chitra.json',
+  'content/sponsors.json',
   'content/namokar.txt',
   'content/darshan-path.txt',
   'content/darshan-stuti.txt',
