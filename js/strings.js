@@ -212,7 +212,7 @@ const STRINGS = {
       '"सुनें" दबाने पर पाठ आवाज़ में सुनाई देगा और अगला पन्ना अपने आप खुलेगा।',
       'पढ़ते समय "सहेजें" दबाएँ, वह पाठ "सहेजे गए" में मिलेगा।',
       'ऐप याद रखता है कि आपने कहाँ छोड़ा था। मुख्य स्क्रीन पर "पढ़ना जारी रखें" दबाएँ।',
-      'नीचे की पट्टी से किसी भी समय मुख्य, ग्रंथ, खोज या सेटिंग पर जाएँ।'
+      'नीचे की पट्टी से किसी भी समय "मुख्य", "ग्रंथ", "पूछें", "खोजें" या "सेटिंग" पर जाएँ।'
     ],
     partNames: {}
   },
@@ -419,7 +419,7 @@ const STRINGS = {
       'Tap "Listen" to hear the text read aloud; the next page opens by itself.',
       'Tap "Save" while reading to find that text later under "Saved".',
       'The app remembers where you stopped. Tap "Continue reading" on the home screen.',
-      'The bar at the bottom takes you to Home, Books, Search or Settings at any time.'
+      'The bar at the bottom takes you to Home, Books, Ask, Search or Settings at any time.'
     ],
     partNames: {
       'अन्वयार्थ': 'Word-by-word meaning',

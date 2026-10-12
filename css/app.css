@@ -300,15 +300,9 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .tab.is-active .icon { color: var(--brass-text); }
 /* The active tab carries a brass lintel. */
 .tab.is-active::before { content: ''; position: absolute; top: -0.32rem; left: 50%; width: 1.7rem; height: 0.2rem; margin-left: -0.85rem; border-radius: 0 0 3px 3px; background: linear-gradient(var(--brass-hi), var(--brass)); }
-/* While the page scrolls down the bar sinks by its label line, leaving only the icons above the edge;
-   the labels fade but stay for screen readers. Only transform and opacity move, so it stays smooth. */
-.tabbar { transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
-.tab > span { transition: opacity 0.18s; }
-.tabbar.is-min { transform: translateY(1rem); }
-.tabbar.is-min .tab > span { opacity: 0; }
 
 /* Ask, floating just above the bar's brass edge at the right. It sits inside the bar, so it rises with the
-   "more below" band and sinks with the bar as it folds. Like the toast, it is one of the few things that
+   "more below" band. Like the toast, it is one of the few things that
    stand proud of the marble: a sanctum-white pill drawn in brass, carrying the Lift. */
 .ask-fab {
   position: absolute;
@@ -553,6 +547,13 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .size-ctrl .size-level { gap: 0.35rem; }
 .size-btn { min-width: 3.1rem; padding-left: 0.6rem; padding-right: 0.6rem; font: 700 var(--fs-md)/1 var(--font-head); gap: 0.1rem; }
 .size-sign { font-weight: 700; }
+/* At the largest sizes on a narrow phone the row would run past the screen's edge, so in the reader's panel the
+   dots and the room around the buttons shrink with the screen. */
+.size-panel .size-ctrl { gap: min(0.5rem, 2.5vw); }
+.size-panel .size-btn { min-width: min(3.1rem, 17vw); padding-left: min(0.6rem, 3vw); padding-right: min(0.6rem, 3vw); }
+.size-panel .size-ctrl .size-level { gap: min(0.35rem, 1.5vw); }
+.size-panel .size-dot { width: min(0.42rem, 2.6vw); height: min(0.42rem, 2.6vw); }
+.size-panel .size-dot.is-on { width: min(0.62rem, 3.8vw); height: min(0.62rem, 3.8vw); }
 .size-glyph { display: inline-flex; align-items: baseline; gap: 0.05rem; font: 700 1.1rem/1 var(--font-head); color: var(--text); }
 .size-glyph small { font-size: 0.66em; }
 
@@ -576,7 +577,6 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 
 .verse { margin: 0; font: 500 var(--fs-verse)/1.85 var(--font-verse); color: var(--verse); word-spacing: 0.08em; overflow-wrap: anywhere; }
 .verse-line { display: block; padding-left: 1em; text-indent: -1em; margin-bottom: 0.2em; }
-.verse-end { white-space: nowrap; }
 .verse-mark { white-space: nowrap; word-spacing: normal; font-size: 0.8em; color: var(--sindoor); }
 .roman { margin: 0.8rem 0 0; font-size: var(--fs-md); line-height: 1.7; color: var(--muted); font-style: italic; overflow-wrap: anywhere; }
 .topic { margin: 0 0 0.6rem; font: 700 var(--fs-body)/1.4 var(--font-head); color: var(--brass-text); text-align: center; }

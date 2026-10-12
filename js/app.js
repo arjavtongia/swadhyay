@@ -123,20 +123,45 @@
     $mark.classList.toggle('is-on', on);
     if (on) $mark.style.setProperty('--p', Math.min(1, Math.max(0, window.scrollY / max)).toFixed(4));
   }
+  /* The square that takes the finger can lie over a button at the edge of the page, such as "अ+". A touch that
+     doesn't move is a tap, so it goes on to whatever lies beneath. */
   let markRect = null;
+  let markStart = null;
   $mark.addEventListener('pointerdown', e => {
     if (!e.target.closest('b')) return;
     e.preventDefault();
     markRect = $mark.getBoundingClientRect();
+    markStart = { x: e.clientX, y: e.clientY };
     $mark.setPointerCapture(e.pointerId);
-    $mark.classList.add('is-drag');
   });
   $mark.addEventListener('pointermove', e => {
     if (!markRect) return;
+    if (!$mark.classList.contains('is-drag')) {
+      if (Math.abs(e.clientX - markStart.x) + Math.abs(e.clientY - markStart.y) < 8) return;
+      $mark.classList.add('is-drag');
+    }
     const p = Math.min(1, Math.max(0, (e.clientY - markRect.top) / markRect.height));
     window.scrollTo(0, p * (document.documentElement.scrollHeight - window.innerHeight));
   });
-  ['pointerup', 'pointercancel'].forEach(ev => $mark.addEventListener(ev, () => { markRect = null; $mark.classList.remove('is-drag'); }));
+  $mark.addEventListener('pointerup', e => {
+    if (markRect && !$mark.classList.contains('is-drag')) tapBeneathMark(e.clientX, e.clientY);
+    endMarkDrag();
+  });
+  $mark.addEventListener('pointercancel', endMarkDrag);
+  function endMarkDrag() {
+    markRect = null;
+    $mark.classList.remove('is-drag');
+  }
+  function tapBeneathMark(x, y) {
+    const grip = $mark.querySelector('b');
+    grip.style.pointerEvents = 'none';
+    const under = document.elementFromPoint(x, y);
+    grip.style.pointerEvents = '';
+    const el = under && under.closest('a[href], button, input, select, textarea, label, summary, [data-action]');
+    if (!el) return;
+    if (el.matches('input, select, textarea')) el.focus();
+    else el.click();
+  }
 
   function isStandalone() {
     return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -608,9 +633,24 @@
     return out;
   }
 
-  function speakPage(book, verses) {
+  /* The phone's voices arrive a moment after the page opens. Until they have, wait (at most a second and a half),
+     so the first "Listen" neither skips a page in silence nor misses the Hindi voice. */
+  function voicesReady() {
+    const synth = window.speechSynthesis;
+    if (synth.getVoices().length) return Promise.resolve();
+    return new Promise(resolve => {
+      const done = () => { synth.removeEventListener('voiceschanged', done); clearTimeout(timer); resolve(); };
+      const timer = setTimeout(done, 1500);
+      synth.addEventListener('voiceschanged', done);
+    });
+  }
+
+  async function speakPage(book, verses) {
     const synth = window.speechSynthesis;
     synth.cancel();
+    const token = ++speech.token;
+    await voicesReady();
+    if (token !== speech.token || !speech.playing) return;
     const hiVoice = findVoice('hi');
     if (!hiVoice && synth.getVoices().length) {
       stopSpeech();
@@ -631,7 +671,6 @@
         speechPieces(part.text).forEach(p => chunks.push({ text: p, lang: isEn ? 'en-IN' : 'hi-IN', voice: isEn ? enVoice : hiVoice }));
       }
     });
-    const token = ++speech.token;
     /* Short delay after cancel(): some Android browsers drop the next utterance otherwise. */
     setTimeout(() => {
       if (token !== speech.token) return;
@@ -694,7 +733,7 @@
       { id: 'search', href: '#/search', icon: 'search', label: t('search'), active: view === 'search' },
       { id: 'settings', href: '#/settings', icon: 'settings', label: t('settings'), active: view === 'settings' || view === 'credits' }
     ];
-    /* On home, the Ask button floats just above the bar (and rides with it as it folds). */
+    /* On home, the Ask button floats just above the bar. */
     const fab = view !== 'home' ? '' : '<a class="ask-fab" href="#/ask" data-action="open-ask" aria-label="' + esc(t('askFab')) + '">' +
       icon('ask') + '<span aria-hidden="true">' + esc(t('askTab')) + '</span></a>';
     return '<nav class="tabbar" aria-label="' + esc(t('appName')) + '">' + items.map(it =>
@@ -1141,10 +1180,9 @@
     const lastIndex = shown.length - 1;
     const lines = shown.map((l, i) => {
       if (i !== lastIndex || !book.numberMark) return '<span class="verse-line">' + esc(l) + '</span>';
+      /* A no-break space keeps the number with the last word, while a sutra that is one long word can still wrap. */
       const text = l.replace(/[\s।॥]+$/, '');
-      const cut = text.lastIndexOf(' ') + 1;
-      return '<span class="verse-line">' + esc(text.slice(0, cut)) + '<span class="verse-end">' + esc(text.slice(cut)) +
-        ' <span class="verse-mark">॥ ' + esc(numberOf(v)) + ' ॥</span></span></span>';
+      return '<span class="verse-line">' + esc(text) + '\u00A0<span class="verse-mark">॥ ' + esc(numberOf(v)) + ' ॥</span></span>';
     }).join('');
     let html = '<p class="verse" translate="no" lang="' + lang + '">' + lines + '</p>';
     if (state.roman) {
@@ -1152,6 +1190,60 @@
         v.lines.map(l => '<span class="verse-line">' + esc(TRANSLIT.toRoman(l)) + '</span>').join('') + '</p>';
     }
     return html;
+  }
+
+  /* A Sanskrit compound can be wider than the whole line at large text sizes, and the browser would then cut it at
+     any letter. Instead such a word gets soft hyphens between its aksharas, so it breaks where a printed book would,
+     with a hyphen, and never inside a conjunct. Words that fit on a line are left whole. */
+  const CONSONANT = '[\\u0915-\\u0939\\u0958-\\u095F\\u0978-\\u097F]\\u093C?';
+  const AKSHARA = new RegExp('(?:' + CONSONANT + '\\u094D[\\u200C\\u200D]?)*(?:' + CONSONANT + '|[\\u0904-\\u0914\\u0960\\u0961\\u0972-\\u0977])' +
+    '[\\u093A\\u093B\\u093E-\\u094C\\u094E\\u094F\\u0955-\\u0957\\u0962\\u0963]*[\\u0900-\\u0903\\u093D]*\\u094D?|[\\s\\S]', 'g');
+  const isAkshara = s => /^[\u0904-\u0939\u0958-\u0961\u0972-\u097F]/.test(s);
+
+  function withHyphenPoints(word) {
+    const parts = word.match(AKSHARA);
+    /* At least two aksharas stay on each side of a break. */
+    return parts.map((p, i) => (i >= 2 && i <= parts.length - 2 && isAkshara(p) && isAkshara(parts[i - 1]) ? '\u00AD' : '') + p).join('');
+  }
+
+  function textNodesOf(el) {
+    const nodes = [];
+    const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    while (walk.nextNode()) nodes.push(walk.currentNode);
+    return nodes;
+  }
+
+  function fitVerses() {
+    const verses = Array.from($app.querySelectorAll('.verse'));
+    /* Start again from whole words, since the line may now be wider than when they were broken. */
+    verses.forEach(el => {
+      if (!el.dataset.fit) return;
+      textNodesOf(el).forEach(n => { n.data = n.data.replace(/\u00AD/g, ''); });
+      delete el.dataset.fit;
+    });
+    /* A word is too wide when the browser had to break it over two lines. Only words long enough to possibly be
+       too wide are measured: no letter is wider than the text size, and a running-on line is indented by one. */
+    const fixes = [];
+    const range = document.createRange();
+    verses.forEach(el => {
+      const shortest = Math.max(4, Math.floor(el.clientWidth / parseFloat(getComputedStyle(el).fontSize)) - 1);
+      const re = new RegExp('[^\\s\\-–—]{' + shortest + ',}', 'g');
+      textNodesOf(el).forEach(node => {
+        let m;
+        while ((m = re.exec(node.data))) {
+          range.setStart(node, m.index);
+          range.setEnd(node, m.index + m[0].length);
+          const rects = Array.from(range.getClientRects()).filter(r => r.width > 0);
+          const broken = rects.length > 1 && rects[rects.length - 1].top > rects[0].top + rects[0].height / 2;
+          if (broken) fixes.push({ el, node, at: m.index, word: m[0] });
+        }
+      });
+    });
+    /* Change the text from the end of each node backwards, so the places found above stay right. */
+    fixes.reverse().forEach(f => {
+      f.node.data = f.node.data.slice(0, f.at) + withHyphenPoints(f.word) + f.node.data.slice(f.at + f.word.length);
+      f.el.dataset.fit = '1';
+    });
   }
 
   /* Pictures that come before the text: a story's photographs, and the scene above a guide's step. */
@@ -1746,6 +1838,7 @@
 
   function afterRender(view, sameView, sameRoute, focusAction) {
     syncChrome();
+    fitVerses();
     const again = focusAction && $app.querySelector('[data-action="' + focusAction + '"]');
     if (sameView && again) {
       again.focus({ preventScroll: true });
@@ -1795,6 +1888,10 @@
     saveState();
     applySettings();
     refreshSizeButtons();
+    /* The top bar grows with the text, and long words that fitted may no longer fit (or the other way round). */
+    syncChrome();
+    fitVerses();
+    updateScrollmark();
   }
 
   /* Text-size buttons grey out at the smallest and biggest size, and the level dots follow along. */
@@ -2103,27 +2200,20 @@
 
   window.addEventListener('hashchange', render);
 
-  /* Scrolling down folds the tab bar to its icons, leaving the screen to the page; scrolling up or reaching the top opens it again. */
-  let tabbarY = 0;
-  function updateTabbar() {
-    const y = window.scrollY;
-    const bar = $app.querySelector('.tabbar');
-    if (y < 40 || currentView === 'ask') {
-      if (bar) bar.classList.remove('is-min');
-      tabbarY = y;
-    } else if (Math.abs(y - tabbarY) > 8) {
-      if (bar) bar.classList.toggle('is-min', y > tabbarY);
-      tabbarY = y;
-    }
-  }
-
   window.addEventListener('scroll', updateScrollCue, { passive: true });
   window.addEventListener('scroll', updateScrollmark, { passive: true });
-  window.addEventListener('resize', () => { syncChrome(); updateScrollmark(); });
+  /* Phones also resize as the address bar comes and goes; only a change of width can change where lines break. */
+  let fitWidth = window.innerWidth;
+  window.addEventListener('resize', () => {
+    syncChrome();
+    if (window.innerWidth !== fitWidth) { fitWidth = window.innerWidth; fitVerses(); }
+    updateScrollmark();
+  });
+  /* The scripture font may arrive after the page is drawn, and its letters are not as wide as the stand-in's. */
+  if (document.fonts) document.fonts.addEventListener('loadingdone', fitVerses);
   /* While typing on a phone, the bottom bar steps aside so the question box sits right on the keyboard. */
   $app.addEventListener('focusin', e => { if (e.target.id === 'ask-q') { $app.classList.add('composing'); syncChrome(); } });
   $app.addEventListener('focusout', e => { if (e.target.id === 'ask-q') { $app.classList.remove('composing'); syncChrome(); } });
-  window.addEventListener('scroll', updateTabbar, { passive: true });
   window.addEventListener('resize', updateScrollCue);
   /* Text size changes and late-loading fonts change the page height without a scroll. */
   if (window.ResizeObserver) new ResizeObserver(() => { updateScrollCue(); updateScrollmark(); }).observe($app);
