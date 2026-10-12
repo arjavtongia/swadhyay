@@ -24,8 +24,9 @@
 
   /* ---------- Saved settings (kept on this phone only) ---------- */
 
+  /* bell is also read straight from this store by the opening screen's script in index.html, before this file loads. */
   const DEFAULTS = {
-    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, locked: false,
+    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, bell: true, locked: false,
     positions: {}, last: null, recent: [], marks: {}, bookmarks: [], hintShown: false
   };
   const state = loadState();
@@ -53,7 +54,7 @@
   const $app = document.getElementById('app');
   const $toast = document.getElementById('toast');
   const $splash = document.getElementById('splash');
-  const SPLASH_BG = '#1c0d06';
+  const SPLASH_BG = '#120906';
 
   function t(key, vars) {
     const table = STRINGS[state.lang] || STRINGS.hi;
@@ -1868,6 +1869,8 @@
     }
     html += '<section class="set"><h2>' + esc(t('roman')) + '</h2><p class="muted">' + esc(t('romanDesc')) + '</p>' +
       choice('set-roman', state.roman ? 'yes' : 'no', [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }]) + '</section>';
+    html += '<section class="set"><h2>' + esc(t('bell')) + '</h2><p class="muted">' + esc(t('bellDesc')) + '</p>' +
+      choice('set-bell', state.bell === false ? 'no' : 'yes', [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }]) + '</section>';
 
     if (isStandalone()) {
       html += '<section class="set"><h2>' + esc(t('install')) + '</h2><p>' + icon('check') + ' ' + esc(t('installed')) + '</p></section>';
@@ -1895,7 +1898,7 @@
       catalog.map(b => '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
         (L(b.author) ? '<p class="muted">' + esc(L(b.author)) + '</p>' : '') +
         (b.source ? '<p>' + esc(L(b.source)) + '</p>' : '') + '</section>').join('') +
-      '<h2>' + esc(t('toolsHeading')) + '</h2><ul class="plain"><li>' + esc(t('fontCredit')) + '</li><li>' + esc(t('iconCredit')) + '</li></ul>' +
+      '<h2>' + esc(t('toolsHeading')) + '</h2><ul class="plain"><li>' + esc(t('fontCredit')) + '</li><li>' + esc(t('iconCredit')) + '</li><li>' + esc(t('splashPhotoCredit')) + '</li></ul>' +
       '<p>' + esc(t('proofNote')) + '</p><p class="muted">' + esc(t('licenseNote')) + '</p>' +
       '<p><a href="' + REPO_URL + '" target="_blank" rel="noopener">' + REPO_URL.replace('https://', '') + '</a></p></main>';
   }
@@ -2136,6 +2139,13 @@
     'share': () => shareText(),
     'set-speed': el => { state.speed = el.dataset.value; saveState(); render(); },
     'set-roman': el => { state.roman = el.dataset.value === 'yes'; saveState(); render(); },
+    /* Turning the bell on rings it once, so it is heard before the next opening (a tap allows sound on every phone). */
+    'set-bell': el => {
+      state.bell = el.dataset.value === 'yes';
+      saveState();
+      if (state.bell && window.BELL) window.BELL.ring(0, false);
+      render();
+    },
     'font-up': () => changeFont(1),
     'font-down': () => changeFont(-1),
     'lock': () => { state.locked = true; saveState(); render(); },

@@ -169,7 +169,7 @@ Then open http://localhost:8765.
 
 | Path | What it holds |
 | --- | --- |
-| `index.html` | The page that loads the app, and the opening darshan of Bhagwan Mahavir (shown for 3 seconds) |
+| `index.html` | The page that loads the app, and the opening darshan of Bhagwan Mahavir (shown for 3 seconds, photo in `img/mahavir.jpg`) |
 | `js/app.js` | Screens, reader, search, read-aloud, Ask, settings |
 | `js/strings.js` | Every word shown in the app, in Hindi and English |
 | `js/panchang.js` | Tithi calculation (sun and moon positions, sunrise in Delhi, purnimanta months) |
@@ -196,6 +196,7 @@ To add another language, add a block to `js/strings.js` and the language to `LAN
 - **Texts in `content/`** (except the two folders below): CC BY-SA 4.0. The original scriptures are centuries old; the transcriptions were checked against [Sanskrit Wikisource](https://sa.wikisource.org/), which is CC BY-SA 4.0.
 - **Texts in `content/pooja/` and `content/granth/`:** from the Jain Database, [nikkyjain.github.io](https://nikkyjain.github.io/), with the translators it credits. Its license is not stated; the texts are shared here with credit, for study and worship.
 - **Photos in `img/katha/`:** from [Wikimedia Commons](https://commons.wikimedia.org/), public domain, CC0 or CC BY-SA; the photographer and license are shown under each photo in the app.
+- **Opening photo, `img/mahavir.jpg`:** the murti of Bhagwan Mahavir at Shri Mahavirji, by Dayodaya, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Mahavir.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); cropped for the opening screen, and credited in the app's Credits.
 - **Fonts:** Vesper Libre, Hind and Noto Serif Devanagari, all under the SIL Open Font License (see `fonts/`).
 - **Icons:** Swadhyay's own icon pack (`icons/ui/`), and [Tabler Icons](https://tabler.io/icons), MIT License.
 

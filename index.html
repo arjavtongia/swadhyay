@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>स्वाध्याय · Swadhyay</title>
   <meta name="description" content="स्वाध्याय — सबके लिए आसान जैन शास्त्र, पूजा विधि, मंदिर दर्शन और जैन तिथि। Jain scriptures, pooja guides and Jain calendar in easy-to-read Hindi and English.">
-  <meta name="theme-color" content="#1c0d06">
+  <meta name="theme-color" content="#120906">
   <meta name="google" content="notranslate">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/prateek-192.png" type="image/png">
   <link rel="apple-touch-icon" href="icons/prateek-apple-180.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="स्वाध्याय">
-  <link rel="preload" href="fonts/noto-serif-devanagari-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/noto-serif-devanagari-devanagari-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="img/mahavir.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="fonts/vesper-libre-devanagari-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/vesper-libre-devanagari-900-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/hind-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/app.css">
@@ -21,130 +21,106 @@
 <body>
   <!-- Opening screen: darshan of Bhagwan Mahavir for 3 seconds while the app gets ready underneath. Timing is in css/app.css. -->
   <div id="splash" class="splash" aria-hidden="true">
-    <svg class="sp-defs" width="0" height="0" focusable="false">
-      <defs>
-        <linearGradient id="sp-gold" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="0" y2="420">
-          <stop offset="0" stop-color="#fff0c4"/>
-          <stop offset=".3" stop-color="#f6cd6e"/>
-          <stop offset=".65" stop-color="#e0a042"/>
-          <stop offset="1" stop-color="#b8771f"/>
-        </linearGradient>
-        <linearGradient id="sp-canopy" gradientUnits="userSpaceOnUse" x1="0" y1="10" x2="0" y2="84">
-          <stop offset="0" stop-color="#ffe7a6"/>
-          <stop offset="1" stop-color="#d4923a"/>
-        </linearGradient>
-        <radialGradient id="sp-sheen" gradientUnits="userSpaceOnUse" cx="200" cy="236" r="180">
-          <stop offset="0" stop-color="#fffbe8" stop-opacity=".3"/>
-          <stop offset=".6" stop-color="#fffbe8" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="sp-disc" gradientUnits="userSpaceOnUse" cx="200" cy="152" r="86">
-          <stop offset="0" stop-color="#e57a3c"/>
-          <stop offset=".55" stop-color="#b9491c"/>
-          <stop offset="1" stop-color="#7c2a0e"/>
-        </radialGradient>
-        <linearGradient id="sp-bronze" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#d79a46"/>
-          <stop offset="1" stop-color="#8a4c18"/>
-        </linearGradient>
-        <pattern id="sp-curls" width="6" height="5.4" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="2.7" r="1.9" fill="none" stroke="#8a5418" stroke-width=".9"/>
-        </pattern>
-        <!-- Bhagwan seated in padmasana. Drawn once, used for the dark silhouette and for the lit murti. -->
-        <g id="sp-body">
-          <path d="M200 330C170 328 104 338 72 358C50 371 46 398 70 406C106 416 160 414 200 414C240 414 294 416 330 406C354 398 350 371 328 358C296 338 230 328 200 330Z"/>
-          <path d="M178 372C168 384 128 388 106 380C92 375 90 358 102 354C124 348 162 354 178 364Z"/>
-          <path d="M222 372C232 384 272 388 294 380C308 375 310 358 298 354C276 348 238 354 222 364Z"/>
-          <path fill-rule="evenodd" d="M190 186L190 197C176 202 152 202 140 210C126 219 122 236 123 254C124 276 117 294 115 312C114 326 122 336 140 342C150 345 160 347 170 348L230 348C240 347 250 345 260 342C278 336 286 326 285 312C283 294 276 276 277 254C278 236 274 219 260 210C248 202 224 202 210 197L210 186ZM152 248C146 266 140 288 142 302C150 312 158 318 168 322C168 300 162 270 152 248ZM248 248C254 266 260 288 258 302C250 312 242 318 232 322C232 300 238 270 248 248Z"/>
-          <path d="M164 342C172 330 228 330 236 342C236 352 218 358 200 358C182 358 164 352 164 342Z"/>
-          <path d="M174 140C165 138 162 150 164 160C166 170 164 186 168 196C171 202 177 198 177 190C177 176 176 160 175 148Z"/>
-          <path d="M226 140C235 138 238 150 236 160C234 170 236 186 232 196C229 202 223 198 223 190C223 176 224 160 225 148Z"/>
-          <path d="M172 142C170 120 182 106 200 106C218 106 230 120 228 142C228 168 216 188 200 188C184 188 172 168 172 142Z"/>
-          <ellipse cx="200" cy="105" rx="10" ry="8"/>
-        </g>
-      </defs>
-    </svg>
-
     <div class="sp-art">
       <div class="sp-glow"></div>
-      <div class="sp-rays">
-        <svg viewBox="0 0 400 500" focusable="false">
-          <path fill="#ffd47e" fill-opacity=".55" d="M198.1 50 L200 0 L201.9 50ZM224.6 53 L239.3 5.2 L228.2 54ZM249.4 62.7 L276 20.4 L252.6 64.6ZM270.8 78.5 L307.5 44.5 L273.5 81.2ZM287.4 99.4 L331.6 76 L289.3 102.6ZM298 123.8 L346.8 112.7 L299 127.4ZM302 150.1 L352 152 L302 153.9ZM299 176.6 L346.8 191.3 L298 180.2ZM289.3 201.4 L331.6 228 L287.4 204.6ZM273.5 222.8 L307.5 259.5 L270.8 225.5ZM252.6 239.4 L276 283.6 L249.4 241.3ZM228.2 250 L239.3 298.8 L224.6 251ZM201.9 254 L200 304 L198.1 254ZM175.4 251 L160.7 298.8 L171.8 250ZM150.6 241.3 L124 283.6 L147.4 239.4ZM129.2 225.5 L92.5 259.5 L126.5 222.8ZM112.6 204.6 L68.4 228 L110.7 201.4ZM102 180.2 L53.2 191.3 L101 176.6ZM98 153.9 L48 152 L98 150.1ZM101 127.4 L53.2 112.7 L102 123.8ZM110.7 102.6 L68.4 76 L112.6 99.4ZM126.5 81.2 L92.5 44.5 L129.2 78.5ZM147.4 64.6 L124 20.4 L150.6 62.7ZM171.8 54 L160.7 5.2 L175.4 53Z"/>
-          <path fill="#ffd47e" fill-opacity=".32" d="M211.8 50.7 L216.7 25.1 L214.8 51.1ZM237.6 57.2 L249 33.7 L240.4 58.3ZM260.9 70.2 L277.9 50.5 L263.3 72ZM280 88.7 L301.5 74.1 L281.8 91.1ZM293.7 111.6 L318.3 103 L294.8 114.4ZM300.9 137.2 L326.9 135.3 L301.3 140.2ZM301.3 163.8 L326.9 168.7 L300.9 166.8ZM294.8 189.6 L318.3 201 L293.7 192.4ZM281.8 212.9 L301.5 229.9 L280 215.3ZM263.3 232 L277.9 253.5 L260.9 233.8ZM240.4 245.7 L249 270.3 L237.6 246.8ZM214.8 252.9 L216.7 278.9 L211.8 253.3ZM188.2 253.3 L183.3 278.9 L185.2 252.9ZM162.4 246.8 L151 270.3 L159.6 245.7ZM139.1 233.8 L122.1 253.5 L136.7 232ZM120 215.3 L98.5 229.9 L118.2 212.9ZM106.3 192.4 L81.7 201 L105.2 189.6ZM99.1 166.8 L73.1 168.7 L98.7 163.8ZM98.7 140.2 L73.1 135.3 L99.1 137.2ZM105.2 114.4 L81.7 103 L106.3 111.6ZM118.2 91.1 L98.5 74.1 L120 88.7ZM136.7 72 L122.1 50.5 L139.1 70.2ZM159.6 58.3 L151 33.7 L162.4 57.2ZM185.2 51.1 L183.3 25.1 L188.2 50.7Z"/>
-        </svg>
+      <!-- The murti of Shri Mahavirji, seen through the arch of the vedi -->
+      <div class="sp-window">
+        <img class="sp-photo" src="img/mahavir.jpg" alt="" width="596" height="1026" fetchpriority="high" onload="this.parentNode.classList.add('is-lit')">
+        <div class="sp-diya"></div>
+        <div class="sp-aura"></div>
+        <div class="sp-sweep"></div>
       </div>
-      <!-- Bhamandal: the halo of kevalgyan -->
-      <svg class="sp-halo" viewBox="0 0 400 500" focusable="false">
-        <path fill="#f0b552" stroke="#8a5418" stroke-width=".8" d="M200 66C206.2 62 204.5 55 200 50C195.5 55 193.8 62 200 66ZM217.9 67.9C224.8 65.3 224.6 58.1 221.2 52.2C215.8 56.2 212.6 62.7 217.9 67.9ZM235 73.4C242.3 72.3 243.6 65.2 241.5 58.8C235.3 61.6 230.9 67.3 235 73.4ZM250.5 82.4C257.9 82.8 260.7 76.2 260 69.5C253.4 70.9 247.9 75.5 250.5 82.4ZM263.9 94.5C271 96.4 275.1 90.4 275.8 83.7C269.1 83.8 262.7 87.2 263.9 94.5ZM274.5 109C281 112.4 286.3 107.4 288.3 101C281.8 99.6 274.8 101.6 274.5 109ZM281.8 125.4C287.5 130.1 293.6 126.3 297 120.5C290.9 117.7 283.7 118.3 281.8 125.4ZM285.5 143C290.2 148.8 296.9 146.3 301.4 141.3C296 137.4 288.9 136.4 285.5 143ZM285.5 161C288.9 167.6 296 166.6 301.4 162.7C296.9 157.7 290.2 155.2 285.5 161ZM281.8 178.6C283.7 185.7 290.9 186.3 297 183.5C293.6 177.7 287.5 173.9 281.8 178.6ZM274.5 195C274.8 202.4 281.8 204.4 288.3 203C286.3 196.6 281 191.6 274.5 195ZM263.9 209.5C262.7 216.8 269.1 220.2 275.8 220.3C275.1 213.6 271 207.6 263.9 209.5ZM250.5 221.6C247.9 228.5 253.4 233.1 260 234.5C260.7 227.8 257.9 221.2 250.5 221.6ZM235 230.6C230.9 236.7 235.3 242.4 241.5 245.2C243.6 238.8 242.3 231.7 235 230.6ZM217.9 236.1C212.6 241.3 215.8 247.8 221.2 251.8C224.6 245.9 224.8 238.7 217.9 236.1ZM200 238C193.8 242 195.5 249 200 254C204.5 249 206.2 242 200 238ZM182.1 236.1C175.2 238.7 175.4 245.9 178.8 251.8C184.2 247.8 187.4 241.3 182.1 236.1ZM165 230.6C157.7 231.7 156.4 238.8 158.5 245.2C164.7 242.4 169.1 236.7 165 230.6ZM149.5 221.6C142.1 221.2 139.3 227.8 140 234.5C146.6 233.1 152.1 228.5 149.5 221.6ZM136.1 209.5C129 207.6 124.9 213.6 124.2 220.3C130.9 220.2 137.3 216.8 136.1 209.5ZM125.5 195C119 191.6 113.7 196.6 111.7 203C118.2 204.4 125.2 202.4 125.5 195ZM118.2 178.6C112.5 173.9 106.4 177.7 103 183.5C109.1 186.3 116.3 185.7 118.2 178.6ZM114.5 161C109.8 155.2 103.1 157.7 98.6 162.7C104 166.6 111.1 167.6 114.5 161ZM114.5 143C111.1 136.4 104 137.4 98.6 141.3C103.1 146.3 109.8 148.8 114.5 143ZM118.2 125.4C116.3 118.3 109.1 117.7 103 120.5C106.4 126.3 112.5 130.1 118.2 125.4ZM125.5 109C125.2 101.6 118.2 99.6 111.7 101C113.7 107.4 119 112.4 125.5 109ZM136.1 94.5C137.3 87.2 130.9 83.8 124.2 83.7C124.9 90.4 129 96.4 136.1 94.5ZM149.5 82.4C152.1 75.5 146.6 70.9 140 69.5C139.3 76.2 142.1 82.8 149.5 82.4ZM165 73.4C169.1 67.3 164.7 61.6 158.5 58.8C156.4 65.2 157.7 72.3 165 73.4ZM182.1 67.9C187.4 62.7 184.2 56.2 178.8 52.2C175.4 58.1 175.2 65.3 182.1 67.9Z"/>
-        <circle cx="200" cy="152" r="86" fill="url(#sp-disc)" stroke="#ffd98a" stroke-width="2.5"/>
-        <circle cx="200" cy="152" r="72" fill="none" stroke="#ffd08a" stroke-opacity=".35"/>
-        <g fill="#ffd98a" fill-opacity=".7"><circle cx="200" cy="73" r="1.3"/><circle cx="212.4" cy="74" r="1.3"/><circle cx="224.4" cy="76.9" r="1.3"/><circle cx="235.9" cy="81.6" r="1.3"/><circle cx="246.4" cy="88.1" r="1.3"/><circle cx="255.9" cy="96.1" r="1.3"/><circle cx="263.9" cy="105.6" r="1.3"/><circle cx="270.4" cy="116.1" r="1.3"/><circle cx="275.1" cy="127.6" r="1.3"/><circle cx="278" cy="139.6" r="1.3"/><circle cx="279" cy="152" r="1.3"/><circle cx="278" cy="164.4" r="1.3"/><circle cx="275.1" cy="176.4" r="1.3"/><circle cx="270.4" cy="187.9" r="1.3"/><circle cx="263.9" cy="198.4" r="1.3"/><circle cx="255.9" cy="207.9" r="1.3"/><circle cx="246.4" cy="215.9" r="1.3"/><circle cx="235.9" cy="222.4" r="1.3"/><circle cx="224.4" cy="227.1" r="1.3"/><circle cx="212.4" cy="230" r="1.3"/><circle cx="200" cy="231" r="1.3"/><circle cx="187.6" cy="230" r="1.3"/><circle cx="175.6" cy="227.1" r="1.3"/><circle cx="164.1" cy="222.4" r="1.3"/><circle cx="153.6" cy="215.9" r="1.3"/><circle cx="144.1" cy="207.9" r="1.3"/><circle cx="136.1" cy="198.4" r="1.3"/><circle cx="129.6" cy="187.9" r="1.3"/><circle cx="124.9" cy="176.4" r="1.3"/><circle cx="122" cy="164.4" r="1.3"/><circle cx="121" cy="152" r="1.3"/><circle cx="122" cy="139.6" r="1.3"/><circle cx="124.9" cy="127.6" r="1.3"/><circle cx="129.6" cy="116.1" r="1.3"/><circle cx="136.1" cy="105.6" r="1.3"/><circle cx="144.1" cy="96.1" r="1.3"/><circle cx="153.6" cy="88.1" r="1.3"/><circle cx="164.1" cy="81.6" r="1.3"/><circle cx="175.6" cy="76.9" r="1.3"/><circle cx="187.6" cy="74" r="1.3"/></g>
-      </svg>
-      <!-- Lotus seat and lion throne, with the lion lanchhan of Bhagwan Mahavir -->
-      <svg class="sp-base" viewBox="0 0 400 500" focusable="false">
-        <path fill="#eab25c" stroke="#8a5418" stroke-width="1.1" d="M56 412C56 422 62.6 426 67.1 427C71.5 426 78.2 422 78.2 412ZM78.2 412C78.2 422 84.8 426 89.2 427C93.7 426 100.3 422 100.3 412ZM100.3 412C100.3 422 107 426 111.4 427C115.8 426 122.5 422 122.5 412ZM122.5 412C122.5 422 129.1 426 133.5 427C138 426 144.6 422 144.6 412ZM144.6 412C144.6 422 151.3 426 155.7 427C160.1 426 166.8 422 166.8 412ZM166.8 412C166.8 422 173.4 426 177.8 427C182.3 426 188.9 422 188.9 412ZM188.9 412C188.9 422 195.6 426 200 427C204.4 426 211.1 422 211.1 412ZM211.1 412C211.1 422 217.7 426 222.2 427C226.6 426 233.2 422 233.2 412ZM233.2 412C233.2 422 239.9 426 244.3 427C248.7 426 255.4 422 255.4 412ZM255.4 412C255.4 422 262 426 266.5 427C270.9 426 277.5 422 277.5 412ZM277.5 412C277.5 422 284.2 426 288.6 427C293 426 299.7 422 299.7 412ZM299.7 412C299.7 422 306.3 426 310.8 427C315.2 426 321.8 422 321.8 412ZM321.8 412C321.8 422 328.5 426 332.9 427C337.4 426 344 422 344 412Z"/>
-        <rect x="40" y="426" width="320" height="10" rx="3" fill="url(#sp-bronze)"/>
-        <rect x="66" y="436" width="268" height="36" fill="#4a1d0a"/>
-        <rect x="70.5" y="440.5" width="259" height="27" fill="none" stroke="#c98a3a" stroke-opacity=".55"/>
-        <rect x="48" y="472" width="304" height="10" rx="3" fill="url(#sp-bronze)"/>
-        <g fill="none" stroke="#c98a3a" stroke-opacity=".8"><circle cx="112" cy="454" r="4.5"/><circle cx="288" cy="454" r="4.5"/></g>
-        <g fill="#c98a3a"><circle cx="112" cy="454" r="1.6"/><circle cx="288" cy="454" r="1.6"/></g>
-        <g transform="translate(200 458)" fill="#f2c56c">
-          <path d="M-17 -3C-17 -7 -13 -8 -7 -7.5L4 -9C9 -9.5 12 -6 12 -2V8H9L8 3H6.5L5.5 8H3L2.5 2.5H-9L-10.5 8H-13L-13.5 3H-14.5L-15.5 8H-18L-16.8 1C-17.2 0 -17 -1.5 -17 -3Z"/>
-          <circle cx="10" cy="-9" r="7.5"/>
-          <circle cx="10" cy="-9" r="8.6" fill="none" stroke="#f2c56c" stroke-width="3.6" stroke-dasharray="0.1 4.4" stroke-linecap="round"/>
-          <path d="M14 -13.5L21.5 -11.5C22.6 -9 22 -6 20 -5L13.5 -4Z"/>
-          <circle cx="16.6" cy="-10.2" r="1" fill="#4a1d0a"/>
-          <path d="M-17 -3C-23 -3 -24.5 -9 -21.2 -13" fill="none" stroke="#f2c56c" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="-20.6" cy="-14.6" r="2.6"/>
+      <svg class="sp-frame" viewBox="0 -18 360 652" focusable="false">
+        <defs>
+          <linearGradient id="sp-brass" gradientUnits="userSpaceOnUse" x1="0" y1="-18" x2="0" y2="634">
+            <stop offset="0" stop-color="#f6dd97"/>
+            <stop offset=".45" stop-color="#d4ab52"/>
+            <stop offset="1" stop-color="#8a6620"/>
+          </linearGradient>
+        </defs>
+        <g class="sp-line" fill="none" stroke="url(#sp-brass)" stroke-width="2.6">
+          <path pathLength="1" d="M180 0.9A42.5 42.5 0 0 1 111.7 6.9A37.4 37.4 0 0 1 53.8 24.1A28.8 28.8 0 0 1 15.1 49.7A20.6 20.6 0 0 1 1.5 80V620"/>
+          <path pathLength="1" d="M180 0.9A42.5 42.5 0 0 0 248.3 6.9A37.4 37.4 0 0 0 306.2 24.1A28.8 28.8 0 0 0 344.9 49.7A20.6 20.6 0 0 0 358.5 80V620"/>
+        </g>
+        <g class="sp-line" fill="none" stroke="#d4ab52" stroke-opacity=".75" stroke-width=".9">
+          <path pathLength="1" d="M180 4.8A41 41 0 0 1 114.2 10.5A36 36 0 0 1 58.4 26.8A27.6 27.6 0 0 1 21.1 51.2A19.6 19.6 0 0 1 8 80V620"/>
+          <path pathLength="1" d="M180 4.8A41 41 0 0 0 245.8 10.5A36 36 0 0 0 301.6 26.8A27.6 27.6 0 0 0 338.9 51.2A19.6 19.6 0 0 0 352 80V620"/>
+        </g>
+        <path class="sp-kalash" fill="url(#sp-brass)" stroke="#7a5814" stroke-width=".8" d="M180 -16C184 -11 185 -8 185 -5.5C185 -2.5 183 -.5 180 -.5C177 -.5 175 -2.5 175 -5.5C175 -8 176 -11 180 -16Z"/>
+        <g class="sp-plinth">
+          <rect x="-12" y="620" width="384" height="6" rx="2" fill="url(#sp-brass)"/>
+          <rect x="-4" y="628.5" width="368" height="3" rx="1.5" fill="#8a6620" fill-opacity=".8"/>
         </g>
       </svg>
-      <!-- First seen against the halo as a dark silhouette with a rim of light... -->
-      <svg class="sp-shadow" viewBox="0 0 400 500" focusable="false">
-        <use href="#sp-body" fill="none" stroke="#ffc766" stroke-opacity=".7" stroke-width="3"/>
-        <use href="#sp-body" fill="#1d0b04"/>
-      </svg>
-      <!-- ...then lit in gold -->
-      <svg class="sp-murti" viewBox="0 0 400 500" focusable="false">
-        <use href="#sp-body" fill="url(#sp-gold)" stroke="#8a5418" stroke-width="1.4" stroke-linejoin="round"/>
-        <use href="#sp-body" fill="url(#sp-sheen)"/>
-        <path fill="#bd8330" d="M172 142C170 120 182 106 200 106C218 106 230 120 228 142C220 133 210 131 200 131C190 131 180 133 172 142ZM190 105a10 8 0 1 1 20 0a10 8 0 1 1 -20 0Z"/>
-        <path fill="url(#sp-curls)" d="M172 142C170 120 182 106 200 106C218 106 230 120 228 142C220 133 210 131 200 131C190 131 180 133 172 142ZM190 105a10 8 0 1 1 20 0a10 8 0 1 1 -20 0Z"/>
-        <g fill="none" stroke="#7d4a14" stroke-width="1.3" stroke-linecap="round">
-          <path d="M181 146Q189 141 196 145M204 145Q211 141 219 146"/>
-          <path d="M183 154Q189 158.5 195 154M205 154Q211 158.5 217 154"/>
-          <path d="M200 148L198.5 166Q200.5 169 203 167"/>
-          <path d="M194 175Q200 178.5 206 175"/>
-          <path d="M171 149C169 160 171 174 170 188M229 149C231 160 229 174 230 188"/>
-          <path d="M191 192Q200 195.5 209 192"/>
-          <path d="M196 300Q200 304 204 300"/>
-          <path d="M167 321C170 326 172 330 174 335M233 321C230 326 228 330 226 335"/>
-          <circle cx="101" cy="357.5" r="2.6"/><circle cx="97.5" cy="363" r="2.6"/><circle cx="96.5" cy="369" r="2.5"/><circle cx="98.5" cy="374.5" r="2.2"/>
-          <circle cx="299" cy="357.5" r="2.6"/><circle cx="302.5" cy="363" r="2.6"/><circle cx="303.5" cy="369" r="2.5"/><circle cx="301.5" cy="374.5" r="2.2"/>
-          <path d="M187 337Q200 331 213 337M174 345Q200 352 226 345"/>
-          <path d="M118 368Q142 373 168 368M282 368Q258 373 232 368"/>
-          <path d="M74 393C112 398 156 400 192 398M326 393C288 398 244 400 208 398"/>
-        </g>
-        <path fill="#9c5f1a" d="M200 224C203 229 205 231 208 232C205 233 203 235 200 240C197 235 195 233 192 232C195 231 197 229 200 224Z"/>
-      </svg>
-      <!-- Chhatra-traya: the three-tier umbrella -->
-      <svg class="sp-chhatra" viewBox="0 0 400 500" focusable="false">
-        <rect x="198.6" y="20" width="2.8" height="58" fill="#c98b3a"/>
-        <g fill="url(#sp-canopy)" stroke="#8a5418" stroke-width="1.2" stroke-linejoin="round">
-          <path d="M138 76Q200 36 262 76a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0a4.1 3.5 0 0 1 -8.3 0Z"/>
-          <path d="M156 56Q200 24 244 56a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0Z"/>
-          <path d="M172 38Q200 14 228 38a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0a4 3.4 0 0 1 -8 0Z"/>
-          <path d="M200 3C204 9 206 13 206 17C206 21 203 24 200 24C197 24 194 21 194 17C194 13 196 9 200 3Z"/>
-        </g>
-        <g fill="#ffe7a6"><circle cx="146.3" cy="81.5" r="1.5"/><circle cx="154.5" cy="81.5" r="1.5"/><circle cx="162.8" cy="81.5" r="1.5"/><circle cx="171.1" cy="81.5" r="1.5"/><circle cx="179.3" cy="81.5" r="1.5"/><circle cx="187.6" cy="81.5" r="1.5"/><circle cx="195.9" cy="81.5" r="1.5"/><circle cx="204.1" cy="81.5" r="1.5"/><circle cx="212.4" cy="81.5" r="1.5"/><circle cx="220.7" cy="81.5" r="1.5"/><circle cx="228.9" cy="81.5" r="1.5"/><circle cx="237.2" cy="81.5" r="1.5"/><circle cx="245.5" cy="81.5" r="1.5"/><circle cx="253.7" cy="81.5" r="1.5"/><circle cx="164" cy="61.5" r="1.5"/><circle cx="172" cy="61.5" r="1.5"/><circle cx="180" cy="61.5" r="1.5"/><circle cx="188" cy="61.5" r="1.5"/><circle cx="196" cy="61.5" r="1.5"/><circle cx="204" cy="61.5" r="1.5"/><circle cx="212" cy="61.5" r="1.5"/><circle cx="220" cy="61.5" r="1.5"/><circle cx="228" cy="61.5" r="1.5"/><circle cx="236" cy="61.5" r="1.5"/></g>
-      </svg>
-      <!-- At 3 seconds this light spreads out and becomes the app's own page -->
+      <!-- Sparks rising from the aarti -->
+      <div class="sp-sparks">
+        <i style="--x: 30%; --s: 7px; --d: 1.2s; --t: 1.5s; --dx: -9px"></i>
+        <i style="--x: 46%; --s: 5px; --d: 1.55s; --t: 1.3s; --dx: 6px"></i>
+        <i style="--x: 58%; --s: 8px; --d: 1s; --t: 1.6s; --dx: 10px"></i>
+        <i style="--x: 70%; --s: 5px; --d: 1.8s; --t: 1.2s; --dx: -5px"></i>
+      </div>
+      <!-- At 3 seconds the light spreads out from the bhamandal and becomes the app's own page -->
       <div class="sp-flare"></div>
     </div>
 
     <p class="sp-title" lang="hi">स्वाध्याय</p>
+    <p class="sp-rule"><i></i></p>
     <p class="sp-name">Swadhyay</p>
-    <p class="sp-credit"><span class="sp-credit-hi" lang="hi">श्रद्धा सहित निर्मित</span><span class="sp-credit-by">by Arjav</span></p>
+    <p class="sp-credit"><span lang="hi">श्रद्धा सहित निर्मित</span> · by Arjav</p>
   </div>
+  <script>
+    /* A soft temple bell as the darshan opens, made in code so it needs no file and works offline.
+       Phones and browsers only allow sound before a tap where the app is installed or often used;
+       anywhere else the context starts paused and the opening stays silent. Settings can turn it
+       off (saved as "bell" with the other settings), and turning it on there rings it once. */
+    var BELL = (function () {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      /* Partials of a small brass ghanta: [ratio to the note, level, seconds to fade]. */
+      var PARTIALS = [[0.5, 0.28, 3.2], [1, 1, 2.8], [1.004, 0.45, 2.8], [1.25, 0.3, 1.8], [1.5, 0.24, 1.5], [2, 0.26, 1.1], [2.76, 0.08, 0.7], [3, 0.06, 0.5]];
+
+      function strike(ctx, delay) {
+        var F = 587.33, at = ctx.currentTime + delay;
+        var level = ctx.createGain(), soft = ctx.createBiquadFilter();
+        level.gain.value = 0.07;
+        soft.type = 'lowpass';
+        soft.frequency.value = 4200;
+        level.connect(soft);
+        soft.connect(ctx.destination);
+        PARTIALS.forEach(function (p) {
+          var tone = ctx.createOscillator(), env = ctx.createGain();
+          tone.frequency.value = F * p[0];
+          env.gain.setValueAtTime(0.0001, at);
+          env.gain.exponentialRampToValueAtTime(p[1], at + 0.008);
+          env.gain.exponentialRampToValueAtTime(0.0001, at + p[2]);
+          tone.connect(env);
+          env.connect(level);
+          tone.start(at);
+          tone.stop(at + p[2] + 0.05);
+        });
+        setTimeout(function () { ctx.close(); }, (delay + 3.5) * 1000);
+      }
+
+      /* allowedOnly: ring only if the browser already allows sound (the opening, before any tap). */
+      function ring(delay, allowedOnly) {
+        if (!AC) return;
+        var ctx;
+        try { ctx = new AC(); } catch (e) { return; }
+        if (ctx.state === 'running') { strike(ctx, delay); return; }
+        if (allowedOnly) { ctx.close(); return; }
+        ctx.resume().then(function () { strike(ctx, delay); }, function () { ctx.close(); });
+      }
+
+      function wanted() {
+        try {
+          var saved = JSON.parse(localStorage.getItem('swadhyay.v1') || localStorage.getItem('jinvani.v1') || '{}');
+          return saved.bell !== false;
+        } catch (e) { return true; }
+      }
+
+      if (wanted() && document.visibilityState !== 'hidden') ring(0.25, true);
+      return { ring: ring };
+    })();
+  </script>
 
   <!-- Brass for the ornaments in js/ornaments.js; the stops follow the day and night colours in css/app.css. -->
   <svg class="orn-defs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">

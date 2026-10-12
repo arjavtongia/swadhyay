@@ -258,7 +258,7 @@ A marble-and-brass palette with one devotional red, mirrored as black Kota stone
 
 **Display Font:** Vesper Libre 500/700/900 (with Noto Serif Devanagari, Kohinoor Devanagari, Nirmala UI, serif)
 **Body Font:** Hind 400/600/700 (with system-ui and the platform's Devanagari sans faces)
-**Splash Font:** Noto Serif Devanagari 400/600, used only by the opening darshan.
+**Fallback serif:** Noto Serif Devanagari 400/600, kept only to stand in for any Devanagari glyph Vesper Libre lacks. The opening darshan now sets its name in Vesper Libre 700 like the in-app brand.
 
 **Character:** Vesper Libre is carved, like an inscription on a temple pillar, and carries headings, the tithi and all scripture. Hind is the plain spoken voice of the interface, meanings and instructions, so explanation never reads as scripture.
 
@@ -378,8 +378,13 @@ Lists, flows (brass chevrons between steps), stacks (brass wash deepening with d
 - State changes: 0.15s colour and border; toast 0.2s.
 - `prefers-reduced-motion: reduce` removes every transition and animation.
 
-### Opening darshan (fixed brand asset)
-The 3-second splash of Bhagwan Mahavir on a maroon-brown ground (#1c0d06), with its own palette, px sizing, Noto Serif Devanagari and timeline, is a confirmed owner asset outside this token system. Do not restyle it, and do not borrow its tracked uppercase name line or its colours for app screens. Its closing flare takes the app's page colour, which is its only link to the tokens.
+### Opening darshan (brand asset)
+A 3-second darshan on a deep maroon-brown ground (#120906, also the status bar and the manifest background), sized in px and timed entirely in CSS so it leaves even if the script fails. Its centre is a real photograph, the murti of Shri Mahavirji (`img/mahavir.jpg`, cropped from Wikimedia Commons, Dayodaya, CC BY-SA 3.0, credited on the Credits screen). It is seen through the app's own 8-lobe cusped arch (portrait, 360 by 620 units) with the double brass line, the same kalash bud as every arch in the app, and a two-step brass plinth, so the first screen already speaks the app's architecture. The sanctum is dim: a vignette darkens the sides, the silver throne and the foot of the picture so the murti and its bhamandal are the lit centre.
+- **Motion, once:** the photo comes out of the dark (brightness, blur and a 1.14 to 1.02 push-in over 3.5s) while the arch draws down from the kalash and the plinth arrives with it; the carved bhamandal behind the head glows as a ring brighter than the carving, then settles (colour dodge, masked above the shoulders so the face keeps its stone); the aarti's light flickers up from below with four embers that rise and die before the murti's hands; one narrow gleam (screen) crosses the murti at 1.45s; the name is written in at 1.05s; at 3s the light spreads from the bhamandal in the page colour and the screen fades at 3.45s.
+- **Type:** स्वाध्याय in Vesper Libre 700 brass (#f3d796), a brass rule with a lozenge, Swadhyay in Vesper Libre 500 tracked uppercase, and the credit in Hind 13px (#9c8466).
+- **Sound:** one soft temple bell (a ghanta struck once, D5 with bell partials, about -16 dBFS, gone by 2s) at 0.25s, synthesised by a small inline script after the splash markup, so there is no audio file and it works offline. It only sounds where the browser already allows sound before a tap (an installed app, or a site used often); elsewhere the audio context starts paused and the opening stays silent. Settings has "Bell on opening" (Yes/No, on by default, saved as `bell`); the script reads it from the saved settings before the app loads, and choosing Yes rings the bell once so people hear what they turned on. Never louder, never longer, never a melody.
+- **Reduced motion:** everything is simply there; the photo fades in and the screen leaves on time.
+Do not borrow its dark ground, glow or tracked name line for app screens.
 
 ### App icon (owner's choice)
 The Jain Prateek (the emblem adopted by all Jain traditions in 1974: the loka outline holding the siddhashila and siddha, ratnatraya, the swastik with arms turning right, and the raised hand of ahimsa with a 24-spoked dharmachakra, thumb to the viewer's left) in sindoor #a3301a on marble #f4f2ed, with a soft white light behind it. Drawn in code by `tools/make_icons.py`; the maskable icon keeps the emblem inside Android's central 80% circle, and the iPhone icon is square for iOS to round. Keep the emblem's proportions (1.485 times as tall as it is wide) and its elements whole; never crop it, recolour it outside the sindoor and marble pair, or add the motto at icon sizes.
@@ -401,7 +406,7 @@ The Jain Prateek (the emblem adopted by all Jain traditions in 1974: the loka ou
 - **Don't** put shadows on cards, rows or niches; only the primary button, toast and the bottom plinth carry them.
 - **Don't** set commentary, meanings or instructions in Vesper Libre, or scripture in Hind.
 - **Don't** add looping or decorative animation to app screens.
-- **Don't** restyle the opening darshan or carry its splash colours, font or tracked uppercase line into the app.
+- **Don't** carry the opening darshan's dark ground, glow or tracked name line into the app screens.
 
 ## The children's corner (बच्चों की कहानियाँ)
 
