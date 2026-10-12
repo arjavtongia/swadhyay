@@ -330,7 +330,7 @@ Quiet brass outlines with one sindoor voice.
 ### Cards / Containers
 There are no cards. Containers are architectural:
 - **Shrine:** the scripture's sanctum; 12-lobe crown, pillars, sanctum-white body, ॥ label ॥ in sindoor, verse below, attribution under the plinth.
-- **Continue arch:** 10-lobe crown over a brass-wash body with title, place, progress trail and the primary button. It opens home, straight under the greeting; up to two other texts left open follow as rows under "ये भी पढ़ रहे थे / Also reading". On the first visit, and once everything open is finished, it offers the Namokar ("यहाँ से शुरू करें / Start here").
+- **Continue arch:** 10-lobe crown over a brass-wash body with title, place, progress trail and the primary button. It opens home, straight under the greeting; the text read before it, if still open, follows as a single row under "यह भी पढ़ रहे थे / Also reading", so the library still starts on the first screen. On the first visit, and once everything open is finished, it offers the Namokar ("यहाँ से शुरू करें / Start here").
 - **Scene niche:** 10-lobe crown and pillars around an authored drawing on scene paper, standing on a plinth, with a brass caption.
 - **Arch picture:** 16:9 picture masked by an 8-lobe arch and framed in brass.
 

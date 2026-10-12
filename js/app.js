@@ -816,8 +816,8 @@
       '<ul class="rows">' + g.books.map(storyRow).join('') + '</ul>').join('');
   }
 
-  function verseRow(book, v) {
-    const num = v.label === '0' ? '॰' : numberOf(v);
+  function verseRow(book, v, shownNum) {
+    const num = shownNum || (v.label === '0' ? '॰' : numberOf(v));
     const main = v.topic
       ? '<span class="row-topic" translate="no">' + esc(topicOf(v)) + '</span>'
       : '<span class="row-verse" translate="no" lang="' + (book.textLang || 'sa') + '">' + esc(firstLine(v)) + '</span>';
@@ -982,6 +982,16 @@
       '</span></a><div class="plinth full" aria-hidden="true"><i></i></div>';
   }
 
+  /* The Saved line names what is saved, newest first, rather than repeating its own title. */
+  function savedSub() {
+    const titles = [];
+    state.bookmarks.slice().reverse().forEach(b => {
+      const m = bookMeta(b.book);
+      if (m && titles.indexOf(m.title.hi) < 0) titles.push(m.title.hi);
+    });
+    return titles.slice(0, 2).join(', ') + (titles.length > 2 ? ' ' + t('andMore', { n: titles.length - 2 }) : '');
+  }
+
   /* The stories line names the children's picture stories apart, as the library does. */
   function kathaSub() {
     const n = catalog.filter(b => b.category === 'katha').length;
@@ -995,11 +1005,12 @@
     return posLabel(meta, mark) + ' · ' + t('ofTotal', { n: mark.of });
   }
 
-  /* The one next step comes first on home: carry on with the text last read, with any others left open beneath it.
-     On the first visit, and once everything open is finished, begin with the Namokar. */
+  /* The one next step comes first on home: carry on with the text last read, with the one before it beneath, kept to a
+     single row so the library still shows on the first screen. On the first visit, and once everything open is finished,
+     begin with the Namokar. */
   async function readingHtml() {
     const items = [];
-    for (const id of recentBooks().filter(b => state.positions[b] && bookMeta(b)).slice(0, 3)) {
+    for (const id of recentBooks().filter(b => state.positions[b] && bookMeta(b)).slice(0, 2)) {
       const pos = state.positions[id];
       let mark = state.marks[id];
       if (!mark) {
@@ -1044,7 +1055,7 @@
       has('katha') && { href: '#/books/katha', emblem: { category: 'katha' }, title: t('pathKatha'), sub: kathaSub() },
       has('vidhi') && { href: '#/books/vidhi', icon: 'temple', title: t('pathVidhi'), sub: t('pathVidhiSub') },
       /* Saved appears once something has been saved; until then it would only be an empty line. */
-      state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: t('savedCount', { n: state.bookmarks.length }) }
+      state.bookmarks.length && { href: '#/saved', emblem: { id: 'saved' }, title: t('saved'), sub: savedSub() }
     ].filter(Boolean);
     return '<ul class="paths">' + items.map(it =>
       '<li><a class="path" href="' + it.href + '">' + (it.icon ? nicheHtml(icon(it.icon, 'niche-pack')) : coverEmblem(it.emblem)) +
@@ -1240,6 +1251,10 @@
           '<span class="row-num">' + x.s.index + '</span><span class="row-main"><span class="row-topic" translate="no" lang="hi">' + esc(x.name) + '</span>' +
           '<span class="row-sub">' + x.n + ' ' + esc(unitPlural) + '</span></span>' + icon('chevron-right', 'row-chev') + '</a></li>').join('') + '</ol>';
       }
+    } else if (story && book.verses.some(v => v.topic)) {
+      /* A story reads as one page; its contents name its titled parts (in brief, the full story), not every paragraph. */
+      html += '<h2>' + esc(t('contents')) + '</h2><ol class="rows verse-index">' +
+        book.verses.filter(v => v.topic).map((v, i) => verseRow(book, v, String(i + 1))).join('') + '</ol>';
     } else {
       html += '<h2>' + esc(t('contents')) + '</h2><ol class="rows verse-index">' +
         book.verses.map(v => verseRow(book, v)).join('') + '</ol>';
@@ -1930,10 +1945,15 @@
   }
 
   let pendingDir = null;
+  let offlineNotePending = false;
 
   function afterRender(view, sameView, sameRoute, focusAction) {
     syncChrome();
     fitVerses();
+    if (offlineNotePending && view !== 'welcome') {
+      offlineNotePending = false;
+      toast(t('offlineReady'));
+    }
     const again = focusAction && $app.querySelector('[data-action="' + focusAction + '"]');
     if (sameView && again) {
       again.focus({ preventScroll: true });
@@ -2331,7 +2351,12 @@
     const firstInstall = !navigator.serviceWorker.controller;
     navigator.serviceWorker.register('sw.js').then(() => {
       if (firstInstall) {
-        navigator.serviceWorker.addEventListener('controllerchange', () => toast(t('offlineReady')), { once: true });
+        /* On the first visit this lands while the language is still being chosen: it waits for the next screen, so it
+           neither covers the language buttons nor speaks before the reader's language is known. */
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!currentView || currentView === 'welcome') offlineNotePending = true;
+          else toast(t('offlineReady'));
+        }, { once: true });
       }
     }).catch(() => { /* offline support is optional */ });
   }

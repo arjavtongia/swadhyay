@@ -649,6 +649,7 @@
       "at": [8],
       "type": "drawing",
       "drawing": "thona",
+      "top": true,
       "title": { "hi": "ठौने में तीन लौंग — स्थापना के तीन चरण", "en": "Three cloves in the thona — the three steps of sthapana" },
       "items": [
         { "hi": "आह्वानन", "en": "Aahvanan", "sub": { "hi": "'अत्र अवतर अवतर संवौषट्' — पधारिए", "en": "'atra avatara avatara samvaushat': please come" } },
