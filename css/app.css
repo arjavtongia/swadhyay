@@ -611,6 +611,7 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .reader-top .back { flex: 1; }
 .size-panel { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.35rem 0.6rem; margin: 0 -1rem; padding: 0.45rem 1rem; background: var(--plinth); border-bottom: 1px solid var(--hair); }
 .size-panel[hidden] { display: none; }
+.size-panel > .where { flex-basis: 100%; margin: 0 0 0.2rem; }
 .size-panel-label { font-weight: 600; font-size: var(--fs-sm); }
 .size-panel .size-level { margin: 0; }
 .size-ctrl { display: flex; align-items: center; gap: 0.5rem; margin-left: auto; }
@@ -638,13 +639,20 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
    wide the screen. */
 .page-body, .read-pair, .reader > .guide-links { max-width: 46rem; margin-left: auto; margin-right: auto; }
 .reader > .guide-links { max-width: 30rem; }
-/* Where the screen has room, the shrine stands on the left and its meaning sits beside it on the marble, as in a
-   printed edition with the mool on one side and the arth on the other. Without a meaning, the shrine stays centred. */
+/* When the meaning is asked for and the screen has room, the shrine stands on the left and its meaning sits beside it on
+   the marble, as in a printed edition with the mool on one side and the arth on the other. Otherwise the shrine stays
+   centred, alone. */
 @container (min-width: 52rem) {
-  .read-pair.has-notes { display: grid; grid-template-columns: minmax(0, 31rem) minmax(0, 1fr); column-gap: clamp(2rem, 4.5cqi, 4.5rem); align-items: start; max-width: 76rem; }
-  .read-pair.has-notes > .notes { padding-top: 1.5rem; }
-  .read-pair.has-notes .commentary { margin-top: 0; }
-  .read-pair.has-notes .notes > .rec { margin-left: 0; margin-right: 0; }
+  .show-meaning .read-pair.has-notes { display: grid; grid-template-columns: minmax(0, 31rem) minmax(0, 1fr); column-gap: clamp(2rem, 4.5cqi, 4.5rem); align-items: start; max-width: 76rem; }
+  .show-meaning .read-pair.has-notes > .notes { padding-top: 1.5rem; }
+  .show-meaning .read-pair.has-notes .commentary { margin-top: 0; }
+  /* In a pooja or a guide, each verse with its meaning beside it, the page widening to hold both. */
+  .show-meaning .page-body:has(.verse-pair) { max-width: 76rem; }
+  .show-meaning .verse-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: clamp(2rem, 4.5cqi, 4.5rem); align-items: start; }
+  .show-meaning .verse-pair > .verse-meaning { margin-top: 0; }
+  /* Between the rows of verse and meaning, one hairline across both columns. */
+  .show-meaning .scroll-page:has(.verse-pair) .verse-block + .verse-block::before { left: 0; right: 0; border-top-color: var(--hair); }
+  .show-meaning .scroll-page:has(.verse-pair) .verse-block + .verse-block::after { content: none; }
 }
 
 /* The shrine: scripture stands in it, under the toran, on the vedi's steps. */
@@ -685,40 +693,31 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
    printed pooja books set it, so the verse and its mantra are not read as one. */
 .verse-line.mantra { margin-top: 0.7em; padding-left: 0; text-indent: 0; font-size: 0.8em; line-height: 1.6; color: var(--brass-text); text-wrap: balance; }
 .verse-line.mantra + .verse-line.mantra { margin-top: 0.25em; }
-/* Each stanza is headed by what it offers: its name on a brass-edged pill across a brass rule, in place of the plain
-   rule between stanzas, so a glance shows which part of the pooja this is. */
-.offer-mark { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 0 0 1rem; }
-.offer-mark::before, .offer-mark::after { content: ''; flex: 1; max-width: 7rem; border-top: 1px solid var(--brass-line); }
-.offer-mark span { padding: 0.12rem 0.85rem; border: 1px solid var(--brass-line); border-radius: 999px; background: var(--brass-wash); font: 700 var(--fs-md)/1.4 var(--font-head); color: var(--brass-text); white-space: nowrap; }
-.scroll-page .verse-block.has-offer { padding-top: 0.3rem; }
-.scroll-page .verse-block.has-offer::before, .scroll-page .verse-block.has-offer::after { content: none; }
+/* Each stanza is headed by the word for what it offers (जल, चंदन…), small and in brass, as a printed pooja book names it. */
+.offer-mark { margin: 0 0 0.6rem; text-align: center; font: 600 var(--fs-sm)/1.4 var(--font-ui); color: var(--brass-text); }
 /* Who wrote the pooja, or the tune it is sung to: a quiet note above the text, not a heading. */
 .topic-note { margin: 0 0 0.9rem; font: 400 var(--fs-sm)/1.5 var(--font-ui); color: var(--muted); text-align: center; text-wrap: balance; }
 
-/* The parts of the pooja, as a strip that stays under the top bar: the part now being read is lit, and a tap opens any
-   other. It slides sideways when the parts do not all fit, and stands centred when they do. */
-.offer-strip { position: sticky; top: var(--top-h, 0px); z-index: 4; margin: 0 -1rem; padding: 0.4rem 0; background: var(--bg); border-bottom: 1px solid var(--hair); }
-.offer-track { position: relative; display: flex; gap: 0.4rem; overflow-x: auto; padding: 0 1rem; scrollbar-width: none; scroll-snap-type: x proximity; }
-.offer-track::-webkit-scrollbar { display: none; }
-.offer-chip { flex: none; min-height: 44px; padding: 0.2rem 0.9rem; border: 1px solid var(--brass-line); border-radius: 999px; background: none; color: var(--text); font: 600 var(--fs-md)/1.2 var(--font-ui); cursor: pointer; scroll-snap-align: center; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
-.offer-chip:first-child { margin-left: auto; }
-.offer-chip:last-child { margin-right: auto; }
-.offer-chip:hover { border-color: var(--brass); background: var(--brass-wash); }
-.offer-chip[aria-current="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); color: var(--brass-text); }
-
-/* The words come first: in a pooja the head is short, and its picture a small window rather than a full scene. */
+/* The words come first: in a pooja the head is short. */
 .recite-page .page-head { margin: 1rem 0 0.9rem; }
 .recite-page .page-head .chhatra { width: 2.6rem; margin-bottom: 0.35rem; }
 .page-head .book-sponsor { justify-content: center; margin-top: 0.4rem; }
-.recite-page .scene { margin: 0.2rem 0 1.2rem; }
-.recite-page .scene-niche { max-width: min(13rem, 62%); }
-.recite-page .scene .plinth { max-width: min(14rem, 67%); }
-.recite-page .scene-caption { margin-top: 0.45rem; font-size: var(--fs-sm); }
 .reader > .book-give { max-width: 30rem; margin-left: auto; margin-right: auto; }
-@container (min-width: 40rem) {
-  .recite-page .scene-niche { max-width: 17rem; }
-  .recite-page .scene .plinth { max-width: 18rem; }
-}
+
+/* ---------- The text leads; its meaning when asked for ---------- */
+
+/* Two small buttons by the text, "अर्थ देखें" and "गायन सुनें": what explains it and what sings it wait behind them. */
+.text-tools { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin: 1rem 0 1.2rem; }
+.page-head + .text-tools { margin-top: 0; }
+.text-tools .btn[aria-pressed="true"] .icon, .text-tools .btn[aria-expanded="true"] .icon { color: var(--brass-text); }
+.text-tools .btn[aria-expanded="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); }
+.text-tools + .rec { margin-top: -0.4rem; }
+.rec[hidden] { display: none; }
+/* Until asked for, the meaning is not on the page at all; when shown it opens under each verse on a phone. */
+.reader:not(.show-meaning) .notes, .reader:not(.show-meaning) .verse-meaning { display: none; }
+.verse-meaning { margin-top: 1.2rem; text-align: start; }
+.verse-meaning:empty { display: none; }
+.page-rest { max-width: 46rem; margin-left: auto; margin-right: auto; }
 
 /* What explains the scripture sits below it, in the plain interface font, so it never reads as the scripture itself. */
 .commentary { margin-top: 1.4rem; }
@@ -742,7 +741,6 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .fig-credit { font-size: var(--fs-xs); opacity: 0.85; }
 .guide-links { display: flex; flex-direction: column; gap: 0.6rem; margin: 1.2rem 0; }
 
-.reader-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 1.6rem 0 0; }
 
 .reader-bar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 0.5rem; padding: 0.45rem max(0.8rem, calc(50% - 21rem)) calc(0.5rem + env(safe-area-inset-bottom)); }
 .reader-bar .btn { flex-direction: column; gap: 0.1rem; min-height: max(3.2rem, 52px); padding: 0.25rem; border: 0; font-size: min(var(--fs-md), 4.6vw); line-height: 1.15; overflow-wrap: anywhere; }
@@ -1093,7 +1091,7 @@ textarea:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 /* ---------- Side rail: how far down a page you are ---------- */
 /* A hairline at the side of every screen that scrolls (home excepted), gilded as far as you have come, with a
    sindoor lozenge at your place. It sits just outside the column, between the top and bottom bars. */
-.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + var(--strip-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - var(--col-half) - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - var(--col-half) - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .scrollmark.is-on { opacity: 1; }
 .scrollmark i { position: absolute; top: 0; left: 0; width: 100%; height: calc(var(--p, 0) * 100%); border-radius: 2px; background: linear-gradient(var(--brass-hi), var(--brass)); }
 .scrollmark b { position: absolute; top: calc(var(--p, 0) * 100%); right: -0.35rem; width: 2.6rem; height: 2.6rem; margin-top: -1.3rem; }
@@ -1199,9 +1197,6 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
   /* The reader's own bars run the full width, their controls kept to the column. */
   #app > .reader-top, #app > .size-panel { width: auto; margin: 0; padding-left: max(var(--gutter), calc((100% - var(--wide)) / 2)); padding-right: max(var(--gutter), calc((100% - var(--wide)) / 2)); }
   #app > .reader-bar { width: auto; }
-  /* A pooja's strip of parts runs the full width too, so all its stops show at once, centred over the text. */
-  #app > .offer-strip { width: auto; margin: 0; }
-  #app > .offer-strip .offer-track { padding-left: var(--gutter); padding-right: var(--gutter); }
 
   /* Home: what you are reading beside the day, the library across the page, then the story beside the sutra. */
   main.home {
@@ -1563,4 +1558,4 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
 /* A row's tags keep their own width where the row is laid out as a grid (wide screens). */
 .row-main > .row-tag { justify-self: start; }
 /* After the verse (texts read verse by verse), the player stands clear of the shrine and its commentary. */
-.notes > .rec, .page-body:not(.scroll-page) > .rec { margin-top: 1.4rem; }
+.icon-btn[aria-pressed="true"] { color: var(--brass-text); }

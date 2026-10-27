@@ -30,7 +30,7 @@
 
   /* bell is also read straight from this store by the opening screen's script in index.html, before this file loads. */
   const DEFAULTS = {
-    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, bell: true, awake: true, locked: false,
+    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, bell: true, awake: true, meaning: false, locked: false,
     positions: {}, last: null, recent: [], marks: {}, bookmarks: [], hintShown: false
   };
   const state = loadState();
@@ -133,28 +133,25 @@
     root.setProperty('--top-h', (top ? top.offsetHeight : 0) + 'px');
     root.setProperty('--bar-h', (bar ? bar.offsetHeight : 0) + 'px');
     root.setProperty('--composer-h', (box ? box.offsetHeight : 0) + 'px');
-    const strip = $app.querySelector('.offer-strip');
-    root.setProperty('--strip-h', (strip ? strip.offsetHeight : 0) + 'px');
   }
 
-  /* The bars that stay at the top of the screen (the top bar, and in a pooja the strip of its parts), so a place scrolled
-     to comes into view just beneath them. */
+  /* The bar that stays at the top of the screen, so a place scrolled to comes into view just beneath it. */
   function stuckHeight() {
     const top = tabsOnTop() || $app.querySelector('.topbar');
-    const strip = $app.querySelector('.offer-strip');
-    return (top ? top.offsetHeight : 0) + (strip ? strip.offsetHeight : 0);
+    return top ? top.offsetHeight : 0;
   }
 
-  /* Open one part of a pooja from its strip. */
-  function jumpTo(pos) {
-    const el = document.getElementById('v-' + pos);
-    if (!el) return;
-    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - stuckHeight() - 12, behavior: still ? 'auto' : 'smooth' });
+  /* Keep the words being read where they are on the screen while something above or beside them opens or closes. */
+  function keepPlace(change) {
+    const line = stuckHeight();
+    const anchor = Array.from($app.querySelectorAll('.verse-block, .shrine')).find(el => el.getBoundingClientRect().bottom > line + 8);
+    const before = anchor ? anchor.getBoundingClientRect().top : 0;
+    change();
+    if (anchor) window.scrollBy(0, anchor.getBoundingClientRect().top - before);
   }
 
-  /* In a pooja read as one page: light the part on the strip that is now under it, and remember the stanza you are at, so
-     the pooja opens there next time and home's progress follows it. */
+  /* In a pooja read as one page: remember the stanza you are at, so the pooja opens there next time and home's progress
+     follows it. */
   let placeTimer = null;
   function trackPlace() {
     if (currentView !== 'read' || !ctx || !ctx.page.scroll) return;
@@ -169,18 +166,6 @@
     }
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) at = blocks[blocks.length - 1];
     const pos = parseInt(at.id.slice(2), 10);
-    const strip = $app.querySelector('.offer-strip');
-    if (strip) {
-      const chips = Array.from(strip.querySelectorAll('.offer-chip'));
-      const chip = chips.filter(c => +c.dataset.pos <= pos).pop() || chips[0];
-      if (!chip.hasAttribute('aria-current')) {
-        chips.forEach(c => c.removeAttribute('aria-current'));
-        chip.setAttribute('aria-current', 'true');
-        const track = chip.parentNode;
-        const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        track.scrollTo({ left: chip.offsetLeft - (track.clientWidth - chip.offsetWidth) / 2, behavior: still ? 'auto' : 'smooth' });
-      }
-    }
     /* Only while the pooja is being read: once it is finished its place has been cleared, and stays cleared. */
     const id = ctx.book.id;
     if (state.positions[id] != null && state.positions[id] !== pos) {
@@ -795,10 +780,12 @@
     const chunks = [];
     verses.forEach(v => {
       v.lines.forEach(l => speechPieces(l).forEach(p => chunks.push({ text: p, lang: 'hi-IN', voice: hiVoice })));
-      const prose = proseOf(v);
+      /* The translation and the meaning are read only while they are shown. */
+      const hidden = explains(book) && !state.meaning;
+      const prose = hidden && v.lines.length ? [] : proseOf(v);
       const isEnProse = prose.length > 0 && prose === v.proseEn;
       prose.forEach(pr => speechPieces(pr).forEach(p => chunks.push({ text: p, lang: isEnProse ? 'en-IN' : 'hi-IN', voice: isEnProse ? enVoice : hiVoice })));
-      const part = shownParts(v)[0];
+      const part = hidden ? null : shownParts(v)[0];
       if (part) {
         const isEn = part.lang === 'en';
         speechPieces(part.text).forEach(p => chunks.push({ text: p, lang: isEn ? 'en-IN' : 'hi-IN', voice: isEn ? enVoice : hiVoice }));
@@ -968,10 +955,18 @@
       playing: !!(here && !rec.el.paused) };
   }
 
+  /* The sung recording stays out of the way of the text: a small "गायन सुनें" button opens its player, and the player stays
+     open (or closed) from page to page while the app is open. In a pooja recited in one go, Listen plays it anyway. */
+  let recOpen = false;
+  function recButtonHtml() {
+    return '<button class="btn btn-small" type="button" data-action="rec-open" aria-controls="rec-panel" aria-expanded="' + recOpen + '">' +
+      icon('headphones') + '<span>' + esc(t('recTitle')) + '</span></button>';
+  }
+
   function recordingHtml(book) {
     const s = recState(book.id);
     const pct = s.dur ? Math.min(100, s.now / s.dur * 100) : 0;
-    return '<section class="rec' + (s.playing ? ' is-playing' : '') + '" aria-label="' + esc(t('recTitle')) + '">' +
+    return '<section class="rec' + (s.playing ? ' is-playing' : '') + '" id="rec-panel" aria-label="' + esc(t('recTitle')) + '"' + (recOpen ? '' : ' hidden') + '>' +
       '<div class="rec-row"><button class="rec-play" type="button" data-action="rec-toggle" aria-pressed="' + s.playing + '" aria-label="' +
       esc(t(s.playing ? 'recPause' : 'recPlay')) + '">' + icon(s.playing ? 'player-pause' : 'player-play') + '</button>' +
       '<div class="rec-main"><p class="rec-title">' + icon('headphones') + '<span>' + esc(t('recTitle')) + '</span></p>' +
@@ -1778,35 +1773,53 @@
     return html;
   }
 
-  /* What explains or follows the verse: prose, the lesson, links, pictures, the Hindi padya and the meanings. */
-  function commentaryHtml(book, v) {
+  /* In scripture, poojas and paath, what explains the text (its translation, the Hindi padya, the meanings and the
+     pictures that explain it) waits behind the Meaning button, so the text itself leads. In stories and the temple and
+     pooja guides the words are the text, so everything shows. */
+  function explains(book) {
+    return STORY_LIKE.indexOf(book.category) < 0 && book.category !== 'vidhi';
+  }
+
+  /* What explains or follows the verse: prose, the lesson, links, pictures, the Hindi padya and the meanings.
+     `which` picks part of it: 'meaning' (what the Meaning button shows) or 'rest' (what always shows). */
+  function commentaryHtml(book, v, which) {
+    const explained = explains(book);
+    const want = isMeaning => !which || (which === 'meaning') === (explained && isMeaning);
     let html = '';
     const prose = proseOf(v);
-    if (prose.length) {
-      /* Under the original lines of a pooja or granth the prose is their translation, so it is set apart like a meaning.
-         In the temple and pooja guides the prose is the instruction itself and stays plain. */
-      const gloss = v.lines.length && book.category !== 'vidhi';
+    /* Under the original lines of a pooja or granth the prose is their translation, so it is set apart like a meaning.
+       In the temple and pooja guides the prose is the instruction itself and stays plain. */
+    const gloss = v.lines.length && book.category !== 'vidhi';
+    if (prose.length && want(gloss)) {
       html += '<div class="prose' + (gloss ? ' gloss' : '') + '" translate="no">' + prose.map(p => '<p>' + esc(p) + '</p>').join('') + '</div>';
     }
     const moral = state.lang === 'en' && v.moralEn.length ? v.moralEn : (v.moral.length ? v.moral : v.moralEn);
-    if (moral.length) {
+    if (moral.length && want(false)) {
       html += '<aside class="moral"><h2>' + esc(t('moral')) + '</h2>' + moral.map(p => '<p translate="no">' + esc(p) + '</p>').join('') + '</aside>';
     }
     /* A link to a text not yet in the app is left out until that text is added. */
     const links = v.links.filter(l => bookMeta(l.book));
-    if (links.length) {
+    if (links.length && want(false)) {
       html += '<div class="guide-links">' + links.map(l =>
         '<a class="btn btn-wide" href="#/read/' + encodeURIComponent(l.book) + '/' + l.pos + '">' + icon('book') + '<span>' + esc(L(l)) + '</span></a>').join('') + '</div>';
     }
-    (v.chitra || []).filter(c => !c.top).forEach(c => { html += chitraHtml(c); });
-    if (v.padya.length) {
+    if (want(true)) (v.chitra || []).filter(c => !c.top).forEach(c => { html += chitraHtml(c); });
+    if (v.padya.length && want(true)) {
       html += '<section class="padya"><h2>' + esc(t('padya')) + '</h2><p translate="no" lang="hi">' +
         v.padya.map(l => '<span class="verse-line">' + esc(l) + '</span>').join('') + '</p></section>';
     }
-    shownParts(v).forEach(p => {
-      html += '<section class="meaning"><h2>' + esc(partLabel(p.label)) + '</h2><p translate="no" lang="' + p.lang + '">' + padaHtml(p.text) + '</p></section>';
-    });
+    if (want(true)) {
+      shownParts(v).forEach(p => {
+        html += '<section class="meaning"><h2>' + esc(partLabel(p.label)) + '</h2><p translate="no" lang="' + p.lang + '">' + padaHtml(p.text) + '</p></section>';
+      });
+    }
     return html;
+  }
+
+  /* The Meaning button: it says what a tap will do, and is pressed while the meaning shows. */
+  function meaningButtonHtml() {
+    return '<button class="btn btn-small" type="button" data-action="meaning" aria-pressed="' + !!state.meaning + '">' +
+      icon('bulb') + '<span>' + esc(t(state.meaning ? 'meaningHide' : 'meaningShow')) + '</span></button>';
   }
 
   function verseBlockOpen(v, isTarget, cls) {
@@ -1862,43 +1875,42 @@
       pct = book.sections.length > 1 ? Math.round(sec.index / book.sections.length * 100) : 100;
     }
     const whereBook = book.title.hi + (secName && !page.scroll ? ' · ' + secName : '');
-    /* A pooja that is one page has its name in its own heading, and the side rail shows how far down it you are. */
+    /* Where you are in the book sits in the text-size panel, out of the way of the text. A pooja that is one page has its
+       name in its own heading, and the side rail shows how far down it you are. */
     const showWhere = !(page.scroll && book.sections.length === 1);
-    /* The parts of a pooja, by what is offered, as a strip that stays at the top: it shows where you are and opens any part.
-       The same offering twice in a row (the arghya to each of the five kalyanaks) is one stop on the strip. */
-    const parts = [];
-    if (page.scroll) {
-      verses.forEach(v => {
-        const part = offeringOf(v) || (/^जयमाला/.test(v.topic) ? 'jaymala' : null);
-        if (part && (!parts.length || parts[parts.length - 1].id !== part)) parts.push({ id: part, pos: v.pos });
-      });
-    }
-    const strip = parts.length >= 3 ? '<nav class="offer-strip" aria-label="' + esc(t('offerParts')) + '"><div class="offer-track">' +
-      parts.map((x, i) => '<button class="offer-chip" type="button" data-action="jump" data-pos="' + x.pos + '"' + (i === 0 ? ' aria-current="true"' : '') +
-        ' translate="no">' + esc(t('offerings')[x.id]) + '</button>').join('') + '</div></nav>' : '';
+    const whereHtml = showWhere ? '<div class="where"><span class="where-book" translate="no" lang="hi">' + esc(whereBook) + '</span>' +
+      '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' +
+      (posText ? '<span class="where-pos">' + posText + '</span>' : '') + '</div>' : '';
+
+    /* The text leads. Save and Share stand in the top bar; the meaning and the sung recording wait behind two small buttons
+       by the text (css/app.css shows the meaning beside the text where there is room, under each verse on a phone). */
+    const recHtml = recordingOf(id) ? recordingHtml(book) : '';
+    const meanings = verses.map(v => commentaryHtml(book, v, 'meaning'));
+    const hasMeaning = meanings.some(Boolean);
+    const tools = hasMeaning || recHtml ? '<div class="text-tools">' + (hasMeaning ? meaningButtonHtml() : '') + (recHtml ? recButtonHtml() : '') + '</div>' + recHtml : '';
+    /* In poojas, aartis and paath (not the guides) the page is the text alone: no drawings between the stanzas. */
+    const textOnly = opensDirect(book) && book.category !== 'vidhi';
 
     let html = '<header class="topbar reader-top">' +
       '<a class="back" href="' + back.href + '">' + icon('arrow-left') + '<span>' + esc(back.label) + '</span></a>' +
       '<span class="top-actions">' +
+      '<button class="icon-btn" data-action="bookmark" aria-pressed="' + isBookmarked + '" aria-label="' + esc(isBookmarked ? t('savedDone') : t('save')) + '">' + icon(isBookmarked ? 'check' : 'bookmark') + '</button>' +
+      (canShare() ? '<button class="icon-btn" data-action="share" aria-label="' + esc(t('share')) + '">' + icon('share') + '</button>' : '') +
       (state.locked ? '' : '<button class="icon-btn" data-action="size-panel" aria-controls="size-panel" aria-expanded="' + sizePanelOpen + '" aria-label="' + esc(t('textSize')) + '">' +
         '<span class="size-glyph" aria-hidden="true" translate="no" lang="hi"><small>अ</small>अ</span></button>') +
       '<a class="icon-btn" href="#/" aria-label="' + esc(t('home')) + '">' + icon('home') + '</a>' +
       '</span></header>' +
-      (state.locked ? '' : '<div class="size-panel" id="size-panel"' + (sizePanelOpen ? '' : ' hidden') + '>' +
+      (state.locked ? (whereHtml ? '<div class="size-panel" id="size-panel">' + whereHtml + '</div>' : '') :
+        '<div class="size-panel" id="size-panel"' + (sizePanelOpen ? '' : ' hidden') + '>' + whereHtml +
         '<span class="size-panel-label">' + esc(t('textSize')) + '</span><span class="size-ctrl">' + sizeButtonsHtml(false, sizeLevelHtml(true)) + '</span></div>') +
-      (showWhere ? '<div class="where"><span class="where-book" translate="no" lang="hi">' + esc(whereBook) + '</span>' +
-        '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' +
-        (posText ? '<span class="where-pos">' + posText + '</span>' : '') + '</div>' : '') + strip +
-      '<main class="reader' + (book.category === 'bal-katha' ? ' kids' : '') + (listening() ? ' is-listening' : '') + '" id="verse-area">';
-    /* The sung recording opens a pooja recited in one go; in a text read verse by verse it follows the verse,
-       so the verse still comes first on every page. */
-    const recHtml = recordingOf(id) ? recordingHtml(book) : '';
+      '<main class="reader' + (book.category === 'bal-katha' ? ' kids' : '') + (listening() ? ' is-listening' : '') + (state.meaning ? ' show-meaning' : '') + '" id="verse-area">';
 
     if (shrine) {
-      /* The shrine, and what explains it: one under the other, or on a wide screen side by side like a printed
-         edition with the mool on one side and its arth on the other (css/app.css). */
-      const notes = verses.map(v => commentaryHtml(book, v)).join('');
-      html += '<div class="read-pair' + (notes || recHtml ? ' has-notes' : '') + '"><div class="sanctum">' +
+      /* The shrine, and what explains it when asked for: one under the other on a phone, or side by side like a printed
+         edition with the mool on one side and its arth on the other. */
+      const notes = meanings.join('');
+      const rest = verses.map(v => commentaryHtml(book, v, 'rest')).join('');
+      html += '<div class="read-pair' + (notes ? ' has-notes' : '') + '"><div class="sanctum">' +
         '<article class="shrine' + (readEntering ? ' is-entering' : '') + '">' + ORN.crown(12) +
         '<div class="shrine-body">' + ORN.sides() +
         '<h1 class="shrine-label" translate="no">॥ ' + esc(label) + ' ॥</h1>' +
@@ -1908,34 +1920,34 @@
         '</div></div></article>' +
         '<div class="plinth full" aria-hidden="true"><i></i><i></i></div>' +
         (L(book.author) ? '<p class="shrine-attrib" translate="no">' + esc(L(book.author)) + ' · <span lang="hi">' + esc(book.title.hi) + '</span></p>' : '') +
-        '</div>';
-      if (notes || recHtml) html += '<div class="notes">' + (notes ? '<div class="commentary">' + notes + '</div>' : '') + recHtml + '</div>';
-      html += '</div>';
+        tools + '</div>';
+      if (notes) html += '<div class="notes" id="meaning"><div class="commentary">' + notes + '</div></div>';
+      html += '</div>' + (rest ? '<div class="commentary page-rest">' + rest + '</div>' : '');
     } else {
       html += '<div class="page-body' + (page.scroll ? ' scroll-page' : '') + (opensDirect(book) ? ' recite-page' : '') + '">';
       if (page.scroll) {
-        /* The words come first: a short head (no chhatra where the pooja has its own picture), the player, then the text. */
-        const pictured = (first.chitra || []).some(c => c.top);
-        html += '<header class="page-head">' + (pictured ? '' : ORN.chhatra()) + '<h1 translate="no">' + esc(label) + '</h1>' +
+        html += '<header class="page-head">' + ORN.chhatra() + '<h1 translate="no">' + esc(label) + '</h1>' +
           (secName && secName !== book.title.hi ? '<p class="page-head-sub" translate="no" lang="hi">' + esc(book.title.hi) + '</p>' : '') +
-          (opensDirect(book) ? sponsorHtml(id) : '') + '</header>' + recHtml;
+          (opensDirect(book) ? sponsorHtml(id) : '') + '</header>' + tools;
       } else {
-        html += '<h1 class="step-title" translate="no">' + esc(first.topic ? topicOf(first) : label) + '</h1>';
+        html += '<h1 class="step-title" translate="no">' + esc(first.topic ? topicOf(first) : label) + '</h1>' + tools;
       }
-      html += verses.map(v => {
-        /* In a pooja each stanza is headed by what it offers (जल, चंदन…), unless its own heading already says so; who wrote
-           it or the tune it is sung to is a quiet note, not a heading. */
+      html += verses.map((v, i) => {
+        /* In a pooja each stanza is headed by the word for what it offers (जल, चंदन…), unless its own heading already says
+           so; who wrote it or the tune it is sung to is a quiet note, not a heading. */
         const topic = page.scroll && v.topic ? topicOf(v) : '';
         const offer = page.scroll ? offeringOf(v) : null;
-        const mark = offer && topic.indexOf(STRINGS.hi.offerings[offer]) < 0 ? '<p class="offer-mark" translate="no"><span>' + esc(offeringName(offer)) + '</span></p>' : '';
-        /* In a pooja the picture follows the stanza it shows, so the first words are on the first screen. */
-        const pics = figuresHtml(v, v.topic ? topicOf(v) : label);
+        const mark = offer && topic.indexOf(STRINGS.hi.offerings[offer]) < 0 ? '<p class="offer-mark" translate="no">' + esc(offeringName(offer)) + '</p>' : '';
+        const pics = textOnly ? '' : figuresHtml(v, v.topic ? topicOf(v) : label);
         const words = v.lines.length ? '<div class="recite">' + linesHtml(book, v, true) + '</div>' : '';
-        return verseBlockOpen(v, target(v), mark ? 'has-offer' : '') + mark +
-          (topic ? (isCreditTopic(topic) ? '<p class="topic-note" translate="no">' + esc(topic) + '</p>' : '<h2 class="topic">' + esc(topic) + '</h2>') : '') +
-          (opensDirect(book) ? words + pics : pics + words) + commentaryHtml(book, v) + '</div>';
+        const text = mark + (topic ? (isCreditTopic(topic) ? '<p class="topic-note" translate="no">' + esc(topic) + '</p>' : '<h2 class="topic">' + esc(topic) + '</h2>') : '') + pics + words;
+        /* Where the page has meanings, every verse stands as a pair with its meaning (empty where it has none), so the
+           meaning can open beside it and all the verses keep one column. */
+        return verseBlockOpen(v, target(v)) +
+          (hasMeaning ? '<div class="verse-pair"><div class="verse-text">' + text + '</div><div class="commentary verse-meaning">' + meanings[i] + '</div></div>' : text) +
+          commentaryHtml(book, v, 'rest') + '</div>';
       }).join('');
-      html += (page.scroll ? '' : recHtml) + '</div>';
+      html += '</div>';
       /* A pooja opened straight from its list has no page of its own before it, so the invitation to give it as gyan daan
          closes the pooja itself. */
       if (opensDirect(book) && page.to === n) html += bookGiveHtml(book);
@@ -1948,12 +1960,7 @@
         icon('book') + '<span>' + esc(t('readWithMeaning')) + '</span></a></div>';
     }
 
-    html += '<div class="reader-tools">' +
-      '<button class="btn btn-small" data-action="bookmark" aria-pressed="' + isBookmarked + '">' + icon(isBookmarked ? 'check' : 'bookmark') +
-      '<span>' + esc(isBookmarked ? t('savedDone') : t('save')) + '</span></button>' +
-      (canShare() ? '<button class="btn btn-small" data-action="share">' + icon('share') + '<span>' + esc(t('share')) + '</span></button>' : '') +
-      '</div>' +
-      '</main>' +
+    html += '</main>' +
       '<nav class="reader-bar" aria-label="' + esc(book.title.hi) + '">' +
       '<button class="btn" data-action="prev">' + icon(isFirst && back.contents ? 'list' : 'arrow-left') + '<span>' + esc(isFirst ? (back.contents ? t('contents') : t('back')) : t('prev')) + '</span></button>' +
       '<button class="btn btn-primary" data-action="listen" aria-pressed="' + (listening() ? 'true' : 'false') + '">' + listenInner() + '</button>' +
@@ -2613,7 +2620,22 @@
       render();
     },
     'set-awake': el => { state.awake = el.dataset.value === 'yes'; saveState(); render(); },
-    'jump': el => jumpTo(parseInt(el.dataset.pos, 10)),
+    /* Show or hide the meaning in place, without drawing the page again, so the place being read stays on the screen. */
+    'meaning': () => {
+      state.meaning = !state.meaning;
+      saveState();
+      const reader = $app.querySelector('.reader');
+      keepPlace(() => { if (reader) reader.classList.toggle('show-meaning', state.meaning); });
+      $app.querySelectorAll('[data-action="meaning"]').forEach(b => { b.outerHTML = meaningButtonHtml(); });
+      updateScrollmark();
+      updateScrollCue();
+    },
+    'rec-open': el => {
+      recOpen = !recOpen;
+      el.setAttribute('aria-expanded', String(recOpen));
+      const panel = document.getElementById('rec-panel');
+      if (panel) panel.hidden = !recOpen;
+    },
     'font-up': () => changeFont(1),
     'font-down': () => changeFont(-1),
     'lock': () => { state.locked = true; saveState(); render(); },
@@ -2648,19 +2670,19 @@
     'retry': () => render(),
     'prev': () => readerStep(-1),
     'next': () => readerStep(1),
-    'bookmark': () => {
+    /* Saved in place, so a long pooja does not jump back to its top. */
+    'bookmark': el => {
       if (!ctx) return;
       const { book, page } = ctx;
       const before = state.bookmarks.length;
       state.bookmarks = state.bookmarks.filter(b => !(b.book === book.id && b.pos >= page.from && b.pos <= page.to));
-      if (state.bookmarks.length < before) {
-        toast(t('removed'));
-      } else {
-        state.bookmarks.push({ book: book.id, pos: page.from });
-        toast(t('savedDone'));
-      }
+      const saved = state.bookmarks.length === before;
+      if (saved) state.bookmarks.push({ book: book.id, pos: page.from });
+      toast(t(saved ? 'savedDone' : 'removed'));
       saveState();
-      render();
+      el.setAttribute('aria-pressed', String(saved));
+      el.setAttribute('aria-label', t(saved ? 'savedDone' : 'save'));
+      el.innerHTML = icon(saved ? 'check' : 'bookmark');
     },
     'unsave': el => {
       const pos = parseInt(el.dataset.pos, 10);
@@ -2826,8 +2848,8 @@
 
   let touchStart = null;
   $app.addEventListener('touchstart', e => {
-    /* Dragging the recording's slider, or sliding the strip of a pooja's parts, is not a page turn. */
-    if (currentView !== 'read' || e.touches.length !== 1 || e.target.closest('.rec, .offer-strip')) { touchStart = null; return; }
+    /* Dragging the recording's slider is not a page turn. */
+    if (currentView !== 'read' || e.touches.length !== 1 || e.target.closest('.rec')) { touchStart = null; return; }
     touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: true });
   $app.addEventListener('touchend', e => {

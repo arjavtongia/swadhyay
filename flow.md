@@ -39,12 +39,17 @@ sung recording), which `css/app.css` sets side by side when `main.reader` is at 
 
 **Reciting a pooja** (texts with `scroll: true`, stories excepted): a list row's link comes from
 `bookHref()` (`#/read/<book>/<saved stanza>`), so `render()` → `viewRead()` opens it directly.
-`viewRead()` → `offeringOf()` per stanza → the strip of parts and the offering marks;
-`linesHtml()` sets `MANTRA_RE` lines apart; `readerBack()` points the back link at the list
-(`bookParent()`). After drawing, `afterRender()` scrolls to the saved stanza (`stuckHeight()`),
-then `trackPlace()` and `keepAwake()`. While reading, the `scroll` listener → `trackPlace()` lights
-the current part and saves the stanza to `state.positions`; a strip tap → `jumpTo()`;
-`visibilitychange` → `keepAwake()` asks for the wake lock again.
+`viewRead()` → `offeringOf()` per stanza → the offering words; `linesHtml()` sets `MANTRA_RE`
+lines apart; `readerBack()` points the back link at the list (`bookParent()`). After drawing,
+`afterRender()` scrolls to the saved stanza (`stuckHeight()`), then `trackPlace()` and
+`keepAwake()`. While reading, the `scroll` listener → `trackPlace()` saves the stanza to
+`state.positions`; `visibilitychange` → `keepAwake()` asks for the wake lock again.
+
+**Showing the meaning:** `viewRead()` → `commentaryHtml(book, v, 'meaning')` per verse (and
+`'rest'` for what always shows) → the shrine's `.notes` or each verse's `.verse-pair`, hidden by
+CSS until `main.reader` has `.show-meaning`. The "Show meaning" button → action `meaning` →
+`keepPlace()` toggles the class and saves `state.meaning`; `speakPage()` reads the meaning only while
+it shows. "गायन सुनें" → action `rec-open` → shows `#rec-panel` (`recordingHtml()`).
 
 **Home:** `#/` → `render()` → `viewHome()` → `.home-start` (greeting, `readingHtml()`),
 `.home-paths` (`pathsHtml()`), `.home-day` (`todayHtml()`, `festivalCardHtml()`), `.home-story`,

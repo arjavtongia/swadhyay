@@ -138,3 +138,46 @@ its contents page.
 
 **Files affected:** `js/app.js`, `js/strings.js`, `css/app.css`, `sw.js` (VERSION v27),
 `DESIGN.md`, `PRODUCT.md`, `flow.md`
+
+## 2026-10-27: The text leads: meaning behind a button, beside the text when shown
+
+**Context:** After the previous change the owner still found reading "difficult and confusing" and
+asked for the focus to be on the text, with the meaning behind a button that shows it side by side
+with the text. Asked what else should step back, they chose all four: the pooja parts strip and
+pill labels, the audio player panel, pictures inside poojas, and Save, Share and the position line.
+On phones the meaning opens under each verse (their choice).
+
+**Decision:**
+- `commentaryHtml(book, v, which)` splits what explains a verse ('meaning': translation, padya,
+  meanings, explanatory pictures) from what always shows ('rest': a story's or guide's own words,
+  the lesson, links). `explains(book)` keeps stories and guides whole.
+- A "Show meaning" button (`meaningButtonHtml()`, action `meaning`) toggles `.show-meaning` on
+  `main.reader` in place (`keepPlace()` holds the words being read still); the choice is saved as
+  `state.meaning`, off by default. CSS shows the meaning beside the shrine, or as rows of verse and
+  meaning in poojas (`.verse-pair`), where the reader is 52rem wide; under each verse otherwise.
+- The sticky strip of parts is removed (reverses part of the previous entry); offerings are a small
+  brass word. The sung recording's player opens from a small button (`recButtonHtml()`, action
+  `rec-open`). Poojas, aartis and paath show no drawings. Save and Share move into the reader's top
+  bar as icons, and bookmarking updates in place instead of redrawing. The position line moves into
+  the text-size panel. Read aloud speaks the meaning only while it is shown.
+
+**Why:** The owner's direction is explicit: the text is the reason the app is opened (Product
+principle 1), and every extra band, pill and panel around it read as clutter. Toggling a class
+instead of redrawing keeps the place on long poojas, which a redraw would have thrown back to the
+top. Keeping the meaning in the page (hidden) rather than fetched on demand keeps it offline and
+instant.
+
+**Alternatives considered:**
+- *Meaning in a pop-up sheet per verse:* rejected; a modal covers the text it explains, and the
+  owner asked for side by side.
+- *Side by side on phones too:* offered; the owner chose under each verse, since two columns on a
+  phone make both too narrow.
+- *A "more" menu for Save and Share:* rejected for icons in the bar, which stay one tap away.
+
+**Tradeoffs accepted:** Someone who wants the meaning has to tap once (then it stays on). The
+strip's quick jump between parts is gone; the offering words and the side rail remain for finding
+one's place. Pooja drawings are no longer seen in the reader. Save and Share are icons without
+words (with labels for screen readers).
+
+**Files affected:** `js/app.js`, `js/strings.js`, `css/app.css`, `sw.js` (VERSION v28),
+`DESIGN.md`, `flow.md`
