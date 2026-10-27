@@ -780,9 +780,9 @@
     const chunks = [];
     verses.forEach(v => {
       v.lines.forEach(l => speechPieces(l).forEach(p => chunks.push({ text: p, lang: 'hi-IN', voice: hiVoice })));
-      /* The translation and the meaning are read only while they are shown. */
+      /* The meaning is read only while it is shown; prose is the text, so it is always read. */
       const hidden = explains(book) && !state.meaning;
-      const prose = hidden && v.lines.length ? [] : proseOf(v);
+      const prose = proseOf(v);
       const isEnProse = prose.length > 0 && prose === v.proseEn;
       prose.forEach(pr => speechPieces(pr).forEach(p => chunks.push({ text: p, lang: isEnProse ? 'en-IN' : 'hi-IN', voice: isEnProse ? enVoice : hiVoice })));
       const part = hidden ? null : shownParts(v)[0];
@@ -1774,9 +1774,10 @@
     return html;
   }
 
-  /* In scripture, poojas and paath, what explains the text (its translation, the Hindi padya, the meanings and the
-     pictures that explain it) waits behind the Meaning button, so the text itself leads. In stories and the temple and
-     pooja guides the words are the text, so everything shows. */
+  /* In scripture, poojas and paath, what explains the text (the Hindi padya, the meanings and the pictures that explain
+     it) waits behind the Meaning button, so the text itself leads. Prose always shows: in the puranas told in Hindi
+     prose under a short heading of each parva (Uttarpuran, Padmapuran…) the prose is the text. In stories and the temple
+     and pooja guides the words are the text, so everything shows. */
   function explains(book) {
     return STORY_LIKE.indexOf(book.category) < 0 && book.category !== 'vidhi';
   }
@@ -1791,7 +1792,7 @@
     /* Under the original lines of a pooja or granth the prose is their translation, so it is set apart like a meaning.
        In the temple and pooja guides the prose is the instruction itself and stays plain. */
     const gloss = v.lines.length && book.category !== 'vidhi';
-    if (prose.length && want(gloss)) {
+    if (prose.length && want(false)) {
       html += '<div class="prose' + (gloss ? ' gloss' : '') + '" translate="no">' + prose.map(p => '<p>' + esc(p) + '</p>').join('') + '</div>';
     }
     const moral = state.lang === 'en' && v.moralEn.length ? v.moralEn : (v.moral.length ? v.moral : v.moralEn);

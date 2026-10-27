@@ -204,3 +204,43 @@ with the text (Product principle 3: never commercial).
 **Tradeoffs accepted:** A smaller link may be noticed less often.
 
 **Files affected:** `js/app.js`, `css/app.css`, `sw.js` (VERSION v29), `DESIGN.md`
+
+## 2026-10-28: Krishna as a future Tirthankar: a common question, and Digambar-first answers
+
+**Context:** The owner asked Ask "is lord krishna going to be a jain tirthankar in the future?" and
+got an AI answer that said the app's texts did not cover it (the Harivansh article and the
+Uttarpuran both do), and gave "Amam", the Shvetambar name, without saying it was Shvetambar. The
+server's search had missed the right passages: the Uttarpuran names Krishna as "वासुदेव", not
+"कृष्ण". The wrong answer was then cached on the server for 90 days.
+
+**Decision:**
+- A common question `krishna-tirthankar` in `content/faq.json`: in the Digambar tradition Krishna
+  will become a Tirthankar in the coming utsarpini; the Uttarpuran lists वासुदेव 16th among the
+  souls who will be the next Tirthankars and Nirmal 16th among their names, so he is held to be the
+  16th Tirthankar, Nirmal; the Harivansh account says the same; the Shvetambar tradition calls him
+  Amam, the 12th. Sources: Uttarpuran passage 29 (Parva 76) and the Harivansh article, part 5.
+  Its wordings name Krishna, so a general "who are the future Tirthankars" still goes to the
+  server (with this question offered as related).
+- The server's instructions (both languages) now say to give the Digambar teaching, names and
+  numbers also when answering from general knowledge, to name any Shvetambar view as such, and to
+  say so when the Digambar teaching is not known rather than give another tradition's.
+- Prose (गद्य) is no longer hidden behind "Show meaning" (reverses that part of the text-first
+  entry): the only texts with prose under verse lines are seven puranas and charitras whose Hindi
+  prose is the text itself, so the Uttarpuran link opened on a page with its content hidden.
+
+**Why:** Common questions are matched on the phone before the server is asked, so the cached
+wrong answer is no longer reached for this question, at no cost and offline. The Uttarpuran's
+pairing of the two lists by position is the tradition's reading, and the answer shows the two
+lists rather than asserting more than the text says.
+
+**Alternatives considered:**
+- *Teaching the server's search that वासुदेव means Krishna:* rejected for now; a synonym list for
+  names is a larger change to `js/askkey.js`, which the server and index builder share.
+- *Only changing the instructions:* rejected; the model still would not see the passage.
+
+**Tradeoffs accepted:** The server keeps its cached wrong answer until it expires or is deleted
+(Workers KV, ASK_CACHE); someone who taps "Get an answer from the texts" under the common answer
+can still reach it. The new instructions take effect only after `npx wrangler deploy`.
+
+**Files affected:** `content/faq.json`, `server/answer.js`, `js/app.js`, `sw.js` (VERSION v31),
+`DESIGN.md`

@@ -1693,6 +1693,40 @@
     ]
   },
   {
+    "id": "krishna-tirthankar",
+    "q": {
+      "hi": "क्या श्रीकृष्ण आगे तीर्थंकर बनेंगे?",
+      "en": "Will Krishna become a Tirthankar?"
+    },
+    "also": [
+      "will krishna be a tirthankar",
+      "is lord krishna going to be a jain tirthankar",
+      "will krishna be the next tirthankar",
+      "krishna tirthankar",
+      "krishna nirmal tirthankar",
+      "श्रीकृष्ण तीर्थंकर",
+      "कृष्ण भावी तीर्थंकर",
+      "श्री कृष्ण भविष्य में तीर्थंकर होंगे",
+      "कृष्ण अगले तीर्थंकर बनेंगे"
+    ],
+    "a": {
+      "hi": "हाँ। दिगम्बर परम्परा के अनुसार श्रीकृष्ण आने वाली उत्सर्पिणी में तीर्थंकर बनेंगे। आचार्य गुणभद्र के उत्तरपुराण में उन जीवों की सूची है जो आगे तीर्थंकर होंगे; उसमें सोलहवाँ नाम वासुदेव (श्रीकृष्ण) का है। वहीं आगामी चौबीसी के नाम भी दिए हैं, जिनमें सोलहवें तीर्थंकर निर्मल हैं; इसलिए दिगम्बर परम्परा श्रीकृष्ण को भावी सोलहवें तीर्थंकर निर्मल मानती है। आचार्य जिनसेन के हरिवंश पुराण की कथा भी बताती है कि श्रीकृष्ण आगे तीर्थंकर बनेंगे। श्वेताम्बर परम्परा में उन्हें बारहवें भावी तीर्थंकर अमम कहा जाता है।",
+      "en": "Yes. In the Digambar tradition, Krishna will become a Tirthankar in the coming utsarpini. Acharya Gunabhadra's Uttarpuran lists the souls who will be the next Tirthankars, and the sixteenth of them is Vasudev (Krishna). It also gives the names of the coming twenty-four, the sixteenth being Nirmal, so the Digambar tradition holds that Krishna will be the sixteenth Tirthankar, Nirmal. The story of Acharya Jinasena's Harivansh Puran also tells that Krishna will become a Tirthankar. In the Shvetambar tradition he is named Amam, the twelfth future Tirthankar."
+    },
+    "sources": [
+      {
+        "book": "uttarpuran",
+        "find": "वासुदेव 16",
+        "pos": 29
+      },
+      {
+        "book": "harivansh",
+        "find": "श्रीकृष्ण आने वाली उत्सर्पिणी में तीर्थंकर बनेंगे",
+        "pos": 5
+      }
+    ]
+  },
+  {
     "id": "veer-nirvan-samvat",
     "q": {
       "hi": "वीर निर्वाण संवत् क्या है?",
