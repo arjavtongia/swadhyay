@@ -61,17 +61,19 @@ screens.
 ```mermaid
 flowchart TD
   Q[js/app.js:askQuestion] --> A[js/app.js:answerQuestion]
+  A -- follow-up, ASK.isFollowUp --> S2[js/ask.js:ASK.askServer<br/>with askContext: last 2 questions and answers]
+  S2 --> W
   A --> F[js/ask.js:ASK.matchFaq<br/>content/faq.json]
   F -- common question --> Done[answer shown on phone]
   F -- no match --> S[js/ask.js:ASK.askServer<br/>phone cache, then POST /ask]
   S --> W[server/worker.js:fetch]
-  W -- in Workers KV cache --> Done
+  W -- in Workers KV cache, not for a follow-up --> Done
   W --> R[server/retrieve.js:retrieve<br/>ask-index/ on the app's site]
   R --> M[server/answer.js:answer]
   M --> P{providers in PROVIDERS order<br/>with a key set}
   P --> N[askNvidia<br/>integrate.api.nvidia.com]
   P -- NVIDIA failed or not set --> C[askAnthropic<br/>api.anthropic.com]
-  N --> K[citations cleaned and renumbered,<br/>cached in KV for 90 days]
+  N --> K[citations cleaned and renumbered,<br/>cached in KV for 90 days unless a follow-up]
   C --> K
   K --> Done
 ```
@@ -80,6 +82,12 @@ As a call chain: `js/app.js:askQuestion()` → `js/app.js:answerQuestion()` →
 `js/ask.js:matchFaq()` → (no match) `js/ask.js:askServer()` → `server/worker.js:fetch()` →
 `server/retrieve.js:retrieve()` → `server/answer.js:answer()` → `askNvidia()`, then
 `askAnthropic()` if NVIDIA fails.
+
+A follow-up ("why?", "and his wife?"): `js/app.js:answerQuestion()` → `js/ask.js:isFollowUp()` →
+`js/app.js:askContext()` (the last two questions and answers) → `js/ask.js:askServer(question,
+lang, context)` (no phone cache) → `server/worker.js:fetch()` with `history` (no KV cache;
+searched as this question plus the one before) → `server/answer.js:answer(..., history)` →
+`earlierTurns()` puts the conversation before the question for either model.
 
 **Server health:** `GET /health` → `server/worker.js:fetch()` → `server/answer.js:primaryModel()`
 and `providers()` (reports which model answers first and which providers have keys).

@@ -13,6 +13,11 @@ called as rarely as possible:
    from passages of the app's own texts, found in the search index (`ask-index/`, built by
    `tools/build_ask_index.js`), and cites them. The app links each citation to the verse.
 
+A **follow-up** ("why?", "and his wife?", "इसका अर्थ?") means nothing alone, so the app sends it with the
+last two questions and answers (`history`). The server searches the texts with the question before
+it, gives the model the conversation, and does not cache the answer, since it belongs to that
+conversation. A follow-up is never matched to a common question.
+
 Until this server is deployed, the app answers the common questions only.
 
 ## Files

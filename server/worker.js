@@ -2,11 +2,14 @@
  * The Ask server: a Cloudflare Worker between the app and the AI models (NVIDIA, with Anthropic's
  * Claude as a second provider).
  *
- * POST /ask {question, lang} →
+ * POST /ask {question, lang, history?} →
  *   1. the shared cache (Workers KV): a question asked before, in the same words or near enough
  *      (same search keys), is answered from there without calling the model;
  *   2. otherwise the passages are found in the app's texts (index on the app's own site, see
  *      tools/build_ask_index.js), the model answers from them, and the answer is cached.
+ * A follow-up ("why?", "and his wife?") comes with `history`, the conversation before it ([{q, a}], oldest
+ * first): it is searched together with the question before it, answered as part of that conversation, and
+ * never cached, since its answer belongs to that conversation alone.
  *
  * The NVIDIA and Anthropic keys stay here as secrets; the app never sees it. Setup: server/README.md.
  */
@@ -14,6 +17,8 @@ import { retrieve, questionKeys } from './retrieve.js';
 import { answer, providers, primaryModel } from './answer.js';
 
 const MAX_QUESTION = 300;
+const MAX_HISTORY = 2;               // earlier questions sent with a follow-up
+const MAX_HISTORY_ANSWER = 1500;     // characters of each earlier answer
 const CACHE_DAYS = 90;
 const PER_HOUR = 20;                 // new (uncached) questions one visitor can ask in an hour
 
@@ -73,11 +78,14 @@ export default {
     const question = String(body.question || '').trim().slice(0, MAX_QUESTION);
     const lang = body.lang === 'hi' ? 'hi' : 'en';
     if (question.length < 3) return json({ error: 'empty' }, 400, headers);
+    const history = (Array.isArray(body.history) ? body.history : []).slice(-MAX_HISTORY)
+      .map(h => ({ q: String((h && h.q) || '').trim().slice(0, MAX_QUESTION), a: String((h && h.a) || '').trim().slice(0, MAX_HISTORY_ANSWER) }))
+      .filter(h => h.q && h.a);
 
-    /* Same search keys in the same language → same answer. */
+    /* Same search keys in the same language → same answer; a follow-up is never looked up or kept. */
     const keys = questionKeys(question);
     const cacheKey = 'a:' + lang + ':' + (keys.length ? keys.slice().sort().join('+') : question.toLowerCase());
-    if (env.ASK_CACHE) {
+    if (env.ASK_CACHE && !history.length) {
       const hit = await env.ASK_CACHE.get(cacheKey, 'json');
       if (hit) return json(Object.assign(hit, { cached: true }), 200, headers);
     }
@@ -86,11 +94,13 @@ export default {
     if (!providers(env).length) return json({ error: 'not configured' }, 503, headers);
 
     try {
-      const { passages } = await retrieve(question, loader(env.INDEX_URL));
-      const out = await answer(question, lang, passages, env);
+      /* A follow-up has few words of its own, so it is searched with the question before it ("why" → Krishna). */
+      const searchFor = history.length ? question + ' ' + history[history.length - 1].q : question;
+      const { passages } = await retrieve(searchFor, loader(env.INDEX_URL));
+      const out = await answer(question, lang, passages, env, history);
       if (!out.answer) return json({ error: 'no answer' }, 502, headers);
       const record = { question, lang, answer: out.answer, sources: out.sources, model: out.model, date: new Date().toISOString().slice(0, 10) };
-      if (env.ASK_CACHE) await env.ASK_CACHE.put(cacheKey, JSON.stringify(record), { expirationTtl: CACHE_DAYS * 86400 });
+      if (env.ASK_CACHE && !history.length) await env.ASK_CACHE.put(cacheKey, JSON.stringify(record), { expirationTtl: CACHE_DAYS * 86400 });
       return json(Object.assign(record, { cached: false }), 200, headers);
     } catch (e) {
       console.error(e && e.message);

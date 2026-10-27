@@ -4,6 +4,8 @@
  *   2. answers this phone has already received (kept in localStorage);
  *   3. the Ask server (server/), which answers from the app's own texts with NVIDIA's model (or
  *      Anthropic's Claude) and shares one cache among all users, so a question is only sent to the model once.
+ * A follow-up ("why?", "and his wife?", "इसका अर्थ?") goes to the server with the conversation before it,
+ * since it means nothing alone; it is neither matched to a common question nor kept in either cache.
  */
 const ASK = (function () {
   /* The Ask server's address, once it is deployed (server/README.md). Empty: common questions only. */
@@ -79,11 +81,29 @@ const ASK = (function () {
     return readStore();
   }
 
-  /* An answer from the server, or from this phone if it was asked before. Throws 'offline', 'busy',
-     'off' (no server yet) or 'failed'. */
-  async function askServer(question, lang) {
+  /* Words that point back to what was said before: he, his, they, this, more…; उनका, इसका, वह, और… */
+  const BACK_WORDS = /^(he|him|his|she|her|hers|it|its|they|them|their|theirs|this|that|these|those|then|more|else|also|same|why|how)$|^(वह|वे|वो|उस|उसे|उसका|उसकी|उसके|उसने|उन|उन्हें|उनका|उनकी|उनके|उन्होंने|यह|ये|इस|इसे|इसका|इसकी|इसके|इसमें|इन|इन्हें|इनका|इनकी|इनके|इन्होंने|वहाँ|यहाँ|ऐसा|ऐसे|ऐसी|फिर|तब|क्यों|कैसे)$/i;
+  const OPENS_ON = /^(and|but|so|also|what about|how about|और|लेकिन|पर|तो)(\s|$)/i;
+
+  /* A question that only makes sense after the one before it: one with no words of its own to search on ("why?",
+     "क्यों?"), one that opens on "and…" or "what about…", or one with a word pointing back ("his wife", "इसका अर्थ").
+     A short "why" or "how" counts only when it is most of the question, so "Why do Jains not eat after sunset?"
+     stands on its own. */
+  function isFollowUp(question) {
+    const q = String(question || '').trim().replace(/[?？।!.,]+/g, ' ').trim();
+    if (!q) return false;
+    if (!ASKKEY.questionKeys(q).length || OPENS_ON.test(q)) return true;
+    const words = q.split(/\s+/);
+    return words.some(w => BACK_WORDS.test(w) && (!/^(why|how|क्यों|कैसे)$/i.test(w) || words.length <= 3));
+  }
+
+  /* An answer from the server, or from this phone if it was asked before. With `context` (the conversation before a
+     follow-up, oldest first, as {q, a}) it always asks the server and keeps nothing, since the answer belongs to that
+     conversation. Throws 'offline', 'busy', 'off' (no server yet) or 'failed'. */
+  async function askServer(question, lang, context) {
     const key = cacheKey(question, lang);
-    const saved = readStore().find(r => r.key === key);
+    const followUp = !!(context && context.length);
+    const saved = !followUp && readStore().find(r => r.key === key);
     if (saved) return Object.assign({}, saved, { fromPhone: true });
     if (!SERVER) throw new Error('off');
     if (!navigator.onLine) throw new Error('offline');
@@ -94,7 +114,7 @@ const ASK = (function () {
       res = await fetch(SERVER.replace(/\/$/, '') + '/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: question, lang: lang }),
+        body: JSON.stringify(followUp ? { question: question, lang: lang, history: context } : { question: question, lang: lang }),
         signal: ctrl ? ctrl.signal : undefined
       });
     } catch (e) {
@@ -106,9 +126,9 @@ const ASK = (function () {
     if (!res.ok) throw new Error('failed');
     const data = await res.json();
     const record = { key: key, question: question, lang: lang, answer: data.answer, sources: data.sources || [], date: data.date || '' };
-    remember(record);
+    if (!followUp) remember(record);
     return record;
   }
 
-  return { loadFaq: loadFaq, matchFaq: matchFaq, askServer: askServer, history: history, enabled: () => !!SERVER };
+  return { loadFaq: loadFaq, matchFaq: matchFaq, askServer: askServer, isFollowUp: isFollowUp, history: history, enabled: () => !!SERVER };
 })();

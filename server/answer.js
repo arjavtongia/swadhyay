@@ -29,6 +29,7 @@ Rules:
 - If the passages do not answer the question, you may give the widely accepted basic Jain teaching in one or two sentences, and say that it is not from the app's texts. If you are not sure, say so and suggest asking a learned person at the temple. Never invent verses, verse numbers, dates or quotations.
 - Passages marked "children's story" are simple stories written for children. Take only their teaching; never name their characters or refer to their events, and prefer the scriptures when both say the same thing.
 - Follow the Digambar tradition of these texts, also when you answer from general knowledge: give the Digambar teaching, names and numbers. Never give a Shvetambar view as the Jain answer; if you mention one, say plainly that it is the Shvetambar view (for example "In the Shvetambar tradition…"). If you do not know the Digambar teaching on a point, say so rather than giving another tradition's.
+- Earlier questions and your answers to them may come before the question. A short follow-up such as "why?", "how?" or "and his wife?" continues the last topic: answer it in that light, from the passages.
 - Be respectful and simple, in plain English, in at most 160 words. No headings, no lists unless the question asks for one.
 - Only answer questions about Jain dharma, its practice, texts, history and festivals. For anything else, say politely that you can only help with Jain dharma.`,
   hi: `आप स्वाध्याय ऐप के भीतर जैन धर्म के प्रश्नों का उत्तर देते हैं। यह ऐप दिगम्बर जैन ग्रंथों, पूजाओं और कथाओं का है।
@@ -37,11 +38,17 @@ Rules:
 - अगर अंशों में उत्तर न हो, तो सर्वमान्य मूल जैन सिद्धांत एक-दो वाक्यों में बता सकते हैं, पर साफ़ कहें कि यह ऐप के ग्रंथों से नहीं है। संदेह हो तो कहें, और मंदिर में किसी विद्वान से पूछने का सुझाव दें। कोई श्लोक, क्रमांक, तिथि या उद्धरण अपनी ओर से न गढ़ें।
 - "बाल कथा" लिखे अंश बच्चों के लिए लिखी सरल कहानियाँ हैं। उनसे केवल शिक्षा लें; उनके पात्रों के नाम या घटनाओं का उल्लेख न करें, और जहाँ ग्रंथ वही बात कहें वहाँ ग्रंथ को प्राथमिकता दें।
 - इन ग्रंथों की दिगम्बर परम्परा का पालन करें, अपनी जानकारी से उत्तर देते समय भी: दिगम्बर मान्यता, नाम और संख्याएँ ही दें। श्वेताम्बर मान्यता को कभी जैन धर्म के उत्तर के रूप में न दें; उसका उल्लेख करें तो साफ़ लिखें कि यह श्वेताम्बर मान्यता है (जैसे "श्वेताम्बर परम्परा में…")। किसी बात पर दिगम्बर मान्यता न पता हो तो यही कहें, दूसरी परम्परा की बात न दें।
+- प्रश्न से पहले की बातचीत (पिछले प्रश्न और उनके आपके उत्तर) भी दी जा सकती है। "क्यों?", "कैसे?" या "उनकी पत्नी?" जैसा छोटा प्रश्न पिछली बात से जुड़ा है: उसी संदर्भ में, अंशों के आधार पर उत्तर दें।
 - पूरा उत्तर विनम्र और सरल हिंदी (देवनागरी) में, अधिक से अधिक 160 शब्दों में दें; अंग्रेज़ी वाक्य न जोड़ें। शीर्षक न लगाएँ; सूची तभी जब प्रश्न में माँगी गई हो।
 - केवल जैन धर्म, उसके आचरण, ग्रंथों, इतिहास और पर्वों के प्रश्नों का उत्तर दें। दूसरे विषयों पर विनम्रता से कहें कि आप केवल जैन धर्म में सहायता कर सकते हैं।`
 };
 
-async function askNvidia(system, user, env) {
+/* The conversation before a follow-up, as the model's own earlier turns. */
+function earlierTurns(history) {
+  return (history || []).flatMap(h => [{ role: 'user', content: h.q }, { role: 'assistant', content: h.a }]);
+}
+
+async function askNvidia(system, user, env, history) {
   const model = env.MODEL || DEFAULT_MODEL;
   const res = await fetch(NVIDIA_ENDPOINT, {
     method: 'POST',
@@ -52,7 +59,7 @@ async function askNvidia(system, user, env) {
       top_p: 0.9,
       max_tokens: 1400,
       stream: false,
-      messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
+      messages: [{ role: 'system', content: system }].concat(earlierTurns(history), [{ role: 'user', content: user }])
     })
   });
   if (!res.ok) throw new Error('nvidia ' + res.status + ' ' + (await res.text()).slice(0, 300));
@@ -61,7 +68,7 @@ async function askNvidia(system, user, env) {
   return { text: (choice.message && choice.message.content) || '', truncated: choice.finish_reason === 'length', model };
 }
 
-async function askAnthropic(system, user, env) {
+async function askAnthropic(system, user, env, history) {
   const model = env.ANTHROPIC_MODEL || DEFAULT_ANTHROPIC_MODEL;
   const res = await fetch(ANTHROPIC_ENDPOINT, {
     method: 'POST',
@@ -80,7 +87,7 @@ async function askAnthropic(system, user, env) {
       output_config: { effort: env.ANTHROPIC_EFFORT || 'low' },
       fallbacks: 'default',
       system,
-      messages: [{ role: 'user', content: user }]
+      messages: earlierTurns(history).concat([{ role: 'user', content: user }])
     })
   });
   if (!res.ok) throw new Error('anthropic ' + res.status + ' ' + (await res.text()).slice(0, 300));
@@ -92,7 +99,7 @@ async function askAnthropic(system, user, env) {
 
 const ASK = { nvidia: askNvidia, anthropic: askAnthropic };
 
-export async function answer(question, lang, passages, env) {
+export async function answer(question, lang, passages, env, history) {
   const context = passages.map((p, i) => '[' + (i + 1) + '] ' + p.title.hi + ' (' + p.title.en + ')' + (p.forChildren ? ", a children's story (बाल कथा)" : p.author ? ', by ' + p.author : '') + ', part ' + p.pos + ':\n' + p.text).join('\n\n');
   const system = SYSTEM[lang === 'hi' ? 'hi' : 'en'];
   const user = (context ? 'Passages:\n\n' + context + '\n\n' : 'No passages were found in the app\'s texts.\n\n') + 'Question: ' + question;
@@ -101,7 +108,7 @@ export async function answer(question, lang, passages, env) {
   let out, lastError;
   for (const p of order) {
     try {
-      out = await ASK[p](system, user, env);
+      out = await ASK[p](system, user, env, history);
       if (out.text.trim()) break;
       lastError = new Error(p + ' gave an empty answer');
     } catch (e) {

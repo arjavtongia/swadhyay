@@ -244,3 +244,42 @@ can still reach it. The new instructions take effect only after `npx wrangler de
 
 **Files affected:** `content/faq.json`, `server/answer.js`, `js/app.js`, `sw.js` (VERSION v31),
 `DESIGN.md`
+
+## 2026-10-28: Ask answers follow-ups in the light of the conversation
+
+**Context:** After the Krishna answer, the owner asked "why" and got "your question seems
+incomplete": every question went to the server alone. Worse, the server cached that reply under
+"why" for everyone.
+
+**Decision:**
+- `js/ask.js:isFollowUp()` marks a question as a follow-up when it has no search words of its own
+  ("why", "क्यों"), opens on "and / what about / और / तो…", or has a word that points back (his,
+  they, this, more; उनका, इसका, वह…); "why" and "how" count only in a question of three words or
+  fewer, so "Why do Jains not eat after sunset?" stands alone. Tested on 25 wordings.
+- A follow-up skips common-question matching and goes to the server with `askContext()`: the
+  last two questions and answers in the thread (answers without citation marks, at most 1500
+  characters). It is not kept in the phone's answer store or its list of earlier questions.
+- The server accepts `history` (at most two turns, trimmed again), searches the texts with the
+  question plus the one before it, passes the conversation to the model as earlier turns
+  (`earlierTurns()`, for NVIDIA and Claude alike), adds a rule on reading short follow-ups, and
+  neither reads nor writes the shared cache for it.
+
+**Why:** A follow-up's answer depends on its conversation, so it cannot be shared through a cache
+keyed on its words, and its few words cannot find the passages alone. Sending only questions that
+look like follow-ups keeps every standalone question cacheable and matched to common questions as
+before, which keeps cost down; a few standalone questions with "it" or "they" will be sent with
+context and not cached, which costs a model call but answers correctly.
+
+**Alternatives considered:**
+- *Always sending the conversation:* rejected; no question after the first would use the cache or
+  the common questions.
+- *Rewriting the follow-up into a full question on the phone:* rejected; it needs a model.
+- *Caching follow-ups under a key with the previous question:* rejected; the answer also depends on
+  the previous answer, and such keys would rarely repeat.
+
+**Tradeoffs accepted:** Follow-ups need the internet and each costs a model call. The history is
+supplied by the phone, so it is trimmed and counted against the same hourly limit. The server's
+stale "why" answer stays cached for a bare "why" asked first; it expires within 90 days.
+
+**Files affected:** `js/ask.js`, `js/app.js`, `server/worker.js`, `server/answer.js`,
+`server/README.md`, `sw.js` (VERSION v32), `DESIGN.md`, `flow.md`

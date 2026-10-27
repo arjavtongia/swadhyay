@@ -2110,8 +2110,20 @@
   }
 
   /* The answer to a question: a common question if one matches (unless the texts are asked for), otherwise the server. */
+  /* The conversation before a follow-up, for the server: the last two questions answered, oldest first, each answer
+     without its citation marks and kept short. */
+  function askContext() {
+    return askThread.filter(m => m.role === 'app' && m.status === 'done' && m.result).slice(-2).map(m => ({
+      q: String(m.question || '').slice(0, 300),
+      a: String(m.result.answer || '').replace(/\s*\[\d+\]/g, '').slice(0, 1500)
+    }));
+  }
+
   async function answerQuestion(question, forceServer) {
-    const { best, related } = await ASK.matchFaq(question);
+    /* A follow-up ("why?", "and his wife?") goes to the server with what was asked before; alone it would be
+       matched to the wrong common question, or answered as if nothing had been said. */
+    const context = !forceServer && ASK.isFollowUp(question) ? askContext() : [];
+    const { best, related } = context.length ? { best: null, related: [] } : await ASK.matchFaq(question);
     if (best && !forceServer) {
       askThread.push({ role: 'app', status: 'done', question: question, result: faqResult(best), related: related, typed: true, fresh: true });
       return refreshAsk();
@@ -2120,7 +2132,7 @@
     askThread.push(msg);
     refreshAsk();
     try {
-      const r = await ASK.askServer(question, state.lang);
+      const r = await ASK.askServer(question, state.lang, context);
       Object.assign(msg, { status: 'done', result: { kind: 'ai', answer: r.answer, sources: r.sources || [] }, related: related, fresh: true });
     } catch (e) {
       Object.assign(msg, { status: 'error', error: e.message, related: related, fresh: true });
