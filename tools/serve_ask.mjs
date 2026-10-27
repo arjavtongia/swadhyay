@@ -15,7 +15,7 @@ const env = {
   ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
   ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL,
   PROVIDERS: process.env.PROVIDERS,
-  INDEX_URL: process.env.INDEX_URL || 'http://localhost:8780/ask-index/',
+  INDEX_URL: process.env.INDEX_URL || 'http://localhost:8780/ask-index/v2/',
   ALLOWED_ORIGINS: 'http://localhost:8780',
   ASK_CACHE: {
     get: async (k, type) => (cache.has(k) ? (type === 'json' ? JSON.parse(cache.get(k)) : cache.get(k)) : null),

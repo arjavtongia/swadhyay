@@ -320,3 +320,52 @@ people need their `need` kept up to date when wordings are added. Sita is left o
 entry's names because its key ("sit") is an English word.
 
 **Files affected:** `content/faq.json`, `js/ask.js`, `server/README.md`, `sw.js` (VERSION v33)
+
+## 2026-10-28: The Ask index in pieces, in a version folder; the future 24 as a common question
+
+**Context:** Asked for the future twenty-four Tirthankars, the server said the app's texts do not
+give them, though the Uttarpuran (Parva 76) does. Each parva of the prose puranas was one passage
+of tens of thousands of characters: the ranking pushed such passages to the bottom, and only their
+first 800 characters were ever shown to the model, so a list deep inside could never be used. 3,211
+passages (9.2M characters) were affected. The owner asked to keep the model's limits on answering
+from its own knowledge.
+
+**Decision:**
+- `tools/build_ask_index.js:pieces()` indexes a passage over 1000 characters in pieces of about 900
+  at sentence ends. Each piece carries the passage's heading and verse lines (the shloka over its
+  commentary, or a parva's summary), the same book and verse number, "…" at the cuts, and the last
+  sentence of the piece before it. The book's title words count once per verse (first piece only).
+  Each word keeps its best 100 passages instead of 60, as there are now 32,265 passages, not 22,031.
+- `server/retrieve.js` adds to a chosen piece the piece after it (a list going on past a cut) and
+  joins any other chosen piece of the same verse into it, up to 2000 characters, so a place is
+  cited once.
+- The index is built in `ask-index/v2/`; `INDEX_URL` in `server/wrangler.toml` points there. The
+  old files stay in `ask-index/` until the server is redeployed, then go.
+- A common question `future-tirthankars` gives the Uttarpuran's list (Mahapadma … Anantvirya), with
+  Shrenik as the first and Krishna as the sixteenth, says it is the Digambar list, and cites
+  Uttarpuran Parva 76 and the Kalchakra article.
+
+**Why:** Measured on the 81 common questions in both languages (161 wordings, each with
+hand-picked sources): the new index finds a hand-picked section in its top six for 65, the old one
+for 60, and the right text for 107 against 105; lines deep inside long passages ("महापद्म सुरदेव
+सुपार्श्व", "श्रेणिक आगे तीर्थंकर होंगे") are found and shown to the model. A version folder is needed
+because the server keeps index files for up to a day (Cloudflare's cache and its own memory): a
+rebuild in place could pair new word lists with old passages, or the reverse, for that time.
+
+**Alternatives considered:**
+- *Letting the model list the future Tirthankars from its own knowledge:* rejected by the owner;
+  the Digambar and Shvetambar lists differ in many names.
+- *Only raising the 800-character limit:* rejected; the ranking would still bury long passages, and
+  whole parvas would not fit in a request.
+- *Synonyms between wordings ("आगामी चौबीसी" for the list's "आगे … चौबीस"):* not done; the search
+  matches words, so a question worded unlike the text can still miss it. Common questions cover
+  the most asked of these.
+
+**Tradeoffs accepted:** The index grows from 30MB to 52MB, and both copies are in the repository
+until the old one is deleted. Four of the 161 wordings now miss a text the old index found, all of
+them questions with a common answer, which the phone gives without asking the server. Changing
+texts now means a new index folder and a server deploy.
+
+**Files affected:** `tools/build_ask_index.js`, `server/retrieve.js`, `server/wrangler.toml`,
+`tools/serve_ask.mjs`, `tools/test_ask.mjs`, `ask-index/v2/`, `content/faq.json`, `server/README.md`,
+`README.md`, `flow.md`, `sw.js` (VERSION v34)

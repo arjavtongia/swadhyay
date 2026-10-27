@@ -194,7 +194,7 @@ Then open http://localhost:8765.
 | `js/icons-swadhyay.js`, `js/icons.js` | The app's own icon pack (built from `icons/ui/*.svg` by `tools/build_icons.py`) and Tabler Icons |
 | `css/app.css` | Styles, day and night colours |
 | `content/` | The book list (`books.json`), categories, diagrams (`chitra.json`), common questions (`faq.json`) and every text |
-| `ask-index/` | Search index of every passage for the Ask server, built by `tools/build_ask_index.js` |
+| `ask-index/` | Search index of every passage for the Ask server, built by `tools/build_ask_index.js` into a version folder (`v2/`) |
 | `server/` | The Ask server (a Cloudflare Worker using NVIDIA's model, with Anthropic's Claude as backup); setup in [`server/README.md`](server/README.md) |
 | `sw.js` | Offline support; change `VERSION` when adding or removing files in its list |
 | `tools/` | Icon builders, the Ask index builder and the opening-line writer for poojas |

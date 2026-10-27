@@ -12,7 +12,7 @@ build step) and the **Ask server** (a Cloudflare Worker in `server/`).
 | `server/worker.js` → `fetch(request, env)` | Cloudflare, on each HTTP request (`npx wrangler deploy`) |
 | `tools/serve_ask.mjs` | `node tools/serve_ask.mjs`: runs the Worker locally on port 8787 |
 | `tools/test_ask.mjs` | `node tools/test_ask.mjs "question"`: retrieval (and the model, if a key is set) from the command line |
-| `tools/build_ask_index.js` | `node tools/build_ask_index.js`: builds `ask-index/` and links `content/faq.json` to verses |
+| `tools/build_ask_index.js` | `node tools/build_ask_index.js`: builds `ask-index/v2/` and links `content/faq.json` to verses |
 
 ## Order of execution (app)
 
@@ -92,7 +92,11 @@ searched as this question plus the one before) → `server/answer.js:answer(...,
 **Server health:** `GET /health` → `server/worker.js:fetch()` → `server/answer.js:primaryModel()`
 and `providers()` (reports which model answers first and which providers have keys).
 
-**Rebuilding the search index:** `node tools/build_ask_index.js` → reads `content/` →
+**Rebuilding the search index:** `node tools/build_ask_index.js` → `passages()` per text → `pieces()` cuts a
+passage over 1000 characters into pieces of about 900 at sentence ends, each under its heading → writes
+`ask-index/<INDEX_VERSION>/` (now `v2`; the server reads it from `INDEX_URL`). On a question,
+`server/retrieve.js:retrieve()` joins a chosen piece with the piece after it and with any other chosen
+piece of the same verse, so a place is cited once. Overall: reads `content/` →
 writes `ask-index/` and updates `content/faq.json` (uses `js/askkey.js` for word matching).
 
 ## Key modules

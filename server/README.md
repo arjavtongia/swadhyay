@@ -10,7 +10,7 @@ called as rarely as possible:
    model again.
 3. **New questions** go to NVIDIA's model (`nvidia/nemotron-3-super-120b-a12b`), or to Anthropic's
    Claude (`claude-opus-5-5`) if NVIDIA fails or isn't set up. The model answers only
-   from passages of the app's own texts, found in the search index (`ask-index/`, built by
+   from passages of the app's own texts, found in the search index (`ask-index/v2/`, built by
    `tools/build_ask_index.js`), and cites them. The app links each citation to the verse.
 
 A **follow-up** ("why?", "and his wife?", "इसका अर्थ?") means nothing alone, so the app sends it with the
@@ -29,7 +29,7 @@ Until this server is deployed, the app answers the common questions only.
 | `answer.js` | The instructions to the model and the calls to NVIDIA and Anthropic |
 | `wrangler.toml` | Cloudflare settings: model, index address, allowed origins, cache |
 | `../js/askkey.js` | Word matching shared by the app, the server and the index builder |
-| `../tools/build_ask_index.js` | Builds `ask-index/` and links the common questions to verses |
+| `../tools/build_ask_index.js` | Builds `ask-index/v2/` and links the common questions to verses |
 | `../tools/test_ask.mjs` | Tries questions from the command line |
 | `../tools/serve_ask.mjs` | Runs this server on your computer for testing |
 
@@ -69,8 +69,14 @@ Commit and push; the Ask screen now answers new questions too. Check it at
 
 ## Keeping it up to date
 
-- **After adding or editing texts, or the common questions:** run `node tools/build_ask_index.js`
-  and commit `ask-index/` and `content/faq.json`.
+- **After editing only the common questions:** run `node tools/build_ask_index.js` and commit
+  `content/faq.json` (the index files come out the same).
+- **After adding or editing texts:** the passage numbers change, and the server keeps index files for
+  up to a day, so build the new index in a new folder: raise `INDEX_VERSION` in
+  `tools/build_ask_index.js` (v2 → v3), run it, set `INDEX_URL` in `wrangler.toml` to the new folder,
+  commit and push, run `npx wrangler deploy`, and delete the old folder in a later commit. Long
+  passages (a whole parva of a purana) are indexed in pieces of about 900 characters, so the model
+  sees the part that answers rather than the start.
 - **To add a common question:** add an entry to `content/faq.json` (`q`, `also` for other wordings,
   `a`, and `sources` with the book id and a few words of the verse in `find`), then rebuild as above.
   The most asked questions are worth adding: they are then free and work offline.

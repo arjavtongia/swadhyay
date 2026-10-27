@@ -12,7 +12,7 @@ import { answer } from '../server/answer.js';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const cache = new Map();
 const load = async p => {
-  if (!cache.has(p)) cache.set(p, JSON.parse(fs.readFileSync(path.join(ROOT, 'ask-index', p), 'utf8')));
+  if (!cache.has(p)) cache.set(p, JSON.parse(fs.readFileSync(path.join(ROOT, 'ask-index', 'v2', p), 'utf8')));
   return cache.get(p);
 };
 

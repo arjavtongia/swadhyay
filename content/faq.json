@@ -1806,6 +1806,43 @@
     ]
   },
   {
+    "id": "future-tirthankars",
+    "q": {
+      "hi": "आगामी चौबीसी में कौन-से तीर्थंकर होंगे?",
+      "en": "Who will be the twenty-four future Tirthankars?"
+    },
+    "also": [
+      "future 24 tirthankars",
+      "future tirthankars",
+      "next 24 tirthankars",
+      "names of the next 24 tirthankars",
+      "names of future tirthankars",
+      "tirthankars of the coming utsarpini",
+      "agami chaubisi",
+      "bhavi tirthankar",
+      "आने वाले चौबीस तीर्थंकर",
+      "भावी तीर्थंकर",
+      "भविष्य के तीर्थंकर",
+      "आगामी तीर्थंकरों के नाम"
+    ],
+    "a": {
+      "hi": "अवसर्पिणी के बाद आने वाली उत्सर्पिणी के तीसरे आरे में फिर चौबीस तीर्थंकर होंगे। आचार्य गुणभद्र के उत्तरपुराण के अनुसार उनके नाम हैं: 1 महापद्म, 2 सुरदेव, 3 सुपार्श्व, 4 स्वयंप्रभ, 5 सर्वात्मभूत, 6 देवपुत्र, 7 कुलपुत्र, 8 उदंक, 9 प्रोष्ठिल, 10 जयकीर्ति, 11 मुनिसुव्रत, 12 अरनाथ, 13 अपाप, 14 निष्कषाय, 15 विपुल, 16 निर्मल, 17 चित्रगुप्त, 18 समाधिगुप्त, 19 स्वयंभू, 20 अनिवर्ती, 21 विजय, 22 विमल, 23 देवपाल और 24 अनन्तवीर्य। पहले तीर्थंकर महापद्म भगवान महावीर के भक्त राजा श्रेणिक का जीव होंगे, और सोलहवें निर्मल श्रीकृष्ण का। यह दिगम्बर परम्परा की सूची है; श्वेताम्बर परम्परा की सूची में कई नाम अलग हैं।",
+      "en": "In the third ara of the utsarpini that follows this avasarpini, twenty-four Tirthankars will come again. Acharya Gunabhadra's Uttarpuran names them: 1 Mahapadma, 2 Surdev, 3 Suparshva, 4 Swayamprabh, 5 Sarvatmabhut, 6 Devputra, 7 Kulputra, 8 Udank, 9 Proshthil, 10 Jayakirti, 11 Munisuvrat, 12 Aranath, 13 Apap, 14 Nishkashay, 15 Vipul, 16 Nirmal, 17 Chitragupt, 18 Samadhigupt, 19 Swayambhu, 20 Anivarti, 21 Vijay, 22 Vimal, 23 Devpal and 24 Anantvirya. The first, Mahapadma, will be the soul of King Shrenik, Bhagwan Mahavir's devotee, and the sixteenth, Nirmal, that of Krishna. This is the Digambar list; the Shvetambar list differs in many names."
+    },
+    "sources": [
+      {
+        "book": "uttarpuran",
+        "find": "जयकीर्ति 9",
+        "pos": 29
+      },
+      {
+        "book": "kalchakra",
+        "find": "उसके तीसरे आरे में फिर चौबीस तीर्थंकर होंगे",
+        "pos": 5
+      }
+    ]
+  },
+  {
     "id": "veer-nirvan-samvat",
     "q": {
       "hi": "वीर निर्वाण संवत् क्या है?",

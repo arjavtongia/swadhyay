@@ -11,7 +11,7 @@ ANTHROPIC_MODEL = "claude-opus-5-5"
 # Order to try the providers in; one without its key set is skipped.
 PROVIDERS = "nvidia,anthropic"
 # Where the search index lives: the app's own site (built by tools/build_ask_index.js).
-INDEX_URL = "https://arjavtongia.github.io/swadhyay/ask-index/"
+INDEX_URL = "https://arjavtongia.github.io/swadhyay/ask-index/v2/"
 # Only the app may call this server.
 ALLOWED_ORIGINS = "https://arjavtongia.github.io,http://localhost:8780"
 

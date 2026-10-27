@@ -3,21 +3,33 @@
  * question's sources are (content/faq.json).
  *
  * Every verse, sutra or story part of every text becomes a passage, numbered the way the app
- * numbers it (see parseBook in js/app.js), so an answer can link straight to it. Words become
- * sound keys (js/askkey.js) and each key lists its best passages with a BM25 weight, split into
- * 256 small files so the server only loads what a question needs.
+ * numbers it (see parseBook in js/app.js), so an answer can link straight to it. A long one (a whole
+ * parva of a purana told in prose) is cut into pieces of about PIECE characters at sentence ends,
+ * each carrying its heading and the same number: the search can then find a line deep inside it,
+ * and the model is shown that part rather than only the start. Words become sound keys
+ * (js/askkey.js) and each key lists its best passages with a BM25 weight, split into 256 small files
+ * so the server only loads what a question needs.
  *
- * Run after adding or editing texts:  node tools/build_ask_index.js
+ * The index is written to ask-index/<INDEX_VERSION>/. The server caches its files for a day, and the
+ * passage numbers change whenever texts are added or edited, so after such a change raise
+ * INDEX_VERSION, point INDEX_URL in server/wrangler.toml at the new folder, deploy the server, and
+ * delete the old folder once it is live. A rebuild for the common questions alone leaves the
+ * passages as they were.
+ *
+ * Run after adding or editing texts or common questions:  node tools/build_ask_index.js
  */
 const fs = require('fs');
 const path = require('path');
 const ASKKEY = require('../js/askkey.js');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT = path.join(ROOT, 'ask-index');
+const INDEX_VERSION = 'v2';  // the folder under ask-index/; see above for when to raise it
+const OUT = path.join(ROOT, 'ask-index', INDEX_VERSION);
 const CHUNK = 25;           // passages per file, small enough to read quickly
-const KEEP = 60;            // best passages kept for each key
-const MAX_TEXT = 800;       // characters of a passage given to the model
+const KEEP = 100;           // best passages kept for each key
+const MAX_TEXT = 1000;      // characters of a passage given to the model
+const PIECE = 900;          // a passage longer than MAX_TEXT is indexed in pieces of about this size
+const MAX_HEAD = 160;       // characters of the heading repeated on each piece
 const K1 = 1.2, B = 0.75;
 
 const MEANING = /^(अन्वयार्थ|अर्थ|भावार्थ|विशेषार्थ|विशेष|Meaning)\s*:\s*(.*)$/i;
@@ -45,8 +57,12 @@ function passages(txt) {
     });
     block = [];
     if (!v.lines.length && !v.prose.length && !v.hasImage && !v.moral) return;
-    const text = [section, v.topic, v.lines.join(' । '), v.prose.join(' '), v.other.join(' ')].filter(Boolean).join(' — ');
-    out.push(text);
+    /* The verse lines of a long passage (the shloka over its commentary, or the summary heading a parva of a
+       purana) head each of its pieces; see pieces(). */
+    const lines = v.lines.join(' । ');
+    const rest = [v.prose.join(' '), v.other.join(' ')].filter(Boolean).join(' — ');
+    const text = [section, v.topic, lines, rest].filter(Boolean).join(' — ');
+    out.push({ head: [section, v.topic, lines].filter(Boolean).join(' — '), body: rest || lines, lines, text });
   }
   txt.replace(/[०-९]/g, d => String(d.charCodeAt(0) - 0x966)).replace(/\r/g, '').split('\n').forEach(raw => {
     const line = raw.trim();
@@ -59,6 +75,42 @@ function passages(txt) {
   return out;
 }
 
+/* A passage as the model is shown it: whole if it is short, otherwise in pieces cut at sentence ends,
+   each under its heading, with the last sentence of one piece repeated at the start of the next so a
+   list or a thought that crosses the cut is not lost. */
+function pieces(p) {
+  if (p.text.length <= MAX_TEXT) return [p.text];
+  /* A passage that is all verse, without prose, is cut as it is, its section and topic heading each piece. */
+  if (p.body === p.lines) p = Object.assign({}, p, { head: p.head.slice(0, p.head.length - p.lines.length).replace(/ — $/, '') });
+  const head = p.head.length > MAX_HEAD ? p.head.slice(0, MAX_HEAD) + '…' : p.head;
+  const room = Math.max(200, PIECE - head.length);
+  const sentences = [];
+  p.body.split(/(?<=[।॥?!.])\s+/).forEach(s => {
+    /* A "sentence" longer than a piece (a run of verse without stops) is cut between words. */
+    while (s.length > room) {
+      const cut = s.lastIndexOf(' ', room);
+      sentences.push(s.slice(0, cut > room / 2 ? cut : room));
+      s = s.slice(cut > room / 2 ? cut + 1 : room);
+    }
+    if (s) sentences.push(s);
+  });
+  const out = [];
+  let cur = [];
+  let len = 0;
+  sentences.forEach(s => {
+    if (len && len + s.length + 1 > room) {
+      out.push(cur.join(' '));
+      const last = cur[cur.length - 1];
+      cur = last.length <= 200 ? [last] : [];
+      len = cur.length ? last.length : 0;
+    }
+    cur.push(s);
+    len += s.length + 1;
+  });
+  if (cur.length) out.push(cur.join(' '));
+  return out.map((t, i) => (head ? head + ' — ' : '') + (i ? '… ' : '') + t + (i < out.length - 1 ? ' …' : ''));
+}
+
 function main() {
   const books = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/books.json'), 'utf8'));
   const all = [];              // [bookIndex, pos, text]
@@ -66,15 +118,17 @@ function main() {
   const byBook = {};           // id -> passages, for the common questions
   books.forEach((b, bi) => {
     const list = passages(fs.readFileSync(path.join(ROOT, b.file), 'utf8'));
-    byBook[b.id] = list;
+    byBook[b.id] = list.map(p => p.text);
     const author = b.author ? (b.author.hi || '') + ' ' + (b.author.en || '') : '';
     const titleKeys = ASKKEY.keys(b.title.hi + ' ' + b.title.en + ' ' + author + ' ' + (b.aliases || []).join(' '));
-    list.forEach((text, i) => {
+    /* The book's own name counts once for each verse, on its first piece, so a long book cut into many pieces does
+       not crowd the shorter texts out of the results for its name. */
+    list.forEach((p, i) => pieces(p).forEach((text, j) => {
       const counts = new Map();
-      ASKKEY.keys(text).concat(titleKeys).forEach(k => counts.set(k, (counts.get(k) || 0) + 1));
+      ASKKEY.keys(text).concat(j ? [] : titleKeys).forEach(k => counts.set(k, (counts.get(k) || 0) + 1));
       all.push([bi, i + 1, text.length > MAX_TEXT ? text.slice(0, MAX_TEXT) + '…' : text]);
       docKeys.push(counts);
-    });
+    }));
   });
 
   const N = all.length;

@@ -9,6 +9,7 @@ const MAX_KEYS = 16;
 const TOP = 6;
 const PER_BOOK = 2;
 const SCAN = 60;                     // ranked passages looked at, at most, to fill TOP
+const JOINED = 2000;                 // characters, at most, of pieces of one long passage joined together
 
 /* The question's search keys, without repeats: also the shape of its cache entry. */
 export function questionKeys(question) {
@@ -46,9 +47,24 @@ export async function retrieve(question, load) {
     if (chosen.length >= TOP) break;
     const chunk = await load('p/' + Math.floor(pid / meta.chunk) + '.json');
     const [bi, pos, text] = chunk[pid % meta.chunk];
+    /* A long passage is indexed in pieces with the same place: a second piece of one already chosen joins it,
+       so the answer cites that place once. */
+    const same = chosen.find(c => c.bi === bi && c.pos === pos);
+    if (same) {
+      if (same.text.length + text.length < JOINED) same.text += ' ' + text;
+      continue;
+    }
     if ((perBook.get(bi) || 0) >= PER_BOOK) continue;
     const [id, hi, en, author] = books[bi];
-    const passage = { book: id, pos, title: { hi, en }, author: author || '', text };
+    /* The pieces of a long passage lie side by side in the index, so the one after it (a list going on past
+       the cut) is added too. */
+    let joined = text;
+    const nextId = pid + 1;
+    if (nextId < meta.passages) {
+      const next = (await load('p/' + Math.floor(nextId / meta.chunk) + '.json'))[nextId % meta.chunk];
+      if (next && next[0] === bi && next[1] === pos && joined.length + next[2].length < JOINED) joined += ' ' + next[2];
+    }
+    const passage = { bi, book: id, pos, title: { hi, en }, author: author || '', text: joined };
     if (id.startsWith('bal-')) { passage.forChildren = true; if (!story) story = passage; continue; }
     perBook.set(bi, (perBook.get(bi) || 0) + 1);
     chosen.push(passage);
