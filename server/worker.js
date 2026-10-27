@@ -1,16 +1,17 @@
 /*
- * The Ask server: a Cloudflare Worker between the app and NVIDIA's models.
+ * The Ask server: a Cloudflare Worker between the app and the AI models (NVIDIA, with Anthropic's
+ * Claude as a second provider).
  *
  * POST /ask {question, lang} →
  *   1. the shared cache (Workers KV): a question asked before, in the same words or near enough
  *      (same search keys), is answered from there without calling the model;
  *   2. otherwise the passages are found in the app's texts (index on the app's own site, see
- *      tools/build_ask_index.js), NVIDIA's model answers from them, and the answer is cached.
+ *      tools/build_ask_index.js), the model answers from them, and the answer is cached.
  *
- * The NVIDIA key stays here as a secret; the app never sees it. Setup: server/README.md.
+ * The NVIDIA and Anthropic keys stay here as secrets; the app never sees it. Setup: server/README.md.
  */
 import { retrieve, questionKeys } from './retrieve.js';
-import { answer, DEFAULT_MODEL } from './answer.js';
+import { answer, providers, primaryModel } from './answer.js';
 
 const MAX_QUESTION = 300;
 const CACHE_DAYS = 90;
@@ -63,7 +64,7 @@ export default {
     const origin = request.headers.get('Origin') || '';
     const headers = cors(env, origin);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });
-    if (url.pathname === '/health') return json({ ok: true, model: env.MODEL || DEFAULT_MODEL }, 200, headers);
+    if (url.pathname === '/health') return json({ ok: true, model: primaryModel(env), providers: providers(env) }, 200, headers);
     if (url.pathname !== '/ask' || request.method !== 'POST') return json({ error: 'not found' }, 404, headers);
     if (env.ALLOWED_ORIGINS && !env.ALLOWED_ORIGINS.split(',').map(s => s.trim()).includes(origin)) return json({ error: 'forbidden' }, 403, headers);
 
@@ -82,7 +83,7 @@ export default {
     }
 
     if (!allowed(request.headers.get('CF-Connecting-IP') || 'unknown')) return json({ error: 'busy' }, 429, headers);
-    if (!env.NVIDIA_API_KEY) return json({ error: 'not configured' }, 503, headers);
+    if (!providers(env).length) return json({ error: 'not configured' }, 503, headers);
 
     try {
       const { passages } = await retrieve(question, loader(env.INDEX_URL));

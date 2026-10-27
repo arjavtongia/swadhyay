@@ -195,7 +195,7 @@ Then open http://localhost:8765.
 | `css/app.css` | Styles, day and night colours |
 | `content/` | The book list (`books.json`), categories, diagrams (`chitra.json`), common questions (`faq.json`) and every text |
 | `ask-index/` | Search index of every passage for the Ask server, built by `tools/build_ask_index.js` |
-| `server/` | The Ask server (a Cloudflare Worker using NVIDIA's model); setup in [`server/README.md`](server/README.md) |
+| `server/` | The Ask server (a Cloudflare Worker using NVIDIA's model, with Anthropic's Claude as backup); setup in [`server/README.md`](server/README.md) |
 | `sw.js` | Offline support; change `VERSION` when adding or removing files in its list |
 | `tools/` | Icon builders, the Ask index builder and the opening-line writer for poojas |
 | `DESIGN.md`, `PRODUCT.md` | The design system ("inside the mandir": marble, brass and sindoor) and who the app is for |

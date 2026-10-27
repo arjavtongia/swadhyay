@@ -1,6 +1,6 @@
 /*
  * Runs the Ask server on this computer for testing, without Cloudflare:
- *   NVIDIA_API_KEY=... node tools/serve_ask.mjs
+ *   NVIDIA_API_KEY=... ANTHROPIC_API_KEY=... node tools/serve_ask.mjs   (either key, or both)
  * It listens on http://localhost:8787, reads the index from the app served at
  * http://localhost:8780 (or INDEX_URL), and keeps its answer cache in memory.
  */
@@ -12,6 +12,9 @@ const cache = new Map();
 const env = {
   NVIDIA_API_KEY: process.env.NVIDIA_API_KEY,
   MODEL: process.env.MODEL,
+  ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+  ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL,
+  PROVIDERS: process.env.PROVIDERS,
   INDEX_URL: process.env.INDEX_URL || 'http://localhost:8780/ask-index/',
   ALLOWED_ORIGINS: 'http://localhost:8780',
   ASK_CACHE: {

@@ -1,10 +1,26 @@
 /*
- * Asks the model (NVIDIA's hosted API, OpenAI-compatible) to answer from the passages found,
- * and returns the answer with the passages it cites.
+ * Asks a model to answer from the passages found, and returns the answer with the passages it cites.
+ * Two providers: NVIDIA's hosted API (OpenAI-compatible) and Anthropic's Claude. Each is used only
+ * when its key is set; they are tried in the order of PROVIDERS, so a failure of one falls to the next.
  */
-const ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
+const NVIDIA_ENDPOINT = 'https://integrate.api.nvidia.com/v1/chat/completions';
 /* Chosen after trying NVIDIA's models on Hindi questions: quick, and sound on doctrine. */
 export const DEFAULT_MODEL = 'nvidia/nemotron-3-super-120b-a12b';
+const ANTHROPIC_ENDPOINT = 'https://api.anthropic.com/v1/messages';
+export const DEFAULT_ANTHROPIC_MODEL = 'claude-opus-5-5';
+const DEFAULT_PROVIDERS = 'nvidia,anthropic';
+
+/* The providers that have a key, in the order to try them. */
+export function providers(env) {
+  return (env.PROVIDERS || DEFAULT_PROVIDERS).split(',').map(s => s.trim().toLowerCase())
+    .filter(p => (p === 'nvidia' && env.NVIDIA_API_KEY) || (p === 'anthropic' && env.ANTHROPIC_API_KEY));
+}
+
+/* The model the first provider will use, for /health. */
+export function primaryModel(env) {
+  const p = providers(env)[0];
+  return p === 'anthropic' ? env.ANTHROPIC_MODEL || DEFAULT_ANTHROPIC_MODEL : p === 'nvidia' ? env.MODEL || DEFAULT_MODEL : null;
+}
 
 const SYSTEM = {
   en: `You answer questions about Jain dharma inside Swadhyay, an app of Digambar Jain scriptures, poojas and stories.
@@ -25,41 +41,91 @@ Rules:
 - केवल जैन धर्म, उसके आचरण, ग्रंथों, इतिहास और पर्वों के प्रश्नों का उत्तर दें। दूसरे विषयों पर विनम्रता से कहें कि आप केवल जैन धर्म में सहायता कर सकते हैं।`
 };
 
-export async function answer(question, lang, passages, env) {
-  const context = passages.map((p, i) => '[' + (i + 1) + '] ' + p.title.hi + ' (' + p.title.en + ')' + (p.forChildren ? ", a children's story (बाल कथा)" : p.author ? ', by ' + p.author : '') + ', part ' + p.pos + ':\n' + p.text).join('\n\n');
-  const res = await fetch(ENDPOINT, {
+async function askNvidia(system, user, env) {
+  const model = env.MODEL || DEFAULT_MODEL;
+  const res = await fetch(NVIDIA_ENDPOINT, {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + env.NVIDIA_API_KEY, 'Content-Type': 'application/json', 'Accept': 'application/json' },
     body: JSON.stringify({
-      model: env.MODEL || DEFAULT_MODEL,
+      model,
       temperature: 0.1,
       top_p: 0.9,
       max_tokens: 1400,
       stream: false,
-      messages: [
-        { role: 'system', content: SYSTEM[lang === 'hi' ? 'hi' : 'en'] },
-        { role: 'user', content: (context ? 'Passages:\n\n' + context + '\n\n' : 'No passages were found in the app\'s texts.\n\n') + 'Question: ' + question }
-      ]
+      messages: [{ role: 'system', content: system }, { role: 'user', content: user }]
     })
   });
-  if (!res.ok) throw new Error('model ' + res.status + ' ' + (await res.text()).slice(0, 300));
+  if (!res.ok) throw new Error('nvidia ' + res.status + ' ' + (await res.text()).slice(0, 300));
   const data = await res.json();
+  const choice = (data.choices && data.choices[0]) || {};
+  return { text: (choice.message && choice.message.content) || '', truncated: choice.finish_reason === 'length', model };
+}
+
+async function askAnthropic(system, user, env) {
+  const model = env.ANTHROPIC_MODEL || DEFAULT_ANTHROPIC_MODEL;
+  const res = await fetch(ANTHROPIC_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'x-api-key': env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+      /* If Claude's safety checks decline a question, Anthropic retries it on another model. */
+      'anthropic-beta': 'server-side-fallback-2026-07-01',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model,
+      /* Room for thinking as well as the 160-word answer. */
+      max_tokens: 8000,
+      /* Short answers from given passages: low effort is enough, and quicker and cheaper. */
+      output_config: { effort: env.ANTHROPIC_EFFORT || 'low' },
+      fallbacks: 'default',
+      system,
+      messages: [{ role: 'user', content: user }]
+    })
+  });
+  if (!res.ok) throw new Error('anthropic ' + res.status + ' ' + (await res.text()).slice(0, 300));
+  const data = await res.json();
+  if (data.stop_reason === 'refusal') throw new Error('anthropic refused');
+  const text = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+  return { text, truncated: data.stop_reason === 'max_tokens', model: data.model || model };
+}
+
+const ASK = { nvidia: askNvidia, anthropic: askAnthropic };
+
+export async function answer(question, lang, passages, env) {
+  const context = passages.map((p, i) => '[' + (i + 1) + '] ' + p.title.hi + ' (' + p.title.en + ')' + (p.forChildren ? ", a children's story (बाल कथा)" : p.author ? ', by ' + p.author : '') + ', part ' + p.pos + ':\n' + p.text).join('\n\n');
+  const system = SYSTEM[lang === 'hi' ? 'hi' : 'en'];
+  const user = (context ? 'Passages:\n\n' + context + '\n\n' : 'No passages were found in the app\'s texts.\n\n') + 'Question: ' + question;
+  const order = providers(env);
+  if (!order.length) throw new Error('no model key set');
+  let out, lastError;
+  for (const p of order) {
+    try {
+      out = await ASK[p](system, user, env);
+      if (out.text.trim()) break;
+      lastError = new Error(p + ' gave an empty answer');
+    } catch (e) {
+      lastError = e;
+      console.error(e && e.message);
+    }
+    out = null;
+  }
+  if (!out) throw lastError;
   /* Some models write citations as 【2】 or ［2］; make them [2]. */
-  let text = ((data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '')
-    .replace(/[【［]\s*(\d+)\s*[】］]/g, '[$1]').trim();
+  let text = out.text.replace(/[【［]\s*(\d+)\s*[】］]/g, '[$1]').trim();
   /* If the model ran out of room, end at the last full sentence rather than mid-word. */
-  if (data.choices && data.choices[0] && data.choices[0].finish_reason === 'length') {
+  if (out.truncated) {
     const cut = Math.max(text.lastIndexOf('।'), text.lastIndexOf('. '), text.lastIndexOf('.\n'));
     if (cut > 40) text = text.slice(0, cut + 1);
   }
   /* Keep only the passages the answer cites, renumbered in the order they first appear. */
-  const order = [];
-  text.replace(/\[(\d+)\]/g, (m, n) => { const i = +n - 1; if (passages[i] && order.indexOf(i) < 0) order.push(i); return m; });
-  const renum = text.replace(/\[(\d+)\]/g, (m, n) => { const at = order.indexOf(+n - 1); return at < 0 ? '' : '[' + (at + 1) + ']'; })
+  const cited = [];
+  text.replace(/\[(\d+)\]/g, (m, n) => { const i = +n - 1; if (passages[i] && cited.indexOf(i) < 0) cited.push(i); return m; });
+  const renum = text.replace(/\[(\d+)\]/g, (m, n) => { const at = cited.indexOf(+n - 1); return at < 0 ? '' : '[' + (at + 1) + ']'; })
     .replace(/[ \t]+([.,।!?])/g, '$1');
   return {
     answer: renum,
-    sources: order.map(i => ({ book: passages[i].book, pos: passages[i].pos, title: passages[i].title })),
-    model: env.MODEL || DEFAULT_MODEL
+    sources: cited.map(i => ({ book: passages[i].book, pos: passages[i].pos, title: passages[i].title })),
+    model: out.model
   };
 }

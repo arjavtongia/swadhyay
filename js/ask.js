@@ -2,8 +2,8 @@
  * Ask: questions about Jain dharma. Answers come, in this order, from
  *   1. the common questions written into the app (content/faq.json): instant, offline, free;
  *   2. answers this phone has already received (kept in localStorage);
- *   3. the Ask server (server/), which answers from the app's own texts with NVIDIA's model and
- *      shares one cache among all users, so a question is only sent to the model once.
+ *   3. the Ask server (server/), which answers from the app's own texts with NVIDIA's model (or
+ *      Anthropic's Claude) and shares one cache among all users, so a question is only sent to the model once.
  */
 const ASK = (function () {
   /* The Ask server's address, once it is deployed (server/README.md). Empty: common questions only. */

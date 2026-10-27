@@ -1,5 +1,6 @@
 /*
- * Tries questions against the local index, and against NVIDIA when NVIDIA_API_KEY is set.
+ * Tries questions against the local index, and against the model when NVIDIA_API_KEY and/or
+ * ANTHROPIC_API_KEY is set (PROVIDERS=anthropic to try Claude alone).
  *   node tools/test_ask.mjs "रत्नत्रय क्या है?" "Why do Jains not eat after sunset?"
  */
 import fs from 'fs';
@@ -20,8 +21,8 @@ for (const q of questions) {
   const { keys, passages } = await retrieve(q, load);
   console.log('\n## ' + q + '\nkeys: ' + keys.join(' '));
   passages.forEach((p, i) => console.log('[' + (i + 1) + '] ' + p.title.hi + ' #' + p.pos + ': ' + p.text.slice(0, 140).replace(/\s+/g, ' ')));
-  if (process.env.NVIDIA_API_KEY) {
-    const out = await answer(q, /[ऀ-ॿ]/.test(q) ? 'hi' : 'en', passages, { NVIDIA_API_KEY: process.env.NVIDIA_API_KEY, MODEL: process.env.MODEL });
-    console.log('\n' + out.answer + '\nsources: ' + out.sources.map(s => s.book + '#' + s.pos).join(', '));
+  if (process.env.NVIDIA_API_KEY || process.env.ANTHROPIC_API_KEY) {
+    const out = await answer(q, /[ऀ-ॿ]/.test(q) ? 'hi' : 'en', passages, process.env);
+    console.log('\n(' + out.model + ')\n' + out.answer + '\nsources: ' + out.sources.map(s => s.book + '#' + s.pos).join(', '));
   }
 }
