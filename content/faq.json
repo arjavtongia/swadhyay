@@ -817,6 +817,13 @@
       "hi": "भगवान पार्श्वनाथ कौन थे?",
       "en": "Who was Bhagwan Parshvanath?"
     },
+    "need": [
+      "parshvanath",
+      "parasnath",
+      "parshwanath",
+      "पार्श्वनाथ",
+      "पारसनाथ"
+    ],
     "also": [
       "parshvanath",
       "पार्श्वनाथ",
@@ -844,6 +851,12 @@
       "hi": "भगवान नेमिनाथ कौन थे?",
       "en": "Who was Bhagwan Neminath?"
     },
+    "need": [
+      "neminath",
+      "arishtanemi",
+      "नेमिनाथ",
+      "अरिष्टनेमि"
+    ],
     "also": [
       "neminath",
       "नेमिनाथ",
@@ -871,6 +884,13 @@
       "hi": "भगवान महावीर कौन थे?",
       "en": "Who was Bhagwan Mahavir?"
     },
+    "need": [
+      "mahavir",
+      "mahaveer",
+      "vardhaman",
+      "महावीर",
+      "वर्धमान"
+    ],
     "also": [
       "mahavir swami",
       "vardhaman",
@@ -900,6 +920,14 @@
       "hi": "भगवान ऋषभदेव (आदिनाथ) कौन थे?",
       "en": "Who was Bhagwan Rishabhdev (Adinath)?"
     },
+    "need": [
+      "rishabhdev",
+      "rishabh",
+      "adinath",
+      "ऋषभदेव",
+      "ऋषभ",
+      "आदिनाथ"
+    ],
     "also": [
       "adinath bhagwan",
       "आदिनाथ",
@@ -923,6 +951,13 @@
       "hi": "बाहुबली (गोम्मटेश्वर) कौन थे?",
       "en": "Who was Bahubali (Gommateshwar)?"
     },
+    "need": [
+      "bahubali",
+      "gommateshwar",
+      "gomateshwar",
+      "बाहुबली",
+      "गोम्मटेश्वर"
+    ],
     "also": [
       "bahubali",
       "बाहुबली",
@@ -1345,6 +1380,12 @@
       "hi": "आचार्य कुन्दकुन्द कौन थे?",
       "en": "Who was Acharya Kundkund?"
     },
+    "need": [
+      "kundkund",
+      "kundakunda",
+      "कुन्दकुन्द",
+      "कुंदकुंद"
+    ],
     "also": [
       "kundkundacharya",
       "कुन्दकुन्दाचार्य",
@@ -1630,6 +1671,21 @@
       "hi": "जैन धर्म में राम और रावण की कथा क्या है?",
       "en": "What is the story of Ram and Ravan in Jainism?"
     },
+    "need": [
+      "ram",
+      "rama",
+      "ravan",
+      "ravana",
+      "ramayan",
+      "ramayana",
+      "lakshman",
+      "padmapuran",
+      "राम",
+      "रावण",
+      "रामायण",
+      "लक्ष्मण",
+      "पद्मपुराण"
+    ],
     "also": [
       "jain ramayan",
       "jain ramayana",
@@ -1664,6 +1720,20 @@
       "hi": "जैन धर्म में श्रीकृष्ण और पाण्डव कौन हैं?",
       "en": "Who are Krishna and the Pandavs in Jainism?"
     },
+    "need": [
+      "krishna",
+      "pandav",
+      "pandava",
+      "pandavs",
+      "harivansh",
+      "mahabharat",
+      "कृष्ण",
+      "श्रीकृष्ण",
+      "पाण्डव",
+      "पांडव",
+      "हरिवंश",
+      "महाभारत"
+    ],
     "also": [
       "krishna jain",
       "krishna in jainism",
@@ -1698,9 +1768,18 @@
       "hi": "क्या श्रीकृष्ण आगे तीर्थंकर बनेंगे?",
       "en": "Will Krishna become a Tirthankar?"
     },
+    "need": [
+      "krishna",
+      "keshav",
+      "vasudev",
+      "कृष्ण",
+      "श्रीकृष्ण",
+      "केशव",
+      "वासुदेव"
+    ],
     "also": [
       "will krishna be a tirthankar",
-      "is lord krishna going to be a jain tirthankar",
+      "lord krishna jain tirthankar",
       "will krishna be the next tirthankar",
       "krishna tirthankar",
       "krishna nirmal tirthankar",
@@ -1759,6 +1838,11 @@
       "hi": "क्या चन्द्रगुप्त मौर्य जैन मुनि बने थे?",
       "en": "Did Chandragupta Maurya become a Jain muni?"
     },
+    "need": [
+      "chandragupta",
+      "चन्द्रगुप्त",
+      "चंद्रगुप्त"
+    ],
     "also": [
       "chandragupta maurya jain",
       "chandragupta jain muni",
@@ -2033,6 +2117,11 @@
       "hi": "महावीर जयंती कब और कैसे मनाई जाती है?",
       "en": "When and how is Mahavir Jayanti celebrated?"
     },
+    "need": [
+      "mahavir",
+      "mahaveer",
+      "महावीर"
+    ],
     "also": [
       "mahavir jayanti",
       "mahaveer jayanti",
@@ -2057,6 +2146,14 @@
       "hi": "आदिनाथ जयंती और आदिनाथ निर्वाण कब होते हैं?",
       "en": "When are Adinath Jayanti and Adinath Nirvan?"
     },
+    "need": [
+      "adinath",
+      "rishabh",
+      "rishabhdev",
+      "आदिनाथ",
+      "ऋषभ",
+      "ऋषभदेव"
+    ],
     "also": [
       "adinath jayanti",
       "rishabhdev jayanti",

@@ -3,7 +3,7 @@
 The app's **Ask** screen answers questions about Jain dharma in three steps, so that the AI model is
 called as rarely as possible:
 
-1. **Common questions** (`content/faq.json`, 56 questions in Hindi and English, each linked to its
+1. **Common questions** (`content/faq.json`, 80 questions in Hindi and English, each linked to its
    verse). They are answered on the phone, instantly and offline. No server, no cost.
 2. **Answers already given**, kept on the phone and in this server's shared cache (Workers KV,
    90 days). A question asked once, by anyone, in the same or similar words, is never sent to the
@@ -74,6 +74,12 @@ Commit and push; the Ask screen now answers new questions too. Check it at
 - **To add a common question:** add an entry to `content/faq.json` (`q`, `also` for other wordings,
   `a`, and `sources` with the book id and a few words of the verse in `find`), then rebuild as above.
   The most asked questions are worth adding: they are then free and work offline.
+  A question about one person (Krishna, Mahavir, Ram and Ravan…) also gets `need`: the names, in
+  Roman and Devanagari, that a question must use to be answered by it. A question that names
+  someone in another entry's `need` is never answered by an entry about someone else, so "is Ravan
+  going to be a Tirthankar" does not get the answer about Krishna. Keep `also` wordings about the
+  subject, not the sentence around it ("lord krishna jain tirthankar", not "is lord krishna going to
+  be a jain tirthankar"), and avoid names that are also common words (Sita → "sit").
 - **To see what people ask:** in the Cloudflare dashboard, Workers KV → ASK_CACHE lists every
   question answered by the model, with its answer.
 - **To change the model:** edit `MODEL` (NVIDIA) or `ANTHROPIC_MODEL` in `wrangler.toml` and run `npx wrangler deploy`. Try a model

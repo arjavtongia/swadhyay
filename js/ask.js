@@ -13,6 +13,8 @@ const ASK = (function () {
   const STORE = 'swadhyay.ask';
   const KEEP = 40;
   let faq = null;
+  /* The names some common question needs (see loadFaq), each with the common questions that need it. */
+  let named = new Map();
 
   async function loadFaq() {
     if (!faq) {
@@ -25,7 +27,17 @@ const ASK = (function () {
       faq.forEach(item => {
         item.keys = new Set(ASKKEY.questionKeys(item.q.hi + ' ' + item.q.en + ' ' + (item.also || []).join(' ')));
         item.main = new Set(ASKKEY.questionKeys(item.q.hi + ' ' + item.q.en));
+        /* A common question about someone (Krishna, Mahavir, Ram and Ravan…) lists in `need` the names a question
+           must use to be answered by it. */
+        item.needKeys = item.need ? new Set(ASKKEY.questionKeys(item.need.join(' '))) : null;
+        if (item.needKeys) item.needKeys.forEach(k => named.set(k, (named.get(k) || []).concat(item)));
       });
+      /* Words only one common question has ("girnar", "kamath"): they name its subject as surely as its name does. */
+      const seen = new Map();
+      faq.forEach(item => item.keys.forEach(k => seen.set(k, (seen.get(k) || 0) + 1)));
+      faq.forEach(item => { item.ownKeys = new Set([...item.keys].filter(k => seen.get(k) === 1)); });
+      /* Each other wording whole ("first tirthankar" names Rishabhdev without "first" being a name). */
+      faq.forEach(item => { item.wordings = (item.also || []).map(a => ASKKEY.questionKeys(a)).filter(ks => ks.length); });
     }
     return faq;
   }
@@ -39,16 +51,22 @@ const ASK = (function () {
     return list.map(item => {
       const hit = groups.filter(g => g.some(k => item.keys.has(k))).length;
       const main = groups.filter(g => g.some(k => item.main.has(k))).length;
+      /* Whose question it is: one that needs a name must hear it, and none may answer a question that names someone
+         it is not about ("is Ravan going to be a Tirthankar" shares every other word with the one about Krishna). */
+      const asked = new Set([].concat.apply([], groups));
+      const hears = !item.needKeys || groups.some(g => g.some(k => item.needKeys.has(k) || item.ownKeys.has(k))) ||
+        item.wordings.some(ks => ks.every(k => asked.has(k)));
+      const other = groups.some(g => !g.some(k => item.keys.has(k)) && g.some(k => named.has(k)));
       /* On a tie, words in the question itself count before its other wordings, then the more specific
          common question wins ("what is moksha" → moksha, not ratnatraya). */
-      return { item: item, hit: hit, main: main, cover: hit / keys.length, focus: hit / item.keys.size };
+      return { item: item, hit: hit, main: main, cover: hit / keys.length, focus: hit / item.keys.size, fits: hears && !other };
     }).filter(r => r.hit > 0).sort((a, b) => b.cover - a.cover || b.main - a.main || b.hit - a.hit || b.focus - a.focus);
   }
 
   /* A common question close enough to be the answer: it covers most of what was asked. */
   async function matchFaq(question) {
     const ranked = rank(question, await loadFaq());
-    const best = ranked[0];
+    const best = ranked.find(r => r.fits);
     const strong = best && (best.cover >= 0.6 || (best.hit >= 3 && best.cover >= 0.45));
     /* Related: common questions that share at least two of its words, or half of them. */
     const related = ranked.filter(r => (!strong || r.item !== best.item) && (r.hit >= 2 || r.cover >= 0.5));

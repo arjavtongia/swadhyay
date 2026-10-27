@@ -283,3 +283,40 @@ stale "why" answer stays cached for a bare "why" asked first; it expires within 
 
 **Files affected:** `js/ask.js`, `js/app.js`, `server/worker.js`, `server/answer.js`,
 `server/README.md`, `sw.js` (VERSION v32), `DESIGN.md`, `flow.md`
+
+## 2026-10-28: Common questions about a person answer only questions about that person
+
+**Context:** "is ravana going to be a jain tirthankar in the future?" got the answer about Krishna.
+The matcher counts how many of a question's words a common question has, and the Krishna entry had
+a wording copied from a full sentence ("is lord krishna going to be a jain tirthankar"), so it
+shared "going", "jain" and "tirthankar": 3 of 5 words, enough for a match, with only the name
+different. "Will Bahubali become a Tirthankar?" and the same sentence about Shantinath matched it
+too.
+
+**Decision:**
+- An optional `need` list in `content/faq.json` for the twelve entries about a person or a festival
+  named for one (Parshvanath, Neminath, Mahavir, Rishabhdev, Bahubali, Kundkund, Ram and Ravan,
+  Krishna twice, Chandragupta, Mahavir Jayanti, Adinath Jayanti): names in Roman and Devanagari.
+- `js/ask.js:rank()` marks whether a candidate fits: an entry with `need` must hear its subject (one
+  of its names, a word no other entry has such as "girnar", or one of its own other wordings whole
+  such as "first tirthankar"), and no entry may answer a question that names someone from another
+  entry's `need` it does not cover. `matchFaq()` takes the best candidate that fits.
+- The Krishna entry's sentence-like wording becomes "lord krishna jain tirthankar".
+
+**Why:** Word counting cannot tell a name from a filler word; naming the subject is a small,
+explicit piece of data where it matters. Checked on all 650 wordings and test questions, old
+matcher and data against new: 8 fixed (Ravana three ways, Bahubali, Shantinath, and three
+wordings that had matched the wrong entry), none broken.
+
+**Alternatives considered:**
+- *Weighting rare words more (IDF):* rejected; with 80 entries, filler words like "going" look as
+  rare as names.
+- *Stop-words for "going", "jain":* rejected; `js/askkey.js` is shared with the server's search
+  and cache keys, and "what is jainism" needs "jain".
+
+**Tradeoffs accepted:** A name that no entry lists (a Tirthankar without his own entry) is
+protected only by the word count, so `also` wordings must be about their subject. Entries about
+people need their `need` kept up to date when wordings are added. Sita is left out of the Ram
+entry's names because its key ("sit") is an English word.
+
+**Files affected:** `content/faq.json`, `js/ask.js`, `server/README.md`, `sw.js` (VERSION v33)
