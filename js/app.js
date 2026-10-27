@@ -30,7 +30,7 @@
 
   /* bell is also read straight from this store by the opening screen's script in index.html, before this file loads. */
   const DEFAULTS = {
-    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, bell: true, locked: false,
+    lang: null, fontStep: 2, theme: null, speed: 'normal', roman: false, bell: true, awake: true, locked: false,
     positions: {}, last: null, recent: [], marks: {}, bookmarks: [], hintShown: false
   };
   const state = loadState();
@@ -133,6 +133,87 @@
     root.setProperty('--top-h', (top ? top.offsetHeight : 0) + 'px');
     root.setProperty('--bar-h', (bar ? bar.offsetHeight : 0) + 'px');
     root.setProperty('--composer-h', (box ? box.offsetHeight : 0) + 'px');
+    const strip = $app.querySelector('.offer-strip');
+    root.setProperty('--strip-h', (strip ? strip.offsetHeight : 0) + 'px');
+  }
+
+  /* The bars that stay at the top of the screen (the top bar, and in a pooja the strip of its parts), so a place scrolled
+     to comes into view just beneath them. */
+  function stuckHeight() {
+    const top = tabsOnTop() || $app.querySelector('.topbar');
+    const strip = $app.querySelector('.offer-strip');
+    return (top ? top.offsetHeight : 0) + (strip ? strip.offsetHeight : 0);
+  }
+
+  /* Open one part of a pooja from its strip. */
+  function jumpTo(pos) {
+    const el = document.getElementById('v-' + pos);
+    if (!el) return;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - stuckHeight() - 12, behavior: still ? 'auto' : 'smooth' });
+  }
+
+  /* In a pooja read as one page: light the part on the strip that is now under it, and remember the stanza you are at, so
+     the pooja opens there next time and home's progress follows it. */
+  let placeTimer = null;
+  function trackPlace() {
+    if (currentView !== 'read' || !ctx || !ctx.page.scroll) return;
+    const blocks = Array.from($app.querySelectorAll('.verse-block'));
+    if (!blocks.length) return;
+    /* The stanza being read is the one whose start has passed the upper third of what shows under the bars. */
+    const line = stuckHeight() + Math.max(48, (window.innerHeight - stuckHeight()) * 0.3);
+    let at = blocks[0];
+    for (const b of blocks) {
+      if (b.getBoundingClientRect().top <= line) at = b;
+      else break;
+    }
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) at = blocks[blocks.length - 1];
+    const pos = parseInt(at.id.slice(2), 10);
+    const strip = $app.querySelector('.offer-strip');
+    if (strip) {
+      const chips = Array.from(strip.querySelectorAll('.offer-chip'));
+      const chip = chips.filter(c => +c.dataset.pos <= pos).pop() || chips[0];
+      if (!chip.hasAttribute('aria-current')) {
+        chips.forEach(c => c.removeAttribute('aria-current'));
+        chip.setAttribute('aria-current', 'true');
+        const track = chip.parentNode;
+        const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        track.scrollTo({ left: chip.offsetLeft - (track.clientWidth - chip.offsetWidth) / 2, behavior: still ? 'auto' : 'smooth' });
+      }
+    }
+    /* Only while the pooja is being read: once it is finished its place has been cleared, and stays cleared. */
+    const id = ctx.book.id;
+    if (state.positions[id] != null && state.positions[id] !== pos) {
+      state.positions[id] = pos;
+      if (state.last && state.last.book === id) state.last.pos = pos;
+      clearTimeout(placeTimer);
+      placeTimer = setTimeout(saveState, 500);
+    }
+  }
+
+  /* While a text is open in the reader the screen stays on, where the browser allows it, so it does not dim on the chowki
+     in the middle of a pooja. Settings can turn this off (saved as "awake"); leaving the reader lets the phone sleep again,
+     and the browser itself lets go while the app is out of sight (it is asked again on return). */
+  let wakeLock = null;
+  let wakeAsking = false;
+  async function keepAwake() {
+    if (!('wakeLock' in navigator)) return;
+    const want = () => currentView === 'read' && state.awake !== false && document.visibilityState === 'visible';
+    if (want() && !wakeLock && !wakeAsking) {
+      wakeAsking = true;
+      try {
+        wakeLock = await navigator.wakeLock.request('screen');
+        wakeLock.addEventListener('release', () => { wakeLock = null; });
+      } catch (e) {
+        wakeLock = null;
+      }
+      wakeAsking = false;
+    }
+    if (!want() && wakeLock) {
+      const lock = wakeLock;
+      wakeLock = null;
+      lock.release().catch(() => {});
+    }
   }
 
   /* On every screen that scrolls (home excepted), a slim rail at the side: a hairline gilded as far as you have
@@ -1019,15 +1100,34 @@
   /* The shelves of articles written for this app, listed by group with each one's summary. */
   const ARTICLE_CATS = ['puran-itihas', 'samadhan', 'parv'];
 
-  /* A pooja or path also shows how it begins (from tools/add_openings.py), so two texts with one name can be told apart.
-     Where the Pooja guide opens one of several versions, that version says so. */
-  function bookRow(meta, inGuide) {
+  /* Poojas, aartis and paath recited in one go open straight into the reader from a list, at the place they were left;
+     the text's own page (contents, go to number) is for scripture read part by part, and for stories with their cover. */
+  function opensDirect(meta) {
+    return !!meta.scroll && STORY_LIKE.indexOf(meta.category) < 0;
+  }
+  function bookHref(meta) {
+    return opensDirect(meta) ? '#/read/' + meta.id + '/' + (state.positions[meta.id] || 1) : '#/book/' + meta.id;
+  }
+
+  /* Names shared by more than one text in a list, such as the several देव-शास्त्र-गुरु पूजा. */
+  function sharedNames(list) {
+    const seen = {};
+    list.forEach(b => { seen[b.title.hi] = (seen[b.title.hi] || 0) + 1; });
+    return new Set(Object.keys(seen).filter(k => seen[k] > 1));
+  }
+
+  /* A pooja or path in a list: its name, and one line under it (its English name in English, then who wrote it), so a
+     phone shows several at once. Where two texts share a name, the line it begins with (from tools/add_openings.py) tells
+     them apart. Where the Pooja guide opens one of several versions, and where there is a sung recording, a small tag says so. */
+  function bookRow(meta, inGuide, twins) {
     if (STORY_LIKE.indexOf(meta.category) >= 0) return storyRow(meta);
-    return chevronRow('#/book/' + meta.id, titleHtml(meta) +
-      '<span class="row-sub">' + (meta.author && L(meta.author) ? esc(L(meta.author)) + ' · ' : '') + esc(countLabel(meta)) + '</span>' +
-      (inGuide ? '<span class="row-tag">' + icon('check') + esc(t('inPoojaGuide')) + '</span>' : '') +
-      (recordingOf(meta.id) ? '<span class="row-tag">' + icon('headphones') + esc(t('recTag')) + '</span>' : '') +
-      (meta.opening ? '<span class="row-opening" translate="no" lang="' + (meta.textLang || 'hi') + '">' + esc(meta.opening) + '</span>' : ''),
+    const sub = [state.lang === 'en' ? meta.title.en : '', L(meta.author)].filter(Boolean).join(' · ') || countLabel(meta);
+    const tags = (inGuide ? '<span class="row-tag">' + icon('check') + esc(t('inPoojaGuide')) + '</span>' : '') +
+      (recordingOf(meta.id) ? '<span class="row-tag">' + icon('headphones') + esc(t('recTag')) + '</span>' : '');
+    return chevronRow(bookHref(meta), '<span class="title" translate="no" lang="hi">' + esc(meta.title.hi) + '</span>' +
+      '<span class="row-sub row-sub-one">' + esc(sub) + '</span>' +
+      (twins && twins.has(meta.title.hi) && meta.opening ? '<span class="row-opening" translate="no" lang="' + (meta.textLang || 'hi') + '">' + esc(meta.opening) + '</span>' : '') +
+      (tags ? '<span class="row-tags">' + tags + '</span>' : ''),
       coverEmblem(meta));
   }
 
@@ -1038,9 +1138,9 @@
   }
 
   /* At the top of the pooja shelves, a way in for someone new: the Pooja guide walks through the whole pooja in order. */
-  function poojaHelpHtml() {
+  function poojaHelpHtml(compact) {
     if (!bookMeta('pooja-vidhi')) return '';
-    return '<a class="notice pooja-help" href="#/book/pooja-vidhi">' + icon('diya') +
+    return '<a class="notice pooja-help' + (compact ? ' is-compact' : '') + '" href="#/book/pooja-vidhi">' + icon('diya') +
       '<span><span class="notice-title">' + esc(t('poojaHelpTitle')) + '</span><span class="notice-when">' + esc(t('poojaHelpSub')) + '</span></span>' +
       icon('chevron-right', 'row-chev') + '</a>';
   }
@@ -1418,11 +1518,13 @@
       if (cat.id === 'bal-katha') return backBar(up.href, up.label) + '<main class="kids">' + kidsHomeHtml() + '</main>';
       const pooja = GROUPS.find(g => g.id === 'pooja').cats.indexOf(cat.id) >= 0;
       const guided = pooja ? await poojaGuideBooks() : new Set();
+      const list = catalog.filter(b => b.category === cat.id);
+      const twins = sharedNames(list);
+      /* Over a list of poojas the way in for someone new (the Pooja guide) is a single line, so the poojas start sooner. */
       return backBar(up.href, up.label) +
         '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' +
         (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml('katha') : ARTICLE_CATS.indexOf(cat.id) >= 0 ? storyListHtml(cat.id) :
-        (pooja ? poojaHelpHtml() : '') +
-        '<ul class="rows rows-grid">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
+        (pooja ? poojaHelpHtml(true) : '') + '<ul class="rows rows-grid">' + list.map(b => bookRow(b, guided.has(b.id), twins)).join('') + '</ul>') + '</main>';
     }
     document.title = t('books') + ' · ' + t('appName');
     let html = backBar('#/', t('home')) + '<main><h1 class="page-title">' + esc(t('books')) + '</h1>';
@@ -1566,11 +1668,41 @@
 
   /* The words to recite, with the verse number as ॥ 12 ॥ in place of any closing danda, kept on the line of the last word,
      and the Roman spelling if chosen. In a guide or a pooja read in one go each pada gets its own line, as in a printed pooja book. */
+  /* The line said while offering in a pooja, "ॐ ह्रीं … निर्वपामीति स्वाहा": set apart from the verse, as printed pooja
+     books do, so the stanza and its mantra are not read as one. */
+  const MANTRA_RE = /^(ॐ|ओं|ओम्)\s/;
+
+  /* What a pooja's stanza is offered with, from the word before "निर्वपामीति" in its mantra (जलं, चन्दनं, अक्षतान्…, in
+     the many spellings of the imported texts), or the invocation (आह्वाननं, स्थापनं, सन्निधिकरणं). Null otherwise. */
+  function offeringOf(v) {
+    const mantra = v.lines.filter(l => MANTRA_RE.test(l)).join(' ');
+    if (!mantra) return null;
+    const m = mantra.match(/(\S+)\s+निर्वपाम/);
+    if (!m) return /आह्वान|स्थापन|सन्निधि/.test(mantra) ? 'sthapana' : null;
+    const w = m[1];
+    if (/जयमाला|(पूर्णा|महा)र्घ/.test(w)) return 'purnarghya';
+    const found = [['jal', /^जल/], ['chandan', /^च(न्|ं)?द/], ['akshat', /^अक्षत/], ['pushp', /^पुष्प/], ['naivedya', /^(नै|ने)व/],
+      ['deep', /^दीप/], ['dhoop', /^धूप/], ['phal', /^फल/], ['arghya', /र्घ/]].find(x => x[1].test(w));
+    return found ? found[0] : null;
+  }
+
+  /* The name of an offering for the reader: in Devanagari, as said in the temple; English mode adds its Roman spelling. */
+  function offeringName(id) {
+    const hi = STRINGS.hi.offerings[id];
+    return state.lang === 'en' ? hi + ' · ' + STRINGS.en.offerings[id] : hi;
+  }
+
+  /* A topic that names who wrote the pooja or its tune ("युगलजी कृत — तर्ज : …") is a note on the text, not a heading. */
+  function isCreditTopic(topic) {
+    return /कृत|तर्ज|राग\s*:/.test(topic);
+  }
+
   function linesHtml(book, v, padas) {
     const lang = book.textLang || 'sa';
-    const shown = padas ? [].concat.apply([], v.lines.map(l => l.split(/(?<=[,।])\s+(?=\S)/))) : v.lines;
+    const shown = padas ? [].concat.apply([], v.lines.map(l => (MANTRA_RE.test(l) ? [l] : l.split(/(?<=[,।])\s+(?=\S)/)))) : v.lines;
     const lastIndex = shown.length - 1;
     const lines = shown.map((l, i) => {
+      if (MANTRA_RE.test(l)) return '<span class="verse-line mantra">' + esc(l) + '</span>';
       if (i !== lastIndex || !book.numberMark) return '<span class="verse-line">' + esc(l) + '</span>';
       /* A no-break space keeps the number with the last word, while a sutra that is one long word can still wrap. */
       const text = l.replace(/[\s।॥]+$/, '');
@@ -1677,8 +1809,15 @@
     return html;
   }
 
-  function verseBlockOpen(v, isTarget) {
-    return '<div class="verse-block' + (isTarget ? ' is-target' : '') + '" id="v-' + v.pos + '">';
+  function verseBlockOpen(v, isTarget, cls) {
+    return '<div class="verse-block' + (isTarget ? ' is-target' : '') + (cls ? ' ' + cls : '') + '" id="v-' + v.pos + '">';
+  }
+
+  /* Where the reader's back link leads: the list a pooja was opened from (a pooja of one page has nothing else to list),
+     otherwise the text's contents. */
+  function readerBack(book, page, first) {
+    if (opensDirect(book) && book.sections.length === 1) return bookParent(book);
+    return { href: book.sections.length > 1 && !page.scroll ? '#/book/' + book.id + '/' + first.section : '#/book/' + book.id, label: t('contents'), contents: true };
   }
 
   async function viewRead(id, posStr) {
@@ -1708,7 +1847,7 @@
     const isBookmarked = state.bookmarks.some(b => b.book === id && b.pos >= page.from && b.pos <= page.to);
     const isFirst = page.from === 1;
     const isLast = page.to === n;
-    const contentsHref = book.sections.length > 1 && !page.scroll ? '#/book/' + id + '/' + first.section : '#/book/' + id;
+    const back = readerBack(book, page, first);
     const many = verses.length > 1;
     const target = v => many && v.pos === pos && pos !== page.from;
     /* Scripture stands in the shrine; guides, stories and poojas recited in one go read as a page. */
@@ -1723,9 +1862,23 @@
       pct = book.sections.length > 1 ? Math.round(sec.index / book.sections.length * 100) : 100;
     }
     const whereBook = book.title.hi + (secName && !page.scroll ? ' · ' + secName : '');
+    /* A pooja that is one page has its name in its own heading, and the side rail shows how far down it you are. */
+    const showWhere = !(page.scroll && book.sections.length === 1);
+    /* The parts of a pooja, by what is offered, as a strip that stays at the top: it shows where you are and opens any part.
+       The same offering twice in a row (the arghya to each of the five kalyanaks) is one stop on the strip. */
+    const parts = [];
+    if (page.scroll) {
+      verses.forEach(v => {
+        const part = offeringOf(v) || (/^जयमाला/.test(v.topic) ? 'jaymala' : null);
+        if (part && (!parts.length || parts[parts.length - 1].id !== part)) parts.push({ id: part, pos: v.pos });
+      });
+    }
+    const strip = parts.length >= 3 ? '<nav class="offer-strip" aria-label="' + esc(t('offerParts')) + '"><div class="offer-track">' +
+      parts.map((x, i) => '<button class="offer-chip" type="button" data-action="jump" data-pos="' + x.pos + '"' + (i === 0 ? ' aria-current="true"' : '') +
+        ' translate="no">' + esc(t('offerings')[x.id]) + '</button>').join('') + '</div></nav>' : '';
 
     let html = '<header class="topbar reader-top">' +
-      '<a class="back" href="' + contentsHref + '">' + icon('arrow-left') + '<span>' + esc(t('contents')) + '</span></a>' +
+      '<a class="back" href="' + back.href + '">' + icon('arrow-left') + '<span>' + esc(back.label) + '</span></a>' +
       '<span class="top-actions">' +
       (state.locked ? '' : '<button class="icon-btn" data-action="size-panel" aria-controls="size-panel" aria-expanded="' + sizePanelOpen + '" aria-label="' + esc(t('textSize')) + '">' +
         '<span class="size-glyph" aria-hidden="true" translate="no" lang="hi"><small>अ</small>अ</span></button>') +
@@ -1733,9 +1886,9 @@
       '</span></header>' +
       (state.locked ? '' : '<div class="size-panel" id="size-panel"' + (sizePanelOpen ? '' : ' hidden') + '>' +
         '<span class="size-panel-label">' + esc(t('textSize')) + '</span><span class="size-ctrl">' + sizeButtonsHtml(false, sizeLevelHtml(true)) + '</span></div>') +
-      '<div class="where"><span class="where-book" translate="no" lang="hi">' + esc(whereBook) + '</span>' +
-      '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' +
-      (posText ? '<span class="where-pos">' + posText + '</span>' : '') + '</div>' +
+      (showWhere ? '<div class="where"><span class="where-book" translate="no" lang="hi">' + esc(whereBook) + '</span>' +
+        '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' +
+        (posText ? '<span class="where-pos">' + posText + '</span>' : '') + '</div>' : '') + strip +
       '<main class="reader' + (book.category === 'bal-katha' ? ' kids' : '') + (listening() ? ' is-listening' : '') + '" id="verse-area">';
     /* The sung recording opens a pooja recited in one go; in a text read verse by verse it follows the verse,
        so the verse still comes first on every page. */
@@ -1759,18 +1912,33 @@
       if (notes || recHtml) html += '<div class="notes">' + (notes ? '<div class="commentary">' + notes + '</div>' : '') + recHtml + '</div>';
       html += '</div>';
     } else {
-      html += '<div class="page-body' + (page.scroll ? ' scroll-page' : '') + '">';
+      html += '<div class="page-body' + (page.scroll ? ' scroll-page' : '') + (opensDirect(book) ? ' recite-page' : '') + '">';
       if (page.scroll) {
-        html += '<header class="page-head">' + ORN.chhatra() + '<h1 translate="no">' + esc(label) + '</h1>' +
-          (secName && secName !== book.title.hi ? '<p class="page-head-sub" translate="no" lang="hi">' + esc(book.title.hi) + '</p>' : '') + '</header>' + recHtml;
+        /* The words come first: a short head (no chhatra where the pooja has its own picture), the player, then the text. */
+        const pictured = (first.chitra || []).some(c => c.top);
+        html += '<header class="page-head">' + (pictured ? '' : ORN.chhatra()) + '<h1 translate="no">' + esc(label) + '</h1>' +
+          (secName && secName !== book.title.hi ? '<p class="page-head-sub" translate="no" lang="hi">' + esc(book.title.hi) + '</p>' : '') +
+          (opensDirect(book) ? sponsorHtml(id) : '') + '</header>' + recHtml;
       } else {
         html += '<h1 class="step-title" translate="no">' + esc(first.topic ? topicOf(first) : label) + '</h1>';
       }
-      html += verses.map(v => verseBlockOpen(v, target(v)) +
-        (page.scroll && v.topic ? '<h2 class="topic">' + esc(topicOf(v)) + '</h2>' : '') +
-        figuresHtml(v, v.topic ? topicOf(v) : label) + (v.lines.length ? '<div class="recite">' + linesHtml(book, v, true) + '</div>' : '') +
-        commentaryHtml(book, v) + '</div>').join('');
+      html += verses.map(v => {
+        /* In a pooja each stanza is headed by what it offers (जल, चंदन…), unless its own heading already says so; who wrote
+           it or the tune it is sung to is a quiet note, not a heading. */
+        const topic = page.scroll && v.topic ? topicOf(v) : '';
+        const offer = page.scroll ? offeringOf(v) : null;
+        const mark = offer && topic.indexOf(STRINGS.hi.offerings[offer]) < 0 ? '<p class="offer-mark" translate="no"><span>' + esc(offeringName(offer)) + '</span></p>' : '';
+        /* In a pooja the picture follows the stanza it shows, so the first words are on the first screen. */
+        const pics = figuresHtml(v, v.topic ? topicOf(v) : label);
+        const words = v.lines.length ? '<div class="recite">' + linesHtml(book, v, true) + '</div>' : '';
+        return verseBlockOpen(v, target(v), mark ? 'has-offer' : '') + mark +
+          (topic ? (isCreditTopic(topic) ? '<p class="topic-note" translate="no">' + esc(topic) + '</p>' : '<h2 class="topic">' + esc(topic) + '</h2>') : '') +
+          (opensDirect(book) ? words + pics : pics + words) + commentaryHtml(book, v) + '</div>';
+      }).join('');
       html += (page.scroll ? '' : recHtml) + '</div>';
+      /* A pooja opened straight from its list has no page of its own before it, so the invitation to give it as gyan daan
+         closes the pooja itself. */
+      if (opensDirect(book) && page.to === n) html += bookGiveHtml(book);
     }
 
     /* A text kept short for reciting (the Tattvartha Sutra) opens at the same place in its edition with meaning. */
@@ -1787,7 +1955,7 @@
       '</div>' +
       '</main>' +
       '<nav class="reader-bar" aria-label="' + esc(book.title.hi) + '">' +
-      '<button class="btn" data-action="prev">' + icon(isFirst ? 'list' : 'arrow-left') + '<span>' + esc(isFirst ? t('contents') : t('prev')) + '</span></button>' +
+      '<button class="btn" data-action="prev">' + icon(isFirst && back.contents ? 'list' : 'arrow-left') + '<span>' + esc(isFirst ? (back.contents ? t('contents') : t('back')) : t('prev')) + '</span></button>' +
       '<button class="btn btn-primary" data-action="listen" aria-pressed="' + (listening() ? 'true' : 'false') + '">' + listenInner() + '</button>' +
       '<button class="btn" data-action="next"><span>' + esc(isLast ? t('finish') : t('next')) + '</span>' + icon(isLast ? 'check' : 'arrow-right') + '</button>' +
       '</nav>';
@@ -2051,7 +2219,8 @@
     }
     let html = '';
     if (res.books.length) {
-      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows rows-grid">' + res.books.map(b => bookRow(b)).join('') + '</ul>';
+      const twins = sharedNames(res.books);
+      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows rows-grid">' + res.books.map(b => bookRow(b, false, twins)).join('') + '</ul>';
     }
     if (res.verses.length) {
       html += '<h2>' + esc(t('resultsText')) + '</h2><ul class="rows rows-grid">' +
@@ -2144,6 +2313,11 @@
       choice('set-roman', state.roman ? 'yes' : 'no', [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }]) + '</section>';
     html += '<section class="set"><h2>' + esc(t('bell')) + '</h2><p class="muted">' + esc(t('bellDesc')) + '</p>' +
       choice('set-bell', state.bell === false ? 'no' : 'yes', [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }]) + '</section>';
+    /* Only where the browser can keep the screen on. */
+    if ('wakeLock' in navigator) {
+      html += '<section class="set"><h2>' + esc(t('awake')) + '</h2><p class="muted">' + esc(t('awakeDesc')) + '</p>' +
+        choice('set-awake', state.awake === false ? 'no' : 'yes', [{ value: 'yes', label: t('yes') }, { value: 'no', label: t('no') }]) + '</section>';
+    }
 
     if (isStandalone()) {
       html += '<section class="set"><h2>' + esc(t('install')) + '</h2><p>' + icon('check') + ' ' + esc(t('installed')) + '</p></section>';
@@ -2293,7 +2467,9 @@
     if (view === 'ask' && askThread.length) showLatestQuestion(false);
     /* Opening one part of a long pooja: scroll down to that part, below the sticky top bar. */
     const target = view === 'read' && $app.querySelector('.is-target');
-    if (target) window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - 90);
+    if (target) window.scrollTo(0, target.getBoundingClientRect().top + window.scrollY - stuckHeight() - 12);
+    trackPlace();
+    keepAwake();
     if (view === 'search') {
       renderResults();
       const q = document.getElementById('q');
@@ -2357,7 +2533,12 @@
     if (!ctx) return;
     const { book, page } = ctx;
     if (delta < 0) {
-      if (page.from === 1) { go('book/' + book.id + (book.sections.length > 1 ? '/1' : '')); return; }
+      if (page.from === 1) {
+        const back = readerBack(book, page, book.verses[0]);
+        if (back.contents) go('book/' + book.id + (book.sections.length > 1 ? '/1' : ''));
+        else location.hash = back.href;
+        return;
+      }
       const prev = book.pages[book.verses[page.from - 2].page];
       pendingDir = 'prev';
       go('read/' + book.id + '/' + prev.from, true);
@@ -2431,6 +2612,8 @@
       if (state.bell && window.BELL) window.BELL.ring(0, false);
       render();
     },
+    'set-awake': el => { state.awake = el.dataset.value === 'yes'; saveState(); render(); },
+    'jump': el => jumpTo(parseInt(el.dataset.pos, 10)),
     'font-up': () => changeFont(1),
     'font-down': () => changeFont(-1),
     'lock': () => { state.locked = true; saveState(); render(); },
@@ -2643,15 +2826,19 @@
 
   let touchStart = null;
   $app.addEventListener('touchstart', e => {
-    /* Dragging the recording's slider is not a page turn. */
-    if (currentView !== 'read' || e.touches.length !== 1 || e.target.closest('.rec')) { touchStart = null; return; }
+    /* Dragging the recording's slider, or sliding the strip of a pooja's parts, is not a page turn. */
+    if (currentView !== 'read' || e.touches.length !== 1 || e.target.closest('.rec, .offer-strip')) { touchStart = null; return; }
     touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
   }, { passive: true });
   $app.addEventListener('touchend', e => {
-    if (!touchStart || currentView !== 'read') return;
+    if (!touchStart || currentView !== 'read' || !ctx) return;
     const dx = e.changedTouches[0].clientX - touchStart.x;
     const dy = e.changedTouches[0].clientY - touchStart.y;
     touchStart = null;
+    /* A pooja of one page has no page to turn to, and a slip of the hand must never finish a text (and forget its place):
+       there only the buttons leave the page. */
+    if (ctx.page.scroll && ctx.book.sections.length === 1) return;
+    if (dx < 0 && ctx.page.to >= ctx.book.verses.length) return;
     if (Math.abs(dx) > 70 && Math.abs(dy) < 60) readerStep(dx < 0 ? 1 : -1);
   }, { passive: true });
 
@@ -2659,6 +2846,8 @@
 
   window.addEventListener('scroll', updateScrollCue, { passive: true });
   window.addEventListener('scroll', updateScrollmark, { passive: true });
+  window.addEventListener('scroll', trackPlace, { passive: true });
+  document.addEventListener('visibilitychange', keepAwake);
   /* Phones also resize as the address bar comes and goes; only a change of width can change where lines break. */
   let fitWidth = window.innerWidth;
   window.addEventListener('resize', () => {

@@ -84,3 +84,57 @@ keyboard order there (start, library, day) differs slightly from what is seen. `
 contexts; nothing in them depended on the root one.
 
 **Files affected:** `css/app.css`, `js/app.js`, `sw.js` (VERSION v26), `DESIGN.md`, `flow.md`
+
+## 2026-10-27: Reading a pooja: straight in, its offerings named, the screen kept on
+
+**Context:** The owner found reading poojas complicated. Opening one took five screens (Library,
+Poojas, Daily poojas, the pooja's own page with Read from start, Go to number and a 37-line
+contents, then the reader). Each list row was six or seven lines, so two fitted on a phone. In
+the reader the first stanza began on the second screen, under the title, a large player, the tune
+line and a full-width picture. Nothing said which offering a stanza was for, and the "ॐ ह्रीं …
+स्वाहा" lines looked like the verses. The owner chose all four fixes offered, and keeping the
+screen on.
+
+**Decision:**
+- Texts recited in one go (`scroll: true`, not stories) open from any list straight into the
+  reader at the stanza they were left at (`opensDirect()`, `bookHref()`); the reader goes back to
+  the list (`readerBack()`). Their book page is skipped, so its gyan daan invitation and sponsor
+  line move into the reader.
+- Offerings are read from the text itself (`offeringOf()`): the word before "निर्वपाम…" in the
+  mantra line, or the invocation words. Each stanza is headed by its offering, mantra lines are set
+  apart (`MANTRA_RE`), and a sticky strip of parts tracks and opens them (`trackPlace()`,
+  `jumpTo()`). The stanza being read is saved as the book's position while scrolling.
+- The pooja's head is shorter, the player slimmer, and its picture smaller and after the stanza.
+- List rows: name plus one line; the opening line only where names clash (`sharedNames()`).
+- Swipes no longer act on one-page poojas and never finish a text.
+- The Screen Wake Lock API keeps the screen on in the reader (`keepAwake()`), with a setting
+  (`awake`, on by default) shown only where the browser has the API.
+
+**Why:** The content files already carry everything needed: 85 of the pooja files have mantra
+lines, and the offering is always the word before "निर्वपामीति", so no content had to be edited
+or marked up by hand, and the import scripts that regenerate `content/pooja/` keep working. Reading
+it at render time keeps the texts plain files anyone can correct (Product principle 5). Saving the
+stanza while scrolling uses the existing `positions` and `.is-target` machinery, so home, Continue
+reading and the highlight on reopening all work unchanged. A swipe that finished a pooja (it is
+the last page) cleared its place and went home, which is the worst slip during a recitation.
+
+**Alternatives considered:**
+- *Marking offerings in the content files (a new `अर्पण:` line):* rejected; 85 files, regenerated
+  by import scripts outside the repo, and the text already says it.
+- *Keeping the pooja's page with fewer controls:* rejected by the owner's choice of one tap in;
+  the page added a screen before every recitation.
+- *Dropping the picture from poojas on phones:* rejected; the drawings are owner-approved. They
+  follow the stanza instead.
+- *A non-sticky strip at the top:* rejected; jumping to the part the temple has reached mid-pooja
+  would mean scrolling back up first.
+
+**Tradeoffs accepted:** The strip takes about 56px under the top bar on a phone. Offering names
+come from spelling patterns, so an unusual spelling simply gets no label (nothing wrong is shown).
+The saved place now changes as you scroll, so a quick scroll to the end and back moves it too.
+Wake lock is not available in every browser (older iPhones) or in some embedded views (it was
+refused in the app's preview pane during testing, where the code fails quietly), so the setting
+is hidden there. A sponsor-a-text invitation now ends each such pooja in the reader instead of
+its contents page.
+
+**Files affected:** `js/app.js`, `js/strings.js`, `css/app.css`, `sw.js` (VERSION v27),
+`DESIGN.md`, `PRODUCT.md`, `flow.md`

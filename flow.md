@@ -37,6 +37,15 @@ build step) and the **Ask server** (a Cloudflare Worker in `server/`).
 `.read-pair` → `.sanctum` (shrine, plinth, attribution) and `.notes` (`commentaryHtml()` and the
 sung recording), which `css/app.css` sets side by side when `main.reader` is at least 52rem wide.
 
+**Reciting a pooja** (texts with `scroll: true`, stories excepted): a list row's link comes from
+`bookHref()` (`#/read/<book>/<saved stanza>`), so `render()` → `viewRead()` opens it directly.
+`viewRead()` → `offeringOf()` per stanza → the strip of parts and the offering marks;
+`linesHtml()` sets `MANTRA_RE` lines apart; `readerBack()` points the back link at the list
+(`bookParent()`). After drawing, `afterRender()` scrolls to the saved stanza (`stuckHeight()`),
+then `trackPlace()` and `keepAwake()`. While reading, the `scroll` listener → `trackPlace()` lights
+the current part and saves the stanza to `state.positions`; a strip tap → `jumpTo()`;
+`visibilitychange` → `keepAwake()` asks for the wake lock again.
+
 **Home:** `#/` → `render()` → `viewHome()` → `.home-start` (greeting, `readingHtml()`),
 `.home-paths` (`pathsHtml()`), `.home-day` (`todayHtml()`, `festivalCardHtml()`), `.home-story`,
 `.home-sutra`. One column on phones; a grid of start and day, library, story and sutra on wide

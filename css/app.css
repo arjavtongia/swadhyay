@@ -369,6 +369,10 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .pooja-help { margin: 0.2rem 0 1.4rem; }
 .pooja-help > span { flex: 1; min-width: 0; }
 .pooja-help > .icon:first-child { width: 1.6rem; height: 1.6rem; flex: none; color: var(--brass-text); }
+/* Over a list of poojas the way in for someone new is a single line. */
+.pooja-help.is-compact { min-height: var(--tap); margin: 0 0 1rem; padding: 0.35rem 0.9rem; }
+.pooja-help.is-compact .notice-when { display: none; }
+.pooja-help.is-compact .notice-title { font: 600 var(--fs-md)/1.3 var(--font-ui); }
 
 /* ---------- The cusped arch (the reader's shrine, the day's sutra) ---------- */
 
@@ -485,6 +489,10 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
   .row-main > .row-opening { grid-column: 2; grid-row: 1 / span 3; margin: 0; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 }
 .row-chev { color: var(--muted); }
+/* A pooja's one line under its name, and its tags side by side on the line after. */
+.row-sub-one { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.row-tags { display: flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; margin-top: 0.3rem; }
+.row-tags .row-tag { margin-top: 0; }
 .row-verse { font: 500 var(--fs-body)/1.65 var(--font-verse); color: var(--verse); overflow-wrap: anywhere; }
 .row-topic { font-weight: 600; font-size: var(--fs-body); line-height: 1.5; }
 .row-num { flex: none; display: inline-grid; place-items: center; min-width: 2.15rem; height: 2.15rem; padding: 0 0.4rem; border: 1px solid var(--brass-line); border-radius: 999px; font: 700 var(--fs-sm)/1 var(--font-head); color: var(--brass-text); white-space: nowrap; font-variant-numeric: tabular-nums; }
@@ -670,6 +678,47 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .scroll-page .verse-block + .verse-block { position: relative; margin-top: 1.9rem; padding-top: 1.9rem; }
 .scroll-page .verse-block + .verse-block::before { content: ''; position: absolute; top: 0; left: 28%; right: 28%; border-top: 1px solid var(--brass-line); }
 .scroll-page .verse-block + .verse-block::after { content: ''; position: absolute; top: -0.21rem; left: 50%; width: 0.42rem; height: 0.42rem; margin-left: -0.21rem; background: var(--brass); transform: rotate(45deg); }
+
+/* ---------- Reciting a pooja ---------- */
+
+/* The line said while offering ("ॐ ह्रीं … निर्वपामीति स्वाहा") is set apart from the stanza, smaller and in brass ink, as
+   printed pooja books set it, so the verse and its mantra are not read as one. */
+.verse-line.mantra { margin-top: 0.7em; padding-left: 0; text-indent: 0; font-size: 0.8em; line-height: 1.6; color: var(--brass-text); text-wrap: balance; }
+.verse-line.mantra + .verse-line.mantra { margin-top: 0.25em; }
+/* Each stanza is headed by what it offers: its name on a brass-edged pill across a brass rule, in place of the plain
+   rule between stanzas, so a glance shows which part of the pooja this is. */
+.offer-mark { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin: 0 0 1rem; }
+.offer-mark::before, .offer-mark::after { content: ''; flex: 1; max-width: 7rem; border-top: 1px solid var(--brass-line); }
+.offer-mark span { padding: 0.12rem 0.85rem; border: 1px solid var(--brass-line); border-radius: 999px; background: var(--brass-wash); font: 700 var(--fs-md)/1.4 var(--font-head); color: var(--brass-text); white-space: nowrap; }
+.scroll-page .verse-block.has-offer { padding-top: 0.3rem; }
+.scroll-page .verse-block.has-offer::before, .scroll-page .verse-block.has-offer::after { content: none; }
+/* Who wrote the pooja, or the tune it is sung to: a quiet note above the text, not a heading. */
+.topic-note { margin: 0 0 0.9rem; font: 400 var(--fs-sm)/1.5 var(--font-ui); color: var(--muted); text-align: center; text-wrap: balance; }
+
+/* The parts of the pooja, as a strip that stays under the top bar: the part now being read is lit, and a tap opens any
+   other. It slides sideways when the parts do not all fit, and stands centred when they do. */
+.offer-strip { position: sticky; top: var(--top-h, 0px); z-index: 4; margin: 0 -1rem; padding: 0.4rem 0; background: var(--bg); border-bottom: 1px solid var(--hair); }
+.offer-track { position: relative; display: flex; gap: 0.4rem; overflow-x: auto; padding: 0 1rem; scrollbar-width: none; scroll-snap-type: x proximity; }
+.offer-track::-webkit-scrollbar { display: none; }
+.offer-chip { flex: none; min-height: 44px; padding: 0.2rem 0.9rem; border: 1px solid var(--brass-line); border-radius: 999px; background: none; color: var(--text); font: 600 var(--fs-md)/1.2 var(--font-ui); cursor: pointer; scroll-snap-align: center; transition: background-color 0.15s, border-color 0.15s, color 0.15s; }
+.offer-chip:first-child { margin-left: auto; }
+.offer-chip:last-child { margin-right: auto; }
+.offer-chip:hover { border-color: var(--brass); background: var(--brass-wash); }
+.offer-chip[aria-current="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); color: var(--brass-text); }
+
+/* The words come first: in a pooja the head is short, and its picture a small window rather than a full scene. */
+.recite-page .page-head { margin: 1rem 0 0.9rem; }
+.recite-page .page-head .chhatra { width: 2.6rem; margin-bottom: 0.35rem; }
+.page-head .book-sponsor { justify-content: center; margin-top: 0.4rem; }
+.recite-page .scene { margin: 0.2rem 0 1.2rem; }
+.recite-page .scene-niche { max-width: min(13rem, 62%); }
+.recite-page .scene .plinth { max-width: min(14rem, 67%); }
+.recite-page .scene-caption { margin-top: 0.45rem; font-size: var(--fs-sm); }
+.reader > .book-give { max-width: 30rem; margin-left: auto; margin-right: auto; }
+@container (min-width: 40rem) {
+  .recite-page .scene-niche { max-width: 17rem; }
+  .recite-page .scene .plinth { max-width: 18rem; }
+}
 
 /* What explains the scripture sits below it, in the plain interface font, so it never reads as the scripture itself. */
 .commentary { margin-top: 1.4rem; }
@@ -1044,7 +1093,7 @@ textarea:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 /* ---------- Side rail: how far down a page you are ---------- */
 /* A hairline at the side of every screen that scrolls (home excepted), gilded as far as you have come, with a
    sindoor lozenge at your place. It sits just outside the column, between the top and bottom bars. */
-.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - var(--col-half) - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + var(--strip-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - var(--col-half) - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .scrollmark.is-on { opacity: 1; }
 .scrollmark i { position: absolute; top: 0; left: 0; width: 100%; height: calc(var(--p, 0) * 100%); border-radius: 2px; background: linear-gradient(var(--brass-hi), var(--brass)); }
 .scrollmark b { position: absolute; top: calc(var(--p, 0) * 100%); right: -0.35rem; width: 2.6rem; height: 2.6rem; margin-top: -1.3rem; }
@@ -1150,6 +1199,9 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
   /* The reader's own bars run the full width, their controls kept to the column. */
   #app > .reader-top, #app > .size-panel { width: auto; margin: 0; padding-left: max(var(--gutter), calc((100% - var(--wide)) / 2)); padding-right: max(var(--gutter), calc((100% - var(--wide)) / 2)); }
   #app > .reader-bar { width: auto; }
+  /* A pooja's strip of parts runs the full width too, so all its stops show at once, centred over the text. */
+  #app > .offer-strip { width: auto; margin: 0; }
+  #app > .offer-strip .offer-track { padding-left: var(--gutter); padding-right: var(--gutter); }
 
   /* Home: what you are reading beside the day, the library across the page, then the story beside the sutra. */
   main.home {
@@ -1496,6 +1548,14 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
 .rec-parts .chip:hover { background: var(--brass-wash); }
 .rec-parts .chip[aria-pressed="true"] { border-color: var(--brass); background: var(--brass-wash-strong); box-shadow: inset 0 0 0 1px var(--brass); }
 .rec-credit { margin: 0.35rem 0 0 0.4rem; font-size: var(--fs-xs); line-height: 1.4; color: var(--muted); }
+/* Kept slim so the words follow soon: the name on its own line, the trail with the time beside it under it. */
+.rec { padding-top: 0.45rem; padding-bottom: 0.45rem; }
+.rec-main { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 0.6rem; }
+.rec-title { grid-column: 1 / -1; }
+.rec-seek { grid-column: 1; height: 1.5rem; }
+.rec-time { grid-column: 2; grid-row: 2; justify-content: flex-end; gap: 0.3rem; margin: 0; white-space: nowrap; }
+.rec-now::after { content: '/'; margin-left: 0.3rem; }
+.rec-credit { margin-top: 0.15rem; }
 /* While a text is heard (sung or read aloud) the page keeps its marble, with only the diya glow behind the shrine,
    and Listen stays the sindoor primary so its "Pause" stays readable. */
 .reader.is-listening { background: none; }
