@@ -1571,11 +1571,12 @@
     return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&amp;body=' + encodeURIComponent(body.replace(/\n/g, '\r\n'));
   }
 
-  /* At the end of a text's page, a quiet invitation to give it as gyan daan, until someone has. */
+  /* At the end of a text's page, a quiet invitation to give it as gyan daan, until someone has: a small brass link with
+     a line of fine print under it, so it never competes with the text. */
   function bookGiveHtml(book) {
     if (sponsors[book.id] && sponsorText(sponsors[book.id].name)) return '';
-    return '<aside class="book-give"><p>' + esc(t('sponsorBookDesc')) + '</p>' +
-      '<a class="btn btn-wide" href="' + sponsorMailHref(book) + '">' + icon('flower') + '<span>' + esc(t('sponsorBook')) + '</span></a></aside>';
+    return '<aside class="book-give"><a class="give-link" href="' + sponsorMailHref(book) + '">' + icon('flower') + '<span>' + esc(t('sponsorBook')) + '</span></a>' +
+      '<p>' + esc(t('sponsorBookDesc')) + '</p></aside>';
   }
 
   async function viewBook(id, secStr) {

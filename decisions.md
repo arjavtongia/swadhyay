@@ -181,3 +181,26 @@ words (with labels for screen readers).
 
 **Files affected:** `js/app.js`, `js/strings.js`, `css/app.css`, `sw.js` (VERSION v28),
 `DESIGN.md`, `flow.md`
+
+## 2026-10-28: A quieter invitation to sponsor a text
+
+**Context:** The "Sponsor this text" invitation at the end of each text was a paragraph and a
+full-width outlined button, about 130px tall on a phone. With the reader now text-first it stood
+out at the end of every pooja, and the owner asked for it to be subtler and smaller.
+
+**Decision:** `bookGiveHtml()` now gives a small brass link (flower icon, label size, no border)
+with one line of fine print under it, about 82px in all. Its tap area stays 48px tall.
+
+**Why:** Gyan daan is how the owner hopes the app will be supported, so the invitation stays on
+every unsponsored text, but it should read as a quiet line at the end, not as an action competing
+with the text (Product principle 3: never commercial).
+
+**Alternatives considered:**
+- *Only on the text's page, not in the reader:* rejected; poojas opened straight into the reader
+  have no page of their own, so they would lose the invitation entirely.
+- *Hiding the explanation line:* rejected; it says what giving means (your name with the text),
+  which is the reason someone would give.
+
+**Tradeoffs accepted:** A smaller link may be noticed less often.
+
+**Files affected:** `js/app.js`, `css/app.css`, `sw.js` (VERSION v29), `DESIGN.md`
