@@ -94,9 +94,10 @@
   const $scrollCue = document.getElementById('scroll-cue');
   function updateScrollCue() {
     const below = document.documentElement.scrollHeight - window.scrollY - window.innerHeight;
-    const show = window.scrollY < 40 && below > 120 && currentView !== 'ask';
+    /* On a wide screen the tabs stand at the top, with no band below to hold the hint, and the scrollbar shows anyway. */
+    const show = !tabsOnTop() && window.scrollY < 40 && below > 120 && currentView !== 'ask';
     /* The hint sits in a band at the top of the bottom bar, so it never covers the words on the page. */
-    const bar = $app.querySelector('.reader-bar, .tabbar');
+    const bar = bottomBar();
     if (bar && bar.classList.contains('has-cue') !== show) {
       bar.classList.toggle('has-cue', show);
       syncChrome();
@@ -109,15 +110,28 @@
     if (show) $scrollCue.style.bottom = bar ? Math.max(bar.offsetHeight - $scrollCue.offsetHeight - 2, 0) + 'px' : '';
   }
 
-  /* The fixed parts of a screen, measured so the page and the side rail can leave room for them: the top bar,
-     the bottom bar, and on Ask the question box standing on the bar. */
+  /* The bar fixed at the foot of the screen: the tab bar on phones and tablets, and the reader's bar. On a wide screen
+     the tabs stand at the top of the page instead (css/app.css), so there they are not a bottom bar. */
+  function bottomBar() {
+    const bar = $app.querySelector('.reader-bar, .tabbar');
+    if (!bar) return null;
+    const style = getComputedStyle(bar);
+    return style.position === 'fixed' && style.display !== 'none' ? bar : null;
+  }
+  function tabsOnTop() {
+    const tabs = $app.querySelector('.tabbar');
+    return tabs && getComputedStyle(tabs).position === 'sticky' ? tabs : null;
+  }
+
+  /* The fixed parts of a screen, measured so the page and the side rail can leave room for them: the bar stuck at the
+     top (the tabs on a wide screen, otherwise the screen's own top bar), the bottom bar, and on Ask the question box. */
   function syncChrome() {
     const root = document.documentElement.style;
-    const top = $app.querySelector('.topbar');
-    const bar = $app.querySelector('.reader-bar, .tabbar');
+    const bar = bottomBar();
+    const top = tabsOnTop() || $app.querySelector('.topbar');
     const box = $app.querySelector('.composer');
     root.setProperty('--top-h', (top ? top.offsetHeight : 0) + 'px');
-    root.setProperty('--bar-h', (bar && getComputedStyle(bar).display !== 'none' ? bar.offsetHeight : 0) + 'px');
+    root.setProperty('--bar-h', (bar ? bar.offsetHeight : 0) + 'px');
     root.setProperty('--composer-h', (box ? box.offsetHeight : 0) + 'px');
   }
 
@@ -933,8 +947,18 @@
       '</header>';
   }
 
-  /* Bottom bar shown on every screen except the reader and the welcome screen. */
+  /* The tab bar, shown on every screen except the reader and the welcome screen. On phones and tablets it stands at the
+     foot of the screen; on a wide screen it is the lintel across the top, with the name at its left and the language
+     at its right (both hidden on smaller screens, where home's own header carries them). */
   const NAV_VIEWS = ['home', 'books', 'book', 'search', 'ask', 'saved', 'settings', 'credits'];
+
+  /* The language button: in home's header, and at the right of the tabs on a wide screen. Hidden while Settings are locked. */
+  function langButtonHtml(cls) {
+    if (state.locked) return '';
+    const other = LANGS.find(l => l.code !== state.lang) || LANGS[0];
+    return '<button class="btn btn-small' + (cls ? ' ' + cls : '') + '" data-action="switch-lang" data-lang="' + other.code + '" translate="no" lang="' + other.code + '">' +
+      icon('language') + '<span>' + esc(other.name) + '</span></button>';
+  }
 
   function navBar(view) {
     const items = [
@@ -944,9 +968,12 @@
       { id: 'search', href: '#/search', icon: 'search', label: t('search'), active: view === 'search' },
       { id: 'settings', href: '#/settings', icon: 'settings', label: t('settings'), active: view === 'settings' || view === 'credits' }
     ];
-    return '<nav class="tabbar" aria-label="' + esc(t('appName')) + '">' + items.map(it =>
-      '<a class="tab' + (it.active ? ' is-active' : '') + '" href="' + it.href + '"' + (it.active ? ' aria-current="page"' : '') + '>' +
-      icon(it.icon) + '<span>' + esc(it.label) + '</span></a>').join('') + '</nav>';
+    return '<nav class="tabbar" aria-label="' + esc(t('appName')) + '">' +
+      '<a class="nav-brand" href="#/" translate="no" lang="hi" tabindex="-1" aria-hidden="true">' + ORN.prateek() + '<span>' + esc(STRINGS.hi.appName) + '</span></a>' +
+      items.map(it =>
+        '<a class="tab' + (it.active ? ' is-active' : '') + '" href="' + it.href + '"' + (it.active ? ' aria-current="page"' : '') + '>' +
+        icon(it.icon) + '<span>' + esc(it.label) + '</span></a>').join('') +
+      langButtonHtml('nav-lang') + '</nav>';
   }
 
   function chevronRow(href, mainHtml, leadHtml) {
@@ -1030,7 +1057,7 @@
       g.books.push(b);
     });
     return groups.map(g => (g.name ? '<h2 class="shelf-head story-group" translate="no">' + esc(g.name) + '</h2>' : '') +
-      '<ul class="rows">' + g.books.map(storyRow).join('') + '</ul>').join('');
+      '<ul class="rows rows-grid">' + g.books.map(storyRow).join('') + '</ul>').join('');
   }
 
   function verseRow(book, v, shownNum) {
@@ -1193,7 +1220,8 @@
     return '';
   }
 
-  /* Continue reading as one bar: the book's emblem, where you stopped with a brass trail, and a round button. */
+  /* Continue reading as one bar: the book's emblem, where you stopped with a brass trail, and a round button. Where the
+     bar has room (a wide screen) the button says what it does and the line above the title steps aside. */
   function continueHtml(href, book, meta, pct, action) {
     return '<a class="continue" href="' + href + '">' + coverEmblem(book) +
       '<span class="continue-main">' +
@@ -1203,7 +1231,7 @@
         (meta ? '<span class="continue-meta">' + esc(meta) + '</span>' : '') +
         (pct != null ? '<span class="trail" aria-hidden="true"><i style="width:' + pct + '%"></i><b style="left:' + pct + '%"></b></span>' : '') +
         '</span>' : '') +
-      '</span><span class="continue-go" aria-hidden="true">' + icon('arrow-right') + '</span></a>';
+      '</span><span class="continue-go" aria-hidden="true"><span class="continue-go-label">' + esc(action) + '</span>' + icon('arrow-right') + '</span></a>';
   }
 
   /* The Saved line names what is saved, newest first, rather than repeating its own title. */
@@ -1293,18 +1321,19 @@
   async function viewHome() {
     document.title = t('appName');
     await getCatalog();
-    const other = LANGS.find(l => l.code !== state.lang) || LANGS[0];
+    /* Each part of home is its own block, so a wide screen can set them side by side (css/app.css): what you are
+       reading beside the day, the library across, then the story beside the sutra. A phone keeps this order. */
     let html = '<header class="home-head"><span class="brand" translate="no" lang="hi">' + esc(STRINGS.hi.appName) + '</span>' + ORN.prateek() +
-      (state.locked ? '' : '<button class="btn btn-small" data-action="switch-lang" data-lang="' + other.code + '" translate="no" lang="' + other.code + '">' +
-        icon('language') + '<span>' + esc(other.name) + '</span></button>') +
-      '</header><main class="home"><h1 class="greet">' + esc(t('greeting')) + '</h1>' +
-      await readingHtml() + pathsHtml() + ORN.rule('home-rule') + todayHtml() + await festivalCardHtml();
+      langButtonHtml() + '</header><main class="home">' +
+      '<div class="home-start"><h1 class="greet">' + esc(t('greeting')) + '</h1>' + await readingHtml() + '</div>' +
+      '<section class="home-paths" aria-labelledby="paths-head"><h2 class="sec-head paths-head" id="paths-head">' + esc(t('books')) + '</h2>' + pathsHtml() + '</section>' +
+      ORN.rule('home-rule') + '<div class="home-day">' + todayHtml() + await festivalCardHtml() + '</div>';
 
     const day = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
     const stories = catalog.filter(b => b.category === 'katha');
     if (stories.length) {
       const s = stories[day % stories.length];
-      html += ORN.rule('home-rule') + '<section class="home-sec"><h2 class="sec-head">' + esc(t('todaysStory')) + '</h2>' +
+      html += ORN.rule('home-rule') + '<section class="home-sec home-story"><h2 class="sec-head">' + esc(t('todaysStory')) + '</h2>' +
         '<a class="feature" href="#/book/' + s.id + '">' + archPicHtml(s) +
         '<span class="feature-title">' + titleHtml(s) + '</span>' +
         (s.blurb ? '<span class="feature-blurb">' + esc(L(s.blurb)) + '</span>' : '') + '</a></section>';
@@ -1317,7 +1346,7 @@
       const tm = ts.meaningBook && await getBook(ts.meaningBook).catch(() => null);
       const part = tm && tm.verses[v.pos - 1] && shownParts(tm.verses[v.pos - 1])[0];
       const meaning = part ? part.text.replace(/\s*॥\s*[0-9०-९]+\s*॥\s*$/, '') : '';
-      html += ORN.rule('home-rule') + '<section class="home-sec"><h2 class="sec-head">' + esc(t('todaysSutra')) + '</h2>' +
+      html += ORN.rule('home-rule') + '<section class="home-sec home-sutra"><h2 class="sec-head">' + esc(t('todaysSutra')) + '</h2>' +
         '<a class="arch sutra-day" href="#/read/' + ts.id + '/' + v.pos + '">' + ORN.crown(8) + '<span class="arch-body">' + ORN.sides() +
         '<span class="verse" translate="no" lang="sa">' + esc(v.lines.join(' ')) + '</span>' +
         (meaning ? '<span class="sutra-meaning" translate="no" lang="' + (part.lang || 'hi') + '">' + esc(meaning) + '</span>' : '') +
@@ -1379,7 +1408,7 @@
       document.title = t(g.title) + ' · ' + t('appName');
       return backBar('#/books', t('books')) + '<main><h1 class="page-title">' + esc(t(g.title)) + '</h1>' +
         (g.id === 'pooja' ? poojaHelpHtml() : '') +
-        '<ul class="rows">' + cats.map(categoryRow).join('') + '</ul></main>';
+        '<ul class="rows rows-grid">' + cats.map(categoryRow).join('') + '</ul></main>';
     }
     if (catId) {
       const cat = used.find(c => c.id === catId);
@@ -1393,17 +1422,18 @@
         '<main><h1 class="page-title" translate="no">' + esc(L(cat.title)) + '</h1>' +
         (cat.id === 'katha' ? kidsBannerHtml() + storyListHtml('katha') : ARTICLE_CATS.indexOf(cat.id) >= 0 ? storyListHtml(cat.id) :
         (pooja ? poojaHelpHtml() : '') +
-        '<ul class="rows">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
+        '<ul class="rows rows-grid">' + catalog.filter(b => b.category === cat.id).map(b => bookRow(b, guided.has(b.id))).join('') + '</ul>') + '</main>';
     }
     document.title = t('books') + ' · ' + t('appName');
     let html = backBar('#/', t('home')) + '<main><h1 class="page-title">' + esc(t('books')) + '</h1>';
     const shelves = GROUPS.map(g => ({ title: t(g.title), cats: shelfCats(g) }));
     const rest = used.filter(c => !GROUPS.some(g => g.cats.indexOf(c.id) >= 0));
     if (rest.length) shelves.push({ title: t('shelfOther'), cats: rest });
-    html += shelves.filter(s => s.cats.length).map(s => '<section class="shelf"><h2 class="shelf-head" translate="no">' + esc(s.title) + '</h2>' +
-      '<ul class="rows">' + s.cats.map(categoryRow).join('') + '</ul></section>').join('');
+    /* On a wide screen the shelves stand in columns (css/app.css). */
+    html += '<div class="shelves">' + shelves.filter(s => s.cats.length).map(s => '<section class="shelf"><h2 class="shelf-head" translate="no">' + esc(s.title) + '</h2>' +
+      '<ul class="rows">' + s.cats.map(categoryRow).join('') + '</ul></section>').join('') + '</div>';
     const loose = catalog.filter(b => !used.some(c => c.id === b.category));
-    if (loose.length) html += '<ul class="rows">' + loose.map(b => bookRow(b)).join('') + '</ul>';
+    if (loose.length) html += '<ul class="rows rows-grid">' + loose.map(b => bookRow(b)).join('') + '</ul>';
     return html + '</main>';
   }
 
@@ -1466,14 +1496,15 @@
         '<h1 class="page-title" translate="no">' + esc(sectionName(book, s)) + '</h1>' +
         '<div class="book-actions"><a class="btn btn-primary btn-wide" href="#/read/' + id + '/' + s.from + '">' + icon('book') +
         '<span>' + esc(book.sectionUnit ? t('readSectionFromStart', { sec: L(book.sectionUnit) }) : t('readFromStart')) + '</span></a></div>' +
-        '<ol class="rows verse-index">' + verses.map(v => verseRow(book, v)).join('') + '</ol></main>';
+        '<ol class="rows rows-grid verse-index">' + verses.map(v => verseRow(book, v)).join('') + '</ol></main>';
     }
 
     document.title = book.title.hi + ' · ' + t('appName');
     const parent = bookParent(book);
     const kids = book.category === 'bal-katha';
     const story = STORY_LIKE.indexOf(book.category) >= 0;
-    let html = backBar(parent.href, parent.label) + '<main' + (kids ? ' class="kids"' : '') + '>' +
+    /* The text's own details, then its contents: one under the other on a phone, side by side on a wide screen. */
+    let html = backBar(parent.href, parent.label) + '<main class="book-page' + (kids ? ' kids' : '') + '"><div class="book-info">' +
       (story ? '<div class="book-cover">' + archPicHtml(book) + '</div>' : '') +
       '<div class="book-top">' + (story ? '' : coverEmblem(book)) + '<h1>' + titleHtml(book) + '</h1></div>' +
       (book.blurb ? '<p class="book-blurb">' + esc(L(book.blurb)) + '</p>' : '') +
@@ -1491,6 +1522,7 @@
     }
     html += '</div>';
     if (canGoToNumber(book)) html += gotoForm(book);
+    html += '</div><div class="book-contents">';
 
     if (multi) {
       const unitPlural = state.lang === 'en' ? L(book.unit).toLowerCase() + 's' : L(book.unit);
@@ -1517,7 +1549,7 @@
       html += '<h2>' + esc(t('contents')) + '</h2><ol class="rows verse-index">' +
         book.verses.map(v => verseRow(book, v)).join('') + '</ol>';
     }
-    return html + bookGiveHtml(book) + '</main>';
+    return html + '</div>' + bookGiveHtml(book) + '</main>';
   }
 
   let ctx = null;
@@ -1710,7 +1742,11 @@
     const recHtml = recordingOf(id) ? recordingHtml(book) : '';
 
     if (shrine) {
-      html += '<article class="shrine' + (readEntering ? ' is-entering' : '') + '">' + ORN.crown(12) +
+      /* The shrine, and what explains it: one under the other, or on a wide screen side by side like a printed
+         edition with the mool on one side and its arth on the other (css/app.css). */
+      const notes = verses.map(v => commentaryHtml(book, v)).join('');
+      html += '<div class="read-pair' + (notes || recHtml ? ' has-notes' : '') + '"><div class="sanctum">' +
+        '<article class="shrine' + (readEntering ? ' is-entering' : '') + '">' + ORN.crown(12) +
         '<div class="shrine-body">' + ORN.sides() +
         '<h1 class="shrine-label" translate="no">॥ ' + esc(label) + ' ॥</h1>' +
         '<div class="page' + (many ? ' page-many' : '') + '">' +
@@ -1718,10 +1754,10 @@
           linesHtml(book, v) + '</div>').join('') +
         '</div></div></article>' +
         '<div class="plinth full" aria-hidden="true"><i></i><i></i></div>' +
-        (L(book.author) ? '<p class="shrine-attrib" translate="no">' + esc(L(book.author)) + ' · <span lang="hi">' + esc(book.title.hi) + '</span></p>' : '');
-      const notes = verses.map(v => commentaryHtml(book, v)).join('');
-      if (notes) html += '<div class="commentary">' + notes + '</div>';
-      html += recHtml;
+        (L(book.author) ? '<p class="shrine-attrib" translate="no">' + esc(L(book.author)) + ' · <span lang="hi">' + esc(book.title.hi) + '</span></p>' : '') +
+        '</div>';
+      if (notes || recHtml) html += '<div class="notes">' + (notes ? '<div class="commentary">' + notes + '</div>' : '') + recHtml + '</div>';
+      html += '</div>';
     } else {
       html += '<div class="page-body' + (page.scroll ? ' scroll-page' : '') + '">';
       if (page.scroll) {
@@ -1868,7 +1904,7 @@
     const yours = $app.querySelectorAll('.msg-you');
     const last = yours[yours.length - 1];
     if (!last) { window.scrollTo(0, 0); return; }
-    const top = $app.querySelector('.topbar');
+    const top = tabsOnTop() || $app.querySelector('.topbar');
     const y = last.getBoundingClientRect().top + window.scrollY - (top ? top.offsetHeight : 0) - 14;
     const still = !smooth || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: Math.max(0, y), behavior: still ? 'auto' : 'smooth' });
@@ -1986,7 +2022,7 @@
     searchBooks = await searchableBooks();
     const hasMic = !!(window.SpeechRecognition || window.webkitSpeechRecognition);
     return backBar('#/', t('home')) +
-      '<main><h1 class="page-title">' + esc(t('search')) + '</h1>' +
+      '<main class="search-page"><h1 class="page-title">' + esc(t('search')) + '</h1>' +
       '<a class="ask-link" href="#/ask">' + icon('ask') + '<span>' + esc(t('askFromSearch')) + '</span>' + icon('chevron-right', 'row-chev') + '</a>' +
       '<form class="search-form" data-form="search" role="search" novalidate>' +
       '<label class="visually-hidden" for="q">' + esc(t('search')) + '</label>' +
@@ -2015,10 +2051,10 @@
     }
     let html = '';
     if (res.books.length) {
-      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows">' + res.books.map(b => bookRow(b)).join('') + '</ul>';
+      html += '<h2>' + esc(t('resultsBooks')) + '</h2><ul class="rows rows-grid">' + res.books.map(b => bookRow(b)).join('') + '</ul>';
     }
     if (res.verses.length) {
-      html += '<h2>' + esc(t('resultsText')) + '</h2><ul class="rows">' +
+      html += '<h2>' + esc(t('resultsText')) + '</h2><ul class="rows rows-grid">' +
         res.verses.map(r => chevronRow('#/read/' + r.book.id + '/' + r.v.pos,
           '<span class="row-verse" translate="no" lang="' + (r.book.textLang || 'sa') + '">' + esc(r.v.topic || firstLine(r.v)) + '</span>' +
           '<span class="row-sub"><span translate="no" lang="hi">' + esc(r.book.title.hi) + '</span> · ' + esc(posLabel(r.book, r.v)) + '</span>')).join('') + '</ul>';
@@ -2038,7 +2074,7 @@
     const items = state.bookmarks.slice().reverse()
       .map(b => ({ b: b, book: bookCache[b.book] }))
       .filter(x => x.book && x.book.verses[x.b.pos - 1]);
-    html += '<ul class="rows">' + items.map(x => {
+    html += '<ul class="rows rows-grid">' + items.map(x => {
       const v = x.book.verses[x.b.pos - 1];
       return '<li class="row-with-action"><a class="row" href="#/read/' + x.book.id + '/' + v.pos + '"><span class="row-main">' +
         '<span class="row-verse" translate="no" lang="' + (x.book.textLang || 'sa') + '">' + esc(v.topic || firstLine(v)) + '</span>' +
@@ -2083,13 +2119,14 @@
 
   function viewSettings() {
     document.title = t('settings') + ' · ' + t('appName');
-    let html = backBar('#/', t('home')) + '<main><h1 class="page-title">' + esc(t('settings')) + '</h1>';
+    let html = backBar('#/', t('home')) + '<main class="settings-page"><h1 class="page-title">' + esc(t('settings')) + '</h1>';
     if (state.locked) {
       return html + '<section class="set"><p>' + icon('lock') + ' ' + esc(t('lockedMsg')) + '</p>' +
         '<button class="btn btn-wide hold-btn" data-hold="unlock"><span class="hold-fill"></span><span class="hold-text">' + icon('lock') + '<span>' + esc(t('holdToUnlock')) + '</span></span></button></section>' +
         '<div class="set-link"><a class="row" href="#/credits"><span class="row-main"><span class="title">' + esc(t('credits')) + '</span></span>' + icon('chevron-right', 'row-chev') + '</a></div>' + makerHtml() + '</main>';
     }
-    html += '<section class="set"><h2>' + esc(t('language')) + '</h2>' +
+    /* On a wide screen the settings stand in two columns (css/app.css). */
+    html += '<div class="sets"><section class="set"><h2>' + esc(t('language')) + '</h2>' +
       choice('set-lang', state.lang, LANGS.map(l => ({ value: l.code, label: l.name, lang: l.code }))) + '</section>';
     html += '<section class="set"><h2>' + esc(t('textSize')) + '</h2>' +
       '<p class="size-preview" translate="no" lang="pra">' + esc(t('sizePreview')) + '</p>' +
@@ -2121,7 +2158,7 @@
       '<button class="btn btn-wide" data-action="lock">' + icon('lock') + '<span>' + esc(t('lockOn')) + '</span></button></section>';
     html += '<section class="set"><h2>' + icon('help-circle') + ' ' + esc(t('help')) + '</h2><ol class="tips">' +
       t('helpTips').map(tip => '<li>' + esc(tip) + '</li>').join('') + '</ol></section>';
-    html += supportHtml();
+    html += supportHtml() + '</div>';
     html += '<div class="set-link"><a class="row" href="#/credits"><span class="row-main"><span class="title">' + esc(t('credits')) + '</span></span>' + icon('chevron-right', 'row-chev') + '</a></div>';
     return html + makerHtml() + '</main>';
   }
@@ -2131,17 +2168,17 @@
     await getCatalog();
     const given = catalog.filter(b => sponsors[b.id] && sponsorText(sponsors[b.id].name));
     return backBar('#/settings', t('settings')) +
-      '<main><h1 class="page-title">' + esc(t('credits')) + '</h1><p>' + esc(t('creditsIntro')) + '</p>' +
-      (given.length ? '<h2>' + esc(t('sponsorsHeading')) + '</h2>' + given.map(b => {
+      '<main class="credits-page"><h1 class="page-title">' + esc(t('credits')) + '</h1><p>' + esc(t('creditsIntro')) + '</p>' +
+      (given.length ? '<h2>' + esc(t('sponsorsHeading')) + '</h2><div class="credit-list">' + given.map(b => {
         const s = sponsors[b.id];
         return '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
           '<p translate="no">' + esc(sponsorText(s.name)) + '</p>' +
           (sponsorText(s.note) ? '<p class="muted" translate="no">' + esc(sponsorText(s.note)) + '</p>' : '') + '</section>';
-      }).join('') : '') +
-      '<h2>' + esc(t('textsHeading')) + '</h2>' +
+      }).join('') + '</div>' : '') +
+      '<h2>' + esc(t('textsHeading')) + '</h2><div class="credit-list">' +
       catalog.map(b => '<section class="credit"><h3 translate="no" lang="hi">' + esc(b.title.hi) + '</h3>' +
         (L(b.author) ? '<p class="muted">' + esc(L(b.author)) + '</p>' : '') +
-        (b.source ? '<p>' + esc(L(b.source)) + '</p>' : '') + '</section>').join('') +
+        (b.source ? '<p>' + esc(L(b.source)) + '</p>' : '') + '</section>').join('') + '</div>' +
       (recordings.source ? '<h2>' + esc(t('recHeading')) + '</h2><p>' + esc(L(recordings.source)) + '</p>' +
         (recordings.url ? '<p><a href="' + esc(recordings.url) + '" target="_blank" rel="noopener">' + esc(recordings.url.replace('https://', '')) + '</a></p>' : '') : '') +
       '<h2>' + esc(t('toolsHeading')) + '</h2><ul class="plain"><li>' + esc(t('fontCredit')) + '</li><li>' + esc(t('iconCredit')) + '</li><li>' + esc(t('splashPhotoCredit')) + '</li></ul>' +
@@ -2216,7 +2253,8 @@
     clearTimeout(loadingTimer);
     if (token !== renderToken) return;
     const withNav = NAV_VIEWS.indexOf(view) >= 0;
-    $app.innerHTML = html + (withNav ? navBar(view) : '');
+    /* The tabs come first, so on a wide screen, where they stand at the top, they are also first for the keyboard. */
+    $app.innerHTML = (withNav ? navBar(view) : '') + html;
     $app.classList.toggle('has-nav', withNav);
     $app.classList.toggle('is-ask', view === 'ask');
     /* A short rise when the screen changes; a page turn slides only the scripture, in the direction of travel. */

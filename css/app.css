@@ -58,6 +58,11 @@
   --scene-paper: #f7f4ee;
   --scene-ground: #eadbbd;
   --tap: max(2.5rem, 48px);
+  /* The page's column: one 42rem column on phones and tablets; on a wide screen (below) the page spreads to --wide,
+     with --gutter at its sides. --col-half places the side rail just outside it. */
+  --wide: 1440px;
+  --gutter: 1rem;
+  --col-half: 21rem;
   --fs-xs: 0.68rem;
   --fs-sm: 0.76rem;
   --fs-md: 0.86rem;
@@ -262,6 +267,7 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 
 /* ---------- Bottom bar: a marble plinth with a brass edge ---------- */
 
+/* The plinth runs the full width of the screen, as a step does; its controls keep to the 42rem column. */
 #app.has-nav { padding-bottom: calc(6rem + env(safe-area-inset-bottom)); }
 .tabbar, .reader-bar {
   position: fixed;
@@ -269,13 +275,13 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
   right: 0;
   bottom: 0;
   z-index: 5;
-  max-width: 42rem;
-  margin: 0 auto;
   background: var(--plinth);
   border-top: 1px solid var(--brass);
   box-shadow: 0 -3px 0 var(--plinth-edge), 0 -10px 22px rgba(0, 0, 0, 0.07);
 }
-.tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0.3rem 0.4rem calc(0.3rem + env(safe-area-inset-bottom)); }
+.tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 0.3rem max(0.4rem, calc(50% - 21rem)) calc(0.3rem + env(safe-area-inset-bottom)); }
+/* The name and the language button join the tabs only where they stand across the top (wide screens, below). */
+.tabbar > .nav-brand, .tabbar > .nav-lang { display: none; }
 .tab {
   position: relative;
   display: flex;
@@ -300,7 +306,7 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 
 /* ---------- Welcome ---------- */
 
-.welcome { display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 0.9rem; min-height: 92vh; text-align: center; }
+.welcome { display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 0.9rem; max-width: 28rem; min-height: 92vh; margin: 0 auto; text-align: center; }
 .welcome .prateek { height: 4.4rem; margin: 0 auto; }
 .welcome-greet { margin: 0; font: 900 1.6rem/1.2 var(--font-head); }
 .welcome-q { display: flex; flex-direction: column; margin: 0.4rem 0 0.4rem; font: 400 var(--fs-body)/1.5 var(--font-ui); color: var(--muted); }
@@ -383,8 +389,20 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .continue-meta { white-space: nowrap; font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
 .continue .trail { flex: 1; min-width: 2rem; margin: 0; }
 .continue-go { flex: none; display: grid; place-items: center; width: var(--tap); height: var(--tap); border-radius: 50%; background: var(--sindoor-fill); color: var(--on-sindoor); box-shadow: var(--lift); transition: background-color 0.15s, transform 0.1s; }
+.continue-go-label { display: none; }
 .continue:hover .continue-go { background: var(--sindoor-fill-hover); }
 .continue:active .continue-go { transform: scale(0.94); }
+/* With room to spare (a tablet or a wide screen) the round button becomes a sindoor pill that says what it does,
+   so the line above the title is not needed. */
+.home-start { container-type: inline-size; }
+@container (min-width: 30rem) {
+  .continue { padding: 0.8rem 0.8rem 0.8rem 0.9rem; gap: 1rem; }
+  .continue .niche { width: 2.9rem; height: 3.5rem; }
+  .continue-kicker { display: none; }
+  .continue-title { font-size: 1.22rem; }
+  .continue-go { display: inline-flex; gap: 0.5rem; width: auto; padding: 0 0.95rem 0 1.25rem; border-radius: 999px; font: 600 var(--fs-md)/1.2 var(--font-ui); white-space: nowrap; }
+  .continue-go-label { display: inline; }
+}
 
 /* Progress: a brass line, gilded up to where you are, with a sindoor lozenge on the spot. */
 .trail { position: relative; display: block; height: 0.8rem; margin: 0.9rem 0.4rem 0; }
@@ -395,14 +413,15 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 /* ---------- Home: story, sutra and the paths into the library ---------- */
 
 .home-rule { margin: 2.1rem 0 0; }
-.home-sec { margin-top: 1.3rem; }
+.home-sec { margin-top: 1.3rem; container-type: inline-size; }
 .sec-head { margin: 0 0 0.8rem; font: 700 1.22rem/1.3 var(--font-head); }
 .feature { display: block; color: var(--text); text-decoration: none; }
 .feature-title { display: block; margin-top: 0.7rem; font: 700 var(--fs-lg)/1.3 var(--font-head); }
 .feature-title .title-en { font: 400 var(--fs-sm)/1.4 var(--font-ui); }
 .feature-blurb { display: block; margin-top: 0.15rem; font-size: var(--fs-md); line-height: 1.5; color: var(--muted); }
-/* On a wide screen the day's story sits beside its picture rather than under it. */
-@media (min-width: 700px) {
+.feature:hover .feature-title .title { color: var(--brass-text); }
+/* With room beside it, the day's story sits beside its picture rather than under it. */
+@container (min-width: 34rem) {
   .home-sec .feature { display: grid; grid-template-columns: minmax(0, 22rem) 1fr; grid-template-rows: auto 1fr; gap: 0.2rem 1.6rem; align-items: start; }
   .home-sec .feature .arch-pic { grid-row: 1 / span 2; }
   .home-sec .feature .feature-title { margin-top: 2.2rem; }
@@ -427,9 +446,10 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .sutra-meaning { display: block; margin: 0.5rem 0 0.4rem; font: 400 var(--fs-md)/1.55 var(--font-ui); color: var(--text); }
 
 .paths, .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hair); }
-.paths { margin-top: 1rem; }
-/* Home opens with what you were reading; the library follows after a pause. */
-.continue + .paths, .also-reading + .paths { margin-top: 1.6rem; }
+/* Home opens with what you were reading; the library follows after a pause. On a phone the list speaks for itself;
+   where the ways in stand as arched windows (below), they carry the library's name as a heading. */
+.home-paths { margin-top: 1.6rem; container-type: inline-size; }
+.paths-head { display: none; }
 .also-reading { margin-top: 1.4rem; }
 .paths > li, .rows > li { border-bottom: 1px solid var(--hair); }
 .path, .row {
@@ -458,7 +478,8 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 /* How a pooja or path begins, in the scripture's carved letters and brass ink, so it reads as a line of the text
    rather than a description. One line on phones; beside the title on wider screens. */
 .row-opening { margin-top: 0.2rem; font: 500 var(--fs-sm)/1.5 var(--font-verse); color: var(--brass-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-@media (min-width: 640px) {
+.rows > li:has(.row-opening) { container-type: inline-size; }
+@container (min-width: 34rem) {
   .row-main:has(.row-opening) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); column-gap: 1.6rem; align-items: center; }
   .row-main:has(.row-opening) > * { grid-column: 1; }
   .row-main > .row-opening { grid-column: 2; grid-row: 1 / span 3; margin: 0; white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
@@ -471,12 +492,53 @@ a { color: var(--brass-text); text-underline-offset: 0.2em; text-decoration-thic
 .row-with-action { display: flex; align-items: center; gap: 0.5rem; }
 .row-with-action .row { flex: 1; min-width: 0; }
 
+/* Long lists (a shelf of poojas, the stories, search results) take a second column once each can hold a full row. */
+.rows-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 26rem), 1fr)); column-gap: 2.6rem; }
+
+/* The ways into the library, where there is room: a wall of arched windows (jharokhas), each with its emblem standing
+   inside, its name carved below and a line on what it holds. The same shape as the chapter windows, larger. */
+/* Three, four or five to a row as the width allows; a short last row stands centred, as windows do in a wall. */
+@container (min-width: 36rem) {
+  .paths-head { display: flex; }
+  .home-paths .paths { --cols: 3; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 0.9rem; border-top: 0; }
+  .paths > li { flex: 0 0 calc((100% - (var(--cols) - 1) * 0.9rem) / var(--cols)); border-bottom: 0; }
+  .path {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    height: 100%;
+    padding: 1.35rem 0.85rem 1.1rem;
+    text-align: center;
+    background: var(--niche);
+    border: 1px solid var(--brass-line);
+    border-radius: 50% 50% 0.35rem 0.35rem / 3.4rem 3.4rem 0.35rem 0.35rem;
+    transition: background-color 0.15s, border-color 0.15s;
+  }
+  :root[data-theme="night"] .path { background: var(--shrine); }
+  .path:hover { border-color: var(--brass); background: linear-gradient(var(--brass-wash-strong), var(--brass-wash) 70%), var(--niche); }
+  :root[data-theme="night"] .path:hover { background: linear-gradient(var(--brass-wash-strong), var(--brass-wash) 70%), var(--shrine); }
+  .path > .niche { width: 4.4rem; height: 4.4rem; margin-bottom: 0.7rem; background: none; }
+  .path > .niche::after { display: none; }
+  .path > .niche .cover > rect:first-child { fill: none; }
+  .path > .niche > .icon.niche-pack { width: 2.9rem; height: 2.9rem; bottom: 0.55rem; }
+  .path-main { flex: none; align-items: center; }
+  .path b { font: 700 var(--fs-lg)/1.3 var(--font-head); text-wrap: balance; }
+  .path small { display: -webkit-box; margin-top: 0.3rem; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-wrap: pretty; }
+  .path .row-chev { display: none; }
+}
+@container (min-width: 48rem) { .home-paths .paths { --cols: 4; } }
+@container (min-width: 58rem) { .home-paths .paths { --cols: 5; } }
+
 /* ---------- Library ---------- */
 
 .page-title { margin: 1.3rem 0 1rem; }
 .shelf + .shelf { margin-top: 2rem; }
-.shelf-head { display: flex; align-items: center; gap: 0.7rem; margin: 0 0 0.5rem; font: 700 var(--fs-lg)/1.3 var(--font-head); }
-.shelf-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--brass-line), transparent); }
+.shelf-head, .paths-head { align-items: center; gap: 0.7rem; }
+.shelf-head { display: flex; margin: 0 0 0.5rem; font: 700 var(--fs-lg)/1.3 var(--font-head); }
+.shelf-head::after, .paths-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--brass-line), transparent); }
+/* The library's shelves stand side by side once two fit; each shelf stays whole in its column. */
+.shelves { columns: 2 26rem; column-gap: 3rem; }
+.shelves > .shelf { break-inside: avoid; margin: 0 0 2rem; }
 
 .story-group { margin: 2rem 0 0.9rem; }
 .story-group:first-of-type { margin-top: 0.4rem; }
@@ -563,7 +625,19 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .where .trail { flex: 1; margin: 0; }
 .where-pos { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
-.reader { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
+.reader { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); container-type: inline-size; }
+/* Words read as a page (guides, stories, poojas) and the scripture with its meaning keep a reading measure, however
+   wide the screen. */
+.page-body, .read-pair, .reader > .guide-links { max-width: 46rem; margin-left: auto; margin-right: auto; }
+.reader > .guide-links { max-width: 30rem; }
+/* Where the screen has room, the shrine stands on the left and its meaning sits beside it on the marble, as in a
+   printed edition with the mool on one side and the arth on the other. Without a meaning, the shrine stays centred. */
+@container (min-width: 52rem) {
+  .read-pair.has-notes { display: grid; grid-template-columns: minmax(0, 31rem) minmax(0, 1fr); column-gap: clamp(2rem, 4.5cqi, 4.5rem); align-items: start; max-width: 76rem; }
+  .read-pair.has-notes > .notes { padding-top: 1.5rem; }
+  .read-pair.has-notes .commentary { margin-top: 0; }
+  .read-pair.has-notes .notes > .rec { margin-left: 0; margin-right: 0; }
+}
 
 /* The shrine: scripture stands in it, under the toran, on the vedi's steps. */
 .shrine { margin-top: 1.5rem; }
@@ -621,7 +695,7 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 
 .reader-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin: 1.6rem 0 0; }
 
-.reader-bar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 0.5rem; padding: 0.45rem 0.8rem calc(0.5rem + env(safe-area-inset-bottom)); }
+.reader-bar { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr); gap: 0.5rem; padding: 0.45rem max(0.8rem, calc(50% - 21rem)) calc(0.5rem + env(safe-area-inset-bottom)); }
 .reader-bar .btn { flex-direction: column; gap: 0.1rem; min-height: max(3.2rem, 52px); padding: 0.25rem; border: 0; font-size: min(var(--fs-md), 4.6vw); line-height: 1.15; overflow-wrap: anywhere; }
 .reader-bar .btn:not(.btn-primary) { background: none; }
 .reader-bar .btn:not(.btn-primary):hover { background: var(--brass-wash); }
@@ -740,7 +814,7 @@ input:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 .toast {
   position: fixed;
   left: 50%;
-  bottom: calc(6.4rem + env(safe-area-inset-bottom));
+  bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1.4rem + env(safe-area-inset-bottom));
   z-index: 10;
   width: max-content;
   max-width: calc(100% - 2rem);
@@ -970,7 +1044,7 @@ textarea:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
 /* ---------- Side rail: how far down a page you are ---------- */
 /* A hairline at the side of every screen that scrolls (home excepted), gilded as far as you have come, with a
    sindoor lozenge at your place. It sits just outside the column, between the top and bottom bars. */
-.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - 21rem - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+.scrollmark { position: fixed; z-index: 4; top: calc(var(--top-h, 0px) + 1rem); bottom: calc(var(--bar-h, 0px) + var(--composer-h, 0px) + 1rem); right: max(0.4rem, calc(50vw - var(--col-half) - 0.9rem)); width: 2px; border-radius: 2px; background: var(--hair); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
 .scrollmark.is-on { opacity: 1; }
 .scrollmark i { position: absolute; top: 0; left: 0; width: 100%; height: calc(var(--p, 0) * 100%); border-radius: 2px; background: linear-gradient(var(--brass-hi), var(--brass)); }
 .scrollmark b { position: absolute; top: calc(var(--p, 0) * 100%); right: -0.35rem; width: 2.6rem; height: 2.6rem; margin-top: -1.3rem; }
@@ -1014,6 +1088,116 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
 }
 @media (max-width: 360px) {
   .reader-bar .btn { font-size: var(--fs-sm); }
+}
+
+/* Lists of credits fall into columns wherever they fit. */
+.credit-list { columns: 3 17rem; column-gap: 2.4rem; }
+.credit-list > .credit { break-inside: avoid; }
+.top-actions { margin-left: auto; }
+
+/* ---------- Wide screens: the mandir opens out ---------- */
+/* From 1024px the app leaves the phone's single column. The tabs become the lintel across the top of the page, with the
+   name at its left and the language at its right; the page spreads to --wide, and each screen sets its parts side by
+   side. Inner columns are measured in rem, so a larger text size simply gives fewer of them. The reader keeps a
+   reading measure; there the width goes to the meaning beside the verse. */
+@media (min-width: 1024px) {
+  :root { --gutter: clamp(24px, 3vw, 48px); --col-half: calc(min(100vw - 2 * var(--gutter), var(--wide)) / 2); }
+  #app { max-width: none; padding: 0 0 4rem; }
+  #app > * { width: min(100% - 2 * var(--gutter), var(--wide)); margin-left: auto; margin-right: auto; }
+  #app.has-nav { padding-bottom: 4rem; }
+
+  /* The lintel: plinth marble, a brass edge beneath it and the stone's ledge below that, the bottom bar turned over. */
+  #app > .tabbar {
+    position: sticky;
+    top: 0;
+    bottom: auto;
+    z-index: 6;
+    width: auto;
+    grid-template-columns: minmax(0, 1fr) repeat(5, minmax(0, auto)) minmax(0, 1fr);
+    align-items: stretch;
+    padding: env(safe-area-inset-top) max(var(--gutter), calc((100% - var(--wide)) / 2)) 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--brass);
+    box-shadow: 0 3px 0 var(--plinth-edge), 0 10px 22px rgba(0, 0, 0, 0.06);
+    container-type: inline-size;
+  }
+  #app > .tabbar .tab { flex-direction: row; gap: 0.5rem; min-height: 3.6rem; padding: 0 0.95rem; font: 600 var(--fs-md)/1.2 var(--font-ui); }
+  #app > .tabbar .tab .icon { width: 1.25rem; height: 1.25rem; }
+  /* The active tab's brass lintel hangs on the bar's lower edge, under its name. */
+  #app > .tabbar .tab.is-active::before { top: auto; bottom: -1px; left: 0.6rem; right: 0.6rem; width: auto; height: 3px; margin: 0; border-radius: 3px 3px 0 0; background: linear-gradient(var(--brass-hi), var(--brass)); }
+  .tabbar > .nav-brand { display: inline-flex; align-items: center; gap: 0.6rem; justify-self: start; align-self: center; min-width: 0; color: var(--brass-text); font: 700 1.2rem/1 var(--font-head); text-decoration: none; }
+  .nav-brand .prateek { height: 2.2rem; }
+  .tabbar .prateek-cut { stroke: var(--plinth); }
+  .tabbar .prateek-hub { fill: var(--plinth); }
+  .tabbar > .nav-lang { display: inline-flex; justify-self: end; align-self: center; }
+  /* With large text the lintel runs short of room: first the name gives way to the Prateek alone, then the tabs keep
+     only their icons (their names stay for screen readers). */
+  @container (max-width: 56rem) { .nav-brand > span { display: none; } }
+  @container (max-width: 47rem) {
+    #app > .tabbar .tab { padding: 0 0.8rem; }
+    #app > .tabbar .tab > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  }
+
+  /* The name and the language are on the lintel now; the back link to Home is the Home tab. Deeper screens keep
+     theirs, as a quiet line above the title rather than a second bar. */
+  .home-head { display: none; }
+  #app.has-nav > .topbar { position: static; min-height: 0; margin-top: 1rem; padding: 0; background: none; border-bottom: 0; }
+  #app.has-nav > .topbar > .back { margin-left: -0.5rem; }
+  #app.has-nav > .topbar > .back[href="#/"] { display: none; }
+  #app.has-nav > .topbar:has(> .back[href="#/"]):not(:has(> .top-actions)) { display: none; }
+  .page-title { margin: 1.5rem 0 1.4rem; font-size: 1.8rem; }
+
+  /* The reader's own bars run the full width, their controls kept to the column. */
+  #app > .reader-top, #app > .size-panel { width: auto; margin: 0; padding-left: max(var(--gutter), calc((100% - var(--wide)) / 2)); padding-right: max(var(--gutter), calc((100% - var(--wide)) / 2)); }
+  #app > .reader-bar { width: auto; }
+
+  /* Home: what you are reading beside the day, the library across the page, then the story beside the sutra. */
+  main.home {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    grid-template-areas: "start day" "paths paths" "story sutra";
+    column-gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+  main.home > .home-rule { display: none; }
+  .home-start { grid-area: start; padding-top: 2.2rem; }
+  .home-day { grid-area: day; padding-top: 2.2rem; }
+  .home-paths { grid-area: paths; margin-top: 3.4rem; }
+  .home-story { grid-area: story; }
+  .home-sutra { grid-area: sutra; }
+  .home-story, .home-sutra { margin-top: 3.4rem; }
+  .home .greet { margin: 0; font-size: 2.1rem; text-align: start; }
+  .home-day .tithi { margin-top: 0; font-size: 1.6rem; }
+  .home .sec-head { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.1rem; }
+  .home .sec-head::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--brass-line), transparent); }
+
+  /* A text's page: its details on the left, its contents on the right; the invitation to sponsor under the details. */
+  main.book-page {
+    display: grid;
+    grid-template-columns: minmax(0, 23rem) minmax(0, 1fr);
+    grid-template-areas: "info contents" "give contents";
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+  .book-info { grid-area: info; }
+  .book-contents { grid-area: contents; }
+  .book-contents > h2:first-child { margin-top: 1.4rem; }
+  main.book-page > .book-give { grid-area: give; margin-top: 2rem; text-align: start; }
+  main.book-page > .book-give p { margin: 0 0 0.6rem; }
+
+  /* Settings in two columns, each section under its own hairline. */
+  .sets { columns: 2 24rem; column-gap: 3.5rem; }
+  .sets > .set { break-inside: avoid; border-top: 1px solid var(--hair); border-bottom: 0; }
+
+  .search-page > .ask-link, .search-page > .search-form { max-width: 46rem; }
+
+  /* Ask stays a conversation: one column, with its question box under it. */
+  #app > main.ask, #app.is-ask > .topbar { width: min(100% - 2 * var(--gutter), 46rem); }
+  .composer { max-width: 46rem; }
+
+  .kids-grid { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); }
+  .kids-hero { max-width: 44rem; margin-left: auto; margin-right: auto; }
 }
 
 /* ---------- Opening screen: darshan of Bhagwan Mahavir ---------- */
@@ -1319,4 +1503,4 @@ main.enter { animation: enter 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
 /* A row's tags keep their own width where the row is laid out as a grid (wide screens). */
 .row-main > .row-tag { justify-self: start; }
 /* After the verse (texts read verse by verse), the player stands clear of the shrine and its commentary. */
-.reader > .rec, .page-body:not(.scroll-page) > .rec { margin-top: 1.4rem; }
+.notes > .rec, .page-body:not(.scroll-page) > .rec { margin-top: 1.4rem; }

@@ -111,6 +111,7 @@ rounded:
   niche: "1.2rem 1.2rem 0.25rem 0.25rem / 1.05rem 1.05rem 0.25rem 0.25rem"
   day-niche: "1.05rem 1.05rem 0.2rem 0.2rem / 0.95rem 0.95rem 0.2rem 0.2rem"
   chapter-niche: "2.4rem 2.4rem 0.3rem 0.3rem / 1.6rem 1.6rem 0.3rem 0.3rem"
+  jharokha: "50% 50% 0.35rem 0.35rem / 3.4rem 3.4rem 0.35rem 0.35rem"
   bubble-you: "1.3rem 1.3rem 0.35rem 1.3rem"
   bubble-app: "0.35rem 1.3rem 1.3rem 1.3rem"
   source-row: "0.9rem"
@@ -124,6 +125,8 @@ spacing:
   section: "2rem"
   tap: "48px"
   column: "42rem"
+  wide: "1440px"
+  measure: "46rem"
   shrine: "30rem"
 components:
   button-primary:
@@ -213,7 +216,7 @@ components:
 
 Every screen after the opening darshan is the interior of a Digambar mandir: white Makrana marble underfoot, polished brass drawing the architecture, a carved cusped toran over the sanctum. Scripture stands in that sanctum under an arch, on the steps of a vedi; the day is read off a row of arched windows under the chhatra. Hierarchy comes from architecture (arch, plinth, niche, lintel, hairline), never from boxed cards or icon tiles.
 
-The page is one calm centred column (42rem at most), dense enough for a daily habit but always leaving room around the verse. Day is veined white marble lit evenly; night is black Kota stone with the brass lit as if by the diya, warm and low-glare. Colour is spent sparingly: ink and marble carry the page, brass draws structure, sindoor marks what is sacred and the one action that matters on a screen.
+On a phone the page is one calm centred column (42rem at most), dense enough for a daily habit but always leaving room around the verse. On a wide screen the mandir opens out: the tabs become a lintel across the top and each screen sets its parts side by side, while scripture keeps its reading measure. Day is veined white marble lit evenly; night is black Kota stone with the brass lit as if by the diya, warm and low-glare. Colour is spent sparingly: ink and marble carry the page, brass draws structure, sindoor marks what is sacred and the one action that matters on a screen.
 
 Motion is ceremonial and brief. Entering a text draws the arch down from its kalash once; after that only the verse moves. Nothing loops, and reduced motion stills everything.
 
@@ -286,9 +289,16 @@ One centred column, max 42rem, with a 1rem gutter; arches and shrines cap at 30r
 
 Rhythm reuses 0.3, 0.6, 1, 1.4 and 2rem: 0.6rem between controls, 1.4rem between parts of a page (rules, figures, commentary), 2rem between shelves and major home sections. Rows are separated by hairlines, not gaps.
 
-Tap targets are max(2.5rem, 48px), fixed at 48px under 640px so a large text size does not swell controls. Tabs and reader-bar buttons are at least 52px tall. The bottom bars are fixed, max 42rem, and the page reserves 6rem under them.
+Tap targets are max(2.5rem, 48px), fixed at 48px under 640px so a large text size does not swell controls. Tabs and reader-bar buttons are at least 52px tall. The bottom bars are fixed and full width, their controls within 42rem, and the page reserves 6rem under them.
 
-Responsive changes: at 560px stories become two columns; at 700px the story of the day sits beside its 22rem picture. The week of seven day niches scrolls horizontally if it must, with snap.
+Responsive changes: at 560px stories become two columns; where its section is 34rem wide the story of the day sits beside its 22rem picture. The week of seven day niches scrolls horizontally if it must, with snap. The bottom bars run the full width of the screen, their buttons kept to the 42rem column.
+
+**Wide screens (from a 1024px viewport).** The page spreads to 1440px (`--wide`) with a 24 to 48px gutter (`--gutter`); every direct child of `#app` takes that width, and the bars that run full width say so. Inner layouts are container queries or `auto-fill` grids measured in rem, never viewport media queries, so a larger text size simply gives fewer columns.
+- **Home** is a grid: what you are reading (greeting at 2.1rem, left-aligned, then the continue bar) beside the day (tithi at 1.6rem, week, parva line) in 1.4fr and 1fr; the library across the page; then the story of the day beside the sutra, in the same two columns. The brass rules between sections give way to 3.4rem of space, and section heads carry a brass hairline that fades to the right.
+- **Library:** the shelves stand in two columns (26rem each at least); a long list (a shelf of poojas, the stories, search results, saved) takes two columns of rows once each can hold 26rem (`.rows-grid`). A pooja row shows its opening line beside its name only where the row is at least 34rem.
+- **A text's page:** its details (cover, name, blurb, actions, go-to-number, and the invitation to sponsor under them) in a 23rem column, its contents beside.
+- **Reader:** guides, stories and poojas keep a 46rem measure. Scripture in its shrine with a meaning stands as a pair where the reader is 52rem wide: the shrine in a 31rem column on the left, the meaning and the sung recording beside it, like a printed edition with the mool on one side and the arth on the other. Without a meaning the shrine stays centred.
+- **Settings** in two columns, each section under its own hairline; **credits** lists in up to three columns; **Ask** stays one 46rem conversation; **search** keeps its box to 46rem and its results in two columns.
 
 ## Elevation & Depth
 
@@ -342,9 +352,13 @@ There are no cards. Containers are architectural:
 ### Navigation
 - **Top bar:** sticky, page-coloured, hairline below; back link as a pill with a brass arrow.
 - **Tab bar:** five tabs (home, library, ask, search, settings: मुख्य, संग्रह, पूछें, खोजें, सेटिंग) on plinth marble with a brass top edge and the plinth ledge. Icon and label always show together; the bar never folds. Inactive tabs are muted; the active tab is ink with a brass icon and a short brass lintel (1.7rem, gradient highlight to brass) hung from the bar's top edge.
+- **Lintel (wide screens):** the same tab bar becomes a sticky band across the top of the page: plinth marble, a brass edge beneath and the plinth ledge below it (the bottom bar turned over). The Prateek and स्वाध्याय in brass script at the left (home), the five tabs centred with icon and name side by side, the language button at the right. The active tab's lintel is a 3px brass bar on the lower edge under its name. Home's own header is hidden there, and the back link to Home on top-level screens gives way to the Home tab; deeper screens keep their back link as a quiet line above the title. With large text, the brand's name drops first (under 56rem), then the tab names (under 47rem), which stay for screen readers.
 - **Reader bar:** same plinth; Previous, Listen (sindoor primary, wider centre column), Next.
 - **Sung recording:** on the reader page of a text that has one: under the heading of a pooja recited in one go, and after the verse (below the shrine and its commentary) in a text read verse by verse, so the verse still comes first: a field-white panel (`composer` corners, brass-line border) holding a 52px round brass-outlined play button (strong wash and inset ring while playing), "गायन सुनें" in brass script with a headphones icon, the progress trail as a slider (hairline gilded as far as it has played, sindoor lozenge at the place), the times in tabular figures, and the credit in muted label type. In a pooja recited in one go, Listen in the reader bar plays and pauses the same recording (the label turns to रोकें and stays sindoor); a text read verse by verse keeps Listen for reading aloud. A pooja sung in parts shows a chip per part, named for what it holds (पूजा, जयमाला). In the pooja lists such a pooja carries a "गायन सहित" row tag.
 - **More below cue:** a quiet brass-script line in a band at the top of the bar, never over the words.
+
+### Ways into the library
+On a phone, rows (below). Where their block is at least 36rem (a tablet, a wide screen), each way in becomes an arched window, a jharokha (`jharokha` corners, an elliptical arch over a nearly square foot): niche-white (night: shrine), brass-line border, the emblem at 4.4rem standing in it without its own niche frame, the name below in Vesper 700 at 1.06rem, and what it holds in muted label type, two lines at most. Three, four or five stand in a row as the width allows, and a short last row is centred, as windows in a wall. Hover lights the window from the top with the brass wash and a full brass border. With room to spare, the continue bar's round button becomes a sindoor pill that says what it does, and the line above the title steps aside.
 
 ### Rows
 Hairline-separated list rows at least 48px tall, an arch-topped emblem niche at left, title in Hind 600, subtitle muted, chevron at right; brass wash on hover. Verse-number badges are brass-outlined pills in Vesper.
